@@ -95,7 +95,7 @@ end;
 //==============================================================================
 procedure TfrmU110.FormActivate(Sender: TObject);
 begin
-  frmMain.PnlMainMenu.Caption := (Sender as TForm).Caption ;
+  frmMain.LblMenu000.Caption := (Sender as TForm).Caption ;
   fnWmMsgSend( 11111,111 );
   SetComboBox ;
   fnCommandQuery ;

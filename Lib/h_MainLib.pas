@@ -8,6 +8,9 @@ Const
   LogFileName  : String = '.\Log\Monitoring.Log';
   INI_PATH : String = 'AwHouse.INI';
 
+  CONN_STATUS_COLOR : Array [0..1] of TColor = ($008484FF, $0068FF68);
+  BTN_FONT_COLOR : Array [1..2] of TColor = (clBlack, $008B8B8B);
+
   // ¿Ï¼ºÇ° -------------------------
   START_SCNO   = 1 ; // Start SC No
   End_SCNO     = 1 ; // End SC No

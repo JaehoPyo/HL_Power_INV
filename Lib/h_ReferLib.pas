@@ -2,7 +2,11 @@ unit h_ReferLib;
 
 interface
 
-uses Inifiles, Windows, Sysutils, strUtils, StdCtrls;
+uses Inifiles, Windows, Sysutils, strUtils, StdCtrls, WinSock;
+
+type
+  TaPInAddr = Array [0..10] of PInAddr;
+  PaPInAddr = ^TaPInAddr;
 
   function  IniRead ( IniRoot , KeyName  , FieldName , ReadStr   : String ) : String;
   function  IniWrite( IniRoot , KeyName  , FieldName , WriteStr  : String ) : Boolean;
@@ -27,6 +31,10 @@ uses Inifiles, Windows, Sysutils, strUtils, StdCtrls;
   function Dec2Bin(Value : LongInt) : string;
   function Bin2Dec(BinString: string): LongInt;
   function HexToInt(Hex : string) : Integer ;//Cardinal;   {Hex-->Integer}
+
+  procedure TraceLogWrite(WriteStr : String);
+  function SysGetComputerName(): String;
+  function SysGetLocalIP(Const Num: Word): String;
 
 
 var
@@ -665,31 +673,31 @@ end;
 
 
 function Dec2Bin(Value : LongInt) : string;
-var  
-  i : integer;   
-  s : string;   
-begin  
-  s := '';   
-  
+var
+  i : integer;
+  s : string;
+begin
+  s := '';
+
   for i := 7 downto 0 do
     if (Value and (1 shl i)) <> 0 then s := s + '1'
-                                  else s := s + '0';   
-  
-  Result := s;   
-end;   
-  
+                                  else s := s + '0';
+
+  Result := s;
+end;
+
 function Bin2Dec(BinString: string): LongInt;
-var  
-  i : Integer;   
-  Num : LongInt;   
-begin  
+var
+  i : Integer;
+  Num : LongInt;
+begin
   Num := 0;
-  
-  for i := 1 to Length(BinString) do  
-    if BinString[i] = '1' then Num := (Num shl 1) + 1  
-                          else Num := (Num shl 1);   
-  
-  Result := Num;   
+
+  for i := 1 to Length(BinString) do
+    if BinString[i] = '1' then Num := (Num shl 1) + 1
+                          else Num := (Num shl 1);
+
+  Result := Num;
 end;
 
 function  HexaToDecimal4( xHexa : String ) : String;   // Hexa('03E8') ->  '1000'
@@ -697,7 +705,7 @@ var eCode : Integer;
     eStr : String;
 begin
      if xHexa = '' then begin Result := '0000'; exit; end;
-     
+
      eStr := LPad(xHexa, 4, '0');
 
 
@@ -743,6 +751,55 @@ begin
   Result := Result ;
 end;
 
+procedure TraceLogWrite(WriteStr : String);
+var
+  FileName : String ;
+begin
+  FileName := '.\Log\INVTrace_' + FormatDatetime('YYYYMMDD', now) + '.log';
+  LogWrite(FileName,FormatDateTime('HH:NN:SS.ZZZ', now)+' '+WriteStr);
+end;
 
+//==============================================================================
+// SysGetComputerName [컴퓨터 이름]
+//==============================================================================
+function SysGetComputerName(): String;
+var
+  Buffer : Array[0..51] of WideChar;
+  Buflen : Dword;
+begin
+  Buflen := SizeOf(Buffer);
+  GetComputerName(Buffer, Buflen);
+  Result := Trim(StrPas(Buffer));
+end;
+
+//==============================================================================
+// SysGetLocalIP
+//==============================================================================
+function SysGetLocalIP(const Num: Word): String;
+var
+  WSAData : TWSAData;
+  phe : PHostEnt;
+  pptr : PaPInAddr;
+  Buff : Array [0..255] of AnsiChar;
+  i : Integer;
+begin
+  WSAStartup($101, WSAData);
+  GetHostName(Buff, SizeOf(Buff));
+  phe := GetHostByName(Buff);
+
+  result := '';
+  if phe <> nil then
+  begin
+    pptr := PaPInAddr(Phe^.h_addr_list);
+    for i := 0 to (num-1) do
+    begin
+      if pptr^[i] = nil then break;
+      if i <> (num-1)   then continue;
+      result := StrPas(inet_ntoa(pptr^[i]^));
+      break;
+    end;
+  end;
+  WSACleanUp();
+end;
 
 end.
