@@ -154,7 +154,7 @@ object frmU110: TfrmU110
   OnClose = FormClose
   OnDeactivate = FormDeactivate
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 11
   object Pnl_Top: TPanel
     Left = 0
     Top = 0
