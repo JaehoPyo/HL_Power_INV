@@ -458,27 +458,39 @@ end;
 // ADOConnection -> Database Connect
 //==============================================================================
 function ADOConnection: Boolean;
+var
+  st : string;
 begin
   Result := False;
-  m.DbType := UpperCase ( IniRead( INI_PATH, 'Database', 'Connection', 'ORACLE' ) );
-  if  m.DbType = 'ORACLE' then
+  MainDm.M_Info.DbType := UpperCase(IniRead(INI_PATH, 'Database', 'Connection', 'MSSQL'));
+  if MainDm.M_Info.DbType = 'MSSQL' then
   begin
-    MainDm.qryTemp.Connection := MainDM.MainDb;
-    m.DbOle   := IniRead( INI_PATH, 'Database', 'Provider', 'OraOLEDB.Oracle.1' );
-    m.DbAlais := IniRead( INI_PATH, 'Database', 'Alais'   , 'ORCL201'  );
-    m.DbUser  := IniRead( INI_PATH, 'Database', 'User'    , 'DYMOSUSER2'  );
-    m.DbPswd  := IniRead( INI_PATH, 'Database', 'Pswd'    , 'DYMOSPASS2'  );
+    MainDm.M_Info.DbOle   := IniRead(INI_PATH, 'Database', 'Provider', '');
+    MainDm.M_Info.DbAlais := IniRead(INI_PATH, 'Database', 'Alais'   , '');
+    MainDm.M_Info.DbUser  := IniRead( INI_PATH, 'Database', 'User'    , 'sa'  );
+    MainDm.M_Info.DbPswd  := IniRead( INI_PATH, 'Database', 'Pswd'    , 'netis4321'  );
+    MainDm.M_Info.DbFile  := 'WMS_TEMP';
+  end else
+  if MainDm.M_Info.DbType = 'ORACLE' then
+  begin
+    MainDm.M_Info.DbOle   := IniRead(INI_PATH, 'Database', 'Provider', '');
+    MainDm.M_Info.DbAlais := IniRead(INI_PATH, 'Database', 'Alais'   , '');
+    MainDm.M_Info.DbUser  := IniRead(INI_PATH, 'Database', 'User'    , '');
+    MainDm.M_Info.DbPswd  := IniRead(INI_PATH, 'Database', 'Pswd'    , '');
   end;
 
   try
     with MainDm.MainDB do
     begin
       Close;
-      ConnectionString := 'Provider=' + m.DbOle +
-                          ';Data Source=' + m.DbAlais+
-                          ';Persist Security Info=True' +
-                          ';Password=' + m.DbPswd +
-                          ';User ID =' + m.DbUser ;
+
+      ConnectionString := '';
+      ConnectionString := 'Provider=' + MainDm.M_Info.DbOle +
+                          ';Persist Security Info=False;User ID=' +
+                          MainDm.M_Info.DbUser +
+                          ';Data Source=' + MainDm.M_Info.DbAlais +
+                          ';Password=' + MainDm.M_Info.DbPswd +
+                          ';Initial Catalog=' + MainDm.M_Info.DbFile ;
 
       Connected := True;
       Result := True;

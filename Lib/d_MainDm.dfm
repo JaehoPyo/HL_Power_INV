@@ -3,6 +3,11 @@ object MainDm: TMainDm
   Height = 247
   Width = 272
   object MainDB: TADOConnection
+    Connected = True
+    ConnectionString = 
+      'Provider=SQLOLEDB.1;Password=netis4321;Persist Security Info=Tru' +
+      'e;User ID=sa;Initial Catalog=WMS_TEMP;Data Source=192.168.0.123,' +
+      '44333'
     LoginPrompt = False
     Provider = 'SQLOLEDB.1'
     AfterConnect = MainDBAfterConnect

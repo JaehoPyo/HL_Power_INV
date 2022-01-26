@@ -1775,11 +1775,11 @@ object frmMain: TfrmMain
       end
       item
         Alignment = taCenter
-        Text = 'N/A'
         Width = 50
       end>
     ParentShowHint = False
     ShowHint = False
+    OnDrawPanel = staLoginInfoDrawPanel
   end
   object tmrSystem: TTimer
     OnTimer = tmrSystemTimer
