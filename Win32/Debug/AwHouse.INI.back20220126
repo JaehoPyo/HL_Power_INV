@@ -1,7 +1,7 @@
 [Database]
 Connection=ORACLE
 Provider=OraOLEDB.Oracle.1
-Alais=netis_orcl
+Alais=netis_ex
 ;Alais=TRAIN
 User=BSTUSER
 Pswd=BSTPASS

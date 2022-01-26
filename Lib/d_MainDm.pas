@@ -5,7 +5,7 @@ interface
 uses
   Windows, SysUtils, Classes, DB, ADODB, Messages, Dialogs, Inifiles,
   ComObj, StdCtrls, h_MainLib, Variants, DBGrids, h_LangLib, Graphics,
-  ExLibrary  ;
+  ExLibrary, h_ReferLib  ;
 
 type
   TFORM_DESC = Record
@@ -71,10 +71,15 @@ type
   Main_Info = Record
     MainHd   : Hwnd;
     IdPass   : Boolean;
+    ConChk, MESConChk : Boolean ;
     MenuName, MenuNumber, MenuTitle  : String ;
+    UserCode, UserName, UserPwd, UserGrade, UserAdmin, UserETC1, UserETC2 : String;
+    DbOle, DbType, DbUser, DbPswd, DbAlais, DbFile  : String;
+    WMS_NO : String;
+    Popup_ItemInfo : TPopupData;
+
+
     CompanyName : String;
-    DbOle    , DbType  , DbUser  , DbPswd  , DbAlais, DbFile  : String;
-    UserCode, UserName, UserPermit, UserUse   : String ;
     WRHS : String ; //창고구분 (열처리,완제품)
     ActiveFormID, ActiveFormName : String; //실행 시킨 폼
     RunFormID : String; //메뉴에서 누른 메뉴코드
@@ -82,9 +87,20 @@ type
     Form : TLANG_PGM; //등록된 프로그램명칭.
     mPop : TPopupData;
     mPlan : TPlanInfor;
-    ConChk : Boolean ;
     position : String ;
     AwsNo : String; // 1: 하우징, 2: 케이스
+
+    LANG_TYPE : integer;
+    LANG_STR  : String;
+    LANG_PGM  : TLANG_PGM;
+    PCPosition : integer;
+
+    MAINT_PW_410 : String;
+
+    ReLogin : Boolean;
+
+
+    ActivePCName, ActivePCAddr : String;
   end;
 
   TMainDm = class(TDataModule)
@@ -94,6 +110,7 @@ type
     qryCommand: TADOQuery;
     qryInfo: TADOQuery;
     qrySearch: TADOQuery;
+    PD_INS_PGM_HIST: TADOStoredProc;
     procedure MainDBAfterConnect(Sender: TObject);
     procedure MainDBAfterDisconnect(Sender: TObject);
   private
@@ -101,6 +118,8 @@ type
 
   public
     { Public declarations }
+    M_Info : Main_Info;
+    pVersion : String;
   end;
   function fnFileFilter( var FileName : String; Const FilterName : String   ) : Boolean ;
   function DBGridToExcel(var ADBG: TDBGrid; ATitle, ASubtitle, AFoot: String) : Boolean ;
@@ -129,6 +148,9 @@ type
   Function getUserFormAuth(WRHS, UserId, PgmId : String ) : TUser_AUTH;
 
   function fnPGMUsedChk(GetField,WRHS,USR_ID,PGM_ID:String) : Boolean ;
+
+  procedure InsertPGMHist(MENU_ID, HIST_TYPE, FUNC_NAME, EVENT_NAME, EVENT_DESC, COMMAND_TYPE, COMMAND_TEXT, PARAM, ERROR_MSG: String);
+  function fnGetFileVersionInfo(FileName: String): String;
 
 Const
 
@@ -452,16 +474,11 @@ begin
     with MainDm.MainDB do
     begin
       Close;
-//      ConnectionString := 'Provider=' + m.DbOle +
-//                          ';Data Source=' + m.DbAlais+
-//                          ';Persist Security Info=True' +
-//                          ';Password=' + m.DbPswd +
-//                          ';User ID =' + m.DbUser ;
       ConnectionString := 'Provider=' + m.DbOle +
-                          ';Persist Security Info=True;User ID=' + m.DbUser +
-                          ';Data Source=' + m.DbAlais +
+                          ';Data Source=' + m.DbAlais+
+                          ';Persist Security Info=True' +
                           ';Password=' + m.DbPswd +
-                          ';Initial Catalog=WMS_TEMP';
+                          ';User ID =' + m.DbUser ;
 
       Connected := True;
       Result := True;
@@ -859,6 +876,80 @@ end;
 procedure TMainDm.MainDBAfterDisconnect(Sender: TObject);
 begin
   m.ConChk := False ;
+end;
+
+//==============================================================================
+// InsertPGMHist ( W_PROGRAM_HIST 테이블에 이력을 넣음)                       //
+//==============================================================================
+procedure InsertPGMHist(MENU_ID, HIST_TYPE, FUNC_NAME, EVENT_NAME, EVENT_DESC, COMMAND_TYPE, COMMAND_TEXT, PARAM, ERROR_MSG: String);
+begin
+  try
+    with MainDm.PD_INS_PGM_HIST do
+    begin
+      Close;
+      ProcedureName := 'PD_INS_PGM_HIST';
+      Parameters.ParamByName('i_MENU_ID'     ).Value := MENU_ID;
+      Parameters.ParamByName('i_HIST_TYPE'   ).Value := HIST_TYPE;
+      Parameters.ParamByName('i_PGM_FUNCTION').Value := FUNC_NAME;
+      Parameters.ParamByName('i_EVENT_NAME'  ).Value := EVENT_NAME;
+      Parameters.ParamByName('i_EVENT_DESC'  ).Value := EVENT_DESC;
+      Parameters.ParamByName('i_COMMAND_TYPE').Value := COMMAND_TYPE;
+      Parameters.ParamByName('i_COMMAND_TEXT').Value := COMMAND_TEXT;
+      Parameters.ParamByName('i_PARAM'       ).Value := PARAM;
+      Parameters.ParamByName('i_ERROR_MSG'   ).Value := ERROR_MSG;
+      Parameters.ParamByName('i_USER_ID'     ).Value := MainDm.M_Info.UserCode + ' ['+MainDm.M_Info.ActivePCAddr+']';
+      ExecProc;
+      Close;
+    end;
+  except
+    on E : Exception do
+    begin
+      MainDm.PD_INS_PGM_HIST.Close;
+      TraceLogWrite('[000] procedure InsertPGMHist Fail || ERR['+E.Message+']');
+    end;
+  end;
+end;
+
+//==============================================================================
+// fnGetFileVersionInfo                                                       //
+//==============================================================================
+function fnGetFileVersionInfo(FileName: String): String;
+var
+  Size, Size2: DWord;
+  Pt, Pt2: Pointer;
+begin
+  Result := '';
+  try
+    Size := GetFileVersionInfoSize(pChar(FileName), Size2);
+    if Size > 0 then
+    begin
+      GetMem(Pt, Size);
+      try
+        GetFileVersionInfo(pChar(FileName), 0, Size, Pt);
+        VerQueryValue (Pt, '\', Pt2, Size2);
+        with TVSFixedFileInfo(Pt2^) do
+        begin
+{
+          Result := Format('%d.%d.%d.%d', [HiWord(dwFileVersionMS),
+                                           LoWord(dwFileVersionMS),
+                                           HiWord(dwFileVersionLS),
+                                           LoWord(dwFileVersionLS)]);
+}
+
+          Result := Format('%d.%d', [HiWord(dwFileVersionMS),
+                                     LoWord(dwFileVersionLS)]);
+        end;
+      finally
+        FreeMem(Pt);
+      end;
+    end;
+  except
+    on E: Exception do
+    begin
+      InsertPGMHist('[000]', 'E', 'fnGetFileVersionInfo', '버전', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('[000] function fnGetFileVersionInfo Fail || ERR['+E.Message+'], STR['+FileName+']');
+    end;
+  end;
 end;
 
 

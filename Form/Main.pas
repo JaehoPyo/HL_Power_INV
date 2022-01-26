@@ -5,34 +5,17 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Buttons, ComCtrls, ToolWin, Menus, ExtCtrls,  StdCtrls, DB, ADODB,
-  d_MainDm, h_MainLib, h_ReferLib, Grids, DBGrids, DBCtrls, Mask, ExLibrary,
-  Vcl.Imaging.pngimage, Vcl.Imaging.jpeg, System.ImageList, Vcl.ImgList;
+  d_MainDm, h_MainLib, h_ReferLib, Grids, DBGrids, DBCtrls, Mask,
+  Vcl.Imaging.pngimage, Vcl.Imaging.jpeg, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh,
+  Vcl.Imaging.GIFImg, ShellAPI, CPort, Vcl.Tabs, System.ImageList, Vcl.ImgList, System.Actions, Vcl.ActnList;
 
 type
   TfrmMain = class(TForm)
-    Pnl_Top : TPanel;
-    staLoginInfo: TStatusBar;
     tmrSystem: TTimer;
-    Pnl_BTN: TPanel;
-    Pnl_Btn1: TPanel;
-    Pnl_Btn3: TPanel;
-    Pnl_Btn4: TPanel;
-    Pnl_Btn7: TPanel;
-    cmdEXCEL: TSpeedButton;
-    cmdPRINT: TSpeedButton;
-    cmdINQUIRY: TSpeedButton;
-    cmdCLOSE: TSpeedButton;
-    Pnl_Btn0: TPanel;
-    cmdREGISTER: TSpeedButton;
     qryCommChk: TADOQuery;
     tmrConnectCheck: TTimer;
     qryDBChk: TADOQuery;
-    Pnl_Btn5: TPanel;
-    Pnl_Btn6: TPanel;
-    cmdNEXT: TSpeedButton;
-    Pnl_Btn2: TPanel;
-    cmdDELETE: TSpeedButton;
-    Panel21: TPanel;
     mnuMain: TMainMenu;
     M1000: TMenuItem;
     M1100: TMenuItem;
@@ -49,17 +32,46 @@ type
     M5000: TMenuItem;
     M5100: TMenuItem;
     M5200: TMenuItem;
-    cmdPREV: TSpeedButton;
     Img_Main: TImage;
-    PnlSCComm: TPanel;
-    PnlMainMenu: TPanel;
-    PnlDBComm: TPanel;
-    shpDBComm: TShape;
-    Shape3: TShape;
-    shpSCComm: TShape;
-    Label1: TLabel;
-    Label2: TLabel;
     qryOrderDel: TADOQuery;
+    Panel1: TPanel;
+    Panel10: TPanel;
+    Panel22: TPanel;
+    LblMenu000: TLabel;
+    Panel11: TPanel;
+    Pnl_BTN: TPanel;
+    Pnl_Btn5: TPanel;
+    cmdEXCEL: TSpeedButton;
+    Pnl_Btn6: TPanel;
+    cmdPRINT: TSpeedButton;
+    Pnl_Btn7: TPanel;
+    cmdINQUIRY: TSpeedButton;
+    Pnl_Btn10: TPanel;
+    cmdCLOSE: TSpeedButton;
+    Pnl_Btn2: TPanel;
+    cmdREGISTER: TSpeedButton;
+    Pnl_Btn8: TPanel;
+    cmdPREV: TSpeedButton;
+    Pnl_Btn9: TPanel;
+    cmdNEXT: TSpeedButton;
+    Pnl_Btn3: TPanel;
+    cmdDELETE: TSpeedButton;
+    Pnl_Btn1: TPanel;
+    cmdORDER: TSpeedButton;
+    Pnl_Btn4: TPanel;
+    cmdUPDATE: TSpeedButton;
+    Panel28: TPanel;
+    staLoginInfo: TStatusBar;
+    PnlDatabaseConn: TPanel;
+    LblDatabaseConn: TLabel;
+    ShpDatabaseConn: TShape;
+    PnlMFCInterfaceConn: TPanel;
+    LblMFCInterfaceConn: TLabel;
+    ShpMFCInterfaceConn1: TShape;
+    ShpMFCInterfaceConn2: TShape;
+    tmrLogFileCheck: TTimer;
+    PnlSBar2: TPanel;
+    LblVersion: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -68,6 +80,8 @@ type
     procedure tmrSystemTimer(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure tmrConnectCheckTimer(Sender: TObject);
+    procedure tmrLogFileCheckTimer(Sender: TObject);
+    procedure staLoginInfoDrawPanel(StatusBar: TStatusBar; Panel: TStatusPanel; const Rect: TRect);
   private
     { Private declarations }
     procedure execMenuActive( Menu_Number : Integer );
@@ -79,6 +93,14 @@ type
     procedure CloseChkMsg(Sender: TObject);
     procedure WmMsgRecv( var Message : TMessage); message WM_USER;
     function  fnDBConChk: Boolean;
+
+    // 로그자동삭제 관련
+    procedure LogFileDelete;
+    Function  DeleteRecodingFile(fileDir: string; iOption: integer): boolean;
+    function  MinDeleteFile(const DirName : string; const UseRecycleBin: Boolean): Boolean;
+
+    // 프로그램 초기 설정
+    procedure CreateConfig;
   end;
 
 const
@@ -86,13 +108,14 @@ const
 
 var
   frmMain: TfrmMain;
+  DeleteOption : integer ;
 
   CloseChk : Boolean ;
   SC_COMM  : Boolean ;
 
 implementation
 
-uses U110, U210, U220, U230, U310, U320, U410, U420, U510, U520 ;
+uses U110;//, U210, U220, U230, U310, U320, U410, U420, U510, U520 ;
 
 {$R *.dfm}
 
@@ -104,6 +127,14 @@ var
   tmp : String ;
 begin
   m.MainHd := Handle;
+  MainDm.M_Info.ReLogin := False;
+  CloseChk := False;
+
+  MainDm.pVersion := 'v' + fnGetFileVersionInfo(Application.Exename);
+  lblVerSion.Caption := MainDm.pVersion;
+
+  MainDm.M_Info.ActivePCName := SysGetComputerName; // PC Name
+  MainDm.M_Info.ActivePCAddr := SysGetLocalIp(1);   // PC Ip-Address
 
   if not ADOConnection then
   begin
@@ -112,11 +143,10 @@ begin
   end;
 
   CloseChk := False ;
-  PnlMainMenu.Caption := '';
+  CreateConfig;
 
   frmMain.Caption := IniRead( INI_PATH, 'PROGRAM', 'ProgramName' ,'부산교통공사 자동 창고 관리시스템' );
-  staLoginInfo.Panels[0].Text := IniRead( INI_PATH, 'PROGRAM', 'CompanyName' ,'부산교통공사' );
-  fnWmMsgSend( 22222,222 );
+  fnWmMsgSend( 22222,22222 );
 end;
 
 //==============================================================================
@@ -182,33 +212,87 @@ begin
 end;
 
 //==============================================================================
+// CreateConfig
+//==============================================================================
+procedure TfrmMain.CreateConfig;
+var
+  i : integer;
+  tFName, tFSize, tFPath, tCDate, tADate, tUDate, TitleStr : String;
+begin
+  try
+    if not DirectoryExists('.\Log') then ForceDirectories('.\Log');
+
+    //inDm.M_Info.LANG_PGM := fnMenuNameGetRecord(MainDm.M_Info.WRHS, MainDm.M_Info.LANG_TYPE); // 메뉴명
+    //fnMenuChange;
+
+    frmMain.Caption    := IniRead(INI_PATH, 'PROGRAM', 'CompanyName', '') + ' ' +
+                          IniRead(INI_PATH, 'PROGRAM', 'CompanyKind', '') + ' ' +
+                          IniRead(INI_PATH, 'PROGRAM', 'ProgramName', '') + ' ' +
+                          MainDm.pVersion;
+    frmMain.Hint       := IniRead(INI_PATH, 'PROGRAM', 'ProgramName', '') + ' ' + MainDm.pVersion;
+    LblMenu000.Caption := frmMain.Hint;
+    MainDm.M_Info.ActiveFormID   := '000';
+    MainDm.M_Info.ActiveFormName := frmMain.Hint;
+
+    fnDBConChk;
+
+    staLoginInfo.Panels[00].Text := IniRead(INI_PATH, 'PROGRAM', 'CompanyName', '');
+    staLoginInfo.Panels[01].Text := MainDm.M_Info.ActivePCName + ' [' + MainDm.M_Info.ActivePCAddr + ']';
+    staLoginInfo.Panels[02].Text := FormatDateTime( 'YYYY-MM-DD HH:NN:SS', Now);
+
+    staLoginInfo.Panels[03].Style := psOwnerDraw ;
+    PnlSBar2.Parent := staLoginInfo ;
+
+    staLoginInfo.Panels[04].Style := psOwnerDraw ;
+    PnlMFCInterfaceConn.Parent := staLoginInfo ;
+
+    staLoginInfo.Panels[05].Style := psOwnerDraw ;
+    PnlDatabaseConn.Parent := staLoginInfo ;
+
+    tmrConnectCheck.Enabled := True ;
+    tmrSystem.Enabled := True;
+
+    LblVersion.Hint := TitleStr;
+  except
+    on E : Exception do
+    begin
+      InsertPGMHist('[000]', 'E', 'CreateConfig', '', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('[000] procedure CreateConfig Fail || ERR['+E.Message+']');
+    end;
+  end;
+end;
+
+//==============================================================================
 // WmMsgRecv (툴바 버튼 활성화 여부)
 //==============================================================================
 procedure TfrmMain.WmMsgRecv(var Message : TMessage);
-  Procedure ToolBtnSet ( TBtnNo : Integer; Status : String  );
+  Procedure ToolBtnSet(TBtnNo: Integer; Status: String);
   var
     BtnStatus : Boolean;
   begin
-    if   Status = '1' Then BtnStatus := True Else BtnStatus := False;
+    if Status = '1' then BtnStatus := True else BtnStatus := False;
     case TBtnNo of
-      1  : cmdREGISTER.Enabled := BtnStatus ; // cmdReset
-      2  : cmdEXCEL.Enabled    := BtnStatus ; // cmdExcel
-      3  : cmdDELETE.Enabled   := BtnStatus ; // cmdDelete
-      4  : cmdPRINT.Enabled    := BtnStatus ; // cmdPrint
-      5  : cmdINQUIRY.Enabled  := BtnStatus ; // cmdQuery
-      6  : cmdPREV.Enabled     := BtnStatus ; // cmdPREV
-      7  : cmdNEXT.Enabled     := BtnStatus ; // cmdNEXT
-      8  : cmdCLOSE.Enabled    := BtnStatus ; // cmdClose
+      1  : begin cmdORDER.Enabled    := BtnStatus ; cmdORDER.Font.Color    := BTN_FONT_COLOR[StrToInt(Status)];   {cmdORDER.Caption    := BTN_CAPTION[TBtnNo, StrToInt(Status)];} end;// 지시
+      2  : begin cmdREGISTER.Enabled := BtnStatus ; cmdREGISTER.Font.Color := BTN_FONT_COLOR[StrToInt(Status)];   {cmdREGISTER.Caption := BTN_CAPTION[TBtnNo, StrToInt(Status)];} end;// 등록
+      3  : begin cmdDELETE.Enabled   := BtnStatus ; cmdDELETE.Font.Color   := BTN_FONT_COLOR[StrToInt(Status)];   {cmdDELETE.Caption   := BTN_CAPTION[TBtnNo, StrToInt(Status)];} end;// 삭제
+      4  : begin cmdUPDATE.Enabled   := BtnStatus ; cmdUPDATE.Font.Color   := BTN_FONT_COLOR[StrToInt(Status)];   {cmdUPDATE.Caption   := BTN_CAPTION[TBtnNo, StrToInt(Status)];} end;// 수정
+      5  : begin cmdEXCEL.Enabled    := BtnStatus ; cmdEXCEL.Font.Color    := BTN_FONT_COLOR[StrToInt(Status)];   {cmdEXCEL.Caption    := BTN_CAPTION[TBtnNo, StrToInt(Status)];} end;// 엑셀
+      6  : begin cmdPRINT.Enabled    := BtnStatus ; cmdPRINT.Font.Color    := BTN_FONT_COLOR[StrToInt(Status)];   {cmdPRINT.Caption    := BTN_CAPTION[TBtnNo, StrToInt(Status)];} end;// 인쇄
+      7  : begin cmdINQUIRY.Enabled  := BtnStatus ; cmdINQUIRY.Font.Color  := BTN_FONT_COLOR[StrToInt(Status)];   {cmdINQUIRY.Caption  := BTN_CAPTION[TBtnNo, StrToInt(Status)];} end;// 조회
+      8  : begin cmdPREV.Enabled     := BtnStatus ; cmdPREV.Font.Color     := BTN_FONT_COLOR[StrToInt(Status)];   {cmdPREV.Caption     := BTN_CAPTION[TBtnNo, StrToInt(Status)];} end;// 이전
+      9  : begin cmdNEXT.Enabled     := BtnStatus ; cmdNEXT.Font.Color     := BTN_FONT_COLOR[StrToInt(Status)];   {cmdNEXT.Caption     := BTN_CAPTION[TBtnNo, StrToInt(Status)];} end;// 다음
+      10 : begin cmdCLOSE.Enabled    := BtnStatus ; cmdCLOSE.Font.Color    := BTN_FONT_COLOR[StrToInt(Status)];   {cmdCLOSE.Caption    := BTN_CAPTION[TBtnNo, StrToInt(Status)];} end;// 닫기
     end;
   end;
 var
   i : Integer;
   RecvStr : String;
 begin
-  RecvStr  :=  IntToStr ( Message.WParam ) +  IntToStr ( Message.LParam );
-
-  for i := 1 to  Length ( RecvStr ) do
-    ToolBtnSet ( i , Copy( RecvStr, i , 1 ) );
+  RecvStr := IntToStr(Message.WParam) + IntToStr(Message.LParam);
+  for i := 1 to Length(RecvStr) do
+  begin
+    ToolBtnSet(i, Copy(RecvStr, i , 1));
+  end;
 end;
 
 //==============================================================================
@@ -231,27 +315,14 @@ procedure TfrmMain.tmrSystemTimer(Sender: TObject);
 begin
   try
     tmrSystem.Enabled := False;
-    staLoginInfo.Panels[1].Text := formatdatetime ( 'YYYY-MM-DD HH:NN:SS' ,Now() );
-    if m.ConChk then
+    staLoginInfo.Panels[05].Text := FormatDateTime( 'YYYY-MM-DD HH:NN:SS', Now);
+
+    if MdiChildCount = 0 then
     begin
-      CommChk ;
-      OrderDel ;
-
-      shpDBComm.Brush.Color := clLime;
-      if SC_COMM then
-           shpSCComm.Brush.Color := clLime
-      else shpSCComm.Brush.Color := clRed;
-
-      if MdiChildCount=0 then
-      begin
-        fnWmMsgSend( 22222,222 );
-        PnlMainMenu.Caption := '';
-      end;
-
-    end else
-    begin
-      shpDBComm.Brush.Color := clRed;
-      shpSCComm.Brush.Color := clRed;
+      fnWmMsgSend(2222222, 222);
+      MainDm.M_Info.ActiveFormID   := '000';
+      MainDm.M_Info.ActiveFormName := frmMain.Hint;
+      LblMenu000.Caption := frmMain.Hint;
     end;
   finally
     tmrSystem.Enabled := True;
@@ -276,22 +347,23 @@ end;
 procedure TfrmMain.execMenuActive(Menu_Number: Integer);
 begin
   case Menu_Number of
+
     // 코드관리------------------------------------------
     1100 : U110Create() ;          // 기종정보관리
     // 입출고관리------------------------------------------
-    2100 : U210Create();           // 입출고 진행현황
-    2200 : U220Create();           // 입고 작업등록
-    2300 : U230Create();           // 출고 작업등록
+//    2100 : U210Create();           // 입출고 진행현황
+//    2200 : U220Create();           // 입고 작업등록
+//    2300 : U230Create();           // 출고 작업등록
     // 재고관리
-    3100 : U310Create();           // Cell 모니터링
-    3200 : U320Create();           // 지정출고
+//    3100 : U310Create();           // Cell 모니터링
+//    3200 : U320Create();           // 지정출고
     // 실적관리------------------------------------------
-    4100 : U410Create();           // 출고검사
-    4200 : U420Create();           // 지정출고
+//    4100 : U410Create();           // 출고검사
+//    4200 : U420Create();           // 지정출고
     // 모니터링------------------------------------------
-    5100 : U510Create();           // 설비 모니터링
-    5200 : U520Create();           // 설비 에러 이력 조회
-    else exit;
+//    5100 : U510Create();           // 설비 모니터링
+//    5200 : U520Create();           // 설비 에러 이력 조회
+//    else exit;
   end;
 end;
 
@@ -318,27 +390,57 @@ end;
 //==============================================================================
 function TfrmMain.fnDBConChk: Boolean;
 var
-  StrSQL : string;
+  StrSQL : String;
 begin
   Result := False ;
-//  StrSQL := ' SELECT SYSDATE FROM DUAL ' ;
-  StrSQL := ' SELECT GETDATE() ';
-
   try
     with qryDBChk do
     begin
       Close;
       SQL.Clear ;
+      StrSQL := ' SELECT GETDATE() as DBCheck ' ;
       SQL.Text := StrSQL ;
       Open ;
       if not (Bof and Eof) then
       begin
         Result := True ;
         m.ConChk := True ;
+        frmMain.ShpDatabaseConn.Brush.Color := CONN_STATUS_COLOR[1];
+
+        SQL.Clear;
+        StrSQL := ' SELECT INT_NAME, INT_M_NO, (CASE WHEN INT_DATE > DATEADD(SECOND, -5, GETDATE()) THEN 1 ELSE 0 END) STATUS ' +
+                  '   FROM TC_INT_STATUS WITH (NOLOCK) ' ;
+        SQL.Text := StrSQL;
+        Open;
+        if not (Bof and Eof) then
+        begin
+          while not (Eof) do
+          begin
+            TShape(Self.FindComponent('ShpMFCInterfaceConn'+FieldByName('INT_M_NO').AsString)).Brush.Color := CONN_STATUS_COLOR[FieldByName('STATUS').AsInteger];
+            Next;
+          end;
+        end else
+        begin
+          frmMain.ShpMFCInterfaceConn1.Brush.Color := CONN_STATUS_COLOR[0];
+          frmMain.ShpMFCInterfaceConn2.Brush.Color := CONN_STATUS_COLOR[0];
+        end;
+      end else
+      begin
+        frmMain.ShpDatabaseConn.Brush.Color      := CONN_STATUS_COLOR[0];
+        frmMain.ShpMFCInterfaceConn1.Brush.Color := CONN_STATUS_COLOR[0];
+        frmMain.ShpMFCInterfaceConn2.Brush.Color := CONN_STATUS_COLOR[0];
       end;
+      Close;
     end;
   except
-    if qryDBChk.Active then qryDBChk.Close;
+    on E : Exception do
+    begin
+      qryDBChk.Close;
+      m.ConChk := False ;
+      frmMain.ShpDatabaseConn.Brush.Color     := CONN_STATUS_COLOR[0];
+      frmMain.ShpMFCInterfaceConn1.Brush.Color := CONN_STATUS_COLOR[0];
+      frmMain.ShpMFCInterfaceConn2.Brush.Color := CONN_STATUS_COLOR[0];
+    end;
   end;
 end;
 
@@ -350,14 +452,11 @@ var
   StrSQL : String;
 begin
   try
-//    StrSQL := ' SELECT (CASE WHEN SCC_DT > (SELECT SYSDATE - (((1/24)/60)/12) FROM DUAL) ' +
-//              '              THEN 1 ELSE 0 END) AS STATUS ' +
-//              '  FROM TT_SCC ' +
-//              ' WHERE SCC_SR=''R'' ' ;
-    StrSQL := ' SELECT (CASE WHEN SCC_DT > DATEADD(SECOND, 5, GETDATE()) ' +
+    StrSQL := ' SELECT (CASE WHEN SCC_DT > (SELECT SYSDATE - (((1/24)/60)/12) FROM DUAL) ' +
               '              THEN 1 ELSE 0 END) AS STATUS ' +
               '  FROM TT_SCC ' +
               ' WHERE SCC_SR=''R'' ' ;
+
     with qryCommChk do
     begin
       Close;
@@ -400,6 +499,140 @@ begin
     end;
   except
     if qryOrderDel.Active then qryOrderDel.Close ;
+  end;
+end;
+
+//==============================================================================
+// staLoginInfoDrawPanel
+//==============================================================================
+procedure TfrmMain.staLoginInfoDrawPanel(StatusBar: TStatusBar; Panel: TStatusPanel; const Rect: TRect);
+begin
+  try
+    if Panel = staLoginInfo.Panels[03] then
+    begin
+      with PnlSBar2 do
+      begin
+        Top := Rect.Top - 1 ;
+        Left := Rect.Left ;
+      end;
+    end;
+
+    if Panel = staLoginInfo.Panels[04] then
+    begin
+      with PnlMFCInterfaceConn do
+      begin
+        Top := Rect.Top - 1 ;
+        Left := Rect.Left ;
+      end;
+    end;
+
+    if Panel = staLoginInfo.Panels[05] then
+    begin
+      with PnlDatabaseConn do
+      begin
+        Top := Rect.Top - 1 ;
+        Left := Rect.Left ;
+      end;
+    end;
+  except
+    on E : Exception do
+    begin
+      InsertPGMHist('[000]', 'E', 'staLoginInfoDrawPanel', '', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('[000] procedure staLoginInfoDrawPanel Fail || ERR['+E.Message+']');
+    end;
+  end;
+end;
+
+//==============================================================================
+// 로그자동 삭제 관련 함수
+//==============================================================================
+procedure TfrmMain.tmrLogFileCheckTimer(Sender: TObject);
+begin
+  try
+    tmrLogFileCheck.Enabled := False ;
+    LogFileDelete ;
+  finally
+    tmrLogFileCheck.Enabled := True ;
+  end;
+end;
+
+procedure TfrmMain.LogFileDelete;
+var
+  i : integer ;
+  DeleteDir : String ;
+begin
+  DeleteDir := '.\Log\';
+  if (DeleteDir <> '') and
+     (DeleteOption in [0..2])then
+  begin
+    DeleteRecodingFile(DeleteDir, DeleteOption);
+    InsertPGMHist('[000]', 'N', 'LogFileDelete', '', 'Automatically Delete Log ['+IntToStr(DeleteOption)+']', 'PGM', '', '', '');
+  end;
+end;
+
+function TfrmMain.DeleteRecodingFile(fileDir: String; iOption: integer): Boolean;
+var
+  FoundFile : Integer;
+  SearchRec : TSearchRec;
+  stLogDir  : string;
+  Sdate : TDateTime;
+begin
+  Sdate :=  Now();
+  result := true;
+  stLogDir := fileDir + '*';
+  try
+    FoundFile := findfirst(stLogDir,faAnyFile,SearchRec);
+    while FoundFile = 0 do
+    begin
+      Application.ProcessMessages;
+      case iOption of
+       0 : if (Sdate - FileDateToDateTime(SearchRec.Time)) >= 30 then
+           begin
+             if (SearchRec.name <> '.') and (SearchRec.name <> '..') then
+             MinDeleteFile(fileDir + SearchRec.name, true); //
+           end;
+       1 : if (Sdate - FileDateToDateTime(SearchRec.Time)) >= 7 then
+           begin
+             if (SearchRec.name <> '.') and (SearchRec.name <> '..') then
+             MinDeleteFile(fileDir + SearchRec.name, true); //
+           end;
+       2 : if (SearchRec.name <> '.') and (SearchRec.name <> '..') then
+           MinDeleteFile(fileDir + SearchRec.name, true); //
+      end;
+      FoundFile := findnext(SearchRec);
+    end;
+    FindClose(SearchRec);
+  except
+    FindClose(SearchRec);
+    result := false;
+  end;
+end;
+
+function TfrmMain.MinDeleteFile(const DirName : string;
+const UseRecycleBin: Boolean): Boolean;
+var
+  SHFileOpStruct: TSHFileOpStruct;
+  DirBuf: array [0..255] of char;
+  Directory: string;
+begin
+  try
+    Directory := ExcludeTrailingPathDelimiter(DirName);
+
+    Fillchar(SHFileOpStruct, sizeof(SHFileOpStruct), 0);
+    FillChar(DirBuf, sizeof(DirBuf), 0);
+    StrPCopy(DirBuf, Directory);
+
+    with SHFileOpStruct do
+    begin
+      Wnd := 0;
+      pFrom := @DirBuf;
+      wFunc := FO_DELETE;
+      if UseRecycleBin = True then
+      fFlags := FOF_NOCONFIRMATION or FOF_SILENT;
+    end;
+    Result := (SHFileOperation(SHFileOpStruct)=0);
+  except
+    Result := False;
   end;
 end;
 
