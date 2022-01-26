@@ -1,7 +1,7 @@
 object frmMain: TfrmMain
   Left = 206
   Top = 0
-  Caption = ' '#51088#46041#52285#44256' '#44288#47532' '#49884#49828#53596
+  Caption = 'HL_Power '#51088#46041#52285#44256' '#44288#47532' '#49884#49828#53596
   ClientHeight = 592
   ClientWidth = 1008
   Color = clWhite
