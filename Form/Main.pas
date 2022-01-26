@@ -374,6 +374,7 @@ procedure TfrmMain.tmrConnectCheckTimer(Sender: TObject);
 var
   i : integer;
 begin
+
   try
     tmrConnectCheck.Enabled := False ;
     if not fnDBConChk then
@@ -383,6 +384,7 @@ begin
   finally
     tmrConnectCheck.Enabled := True ;
   end;
+
 end;
 
 //==============================================================================
@@ -408,15 +410,15 @@ begin
         frmMain.ShpDatabaseConn.Brush.Color := CONN_STATUS_COLOR[1];
 
         SQL.Clear;
-        StrSQL := ' SELECT INT_NAME, INT_M_NO, (CASE WHEN INT_DATE > DATEADD(SECOND, -5, GETDATE()) THEN 1 ELSE 0 END) STATUS ' +
-                  '   FROM TC_INT_STATUS WITH (NOLOCK) ' ;
+        StrSQL := ' SELECT SCC_SR, SCC_NO, (CASE WHEN SCC_DT > DATEADD(SECOND, -5, GETDATE()) THEN 1 ELSE 0 END) STATUS ' +
+                  '   FROM TT_SCC WITH (NOLOCK) ' ;
         SQL.Text := StrSQL;
         Open;
         if not (Bof and Eof) then
         begin
           while not (Eof) do
           begin
-            TShape(Self.FindComponent('ShpMFCInterfaceConn'+FieldByName('INT_M_NO').AsString)).Brush.Color := CONN_STATUS_COLOR[FieldByName('STATUS').AsInteger];
+            TShape(Self.FindComponent('ShpMFCInterfaceConn'+FieldByName('SCC_NO').AsString)).Brush.Color := CONN_STATUS_COLOR[FieldByName('STATUS').AsInteger];
             Next;
           end;
         end else
