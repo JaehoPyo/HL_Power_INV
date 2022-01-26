@@ -1,0 +1,19 @@
+[Database]
+Connection=ORACLE
+Provider=OraOLEDB.Oracle.1
+Alais=ORCL
+;Alais=TRAIN
+User=BSTUSER
+Pswd=BSTPASS
+
+
+[PROGRAM]
+ProgramName=부산교통공사 자동창고 관리 시스템
+CompanyName=부산교통공사
+
+
+
+
+
+
+
