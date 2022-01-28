@@ -47,12 +47,15 @@ Const
   //========================================================================
   // ¸ÞÀÎÆû Åø¹Ù ¹öÆ° Tag°ª
   //========================================================================
-  MSG_MDI_WIN_NEW     = 11 ; // ½Å±Ô
-  MSG_MDI_WIN_EXCEL   = 12 ; // ¿¢¼¿
+  MSG_MDI_WIN_ORDER   = 11 ; // Áö½Ã
+  MSG_MDI_WIN_ADD     = 12 ; // ½Å±Ô
   MSG_MDI_WIN_DELETE  = 13 ; // »èÁ¦
-  MSG_MDI_WIN_PRINT   = 14 ; // ÀÎ¼â
-  MSG_MDI_WIN_QUERY   = 15 ; // Á¶È¸
-  MSG_MDI_WIN_CLOSE   = 18 ; // ´Ý±â
+  MSG_MDI_WIN_UPDATE  = 14 ; // ¼öÁ¤
+  MSG_MDI_WIN_EXCEL   = 15 ; // ¿¢¼¿
+  MSG_MDI_WIN_PRINT   = 16 ; // ÀÎ¼â
+  MSG_MDI_WIN_QUERY   = 17 ; // Á¶È¸
+  MSG_MDI_WIN_CLOSE   = 20 ; // ´Ý±â
+  MSG_MDI_WIN_LANG    = 21 ; // ¾ð¾î
 
   //¸Þ´ºID
   PGMID      : Array[1..25] of String=('100','110','120','200','210','220','300','310','320',

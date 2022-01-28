@@ -487,7 +487,6 @@ object frmMain: TfrmMain
     BorderWidth = 4
     ParentBackground = False
     TabOrder = 0
-    ExplicitTop = 8
     object Panel10: TPanel
       Left = 4
       Top = 4
@@ -643,6 +642,7 @@ object frmMain: TfrmMain
               ShowHint = False
               Spacing = 5
               Transparent = False
+              OnClick = btnClick
               ExplicitLeft = -3
               ExplicitHeight = 53
             end
@@ -739,6 +739,7 @@ object frmMain: TfrmMain
               ShowHint = False
               Spacing = 5
               Transparent = False
+              OnClick = btnClick
               ExplicitLeft = -3
               ExplicitHeight = 53
             end
@@ -835,6 +836,7 @@ object frmMain: TfrmMain
               ShowHint = False
               Spacing = 5
               Transparent = False
+              OnClick = btnClick
               ExplicitLeft = -3
               ExplicitHeight = 53
             end
@@ -931,6 +933,7 @@ object frmMain: TfrmMain
               ShowHint = False
               Spacing = 5
               Transparent = False
+              OnClick = btnClick
               ExplicitLeft = -3
               ExplicitTop = -3
               ExplicitHeight = 54
@@ -1028,6 +1031,7 @@ object frmMain: TfrmMain
               ShowHint = False
               Spacing = 5
               Transparent = False
+              OnClick = btnClick
               ExplicitLeft = 5
               ExplicitHeight = 53
             end
@@ -1151,6 +1155,7 @@ object frmMain: TfrmMain
               ShowHint = False
               Spacing = 6
               Transparent = False
+              OnClick = btnClick
               ExplicitLeft = -3
               ExplicitTop = -3
               ExplicitHeight = 54
@@ -1269,6 +1274,7 @@ object frmMain: TfrmMain
               ShowHint = False
               Spacing = 6
               Transparent = False
+              OnClick = btnClick
               ExplicitLeft = -3
               ExplicitHeight = 53
             end
@@ -1365,6 +1371,7 @@ object frmMain: TfrmMain
               ShowHint = False
               Spacing = 5
               Transparent = False
+              OnClick = btnClick
               ExplicitLeft = -3
               ExplicitTop = -3
               ExplicitHeight = 54
@@ -1468,6 +1475,7 @@ object frmMain: TfrmMain
               ShowHint = False
               Spacing = 5
               Transparent = False
+              OnClick = btnClick
               ExplicitLeft = 0
               ExplicitHeight = 53
             end
@@ -1564,6 +1572,7 @@ object frmMain: TfrmMain
               ShowHint = False
               Spacing = 5
               Transparent = False
+              OnClick = btnClick
               ExplicitLeft = -3
               ExplicitTop = -3
               ExplicitHeight = 54

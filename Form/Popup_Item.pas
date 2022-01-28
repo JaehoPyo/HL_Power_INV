@@ -82,7 +82,7 @@ begin
             	'      , ITM_QTY   = ' + QuotedStr(Trim(edtITM_Qty.Text) ) +
             	'      , ITM_YN    = ' + QuotedStr(Trim(ITM_YN)          ) +
             	'      , MEMO      = ' + QuotedStr(Trim(edtMemo.Text)    ) +
-            	'      , UP_DATE   = Sysdate ' +
+            	'      , UP_DATE   = GETDATE() ' +
               ' Where ITM_CD = ' + QuotedStr(Trim(edtITM_CD.Text)  ) ;
   end else
   if btnSave.Caption = 'µî ·Ï' then
@@ -95,7 +95,7 @@ begin
               QuotedStr(Trim(edtITM_CD.Text)  ) + ',' + QuotedStr(Trim(edtITM_Name.Text)) + ',' +
               QuotedStr(Trim(edtITM_Spec.Text)) + ',' + QuotedStr(Trim(edtITM_Qty.Text) ) + ',' +
               QuotedStr(Trim(ITM_YN)          ) + ',' + QuotedStr(Trim(edtMemo.Text)    ) + ',' +
-              ' Sysdate, Sysdate ) ' ;
+              ' GETDATE(), GETDATE() ) ' ;
   end;
 
   try
