@@ -87,8 +87,6 @@ type
     procedure execMenuActive( Menu_Number : Integer );
   public
     { Public declarations }
-    procedure CommChk ;
-    procedure OrderDel;
     procedure fnCloseSet;
     procedure CloseChkMsg(Sender: TObject);
     procedure WmMsgRecv( var Message : TMessage); message WM_USER;
