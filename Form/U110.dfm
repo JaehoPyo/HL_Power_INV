@@ -371,19 +371,13 @@ object frmU110: TfrmU110
     Left = 880
     Top = 6
   end
-  object qryInfo: TADOQuery
-    Connection = MainDm.MainDB
-    CursorType = ctStatic
-    Parameters = <>
-    Left = 848
-    Top = 6
-  end
   object dsInfo: TDataSource
     DataSet = qryInfo
     Left = 816
     Top = 6
   end
   object EhPrint: TPrintDBGridEh
+    DBGridEh = dgInfo
     Options = []
     PageFooter.Font.Charset = DEFAULT_CHARSET
     PageFooter.Font.Color = clWindowText
@@ -397,6 +391,12 @@ object frmU110: TfrmU110
     PageHeader.Font.Style = []
     Units = MM
     Left = 912
+    Top = 6
+  end
+  object qryInfo: TADOQuery
+    Connection = MainDm.MainDB
+    Parameters = <>
+    Left = 848
     Top = 6
   end
 end
