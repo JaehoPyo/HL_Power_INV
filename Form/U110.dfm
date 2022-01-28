@@ -396,7 +396,7 @@ object frmU110: TfrmU110
     PageHeader.Font.Name = 'Tahoma'
     PageHeader.Font.Style = []
     Units = MM
-    Left = 913
+    Left = 912
     Top = 6
   end
 end

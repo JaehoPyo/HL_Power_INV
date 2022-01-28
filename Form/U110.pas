@@ -14,13 +14,13 @@ type
     qryTemp: TADOQuery;
     qryInfo: TADOQuery;
     dsInfo: TDataSource;
-    EhPrint: TPrintDBGridEh;
     Pnl_Top: TPanel;
     Pnl_Main: TPanel;
     dgInfo: TDBGridEh;
     rgITM_YN: TRadioGroup;
     gbCode: TGroupBox;
     cbCode: TComboBox;
+    EhPrint: TPrintDBGridEh;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -103,6 +103,7 @@ end;
 procedure TfrmU110.FormActivate(Sender: TObject);
 begin
   frmMain.LblMenu000.Caption := (Sender as TForm).Caption ;
+  frmU110.Caption := MainDm.M_Info.ActiveFormName;
   fnWmMsgSend( 21111,11111 );
   SetComboBox ;
   fnCommandQuery ;
@@ -175,14 +176,22 @@ end;
 //==============================================================================
 procedure TfrmU110.fnCommandAdd  ;
 begin
-  frmPopup_Item := TfrmPopup_Item.Create(Application);
-  frmPopup_Item.PnlFormName.Caption := '코드 등록';
-  frmPopup_Item.btnSave.Caption := '등 록';
-  frmPopup_Item.edtITM_CD.Text  := '';
-  frmPopup_Item.edtITM_CD.Color := clWhite;
-  frmPopup_Item.edtITM_CD.ReadOnly := False;
-  frmPopup_Item.edtITM_QTY.Text := '1';
-  frmPopup_Item.ShowModal ;
+  try
+    frmPopup_Item := TfrmPopup_Item.Create(Application);
+    frmPopup_Item.PnlFormName.Caption := '코드 등록';
+    frmPopup_Item.btnSave.Caption := '등 록';
+    frmPopup_Item.edtITM_CD.Text  := '';
+    frmPopup_Item.edtITM_CD.Color := clWhite;
+    frmPopup_Item.edtITM_CD.ReadOnly := False;
+    frmPopup_Item.edtITM_QTY.Text := '1';
+    frmPopup_Item.ShowModal ;
+  except
+    on E : Exception do
+    begin
+      InsertPGMHist('['+FormNo+']', 'E', 'fnCommandAdd', '등록', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnCommandAdd Fail || ERR['+E.Message+']');
+    end;
+  end;
 end;
 
 //==============================================================================
@@ -190,8 +199,21 @@ end;
 //==============================================================================
 procedure TfrmU110.fnCommandExcel;
 begin
-  hlbEhgridListExcel ( dgInfo , frmU110.Caption + '_' + FormatDatetime('YYYYMMDDHHNN', Now) );
-  MessageDlg('엑셀 저장을 완료하였습니다.', mtConfirmation, [mbYes], 0);
+  try
+    if hlbEhgridListExcel(dgInfo, Copy(MainDm.M_Info.ActiveFormName, 6, Length(MainDm.M_Info.ActiveFormName)-5) + '_' + FormatDatetime('YYYYMMDD', Now)) then
+    begin
+      MessageDlg('엑셀 저장을 완료하였습니다.', mtConfirmation, [mbYes], 0);
+    end else
+    begin
+      MessageDlg('엑셀 저장을 실패하였습니다.', mtWarning, [mbYes], 0);
+    end;
+  except
+    on E : Exception do
+    begin
+      InsertPGMHist('['+FormNo+']', 'E', 'fnCommandExcel', '엑셀', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnCommandExcel Fail || ERR['+E.Message+']');
+    end;
+  end;
 end;
 
 //==============================================================================
@@ -258,9 +280,28 @@ end;
 //==============================================================================
 procedure TfrmU110.fnCommandPrint;
 begin
-  if not qryInfo.Active then Exit;
-  EhPrint.PrinterSetupDialog;
-  EhPrint.Preview;
+  try
+    if not qryInfo.Active then Exit;
+    fnCommandQuery;
+    EhPrint.DBGridEh := dgInfo;
+    EhPrint.PageHeader.LeftText.Clear;
+    EhPrint.PageHeader.LeftText.Add(Copy(MainDm.M_Info.ActiveFormName, 6,
+                                    Length(MainDm.M_Info.ActiveFormName)-5) );
+    EhPrint.PageHeader.Font.Name := '돋움';
+    EhPrint.PageHeader.Font.Size := 10;
+    EhPrint.PageFooter.RightText.Clear;
+    EhPrint.PageFooter.RightText.Add(FormatDateTime('YYYY-MM-DD HH:NN:SS', Now) + '   ' +
+                                     MainDM.M_Info.UserCode+' / '+MainDM.M_Info.UserName);
+    EhPrint.PageFooter.Font.Name := '돋움';
+    EhPrint.PageFooter.Font.Size := 10;
+    EhPrint.Preview;
+  except
+    on E : Exception do
+    begin
+      InsertPGMHist('['+FormNo+']', 'E', 'fnCommandPrint', '인쇄', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnCommandPrint Fail || ERR['+E.Message+']');
+    end;
+  end;
 end;
 
 //==============================================================================
@@ -298,7 +339,12 @@ begin
       Open ;
     end;
   except
-    if qryInfo.Active then qryInfo.Close;
+    on E : Exception do
+    begin
+      qryInfo.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'fnCommandQuery', '조회', 'Exception Error', 'SQL', StrSQL, '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnCommandQuery Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
+    end;
   end;
 end;
 
