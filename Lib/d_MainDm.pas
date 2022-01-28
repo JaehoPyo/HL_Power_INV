@@ -466,10 +466,10 @@ begin
   if MainDm.M_Info.DbType = 'MSSQL' then
   begin
     MainDm.M_Info.DbOle   := IniRead(INI_PATH, 'Database', 'Provider', '');
-    MainDm.M_Info.DbAlais := IniRead(INI_PATH, 'Database', 'Alais'   , '');
-    MainDm.M_Info.DbUser  := IniRead( INI_PATH, 'Database', 'User'    , 'sa'  );
-    MainDm.M_Info.DbPswd  := IniRead( INI_PATH, 'Database', 'Pswd'    , 'netis4321'  );
-    MainDm.M_Info.DbFile  := 'WMS_TEMP';
+    MainDm.M_Info.DbAlais := IniRead(INI_PATH, 'Database', 'DataSource', '');// Á¢¼Ó IP
+    MainDm.M_Info.DbUser  := IniRead(INI_PATH, 'Database', 'User' , '');
+    MainDm.M_Info.DbPswd  := IniRead(INI_PATH, 'Database', 'Pswd' , '');
+    MainDm.M_Info.DbFile  := IniRead(INI_PATH, 'Database', 'Alais', '');// Database
   end else
   if MainDm.M_Info.DbType = 'ORACLE' then
   begin
@@ -485,12 +485,26 @@ begin
       Close;
 
       ConnectionString := '';
-      ConnectionString := 'Provider=' + MainDm.M_Info.DbOle +
-                          ';Persist Security Info=False;User ID=' +
-                          MainDm.M_Info.DbUser +
-                          ';Data Source=' + MainDm.M_Info.DbAlais +
+
+
+
+      if (UpperCase(MainDm.M_Info.DbType) = 'MSSQL') then
+      begin
+        ConnectionString := 'Provider=' + MainDm.M_Info.DbOle +
+                            ';User ID=' + MainDm.M_Info.DbUser +
+                            ';Data Source=' + MainDm.M_Info.DbAlais +
+                            ';Password=' + MainDm.M_Info.DbPswd +
+                            ';Initial Catalog=' + MainDm.M_Info.DbFile +
+                            ';Persist Security Info=True';
+      end
+      else if (UpperCase(MainDm.M_Info.DbType) = 'ORACLE') then
+      begin
+        ConnectionString := 'Provider=' + MainDm.M_Info.DbOle +
+                          ';Data Source=' + MainDm.M_Info.DbAlais+
                           ';Password=' + MainDm.M_Info.DbPswd +
-                          ';Initial Catalog=' + MainDm.M_Info.DbFile ;
+                          ';User ID =' + MainDm.M_Info.DbUser +
+                          ';Persist Security Info=True';
+      end;
 
       Connected := True;
       Result := True;
