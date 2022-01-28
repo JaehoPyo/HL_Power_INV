@@ -12,7 +12,6 @@ uses
 type
   TfrmU110 = class(TForm)
     qryTemp: TADOQuery;
-    qryInfo: TADOQuery;
     dsInfo: TDataSource;
     Pnl_Top: TPanel;
     Pnl_Main: TPanel;
@@ -21,6 +20,7 @@ type
     gbCode: TGroupBox;
     cbCode: TComboBox;
     EhPrint: TPrintDBGridEh;
+    qryInfo: TADOQuery;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -121,12 +121,6 @@ begin
     if (Self.Components[i] is TTimer) then
        (Self.Components[i] as TTimer).Enabled := False ;
   end;
-
-  for i := 0 to Self.ComponentCount-1 Do
-  begin
-    if (Self.Components[i] is TADOQuery) then
-       (Self.Components[i] as TADOQuery).Active := False ;
-  end;
 end;
 
 //==============================================================================
@@ -200,7 +194,7 @@ end;
 procedure TfrmU110.fnCommandExcel;
 begin
   try
-    if hlbEhgridListExcel(dgInfo, Copy(MainDm.M_Info.ActiveFormName, 6, Length(MainDm.M_Info.ActiveFormName)-5) + '_' + FormatDatetime('YYYYMMDD', Now)) then
+    if hlbEhgridListExcel(dgInfo, frmMain.LblMenu000.Caption + '_' + FormatDatetime('YYYYMMDD', Now)) then
     begin
       MessageDlg('¿¢¼¿ ÀúÀåÀ» ¿Ï·áÇÏ¿´½À´Ï´Ù.', mtConfirmation, [mbYes], 0);
     end else
@@ -294,6 +288,7 @@ begin
                                      MainDM.M_Info.UserCode+' / '+MainDM.M_Info.UserName);
     EhPrint.PageFooter.Font.Name := 'µ¸¿ò';
     EhPrint.PageFooter.Font.Size := 10;
+
     EhPrint.Preview;
   except
     on E : Exception do
