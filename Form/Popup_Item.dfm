@@ -17,7 +17,7 @@ object frmPopup_Item: TfrmPopup_Item
   OnClose = FormClose
   OnDeactivate = FormDeactivate
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 11
   object Pnl_Main: TPanel
     Left = 0
     Top = 0
@@ -226,7 +226,7 @@ object frmPopup_Item: TfrmPopup_Item
         end
         object edtITM_QTY: TEdit
           Left = 153
-          Top = 88
+          Top = 86
           Width = 250
           Height = 24
           Color = clWhite

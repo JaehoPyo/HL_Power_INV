@@ -34,12 +34,16 @@ type
   public
     { Public declarations }
     procedure fnCommandStart;
-    procedure fnCommandNew;
-    procedure fnCommandExcel;
+    procedure fnCommandOrder;
+    procedure fnCommandUpdate;
     procedure fnCommandDelete;
+    procedure fnCommandExcel;
     procedure fnCommandPrint;
     procedure fnCommandQuery;
     procedure fnCommandClose;
+    procedure fnCommandLang;
+    procedure fnCommandAdd;
+
     procedure fnWmMsgRecv (var MSG : TMessage) ; message WM_USER ;
 
     procedure SetComboBox ;
@@ -81,12 +85,15 @@ end;
 procedure TfrmU110.fnWmMsgRecv(var MSG: TMessage);
 begin
   case MSG.WParam of
-    MSG_MDI_WIN_NEW     : begin fnCommandNew     ; end;
-    MSG_MDI_WIN_EXCEL   : begin fnCommandExcel   ; end;
-    MSG_MDI_WIN_DELETE  : begin fnCommandDelete  ; end;
-    MSG_MDI_WIN_PRINT   : begin fnCommandPrint   ; end;
-    MSG_MDI_WIN_QUERY   : begin fnCommandQuery   ; end;
-    MSG_MDI_WIN_CLOSE   : begin fnCommandClose   ; Close; end;
+    MSG_MDI_WIN_ORDER   : begin fnCommandOrder   ; end;           // MSG_MDI_WIN_ORDER   = 11 ; // 지시
+    MSG_MDI_WIN_ADD     : begin fnCommandAdd     ; end;           // MSG_MDI_WIN_ADD     = 12 ; // 신규
+    MSG_MDI_WIN_DELETE  : begin fnCommandDelete  ; end;           // MSG_MDI_WIN_DELETE  = 13 ; // 삭제
+    MSG_MDI_WIN_UPDATE  : begin fnCommandUpdate  ; end;           // MSG_MDI_WIN_UPDATE  = 14 ; // 수정
+    MSG_MDI_WIN_EXCEL   : begin fnCommandExcel   ; end;           // MSG_MDI_WIN_EXCEL   = 15 ; // 엑셀
+    MSG_MDI_WIN_PRINT   : begin fnCommandPrint   ; end;           // MSG_MDI_WIN_PRINT   = 16 ; // 인쇄
+    MSG_MDI_WIN_QUERY   : begin fnCommandQuery   ; end;           // MSG_MDI_WIN_QUERY   = 17 ; // 조회
+    MSG_MDI_WIN_CLOSE   : begin fnCommandClose   ; Close; end;    // MSG_MDI_WIN_CLOSE   = 20 ; // 닫기
+    MSG_MDI_WIN_LANG    : begin fnCommandLang    ; end;           // MSG_MDI_WIN_LANG    = 21 ; // 언어
   end;
 end;
 
@@ -96,7 +103,7 @@ end;
 procedure TfrmU110.FormActivate(Sender: TObject);
 begin
   frmMain.LblMenu000.Caption := (Sender as TForm).Caption ;
-  fnWmMsgSend( 11111,111 );
+  fnWmMsgSend( 21111,11111 );
   SetComboBox ;
   fnCommandQuery ;
 end;
@@ -141,8 +148,10 @@ begin
   end;
 
   Action := Cafree;
-  try frmU110 := Nil ;
-  except end;
+  try
+    frmU110 := Nil ;
+  except
+  end;
 end;
 
 //==============================================================================
@@ -154,9 +163,17 @@ begin
 end;
 
 //==============================================================================
-// fnCommandNew [신규]
+// fnCommandOrder [지시]
 //==============================================================================
-procedure TfrmU110.fnCommandNew  ;
+procedure TfrmU110.fnCommandOrder  ;
+begin
+//
+end;
+
+//==============================================================================
+// fnCommandAdd [신규]                                                        //
+//==============================================================================
+procedure TfrmU110.fnCommandAdd  ;
 begin
   frmPopup_Item := TfrmPopup_Item.Create(Application);
   frmPopup_Item.PnlFormName.Caption := '코드 등록';
@@ -198,6 +215,42 @@ begin
   end;
   SetComboBox;
   fnCommandQuery;
+end;
+
+//==============================================================================
+// fnCommandUpdate [수정]                                                     //
+//==============================================================================
+procedure TfrmU110.fnCommandUpdate;
+var
+  PROD_LINE : String ;
+begin
+  try
+    frmPopup_Item := TfrmPopup_Item.Create(Application);
+    frmPopup_Item.PnlFormName.Caption := '코드 수정';
+    frmPopup_Item.btnSave.Caption := '수 정';
+    frmPopup_Item.edtITM_QTY.Text := '1';
+
+    //자재코드
+    frmPopup_Item.edtITM_CD.Text := qryInfo.FieldByName('ITM_CD').AsString;
+    frmPopup_Item.edtITM_CD.Color := $00DDDDDD;
+    frmPopup_Item.edtITM_CD.ReadOnly := True;
+
+    frmPopup_Item.edtITM_NAME.Text := qryInfo.FieldByName('ITM_NAME').AsString;
+    frmPopup_Item.edtITM_SPEC.Text := qryInfo.FieldByName('ITM_SPEC').AsString;
+    frmPopup_Item.edtITM_QTY.Text := qryInfo.FieldByName('ITM_QTY').AsString;
+    if qryInfo.FieldByName('ITM_YN').AsString = 'Y' then frmPopup_Item.cbITM_YN.Checked := True
+    else                                                 frmPopup_Item.cbITM_YN.Checked := False;
+    frmPopup_Item.edtMemo.Text := qryInfo.FieldByName('MEMO').AsString;
+
+
+    frmPopup_Item.ShowModal ;
+  except
+    on E : Exception do
+    begin
+      InsertPGMHist('['+FormNo+']', 'E', 'fnCommandUpdate', '수정', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnCommandUpdate Fail || ERR['+E.Message+']');
+    end;
+  end;
 end;
 
 //==============================================================================
@@ -255,6 +308,14 @@ end;
 procedure TfrmU110.fnCommandClose;
 begin
   Close;
+end;
+
+//==============================================================================
+// fnCommandLang [언어]                                                       //
+//==============================================================================
+procedure TfrmU110.fnCommandLang;
+begin
+//
 end;
 
 //==============================================================================

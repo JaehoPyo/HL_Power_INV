@@ -126,27 +126,38 @@ procedure TfrmMain.FormCreate(Sender: TObject);
 var
   tmp : String ;
 begin
-  m.MainHd := Handle;
-  MainDm.M_Info.ReLogin := False;
-  CloseChk := False;
+  try
+    m.MainHd := Handle;
+    MainDm.M_Info.ReLogin := False;
+    CloseChk := False;
 
-  MainDm.pVersion := 'v' + fnGetFileVersionInfo(Application.Exename);
-  lblVerSion.Caption := MainDm.pVersion;
+    MainDm.pVersion := 'v' + fnGetFileVersionInfo(Application.Exename);
+    lblVerSion.Caption := MainDm.pVersion;
 
-  MainDm.M_Info.ActivePCName := SysGetComputerName; // PC Name
-  MainDm.M_Info.ActivePCAddr := SysGetLocalIp(1);   // PC Ip-Address
+    MainDm.M_Info.ActivePCName := SysGetComputerName; // PC Name
+    MainDm.M_Info.ActivePCAddr := SysGetLocalIp(1);   // PC Ip-Address
 
-  if not ADOConnection then
-  begin
-    MessageDlg('서버 연결에 실패하였습니다.', mtError, [mbYes], 0) ;
-    ExitProcess(0);
+    if not ADOConnection then
+    begin
+      MessageDlg('서버 연결에 실패하였습니다.', mtError, [mbYes], 0) ;
+      ExitProcess(0);
+    end;
+
+    CloseChk := False ;
+    CreateConfig;
+
+    frmMain.Caption := IniRead( INI_PATH, 'PROGRAM', 'ProgramName' ,'부산교통공사 자동 창고 관리시스템' );
+    fnWmMsgSend( 22222,22222 );
+
+    InsertPGMHist('[000]', 'N', 'FormCreate', '시작', 'Program Start ' + MainDm.pVersion, 'PGM', '', '', '');
+    TraceLogWrite('Program Start ' + MainDm.pVersion + ' ['+MainDm.M_Info.UserCode+']');
+  except
+    on E : Exception do
+    begin
+      InsertPGMHist('[000]', 'E', 'FormCreate', '', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('[000] procedure FormCreate Fail || ERR['+E.Message+']');
+    end;
   end;
-
-  CloseChk := False ;
-  CreateConfig;
-
-  frmMain.Caption := IniRead( INI_PATH, 'PROGRAM', 'ProgramName' ,'부산교통공사 자동 창고 관리시스템' );
-  fnWmMsgSend( 22222,22222 );
 end;
 
 //==============================================================================
@@ -314,18 +325,26 @@ end;
 procedure TfrmMain.tmrSystemTimer(Sender: TObject);
 begin
   try
-    tmrSystem.Enabled := False;
-    staLoginInfo.Panels[05].Text := FormatDateTime( 'YYYY-MM-DD HH:NN:SS', Now);
+    try
+      tmrSystem.Enabled := False;
+      staLoginInfo.Panels[05].Text := FormatDateTime( 'YYYY-MM-DD HH:NN:SS', Now);
 
-    if MdiChildCount = 0 then
-    begin
-      fnWmMsgSend(2222222, 222);
-      MainDm.M_Info.ActiveFormID   := '000';
-      MainDm.M_Info.ActiveFormName := frmMain.Hint;
-      LblMenu000.Caption := frmMain.Hint;
+      if MdiChildCount = 0 then
+      begin
+        fnWmMsgSend(2222222, 22222);
+        MainDm.M_Info.ActiveFormID   := '000';
+        MainDm.M_Info.ActiveFormName := frmMain.Hint;
+        LblMenu000.Caption := frmMain.Hint;
+      end;
+    finally
+      tmrSystem.Enabled := True;
     end;
-  finally
-    tmrSystem.Enabled := True;
+  except
+    on E : Exception do
+    begin
+      InsertPGMHist('[000]', 'E', 'tmrSystemTimer', '', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('[000] procedure tmrSystemTimer Fail || ERR['+E.Message+']');
+    end;
   end;
 end;
 
@@ -334,10 +353,18 @@ end;
 //==============================================================================
 procedure TfrmMain.execMenuClick(Sender: TObject);
 begin
-  if StrToInt(Copy ( TMenuItem( Sender).Name , 2, 4 )) <> 0 Then
-  begin
-    m.ActiveFormID := Copy ( TMenuItem( Sender).Name , 2, 4 );
-    execMenuActive( StrToInt(Copy ( TMenuItem( Sender).Name , 2, 4 )) );
+  try
+    if StrToInt(Copy ( TMenuItem( Sender).Name , 2, 4 )) <> 0 Then
+    begin
+      m.ActiveFormID := Copy ( TMenuItem( Sender).Name , 2, 4 );
+      execMenuActive( StrToInt(Copy ( TMenuItem( Sender).Name , 2, 4 )) );
+    end;
+  except
+    on E : Exception do
+    begin
+      InsertPGMHist('[000]', 'E', 'execMenuLblClick', '', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('[000] procedure execMenuLblClick Fail || ERR['+E.Message+']');
+    end;
   end;
 end;
 
@@ -374,17 +401,23 @@ procedure TfrmMain.tmrConnectCheckTimer(Sender: TObject);
 var
   i : integer;
 begin
-
   try
-    tmrConnectCheck.Enabled := False ;
-    if not fnDBConChk then
-    begin
-      ADOConnection ;
+    try
+      tmrConnectCheck.Enabled := False ;
+      if not fnDBConChk then
+      begin
+        ADOConnection ;
+      end;
+    finally
+      tmrConnectCheck.Enabled := True ;
     end;
-  finally
-    tmrConnectCheck.Enabled := True ;
+  except
+    on E : Exception do
+    begin
+      InsertPGMHist('[000]', 'E', 'tmrConnectCheckTimer', '', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('[000] procedure tmrConnectCheckTimer Fail || ERR['+E.Message+']');
+    end;
   end;
-
 end;
 
 //==============================================================================
@@ -443,64 +476,6 @@ begin
       frmMain.ShpMFCInterfaceConn1.Brush.Color := CONN_STATUS_COLOR[0];
       frmMain.ShpMFCInterfaceConn2.Brush.Color := CONN_STATUS_COLOR[0];
     end;
-  end;
-end;
-
-//==============================================================================
-// CommChk
-//==============================================================================
-procedure TfrmMain.CommChk;
-var
-  StrSQL : String;
-begin
-  try
-    StrSQL := ' SELECT (CASE WHEN SCC_DT > (SELECT SYSDATE - (((1/24)/60)/12) FROM DUAL) ' +
-              '              THEN 1 ELSE 0 END) AS STATUS ' +
-              '  FROM TT_SCC ' +
-              ' WHERE SCC_SR=''R'' ' ;
-
-    with qryCommChk do
-    begin
-      Close;
-      SQL.Clear;
-      SQL.Text := StrSQL;
-      Open;
-      if Not (eof and bof) then
-      begin
-        SC_COMM := Boolean(StrToInt(FieldByName('STATUS').AsString)) ;
-      end;
-      Close;
-    end;
-  except
-    if qryCommChk.Active then qryCommChk.Close ;
-  end;
-end;
-
-//==============================================================================
-// OrderDel
-//==============================================================================
-procedure TfrmMain.OrderDel;
-var
-  StrSQL, DelDate : String;
-begin
-  try
-    DelDate := IntToStr(StrToInt(FormatDateTime('YYYYMMDD',Now))-1) ;
-
-    DelDate := DelDate + '000000' ;
-
-    StrSQL := ' DELETE FROM TT_ORDER ' +
-              '  WHERE REG_TIME <  ''' + DelDate + ''' ';
-
-    with qryOrderDel do
-    begin
-      Close;
-      SQL.Clear;
-      SQL.Text := StrSQL;
-      ExecSQL;
-      Close;
-    end;
-  except
-    if qryOrderDel.Active then qryOrderDel.Close ;
   end;
 end;
 
