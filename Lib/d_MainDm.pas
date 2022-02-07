@@ -12,6 +12,7 @@ type
     FORMID   : String;
     FORMNM   : String;
     FIELD_NAME: String;
+    DESC : Array [1..3] of String;
   end;
 
   TLANG_PGM = Record // Form Name Description
@@ -138,7 +139,7 @@ type
 
   // Form의 캡션명을 가져 온다.
   function fnSetFormCaption(FormNo : String) : String;
-  function fnMenuNameGetRecord( WRHS : String) : TLANG_PGM ;
+  function fnMenuNameGetRecord(WRHS: String; Lang_Type: integer): TLANG_PGM ;
   // 필드명의 내용을 선택된 언어로 변환 한다.
   Function getLangString(FieldName, Default : String; LangNo : Integer; addField : String = '') : String;
   Function getLangMenuString(FormId, Default : String; LangNo : Integer; addField : String = '') : String;
@@ -602,41 +603,50 @@ end;
 //==============================================================================
 // fnMenuNameGetRecord
 //==============================================================================
-function fnMenuNameGetRecord( WRHS : String) : TLANG_PGM ;
+function fnMenuNameGetRecord(WRHS: String; Lang_Type: integer): TLANG_PGM ;
 var
-  Menu : TLANG_PGM;
-  StrSql : String ;
   i : integer;
+  LangStr : TLANG_PGM;
+  StrSQL : String ;
+  Test : String;
 begin
   try
     i := 0 ;
-    with MainDm.qryInfo do
+    with MainDM.qrySearch do
     begin
       Close;
       SQL.Clear;
-      SQL.Text :=
-              ' Select WRHS, USE_YN, PGM_ID, PGM_NM ' + // 한국어 -> Unicode
-              '   From TM_PGM ' +
-              '  Where WRHS = ''' + WRHS + ''' ' +
-              '  Order By PGM_ID ' ;
+      StrSQL := ' SELECT WMS_NO, MENU_ID, MENU_LVL, MENU_USED, ' +
+                '        MENU_NAME, ' +   // 한국어 -> Unicode
+                '        UP_DT, CR_DT ' +
+                '   FROM TM_MENU WITH (NOLOCK) ' +
+                '  WHERE WMS_NO = ' + QuotedStr(WRHS) +
+                '  ORDER BY MENU_ID ' ;
 
+      SQL.Text := StrSQL;
       Open;
+
       First ;
-      While not eof do
+      while not eof do
       begin
-
-        Menu.LANG[i].FORMID := FieldByName('PGM_ID').AsString ;
-        Menu.LANG[i].FORMNM := FieldByName('PGM_NM').AsString ;
-
+        Test := FieldByName('MENU_ID').AsString;
+        LangStr.LANG[i].FORMID     := FieldByName('MENU_ID'  ).AsString ;
+        LangStr.LANG[i].FIELD_NAME := FieldByName('MENU_LVL' ).AsString ;
+        LangStr.LANG[i].DESC[1]    := FieldByName('MENU_NAME').AsString ;
         inc(i);
         Next ;
       end;
       Close ;
     end;
   except
-  //
+    on E : Exception do
+    begin
+      MainDM.qrySearch.Close;
+      InsertPGMHist('[000]', 'E', 'fnMenuNameGetRecord', '언어', 'Exception Error', 'SQL', StrSQL, '', E.Message);
+      TraceLogWrite('[000] function fnMenuNameGetRecord Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
+    end;
   end;
-  Result := Menu;
+  Result := LangStr;
 end;
 
 //==============================================================================
@@ -765,18 +775,28 @@ begin
 end;
 
 // 필드명의 메뉴내용을 선택된 언어로 변환 한다.
-Function getLangMenuString(FormId, Default : String; LangNo : Integer; addField : String = '') : String;
-var i : Integer;
+function getLangMenuString(FormID, Default: String; LangNo: Integer; AddField: String = ''): String;
+var
+  i : Integer;
 begin
   Result := Default;
-  for i := Low(m.Pgm.LANG) to High(m.Pgm.LANG) do begin
-    if Trim(m.Pgm.LANG[I].FORMID) = '' then Break;
-    if FormId = m.Pgm.LANG[I].FORMID then begin
-       Result := m.Pgm.LANG[I].FORMNM[LangNo];
-
-       m.ActiveFormID     := FormId; //실행시킨 Menu-ID
-       m.ActiveFormName := ' '+FormId+'. '+ m.Pgm.LANG[I].FORMNM[LangNo];
-       break;
+  try
+    for i := Low(MainDm.M_Info.LANG_PGM.LANG) to High(MainDm.M_Info.LANG_PGM.LANG) do
+    begin
+      if Trim(MainDm.M_Info.LANG_PGM.LANG[i].FORMID) = '' then Break;
+      if FormId = MainDm.M_Info.LANG_PGM.LANG[i].FORMID then
+      begin
+        Result := MainDm.M_Info.LANG_PGM.LANG[i].DESC[LangNo];
+        MainDm.M_Info.ActiveFormID   := FormId; //실행시킨 Menu-ID
+        MainDm.M_Info.ActiveFormName := FormId + '. ' + MainDm.M_Info.LANG_PGM.LANG[i].DESC[LangNo];
+        Break;
+      end;
+    end;
+  except
+    on E : Exception do
+    begin
+      InsertPGMHist('[000]', 'E', 'getLangMenuString', '언어', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('[000] function getLangMenuString Fail || ERR['+E.Message+']');
     end;
   end;
 end;

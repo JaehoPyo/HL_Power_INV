@@ -113,7 +113,7 @@ var
 
 implementation
 
-uses U110;//, U210, U220, U230, U310, U320, U410, U420, U510, U520 ;
+uses U110, U210;//, U220, U230, U310, U320, U410, U420, U510, U520 ;
 
 {$R *.dfm}
 
@@ -135,6 +135,9 @@ begin
     MainDm.M_Info.ActivePCName := SysGetComputerName; // PC Name
     MainDm.M_Info.ActivePCAddr := SysGetLocalIp(1);   // PC Ip-Address
 
+    MainDm.M_Info.WRHS       := IniRead(INI_PATH, 'UserSeting', 'WRHS', 'D');                 // WareHouse Kind
+    MainDm.M_Info.LANG_TYPE  := 1;
+
     if not ADOConnection then
     begin
       MessageDlg('서버 연결에 실패하였습니다.', mtError, [mbYes], 0) ;
@@ -147,7 +150,7 @@ begin
     frmMain.Caption := IniRead( INI_PATH, 'PROGRAM', 'ProgramName' ,'부산교통공사 자동 창고 관리시스템' );
     fnWmMsgSend( 22222,22222 );
 
-    InsertPGMHist('[000]', 'N', 'FormCreate', '시작', 'Program Start ' + MainDm.pVersion, 'PGM', '', '', '');
+//    InsertPGMHist('[000]', 'N', 'FormCreate', '시작', 'Program Start ' + MainDm.pVersion, 'PGM', '', '', '');
     TraceLogWrite('Program Start ' + MainDm.pVersion + ' ['+MainDm.M_Info.UserCode+']');
   except
     on E : Exception do
@@ -231,7 +234,7 @@ begin
   try
     if not DirectoryExists('.\Log') then ForceDirectories('.\Log');
 
-    //inDm.M_Info.LANG_PGM := fnMenuNameGetRecord(MainDm.M_Info.WRHS, MainDm.M_Info.LANG_TYPE); // 메뉴명
+    MainDm.M_Info.LANG_PGM := fnMenuNameGetRecord(MainDm.M_Info.WRHS, MainDm.M_Info.LANG_TYPE); // 메뉴명
     //fnMenuChange;
 
     frmMain.Caption    := IniRead(INI_PATH, 'PROGRAM', 'CompanyName', '') + ' ' +
@@ -376,7 +379,7 @@ begin
     // 코드관리------------------------------------------
     1100 : U110Create() ;          // 기종정보관리
     // 입출고관리------------------------------------------
-//    2100 : U210Create();           // 입출고 진행현황
+    2100 : U210Create();           // 입출고 진행현황
 //    2200 : U220Create();           // 입고 작업등록
 //    2300 : U230Create();           // 출고 작업등록
     // 재고관리

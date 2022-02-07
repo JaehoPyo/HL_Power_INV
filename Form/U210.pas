@@ -36,6 +36,8 @@ type
     dgInfo_Ot: TDBGridEh;
     ImgIn: TImage;
     ImgOt: TImage;
+    chkGridOut: TCheckBox;
+    chkGridIn: TCheckBox;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -46,17 +48,22 @@ type
     procedure dgInfoDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
     procedure ImgAutoQryClick(Sender: TObject);
+    procedure chkGridInClick(Sender: TObject);
+    procedure chkGridOutClick(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
     procedure fnCommandStart;
-    procedure fnCommandNew;
+    procedure fnCommandOrder;
+    procedure fnCommandAdd;
     procedure fnCommandExcel;
     procedure fnCommandDelete;
+    procedure fnCommandUpdate;
     procedure fnCommandPrint;
     procedure fnCommandQuery;
     procedure fnCommandClose;
+    procedure fnCommandLang;
     procedure fnWmMsgRecv (var MSG : TMessage) ; message WM_USER ;
   end;
   procedure U210Create();
@@ -95,12 +102,15 @@ end;
 procedure TfrmU210.fnWmMsgRecv(var MSG: TMessage);
 begin
   case MSG.WParam of
-    MSG_MDI_WIN_NEW     : begin fnCommandNew     ; end;
-    MSG_MDI_WIN_EXCEL   : begin fnCommandExcel   ; end;
-    MSG_MDI_WIN_DELETE  : begin fnCommandDelete  ; end;
-    MSG_MDI_WIN_PRINT   : begin fnCommandPrint   ; end;
-    MSG_MDI_WIN_QUERY   : begin fnCommandQuery   ; end;
-    MSG_MDI_WIN_CLOSE   : begin fnCommandClose   ; Close; end;
+    MSG_MDI_WIN_ORDER   : begin fnCommandOrder   ; end;           // MSG_MDI_WIN_ORDER   = 11 ; // 지시
+    MSG_MDI_WIN_ADD     : begin fnCommandAdd     ; end;           // MSG_MDI_WIN_ADD     = 12 ; // 신규
+    MSG_MDI_WIN_DELETE  : begin fnCommandDelete  ; end;           // MSG_MDI_WIN_DELETE  = 13 ; // 삭제
+    MSG_MDI_WIN_UPDATE  : begin fnCommandUpdate  ; end;           // MSG_MDI_WIN_UPDATE  = 14 ; // 수정
+    MSG_MDI_WIN_EXCEL   : begin fnCommandExcel   ; end;           // MSG_MDI_WIN_EXCEL   = 15 ; // 엑셀
+    MSG_MDI_WIN_PRINT   : begin fnCommandPrint   ; end;           // MSG_MDI_WIN_PRINT   = 16 ; // 인쇄
+    MSG_MDI_WIN_QUERY   : begin fnCommandQuery   ; end;           // MSG_MDI_WIN_QUERY   = 17 ; // 조회
+    MSG_MDI_WIN_CLOSE   : begin fnCommandClose   ; Close; end;    // MSG_MDI_WIN_CLOSE   = 20 ; // 닫기
+    MSG_MDI_WIN_LANG    : begin fnCommandLang    ; end;           // MSG_MDI_WIN_LANG    = 21 ; // 언어
   end;
 end;
 
@@ -109,8 +119,10 @@ end;
 //==============================================================================
 procedure TfrmU210.FormActivate(Sender: TObject);
 begin
-  frmMain.PnlMainMenu.Caption := (Sender as TForm).Caption ;
-  fnWmMsgSend( 22221,111 );
+  MainDm.M_Info.ActiveFormID := '210';
+  frmMain.LblMenu000.Caption := MainDm.M_Info.ActiveFormID + '. ' + getLangMenuString(MainDm.M_Info.ActiveFormID, frmMain.LblMenu000.Caption, MainDm.M_Info.LANG_TYPE, 'N');
+  frmU210.Caption := MainDm.M_Info.ActiveFormName;
+  fnWmMsgSend( 21111,11111 );
   fnCommandQuery ;
   if not tmrQry.Enabled then tmrQry.Enabled := True;
 end;
@@ -169,9 +181,17 @@ begin
 end;
 
 //==============================================================================
-// fnCommandNew [신규]
+// fnCommandOrder [지시]
 //==============================================================================
-procedure TfrmU210.fnCommandNew  ;
+procedure TfrmU210.fnCommandOrder  ;
+begin
+//
+end;
+
+//==============================================================================
+// fnCommandAdd [신규]                                                        //
+//==============================================================================
+procedure TfrmU210.fnCommandAdd  ;
 begin
 //
 end;
@@ -180,14 +200,49 @@ end;
 // fnCommandExcel [엑셀]
 //==============================================================================
 procedure TfrmU210.fnCommandExcel;
+var
+  TmpGrid : TDBGridEh;
+  tStr : String;
 begin
-//
+  try
+    if chkGridIn.Checked then
+    begin
+      TmpGrid := dgInfo_In;
+      tStr := '';
+    end else
+    begin
+      TmpGrid := dgInfo_Ot;
+      tStr := '(Detail)';
+    end;
+
+    if hlbEhgridListExcel(TmpGrid, frmMain.LblMenu000.Caption + '_' + FormatDatetime('YYYYMMDD', Now)) then
+    begin
+      MessageDlg('엑셀 저장을 완료하였습니다.', mtConfirmation, [mbYes], 0);
+    end else
+    begin
+      MessageDlg('엑셀 저장을 실패하였습니다.', mtWarning, [mbYes], 0);
+    end;
+  except
+    on E : Exception do
+    begin
+      InsertPGMHist('['+FormNo+']', 'E', 'fnCommandExcel', '엑셀', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnCommandExcel Fail || ERR['+E.Message+']');
+    end;
+  end;
 end;
 
 //==============================================================================
 // fnCommandDelete [삭제]
 //==============================================================================
 procedure TfrmU210.fnCommandDelete;
+begin
+//
+end;
+
+//==============================================================================
+// fnCommandUpdate [수정]                                                     //
+//==============================================================================
+procedure TfrmU210.fnCommandUpdate;
 begin
 //
 end;
@@ -215,35 +270,35 @@ begin
       begin
         Close;
         SQL.Clear;
-        SQL.Text := ' Select REG_TIME, LUGG, JOBD,                      ' +  #13#10+
-                    '        SRCSITE, SRCAISLE, SRCBAY, SRCLEVEL        ' +  #13#10+
-                    '        DSTSITE, DSTAISLE, DSTBAY, DSTLEVEL        ' +  #13#10+
-                    '        NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS    ' +  #13#10+
-                    '        JOBREWORK, JOBERRORT, JOBERRORC, JOBERRORD ' +  #13#10+
-                    '        CVFR, CVTO, CVCURR, ETC, EMG, ITM_CD,      ' +  #13#10+
-                    '       (Case JOBD  when ''1'' then ''입고'' ' +  #13#10+
-                    '                   when ''2'' then ''출고'' end) as JOBD_DESC, ' +  #13#10+
-                    '       (Case NOWMC when ''1'' then ''컨베어 작업'' ' +  #13#10+
-                    '                   when ''2'' then ''스태커 적재'' ' +  #13#10+
-                    '                   when ''3'' then ''스태커 하역'' end) as NOWMC_DESC, ' +  #13#10+
-                    '       (Case NOWSTATUS when ''1'' then ''등록'' ' +  #13#10+
-                    '                       when ''2'' then ''지시'' ' +  #13#10+
-                    '                       when ''3'' then ''진행'' ' +  #13#10+
-                    '                       when ''4'' then ''완료'' end) as NOWSTATUS_DESC, ' +  #13#10+
-                    '       (Case JOBERRORC when ''0'' then ''정상'' ' +  #13#10+
-                    '                       when ''1'' then ''에러'' end) as JOBERRORC_DESC, ' +  #13#10+
-                    '       (Case JOBERRORD when ''0000'' then ''정상'' ' +  #13#10+
-                    '                       else JOBERRORD end) as JOBERRORD_DESC, ' +  #13#10+
-                    '       (Case BUFFSTATUS when ''0'' then ''대기'' ' +  #13#10+
-                    '                        when ''1'' then ''입고가능'' end) as BUFFSTATUS_DESC, ' +  #13#10+
-                    '       (SUBSTR(DSTAISLE,4,1)||''-''||SUBSTR(DSTBAY,3,2)||''-''||SUBSTR(DSTLEVEL,3,2)) as ID_CODE, ' +  #13#10+
-                    '       (SUBSTR(REG_TIME,1,4)||''-''||SUBSTR(REG_TIME,5,2)||''-''||SUBSTR(REG_TIME,7,2)||''  ''|| ' +  #13#10+
-                    '        SUBSTR(REG_TIME,9,2)||'':''||SUBSTR(REG_TIME,11,2)||'':''||SUBSTR(REG_TIME,13,2)) as REF_TIME_CONV, ' +  #13#10+
-                    '       TO_DATE(REG_TIME,''YYYYMMDDHH24MISS'') as REG_TIME_DESC ' +
-                    '   From TT_ORDER ' +  #13#10+
-                    '  Where JOBD    = ''1'' ' +  #13#10+
-                    '    And JOB_END = ''0'' ' +  #13#10+
-                    '  Order By REG_TIME, LUGG ' ;
+        SQL.Text := ' Select REG_TIME, LUGG, JOBD,                                                                                ' +
+                    '        SRCSITE, SRCAISLE, SRCBAY, SRCLEVEL                                                                  ' +
+                    '        DSTSITE, DSTAISLE, DSTBAY, DSTLEVEL                                                                  ' +
+                    '        NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS                                                              ' +
+                    '        JOBREWORK, JOBERRORT, JOBERRORC, JOBERRORD                                                           ' +
+                    '        CVFR, CVTO, CVCURR, ETC, EMG, ITM_CD,                                                                ' +
+                    '       (Case JOBD  when ''1'' then ''입고''                                                                      ' +
+                    '                   when ''2'' then ''출고'' end) as JOBD_DESC,                                                   ' +
+                    '       (Case NOWMC when ''1'' then ''컨베어 작업''                                                               ' +
+                    '                   when ''2'' then ''스태커 적재''                                                               ' +
+                    '                   when ''3'' then ''스태커 하역'' end) as NOWMC_DESC,                                           ' +
+                    '       (Case NOWSTATUS when ''1'' then ''등록''                                                                  ' +
+                    '                       when ''2'' then ''지시''                                                                  ' +
+                    '                       when ''3'' then ''진행''                                                                  ' +
+                    '                       when ''4'' then ''완료'' end) as NOWSTATUS_DESC,                                          ' +
+                    '       (Case JOBERRORC when ''0'' then ''정상''                                                                  ' +
+                    '                       when ''1'' then ''에러'' end) as JOBERRORC_DESC,                                          ' +
+                    '       (Case JOBERRORD when ''0000'' then ''정상''                                                               ' +
+                    '                       else JOBERRORD end) as JOBERRORD_DESC,                                                ' +
+                    '       (Case BUFFSTATUS when ''0'' then ''대기''                                                                 ' +
+                    '                        when ''1'' then ''입고가능'' end) as BUFFSTATUS_DESC,                                    ' +
+                    '       (SUBSTRING(DSTAISLE,4,1)+''-''+SUBSTRING(DSTBAY,3,2)+''-''+SUBSTRING(DSTLEVEL,3,2)) as ID_CODE,           ' +
+                    '       (SUBSTRING(REG_TIME,1,4)+''-''+SUBSTRING(REG_TIME,5,2)+''-''+SUBSTRING(REG_TIME,7,2)+                     ' +
+                    '        SUBSTRING(REG_TIME,9,2)+'':''+SUBSTRING(REG_TIME,11,2)+'':''+SUBSTRING(REG_TIME,13,2)) as REF_TIME_CONV, ' +
+                    '       CONVERT(VARCHAR, REG_TIME, 120) as REG_TIME_DESC ' +
+                    '   From TT_ORDER          ' +
+                    '  Where JOBD    = ''1''   ' +
+                    '    And JOB_END = ''0''   ' +
+                    '  Order By REG_TIME, LUGG ';
         Open;
       end;
     end;
@@ -277,10 +332,10 @@ begin
                     '                       else JOBERRORD end) as JOBERRORD_DESC, ' +  #13#10+
                     '       (Case BUFFSTATUS when ''0'' then ''대기'' ' +  #13#10+
                     '                        when ''1'' then ''입고가능'' end) as BUFFSTATUS_DESC, ' +  #13#10+
-                    '       (SUBSTR(SRCAISLE,4,1)||''-''||SUBSTR(SRCBAY,3,2)||''-''||SUBSTR(SRCLEVEL,3,2)) as ID_CODE, ' +  #13#10+
-                    '       (SUBSTR(REG_TIME,1,4)||''-''||SUBSTR(REG_TIME,5,2)||''-''||SUBSTR(REG_TIME,7,2)||''  ''|| ' +  #13#10+
-                    '        SUBSTR(REG_TIME,9,2)||'':''||SUBSTR(REG_TIME,11,2)||'':''||SUBSTR(REG_TIME,13,2)) as REF_TIME_CONV, ' +  #13#10+
-                    '       TO_DATE(REG_TIME,''YYYYMMDDHH24MISS'') as REG_TIME_DESC ' +
+                    '       (SUBSTRING(DSTAISLE,4,1)+''-''+SUBSTRING(DSTBAY,3,2)+''-''+SUBSTRING(DSTLEVEL,3,2)) as ID_CODE,           ' +
+                    '       (SUBSTRING(REG_TIME,1,4)+''-''+SUBSTRING(REG_TIME,5,2)+''-''+SUBSTRING(REG_TIME,7,2)+                     ' +
+                    '        SUBSTRING(REG_TIME,9,2)+'':''+SUBSTRING(REG_TIME,11,2)+'':''+SUBSTRING(REG_TIME,13,2)) as REF_TIME_CONV, ' +
+                    '       CONVERT(VARCHAR, REG_TIME, 120) as REG_TIME_DESC ' +
                     '   From TT_ORDER ' +  #13#10+
                     '  Where JOBD    = ''2'' ' +  #13#10+
                     '    And JOB_END = ''0'' ' +  #13#10+
@@ -289,8 +344,13 @@ begin
       end;
     end;
   except
-    if qryInfo_In.Active then qryInfo_In.Close;
-    if qryInfo_Ot.Active then qryInfo_Ot.Close;
+    on E : Exception do
+    begin
+      qryInfo_In.Close;
+      qryInfo_Ot.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'fnCommandQuery', 'Inquiry', 'Exception Error', 'SQL', StrSQL, '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnCommandQuerySub Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
+    end;
   end;
 end;
 
@@ -300,6 +360,14 @@ end;
 procedure TfrmU210.fnCommandClose;
 begin
   Close;
+end;
+
+//==============================================================================
+// fnCommandLang [언어]                                                       //
+//==============================================================================
+procedure TfrmU210.fnCommandLang;
+begin
+//
 end;
 
 //==============================================================================
@@ -462,6 +530,25 @@ begin
       DataSource.DataSet.Close;
     end;
   end;
+end;
+//==============================================================================
+// chkGridInClick
+//==============================================================================
+procedure TfrmU210.chkGridInClick(Sender: TObject);
+begin
+  if (Sender as TCheckBox).Checked then
+       chkGridOut.Checked := False
+  else chkGridOut.Checked := True;
+end;
+
+//==============================================================================
+// chkGridOutClick
+//==============================================================================
+procedure TfrmU210.chkGridOutClick(Sender: TObject);
+begin
+  if (Sender as TCheckBox).Checked then
+       chkGridIn.Checked := False
+  else chkGridIn.Checked := True;
 end;
 
 end.
