@@ -102,7 +102,8 @@ end;
 //==============================================================================
 procedure TfrmU110.FormActivate(Sender: TObject);
 begin
-  frmMain.LblMenu000.Caption := (Sender as TForm).Caption ;
+  MainDm.M_Info.ActiveFormID := '110';
+  frmMain.LblMenu000.Caption := MainDm.M_Info.ActiveFormID + '. ' + getLangMenuString(MainDm.M_Info.ActiveFormID, frmMain.LblMenu000.Caption, MainDm.M_Info.LANG_TYPE, 'N');
   frmU110.Caption := MainDm.M_Info.ActiveFormName;
   fnWmMsgSend( 21111,11111 );
   SetComboBox ;

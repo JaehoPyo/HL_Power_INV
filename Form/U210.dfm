@@ -1,7 +1,7 @@
 object frmU210: TfrmU210
   Left = 2026
   Top = 265
-  Caption = #51077#183#52636#44256' '#51652#54665' '#54788#54889
+  Caption = '2'
   ClientHeight = 612
   ClientWidth = 1008
   Color = clBtnFace
@@ -154,7 +154,7 @@ object frmU210: TfrmU210
   OnClose = FormClose
   OnDeactivate = FormDeactivate
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 11
   object Pnl_Main: TPanel
     Left = 0
     Top = 0
@@ -292,6 +292,26 @@ object frmU210: TfrmU210
           Align = alRight
           BevelOuter = bvNone
           TabOrder = 1
+        end
+        object chkGridOut: TCheckBox
+          Left = 189
+          Top = 18
+          Width = 14
+          Height = 16
+          Cursor = crHandPoint
+          Hint = 'Select Grid - Excel or Print'
+          Color = 15987699
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -24
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 2
+          OnClick = chkGridOutClick
         end
       end
       object dgInfo_Ot: TDBGridEh
@@ -684,6 +704,28 @@ object frmU210: TfrmU210
             end
           end
         end
+        object chkGridIn: TCheckBox
+          Left = 189
+          Top = 17
+          Width = 14
+          Height = 16
+          Cursor = crHandPoint
+          Hint = 'Select Grid - Excel or Print'
+          Checked = True
+          Color = 15987699
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -24
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          State = cbChecked
+          TabOrder = 1
+          OnClick = chkGridInClick
+        end
       end
       object dgInfo_In: TDBGridEh
         Left = 0
@@ -842,8 +884,8 @@ object frmU210: TfrmU210
     Connection = MainDm.MainDB
     CursorType = ctStatic
     Parameters = <>
-    Left = 232
-    Top = 3
+    Left = 880
+    Top = 131
   end
   object qryInfo_In: TADOQuery
     Connection = MainDm.MainDB
@@ -870,8 +912,8 @@ object frmU210: TfrmU210
     PageHeader.Font.Name = 'Tahoma'
     PageHeader.Font.Style = []
     Units = MM
-    Left = 264
-    Top = 3
+    Left = 912
+    Top = 131
   end
   object dsInfo_Ot: TDataSource
     DataSet = qryInfo_Ot
@@ -888,7 +930,7 @@ object frmU210: TfrmU210
   object tmrQry: TTimer
     Enabled = False
     OnTimer = tmrQryTimer
-    Left = 201
-    Top = 3
+    Left = 849
+    Top = 131
   end
 end
