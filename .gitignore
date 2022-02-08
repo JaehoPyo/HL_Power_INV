@@ -67,3 +67,6 @@ __recovery/
 
 # exclude images
 image/
+
+# exclude log
+Win32/Debug/Log/
