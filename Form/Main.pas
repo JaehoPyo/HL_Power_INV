@@ -113,7 +113,7 @@ var
 
 implementation
 
-uses U110, U210;//, U220, U230, U310, U320, U410, U420, U510, U520 ;
+uses U110, U210, U220;//, U230, U310, U320, U410, U420, U510, U520 ;
 
 {$R *.dfm}
 
@@ -128,6 +128,8 @@ begin
     m.MainHd := Handle;
     MainDm.M_Info.ReLogin := False;
     CloseChk := False;
+
+    LblMenu000.Caption := '';
 
     MainDm.pVersion := 'v' + fnGetFileVersionInfo(Application.Exename);
     lblVerSion.Caption := MainDm.pVersion;
@@ -242,7 +244,7 @@ begin
                           IniRead(INI_PATH, 'PROGRAM', 'ProgramName', '') + ' ' +
                           MainDm.pVersion;
     frmMain.Hint       := IniRead(INI_PATH, 'PROGRAM', 'ProgramName', '') + ' ' + MainDm.pVersion;
-    LblMenu000.Caption := frmMain.Hint;
+    LblMenu000.Caption := '000. 메인화면';
     MainDm.M_Info.ActiveFormID   := '000';
     MainDm.M_Info.ActiveFormName := frmMain.Hint;
 
@@ -335,7 +337,7 @@ begin
         fnWmMsgSend(2222222, 22222);
         MainDm.M_Info.ActiveFormID   := '000';
         MainDm.M_Info.ActiveFormName := frmMain.Hint;
-        LblMenu000.Caption := frmMain.Hint;
+        LblMenu000.Caption := MainDm.M_Info.ActiveFormID + '. ' + getLangMenuString(MainDm.M_Info.ActiveFormID, frmMain.LblMenu000.Caption, MainDm.M_Info.LANG_TYPE, 'N');
       end;
     finally
       tmrSystem.Enabled := True;
@@ -380,7 +382,7 @@ begin
     1100 : U110Create() ;          // 기종정보관리
     // 입출고관리------------------------------------------
     2100 : U210Create();           // 입출고 진행현황
-//    2200 : U220Create();           // 입고 작업등록
+    2200 : U220Create();           // 입고 작업등록
 //    2300 : U230Create();           // 출고 작업등록
     // 재고관리
 //    3100 : U310Create();           // Cell 모니터링

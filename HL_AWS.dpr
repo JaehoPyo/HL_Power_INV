@@ -12,7 +12,10 @@ uses
   ExStrLib in 'Lib\ExStrLib.pas',
   ExVclLib in 'Lib\ExVclLib.pas',
   ExVarLib in 'Lib\ExVarLib.pas',
-  Popup_Item in 'Form\Popup_Item.pas' {frmPopup_Item};
+  Popup_Item in 'Form\Popup_Item.pas' {frmPopup_Item},
+  U210 in 'Form\U210.pas' {frmU210},
+  Popup_Item_Search in 'Form\Popup_Item_Search.pas' {frmPopup_Item_Search},
+  U220 in 'Form\U220.pas' {frmU220};
 
 {$R *.res}
 

@@ -2,8 +2,8 @@ object frmU110: TfrmU110
   Left = 2026
   Top = 265
   Caption = #44592#51333#53076#46300' '#44288#47532
-  ClientHeight = 612
-  ClientWidth = 1008
+  ClientHeight = 1001
+  ClientWidth = 1904
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -158,24 +158,24 @@ object frmU110: TfrmU110
   object Pnl_Top: TPanel
     Left = 0
     Top = 0
-    Width = 1008
-    Height = 60
+    Width = 1904
+    Height = 80
     Align = alTop
     BevelInner = bvRaised
     BevelOuter = bvNone
     TabOrder = 0
     object rgITM_YN: TRadioGroup
-      Left = 191
+      Left = 217
       Top = 1
-      Width = 280
-      Height = 58
+      Width = 328
+      Height = 78
       Align = alLeft
       Caption = '[ '#44592#51333#50668#48512' ]'
       Color = clBtnFace
       Columns = 3
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -16
+      Font.Height = -20
       Font.Name = #46027#50880
       Font.Style = []
       ItemIndex = 0
@@ -187,30 +187,37 @@ object frmU110: TfrmU110
       ParentFont = False
       TabOrder = 0
       OnClick = rgITM_YNClick
+      ExplicitLeft = 281
     end
     object gbCode: TGroupBox
       Left = 1
       Top = 1
-      Width = 190
-      Height = 58
+      Width = 216
+      Height = 78
       Align = alLeft
       Caption = '[ '#44592#51333#53076#46300' ]'
       Color = clBtnFace
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -16
+      Font.Height = 20
       Font.Name = #46027#50880
       Font.Style = []
       ParentColor = False
       ParentFont = False
       TabOrder = 1
       object cbCode: TComboBox
-        Left = 10
-        Top = 25
-        Width = 170
-        Height = 24
+        Left = 14
+        Top = 33
+        Width = 187
+        Height = 28
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = 20
+        Font.Name = #46027#50880
+        Font.Style = []
         ImeName = 'Microsoft Office IME 2007'
         ItemIndex = 0
+        ParentFont = False
         TabOrder = 0
         Text = #51204#52404
         OnChange = cbCodeChange
@@ -222,18 +229,21 @@ object frmU110: TfrmU110
   end
   object Pnl_Main: TPanel
     Left = 0
-    Top = 60
-    Width = 1008
-    Height = 552
+    Top = 80
+    Width = 1904
+    Height = 921
     Align = alClient
     BevelInner = bvRaised
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitTop = 60
+    ExplicitWidth = 1008
+    ExplicitHeight = 552
     object dgInfo: TDBGridEh
       Left = 1
       Top = 1
-      Width = 1006
-      Height = 550
+      Width = 1902
+      Height = 919
       Align = alClient
       ColumnDefValues.Layout = tlCenter
       ColumnDefValues.Title.Alignment = taCenter
@@ -249,7 +259,7 @@ object frmU110: TfrmU110
       EditActions = [geaCopyEh]
       Font.Charset = GB2312_CHARSET
       Font.Color = clWindowText
-      Font.Height = -16
+      Font.Height = 20
       Font.Name = #46027#50880
       Font.Style = []
       FooterRowCount = 1
@@ -269,7 +279,7 @@ object frmU110: TfrmU110
       TitleParams.FillStyle = cfstSolidEh
       TitleParams.Font.Charset = GB2312_CHARSET
       TitleParams.Font.Color = clWindowText
-      TitleParams.Font.Height = -16
+      TitleParams.Font.Height = 20
       TitleParams.Font.Name = #46027#50880
       TitleParams.Font.Style = []
       TitleParams.HorzLineColor = 5592405
@@ -288,7 +298,7 @@ object frmU110: TfrmU110
           FieldName = 'ITM_CD'
           Footers = <>
           Title.Caption = #44592#51333#53076#46300
-          Width = 110
+          Width = 200
         end
         item
           Alignment = taCenter
@@ -298,7 +308,7 @@ object frmU110: TfrmU110
           FieldName = 'ITM_NAME'
           Footers = <>
           Title.Caption = #44592#51333#47749
-          Width = 110
+          Width = 200
         end
         item
           Alignment = taCenter
@@ -308,7 +318,7 @@ object frmU110: TfrmU110
           FieldName = 'ITM_SPEC'
           Footers = <>
           Title.Caption = #44592#51333#49324#50577
-          Width = 200
+          Width = 280
         end
         item
           Alignment = taCenter
@@ -318,7 +328,7 @@ object frmU110: TfrmU110
           FieldName = 'ITM_QTY'
           Footers = <>
           Title.Caption = #49688#47049
-          Width = 80
+          Width = 100
         end
         item
           Alignment = taCenter
@@ -328,7 +338,7 @@ object frmU110: TfrmU110
           FieldName = 'ITM_YN'
           Footers = <>
           Title.Caption = #44592#51333#50668#48512
-          Width = 80
+          Width = 100
         end
         item
           Alignment = taCenter
@@ -338,7 +348,7 @@ object frmU110: TfrmU110
           FieldName = 'CR_DATE'
           Footers = <>
           Title.Caption = #46321#47197#51068#51088
-          Width = 220
+          Width = 270
         end
         item
           Alignment = taCenter
@@ -348,7 +358,7 @@ object frmU110: TfrmU110
           FieldName = 'UP_DATE'
           Footers = <>
           Title.Caption = #48320#44221#51068#51088
-          Width = 220
+          Width = 270
         end
         item
           Alignment = taCenter
@@ -358,7 +368,7 @@ object frmU110: TfrmU110
           FieldName = 'MEMO'
           Footers = <>
           Title.Caption = #52280#44256#49324#54637
-          Width = 250
+          Width = 420
         end>
       object RowDetailData: TRowDetailPanelControlEh
       end

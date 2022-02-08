@@ -36,12 +36,14 @@ type
     Panel14: TPanel;
     edtMemo: TEdit;
     btnOrder: TButton;
-    dtDateFr: TDateTimePicker;
-    dtTimeFr: TDateTimePicker;
     edtCode: TEdit;
     cbLevel: TComboBox;
     cbBay: TComboBox;
     cbBank: TComboBox;
+    Panel3: TPanel;
+    dtDateFr: TDateTimePicker;
+    Panel4: TPanel;
+    dtTimeFr: TDateTimePicker;
     Shape2: TShape;
     PD_GET_JOBNO: TADOStoredProc;
     procedure FormActivate(Sender: TObject);
@@ -56,12 +58,15 @@ type
   public
     { Public declarations }
     procedure fnCommandStart;
-    procedure fnCommandNew;
+    procedure fnCommandOrder;
+    procedure fnCommandAdd;
     procedure fnCommandExcel;
     procedure fnCommandDelete;
+    procedure fnCommandUpdate;
     procedure fnCommandPrint;
     procedure fnCommandQuery;
     procedure fnCommandClose;
+    procedure fnCommandLang;
     procedure fnWmMsgRecv (var MSG : TMessage) ; message WM_USER ;
 
     procedure OrderDataClear(OrderData:TJobOrder) ;
@@ -108,12 +113,15 @@ end;
 procedure TfrmU220.fnWmMsgRecv(var MSG: TMessage);
 begin
   case MSG.WParam of
-    MSG_MDI_WIN_NEW     : begin fnCommandNew     ; end;
-    MSG_MDI_WIN_EXCEL   : begin fnCommandExcel   ; end;
-    MSG_MDI_WIN_DELETE  : begin fnCommandDelete  ; end;
-    MSG_MDI_WIN_PRINT   : begin fnCommandPrint   ; end;
-    MSG_MDI_WIN_QUERY   : begin fnCommandQuery   ; end;
-    MSG_MDI_WIN_CLOSE   : begin fnCommandClose   ; Close; end;
+    MSG_MDI_WIN_ORDER   : begin fnCommandOrder   ; end;           // MSG_MDI_WIN_ORDER   = 11 ; // 지시
+    MSG_MDI_WIN_ADD     : begin fnCommandAdd     ; end;           // MSG_MDI_WIN_ADD     = 12 ; // 신규
+    MSG_MDI_WIN_DELETE  : begin fnCommandDelete  ; end;           // MSG_MDI_WIN_DELETE  = 13 ; // 삭제
+    MSG_MDI_WIN_UPDATE  : begin fnCommandUpdate  ; end;           // MSG_MDI_WIN_UPDATE  = 14 ; // 수정
+    MSG_MDI_WIN_EXCEL   : begin fnCommandExcel   ; end;           // MSG_MDI_WIN_EXCEL   = 15 ; // 엑셀
+    MSG_MDI_WIN_PRINT   : begin fnCommandPrint   ; end;           // MSG_MDI_WIN_PRINT   = 16 ; // 인쇄
+    MSG_MDI_WIN_QUERY   : begin fnCommandQuery   ; end;           // MSG_MDI_WIN_QUERY   = 17 ; // 조회
+    MSG_MDI_WIN_CLOSE   : begin fnCommandClose   ; Close; end;    // MSG_MDI_WIN_CLOSE   = 20 ; // 닫기
+    MSG_MDI_WIN_LANG    : begin fnCommandLang    ; end;           // MSG_MDI_WIN_LANG    = 21 ; // 언어
   end;
 end;
 
@@ -122,8 +130,11 @@ end;
 //==============================================================================
 procedure TfrmU220.FormActivate(Sender: TObject);
 begin
-  frmMain.PnlMainMenu.Caption := (Sender as TForm).Caption ;
-  fnWmMsgSend( 22222,111 );
+
+  MainDm.M_Info.ActiveFormID := '220';
+  frmMain.LblMenu000.Caption := MainDm.M_Info.ActiveFormID + '. ' + getLangMenuString(MainDm.M_Info.ActiveFormID, frmMain.LblMenu000.Caption, MainDm.M_Info.LANG_TYPE, 'N');
+  frmU220.Caption := MainDm.M_Info.ActiveFormName;
+  fnWmMsgSend( 22222,22111 );
 
   dtDateFr.Date := StrToDate(FormatDateTime('YYYY-MM-DD',Now));
   dtTimeFr.Time := StrToTime(FormatDateTime('HH:NN:SS',Now));
@@ -188,7 +199,15 @@ end;
 //==============================================================================
 // fnCommandNew [신규]
 //==============================================================================
-procedure TfrmU220.fnCommandNew  ;
+procedure TfrmU220.fnCommandOrder  ;
+begin
+//
+end;
+
+//==============================================================================
+// fnCommandAdd [신규]                                                        //
+//==============================================================================
+procedure TfrmU220.fnCommandAdd  ;
 begin
 //
 end;
@@ -210,6 +229,14 @@ begin
 end;
 
 //==============================================================================
+// fnCommandUpdate [수정]                                                     //
+//==============================================================================
+procedure TfrmU220.fnCommandUpdate;
+begin
+//
+end;
+
+//==============================================================================
 // fnCommandPrint [인쇄]
 //==============================================================================
 procedure TfrmU220.fnCommandPrint;
@@ -221,17 +248,8 @@ end;
 // fnCommandQuery
 //==============================================================================
 procedure TfrmU220.fnCommandQuery;
-var
-  StrSQL : String;
 begin
-  try
-    with qryInfo do
-    begin
-
-    end;
-  except
-    if qryInfo.Active then qryInfo.Close;
-  end;
+//
 end;
 
 //==============================================================================
@@ -240,6 +258,14 @@ end;
 procedure TfrmU220.fnCommandClose;
 begin
   Close;
+end;
+
+//==============================================================================
+// fnCommandLang [언어]                                                       //
+//==============================================================================
+procedure TfrmU220.fnCommandLang;
+begin
+//
 end;
 
 //==============================================================================
@@ -347,12 +373,12 @@ begin
       MessageDlg('적재[열]위치를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
       Exit;
     end else
-    if ( StrToInt(cbBay.Text) > 11 ) then
+    if ( StrToInt(cbBay.Text) > 9 ) then
     begin
       MessageDlg('적재[연]위치를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
       Exit;
     end else
-    if ( StrToInt(cbLevel.Text) > 3 ) then
+    if ( StrToInt(cbLevel.Text) > 6 ) then
     begin
       MessageDlg('적재[단]위치를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
       Exit;
@@ -489,9 +515,13 @@ begin
     with PD_GET_JOBNO do
     begin
       Close;
+      {
       ProcedureName := 'PD_GET_JOBNO';
       Parameters.CreateParameter('@i_Type', ftInteger, pdInput, 0, 1);
-      Parameters.CreateParameter('@o_JobNo', ftWideString, pdInputOutput, 10, '');
+      //Parameters.CreateParameter('@o_JobNo', ftWideString, pdInputOutput, 10, '');
+      }
+      ProcedureName := 'PD_GET_JOBNO';
+      Parameters.ParamByName('@I_TYPE').Value := 1;
       ExecProc;
       returnValue := Parameters.ParamValues['@o_JobNo'];
 
@@ -529,7 +559,7 @@ begin
     begin
       Close;
       SQL.Clear;
-      SQL.Text := ' Select fn_GetFreeLoc(:type) as ID_CODE From Dual ';
+      SQL.Text := ' Select WMS_HL.DBO.fn_GetFreeLoc(:type) ID_CODE ';
       Parameters[0].Value := 0 ;
       Open;
 
@@ -654,7 +684,7 @@ var
 begin
   try
     Result := '0';
-    StrSQL := ' Select SubStr(' + CH_NO + ',' + POS_NO + ',1) as Data ' +
+    StrSQL := ' Select SubString(' + CH_NO + ',' + POS_NO + ',1) as Data ' +
               '   From TT_SCC    ' +
               '  Where SCC_NO= ''' + SCC_NO + ''' ' +
               '    and SCC_SR= ''' + SCC_SR + ''' ' ; // 'R' or 'S'
