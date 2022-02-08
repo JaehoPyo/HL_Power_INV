@@ -2,8 +2,8 @@ object frmU210: TfrmU210
   Left = 2026
   Top = 265
   Caption = '2'
-  ClientHeight = 612
-  ClientWidth = 1008
+  ClientHeight = 1001
+  ClientWidth = 1904
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -158,42 +158,48 @@ object frmU210: TfrmU210
   object Pnl_Main: TPanel
     Left = 0
     Top = 0
-    Width = 1008
-    Height = 612
+    Width = 1904
+    Height = 1001
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     OnResize = Pnl_MainResize
+    ExplicitWidth = 1008
+    ExplicitHeight = 612
     object Pnl_Ot: TPanel
       Left = 0
       Top = 300
-      Width = 1008
-      Height = 312
+      Width = 1904
+      Height = 701
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 0
+      ExplicitWidth = 1008
+      ExplicitHeight = 312
       object PnlTitle_Ot: TPanel
         Left = 0
         Top = 0
-        Width = 1008
-        Height = 50
+        Width = 1904
+        Height = 80
         Align = alTop
         BevelInner = bvRaised
         BevelOuter = bvNone
         TabOrder = 0
+        ExplicitWidth = 1008
         object Panel4: TPanel
-          Left = 1
+          Left = 57
           Top = 1
-          Width = 198
-          Height = 48
+          Width = 315
+          Height = 78
           Align = alLeft
           BevelOuter = bvNone
           TabOrder = 0
+          ExplicitLeft = 1
           object Panel5: TPanel
             Left = 12
             Top = 2
-            Width = 170
-            Height = 43
+            Width = 295
+            Height = 72
             BevelInner = bvRaised
             BevelOuter = bvLowered
             Color = clBlue
@@ -203,8 +209,8 @@ object frmU210: TfrmU210
               Tag = 1
               Left = 2
               Top = 2
-              Width = 166
-              Height = 39
+              Width = 291
+              Height = 68
               Hint = 'OUT'
               Align = alClient
               BevelInner = bvRaised
@@ -213,17 +219,18 @@ object frmU210: TfrmU210
               Caption = #52636#44256#54788#54889
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clMaroon
-              Font.Height = -19
+              Font.Height = -35
               Font.Name = #46027#50880
               Font.Style = [fsBold]
               ParentBackground = False
               ParentFont = False
               TabOrder = 0
               OnClick = PnlAutoQryClick
+              ExplicitWidth = 290
               object ImgOt: TImage
                 Tag = 1
-                Left = 130
-                Top = 8
+                Left = 240
+                Top = 22
                 Width = 22
                 Height = 22
                 Hint = 'OUT'
@@ -285,19 +292,21 @@ object frmU210: TfrmU210
           end
         end
         object Panel10: TPanel
-          Left = 809
+          Left = 1705
           Top = 1
           Width = 198
-          Height = 48
+          Height = 78
           Align = alRight
           BevelOuter = bvNone
           TabOrder = 1
+          ExplicitLeft = 809
+          ExplicitHeight = 48
         end
         object chkGridOut: TCheckBox
-          Left = 189
-          Top = 18
-          Width = 14
-          Height = 16
+          Left = 370
+          Top = 32
+          Width = 20
+          Height = 20
           Cursor = crHandPoint
           Hint = 'Select Grid - Excel or Print'
           Color = 15987699
@@ -313,12 +322,21 @@ object frmU210: TfrmU210
           TabOrder = 2
           OnClick = chkGridOutClick
         end
+        object Panel3: TPanel
+          Left = 1
+          Top = 1
+          Width = 56
+          Height = 78
+          Align = alLeft
+          BevelOuter = bvNone
+          TabOrder = 3
+        end
       end
       object dgInfo_Ot: TDBGridEh
         Left = 0
-        Top = 50
-        Width = 1008
-        Height = 262
+        Top = 80
+        Width = 1904
+        Height = 621
         Align = alClient
         ColumnDefValues.Layout = tlCenter
         ColumnDefValues.Title.Alignment = taCenter
@@ -334,7 +352,7 @@ object frmU210: TfrmU210
         EditActions = [geaCopyEh]
         Font.Charset = GB2312_CHARSET
         Font.Color = clWindowText
-        Font.Height = -16
+        Font.Height = -20
         Font.Name = #46027#50880
         Font.Style = []
         FooterRowCount = 1
@@ -360,7 +378,7 @@ object frmU210: TfrmU210
         TitleParams.FillStyle = cfstSolidEh
         TitleParams.Font.Charset = GB2312_CHARSET
         TitleParams.Font.Color = clWindowText
-        TitleParams.Font.Height = -16
+        TitleParams.Font.Height = -20
         TitleParams.Font.Name = #46027#50880
         TitleParams.Font.Style = []
         TitleParams.HorzLineColor = 5592405
@@ -379,7 +397,7 @@ object frmU210: TfrmU210
             FieldName = 'JOBD_DESC'
             Footers = <>
             Title.Caption = #51089#50629#50976#54805
-            Width = 100
+            Width = 210
           end
           item
             Alignment = taCenter
@@ -389,7 +407,7 @@ object frmU210: TfrmU210
             FieldName = 'ITM_CD'
             Footers = <>
             Title.Caption = #44592#51333#53076#46300
-            Width = 100
+            Width = 210
           end
           item
             Alignment = taCenter
@@ -399,7 +417,7 @@ object frmU210: TfrmU210
             FieldName = 'LUGG'
             Footers = <>
             Title.Caption = #51089#50629#48264#54840
-            Width = 100
+            Width = 210
           end
           item
             Alignment = taCenter
@@ -409,7 +427,7 @@ object frmU210: TfrmU210
             FieldName = 'ID_CODE'
             Footers = <>
             Title.Caption = #54616#50669#50948#52824
-            Width = 110
+            Width = 210
           end
           item
             Alignment = taCenter
@@ -419,7 +437,7 @@ object frmU210: TfrmU210
             FieldName = 'NOWMC_DESC'
             Footers = <>
             Title.Caption = #51652#54665#49345#53468
-            Width = 110
+            Width = 210
           end
           item
             Alignment = taCenter
@@ -430,7 +448,7 @@ object frmU210: TfrmU210
             Footers = <>
             Title.Caption = #48260#54140#49345#53468
             Visible = False
-            Width = 100
+            Width = 210
           end
           item
             Alignment = taCenter
@@ -440,7 +458,7 @@ object frmU210: TfrmU210
             FieldName = 'JOBERRORC_DESC'
             Footers = <>
             Title.Caption = #50640#47084#49345#53468
-            Width = 100
+            Width = 210
           end
           item
             Alignment = taCenter
@@ -450,7 +468,7 @@ object frmU210: TfrmU210
             FieldName = 'JOBERRORD_DESC'
             Footers = <>
             Title.Caption = #50640#47084#53076#46300
-            Width = 100
+            Width = 210
           end
           item
             Alignment = taCenter
@@ -460,7 +478,7 @@ object frmU210: TfrmU210
             FieldName = 'REG_TIME_DESC'
             Footers = <>
             Title.Caption = #46321#47197#51068#51088
-            Width = 200
+            Width = 390
           end>
         object RowDetailData: TRowDetailPanelControlEh
         end
@@ -469,20 +487,22 @@ object frmU210: TfrmU210
     object Pnl_In: TPanel
       Left = 0
       Top = 0
-      Width = 1008
+      Width = 1904
       Height = 300
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 1
+      ExplicitWidth = 1008
       object PnlTitle_In: TPanel
         Left = 0
         Top = 0
-        Width = 1008
-        Height = 50
+        Width = 1904
+        Height = 80
         Align = alTop
         BevelInner = bvRaised
         BevelOuter = bvNone
         TabOrder = 0
+        ExplicitWidth = 1008
         object imgNo: TImage
           Left = 972
           Top = 5
@@ -602,18 +622,19 @@ object frmU210: TfrmU210
           Visible = False
         end
         object Panel1: TPanel
-          Left = 1
+          Left = 57
           Top = 1
-          Width = 198
-          Height = 48
+          Width = 315
+          Height = 78
           Align = alLeft
           BevelOuter = bvNone
           TabOrder = 0
+          ExplicitLeft = 1
           object Panel2: TPanel
             Left = 12
             Top = 3
-            Width = 170
-            Height = 43
+            Width = 295
+            Height = 72
             BevelInner = bvRaised
             BevelOuter = bvLowered
             Color = clBlue
@@ -623,8 +644,8 @@ object frmU210: TfrmU210
               Tag = 1
               Left = 2
               Top = 2
-              Width = 166
-              Height = 39
+              Width = 291
+              Height = 68
               Hint = 'IN'
               Align = alClient
               BevelInner = bvRaised
@@ -633,17 +654,19 @@ object frmU210: TfrmU210
               Caption = #51077#44256#54788#54889
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clNavy
-              Font.Height = -19
+              Font.Height = -35
               Font.Name = #46027#50880
               Font.Style = [fsBold]
               ParentBackground = False
               ParentFont = False
               TabOrder = 0
               OnClick = PnlAutoQryClick
+              ExplicitWidth = 166
+              ExplicitHeight = 39
               object ImgIn: TImage
                 Tag = 1
-                Left = 130
-                Top = 8
+                Left = 240
+                Top = 22
                 Width = 22
                 Height = 22
                 Hint = 'IN'
@@ -705,17 +728,17 @@ object frmU210: TfrmU210
           end
         end
         object chkGridIn: TCheckBox
-          Left = 189
-          Top = 17
-          Width = 14
-          Height = 16
+          Left = 370
+          Top = 32
+          Width = 20
+          Height = 20
           Cursor = crHandPoint
           Hint = 'Select Grid - Excel or Print'
           Checked = True
           Color = 15987699
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -24
+          Font.Height = -30
           Font.Name = 'MS Sans Serif'
           Font.Style = []
           ParentColor = False
@@ -726,12 +749,23 @@ object frmU210: TfrmU210
           TabOrder = 1
           OnClick = chkGridInClick
         end
+        object Panel6: TPanel
+          Left = 1
+          Top = 1
+          Width = 56
+          Height = 78
+          Align = alLeft
+          BevelOuter = bvNone
+          TabOrder = 2
+          ExplicitLeft = 9
+          ExplicitTop = 2
+        end
       end
       object dgInfo_In: TDBGridEh
         Left = 0
-        Top = 50
-        Width = 1008
-        Height = 250
+        Top = 80
+        Width = 1904
+        Height = 220
         Align = alClient
         ColumnDefValues.Layout = tlCenter
         ColumnDefValues.Title.Alignment = taCenter
@@ -747,7 +781,7 @@ object frmU210: TfrmU210
         EditActions = [geaCopyEh]
         Font.Charset = GB2312_CHARSET
         Font.Color = clWindowText
-        Font.Height = -16
+        Font.Height = -20
         Font.Name = #46027#50880
         Font.Style = []
         FooterRowCount = 1
@@ -773,7 +807,7 @@ object frmU210: TfrmU210
         TitleParams.FillStyle = cfstSolidEh
         TitleParams.Font.Charset = GB2312_CHARSET
         TitleParams.Font.Color = clWindowText
-        TitleParams.Font.Height = -16
+        TitleParams.Font.Height = -20
         TitleParams.Font.Name = #46027#50880
         TitleParams.Font.Style = []
         TitleParams.HorzLineColor = 5592405
@@ -792,7 +826,7 @@ object frmU210: TfrmU210
             FieldName = 'JOBD_DESC'
             Footers = <>
             Title.Caption = #51089#50629#50976#54805
-            Width = 100
+            Width = 210
           end
           item
             Alignment = taCenter
@@ -802,7 +836,7 @@ object frmU210: TfrmU210
             FieldName = 'ITM_CD'
             Footers = <>
             Title.Caption = #44592#51333#53076#46300
-            Width = 100
+            Width = 210
           end
           item
             Alignment = taCenter
@@ -812,7 +846,7 @@ object frmU210: TfrmU210
             FieldName = 'LUGG'
             Footers = <>
             Title.Caption = #51089#50629#48264#54840
-            Width = 100
+            Width = 210
           end
           item
             Alignment = taCenter
@@ -822,7 +856,7 @@ object frmU210: TfrmU210
             FieldName = 'ID_CODE'
             Footers = <>
             Title.Caption = #51201#51116#50948#52824
-            Width = 110
+            Width = 210
           end
           item
             Alignment = taCenter
@@ -832,7 +866,7 @@ object frmU210: TfrmU210
             FieldName = 'NOWMC_DESC'
             Footers = <>
             Title.Caption = #51652#54665#49345#53468
-            Width = 110
+            Width = 210
           end
           item
             Alignment = taCenter
@@ -843,7 +877,7 @@ object frmU210: TfrmU210
             Footers = <>
             Title.Caption = #48260#54140#49345#53468
             Visible = False
-            Width = 100
+            Width = 210
           end
           item
             Alignment = taCenter
@@ -853,7 +887,7 @@ object frmU210: TfrmU210
             FieldName = 'JOBERRORC_DESC'
             Footers = <>
             Title.Caption = #50640#47084#49345#53468
-            Width = 100
+            Width = 210
           end
           item
             Alignment = taCenter
@@ -863,7 +897,7 @@ object frmU210: TfrmU210
             FieldName = 'JOBERRORD_DESC'
             Footers = <>
             Title.Caption = #50640#47084#53076#46300
-            Width = 100
+            Width = 210
           end
           item
             Alignment = taCenter
@@ -873,7 +907,7 @@ object frmU210: TfrmU210
             FieldName = 'REG_TIME_DESC'
             Footers = <>
             Title.Caption = #46321#47197#51068#51088
-            Width = 200
+            Width = 390
           end>
         object RowDetailData: TRowDetailPanelControlEh
         end

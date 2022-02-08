@@ -38,6 +38,8 @@ type
     ImgOt: TImage;
     chkGridOut: TCheckBox;
     chkGridIn: TCheckBox;
+    Panel3: TPanel;
+    Panel6: TPanel;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -122,7 +124,7 @@ begin
   MainDm.M_Info.ActiveFormID := '210';
   frmMain.LblMenu000.Caption := MainDm.M_Info.ActiveFormID + '. ' + getLangMenuString(MainDm.M_Info.ActiveFormID, frmMain.LblMenu000.Caption, MainDm.M_Info.LANG_TYPE, 'N');
   frmU210.Caption := MainDm.M_Info.ActiveFormName;
-  fnWmMsgSend( 21111,11111 );
+  fnWmMsgSend( 22221,11111 );
   fnCommandQuery ;
   if not tmrQry.Enabled then tmrQry.Enabled := True;
 end;
@@ -138,12 +140,6 @@ begin
   begin
     if (Self.Components[i] is TTimer) then
        (Self.Components[i] as TTimer).Enabled := False ;
-  end;
-
-  for i := 0 to Self.ComponentCount-1 Do
-  begin
-    if (Self.Components[i] is TADOQuery) then
-       (Self.Components[i] as TADOQuery).Active := False ;
   end;
 end;
 
@@ -251,8 +247,44 @@ end;
 // fnCommandPrint [ÀÎ¼â]
 //==============================================================================
 procedure TfrmU210.fnCommandPrint;
+var
+  TmpGrid : TDBGridEh;
+  tStr : String;
 begin
-//
+  try
+    if chkGridIn.Checked then
+    begin
+      TmpGrid := dgInfo_In;
+      tStr := '';
+      if not qryInfo_In.Active then Exit;
+    end else
+    begin
+      TmpGrid := dgInfo_Ot;
+      tStr := '(Detail)';
+      if not qryInfo_Ot.Active then Exit;
+    end;
+
+    fnCommandQuery;
+    EhPrint.DBGridEh := TmpGrid;
+    EhPrint.PageHeader.LeftText.Clear;
+    EhPrint.PageHeader.LeftText.Add(Copy(MainDm.M_Info.ActiveFormName, 6,
+                                    Length(MainDm.M_Info.ActiveFormName)-5) );
+    EhPrint.PageHeader.Font.Name := 'µ¸¿ò';
+    EhPrint.PageHeader.Font.Size := 10;
+    EhPrint.PageFooter.RightText.Clear;
+    EhPrint.PageFooter.RightText.Add(FormatDateTime('YYYY-MM-DD HH:NN:SS', Now) + '   ' +
+                                     MainDM.M_Info.UserCode+' / '+MainDM.M_Info.UserName);
+    EhPrint.PageFooter.Font.Name := 'µ¸¿ò';
+    EhPrint.PageFooter.Font.Size := 10;
+
+    EhPrint.Preview;
+  except
+    on E : Exception do
+    begin
+      InsertPGMHist('['+FormNo+']', 'E', 'fnCommandPrint', 'ÀÎ¼â', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnCommandPrint Fail || ERR['+E.Message+']');
+    end;
+  end;
 end;
 
 //==============================================================================
