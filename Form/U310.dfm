@@ -2,8 +2,8 @@ object frmU310: TfrmU310
   Left = 2026
   Top = 265
   Caption = #49472#48324' '#47784#45768#53552#47553
-  ClientHeight = 762
-  ClientWidth = 1008
+  ClientHeight = 1001
+  ClientWidth = 1904
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -154,21 +154,23 @@ object frmU310: TfrmU310
   OnClose = FormClose
   OnDeactivate = FormDeactivate
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 11
   object Pnl_Main: TPanel
     Left = 0
     Top = 0
-    Width = 1008
-    Height = 642
+    Width = 1904
+    Height = 901
     Align = alClient
     BevelInner = bvRaised
     BevelOuter = bvNone
     TabOrder = 0
+    ExplicitWidth = 1008
+    ExplicitHeight = 642
     object CanvasPanel1: TPanel
       Left = 1
       Top = 1
-      Width = 656
-      Height = 640
+      Width = 1552
+      Height = 899
       ParentCustomHint = False
       Align = alClient
       Alignment = taLeftJustify
@@ -191,17 +193,21 @@ object frmU310: TfrmU310
       ParentShowHint = False
       ShowHint = False
       TabOrder = 0
+      ExplicitLeft = -119
+      ExplicitTop = -3
     end
     object Pnl_Info: TPanel
-      Left = 657
+      Left = 1553
       Top = 1
       Width = 350
-      Height = 640
+      Height = 899
       Align = alRight
       BevelInner = bvRaised
       BevelOuter = bvNone
       ParentBackground = False
       TabOrder = 1
+      ExplicitLeft = 657
+      ExplicitHeight = 640
       object Panel274: TPanel
         Left = 1
         Top = 1
@@ -567,12 +573,13 @@ object frmU310: TfrmU310
         Left = 1
         Top = 209
         Width = 348
-        Height = 430
+        Height = 689
         Align = alClient
         BevelInner = bvRaised
         BevelOuter = bvLowered
         ParentBackground = False
         TabOrder = 1
+        ExplicitHeight = 430
         object Panel15: TPanel
           Left = 2
           Top = 2
@@ -596,12 +603,13 @@ object frmU310: TfrmU310
           Left = 2
           Top = 32
           Width = 344
-          Height = 396
+          Height = 655
           Align = alClient
           BevelInner = bvLowered
           BevelOuter = bvNone
           ParentBackground = False
           TabOrder = 1
+          ExplicitHeight = 396
           object Panel19: TPanel
             Left = 10
             Top = 10
@@ -1051,9 +1059,9 @@ object frmU310: TfrmU310
   end
   object Panel1: TPanel
     Left = 0
-    Top = 642
-    Width = 1008
-    Height = 120
+    Top = 901
+    Width = 1904
+    Height = 100
     Align = alBottom
     BevelInner = bvRaised
     BevelOuter = bvNone
@@ -1061,8 +1069,8 @@ object frmU310: TfrmU310
     object dgInfo: TDBGridEh
       Left = 1
       Top = 1
-      Width = 1006
-      Height = 118
+      Width = 1902
+      Height = 98
       Align = alClient
       ColumnDefValues.Layout = tlCenter
       DataGrouping.Font.Charset = GB2312_CHARSET
@@ -1077,7 +1085,7 @@ object frmU310: TfrmU310
       EditActions = [geaCopyEh]
       Font.Charset = GB2312_CHARSET
       Font.Color = clWindowText
-      Font.Height = -13
+      Font.Height = 20
       Font.Name = #46027#50880
       Font.Style = []
       FooterParams.FillStyle = cfstSolidEh
@@ -1102,7 +1110,7 @@ object frmU310: TfrmU310
       TitleParams.FillStyle = cfstSolidEh
       TitleParams.Font.Charset = GB2312_CHARSET
       TitleParams.Font.Color = clWindowText
-      TitleParams.Font.Height = -16
+      TitleParams.Font.Height = 20
       TitleParams.Font.Name = #46027#50880
       TitleParams.Font.Style = []
       TitleParams.HorzLineColor = 5592405
@@ -1120,7 +1128,7 @@ object frmU310: TfrmU310
           FieldName = 'CELL_CNT'
           Footers = <>
           Title.Caption = #52509' '#49472
-          Width = 75
+          Width = 109
         end
         item
           Alignment = taCenter
@@ -1130,7 +1138,7 @@ object frmU310: TfrmU310
           FieldName = 'CELL_USE'
           Footers = <>
           Title.Caption = #44032#50857#49472
-          Width = 75
+          Width = 109
         end
         item
           Alignment = taCenter
@@ -1140,7 +1148,7 @@ object frmU310: TfrmU310
           FieldName = 'CELL_EMP'
           Footers = <>
           Title.Caption = #44277#49472
-          Width = 75
+          Width = 109
         end
         item
           Alignment = taCenter
@@ -1150,7 +1158,7 @@ object frmU310: TfrmU310
           FieldName = 'ITEMCELL'
           Footers = <>
           Title.Caption = #49892#49472'|'#49472#49688
-          Width = 75
+          Width = 109
         end
         item
           Alignment = taCenter
@@ -1160,7 +1168,7 @@ object frmU310: TfrmU310
           FieldName = 'ITEMRATE'
           Footers = <>
           Title.Caption = #49892#49472'|'#48708#50984
-          Width = 75
+          Width = 109
         end
         item
           Alignment = taCenter
@@ -1170,7 +1178,7 @@ object frmU310: TfrmU310
           FieldName = 'TRAYCELL'
           Footers = <>
           Title.Caption = #44277#54028#47112#53944'|'#49472#49688
-          Width = 75
+          Width = 109
         end
         item
           Alignment = taCenter
@@ -1180,7 +1188,7 @@ object frmU310: TfrmU310
           FieldName = 'TRAYRATE'
           Footers = <>
           Title.Caption = #44277#54028#47112#53944'|'#48708#50984
-          Width = 75
+          Width = 109
         end
         item
           Alignment = taCenter
@@ -1190,7 +1198,7 @@ object frmU310: TfrmU310
           FieldName = 'EMGCELL'
           Footers = <>
           Title.Caption = #44552#51648#49472'|'#49472#49688
-          Width = 75
+          Width = 109
         end
         item
           Alignment = taCenter
@@ -1200,7 +1208,7 @@ object frmU310: TfrmU310
           FieldName = 'EMGRATE'
           Footers = <>
           Title.Caption = #44552#51648#49472'|'#48708#50984
-          Width = 75
+          Width = 109
         end
         item
           Alignment = taCenter
@@ -1210,7 +1218,7 @@ object frmU310: TfrmU310
           FieldName = 'INCELL'
           Footers = <>
           Title.Caption = #51077#44256#50696#50557'|'#49892#49472
-          Width = 75
+          Width = 109
         end
         item
           Alignment = taCenter
@@ -1220,7 +1228,7 @@ object frmU310: TfrmU310
           FieldName = 'INRATE'
           Footers = <>
           Title.Caption = #51077#44256#50696#50557'|'#48708#50984
-          Width = 75
+          Width = 109
         end
         item
           Alignment = taCenter
@@ -1230,7 +1238,7 @@ object frmU310: TfrmU310
           FieldName = 'OUTCELL'
           Footers = <>
           Title.Caption = #52636#44256#50696#50557'|'#49472#49688
-          Width = 75
+          Width = 109
         end
         item
           Alignment = taCenter
@@ -1240,7 +1248,7 @@ object frmU310: TfrmU310
           FieldName = 'OUTRATE'
           Footers = <>
           Title.Caption = #52636#44256#50696#50557'|'#48708#50984
-          Width = 75
+          Width = 109
         end
         item
           Alignment = taCenter
@@ -1250,7 +1258,7 @@ object frmU310: TfrmU310
           FieldName = 'DOUBLECELL'
           Footers = <>
           Title.Caption = #51060#51473#51077#44256'|'#49472#49688
-          Width = 75
+          Width = 109
         end
         item
           Alignment = taCenter
@@ -1260,7 +1268,7 @@ object frmU310: TfrmU310
           FieldName = 'DOUBLERATE'
           Footers = <>
           Title.Caption = #51060#51473#51077#44256'|'#48708#50984
-          Width = 75
+          Width = 109
         end
         item
           Alignment = taCenter
@@ -1270,7 +1278,7 @@ object frmU310: TfrmU310
           FieldName = 'ZEROCELL'
           Footers = <>
           Title.Caption = #44277#52636#44256'|'#49472#49688
-          Width = 75
+          Width = 109
         end
         item
           Alignment = taCenter
@@ -1280,7 +1288,7 @@ object frmU310: TfrmU310
           FieldName = 'ZERORATE'
           Footers = <>
           Title.Caption = #44277#52636#44256'|'#48708#50984
-          Width = 75
+          Width = 109
         end>
       object RowDetailData: TRowDetailPanelControlEh
       end
