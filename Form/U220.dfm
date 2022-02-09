@@ -165,8 +165,6 @@ object frmU220: TfrmU220
     BevelOuter = bvNone
     TabOrder = 0
     OnResize = Pnl_MainResize
-    ExplicitLeft = 256
-    ExplicitTop = -8
     object Pnl_Sub: TPanel
       Left = 0
       Top = -23
@@ -185,6 +183,21 @@ object frmU220: TfrmU220
         Pen.Style = psDot
         ExplicitWidth = 1900
         ExplicitHeight = 1040
+      end
+      object lbloutstation: TLabel
+        Left = 722
+        Top = 420
+        Width = 1056
+        Height = 100
+        AutoSize = False
+        Caption = #51077#44256#45824#47484' '#49440#53469#54644' '#51452#49901#49884#50724'.'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = 80
+        Font.Name = #46027#50880
+        Font.Style = []
+        ParentFont = False
+        Layout = tlBottom
       end
       object Panel2: TPanel
         Left = 510
@@ -217,8 +230,6 @@ object frmU220: TfrmU220
           ParentFont = False
           TabOrder = 0
           OnClick = Pnl_ITMClick
-          ExplicitTop = 210
-          ExplicitWidth = 386
         end
       end
       object Panel1: TPanel
@@ -240,7 +251,7 @@ object frmU220: TfrmU220
       end
       object Panel5: TPanel
         Left = 140
-        Top = 330
+        Top = 310
         Width = 350
         Height = 100
         BevelOuter = bvNone
@@ -286,14 +297,11 @@ object frmU220: TfrmU220
           ParentFont = False
           TabOrder = 0
           OnClick = Pnl_ITMClick
-          ExplicitLeft = -1
-          ExplicitTop = -6
-          ExplicitWidth = 141
         end
       end
       object Panel8: TPanel
         Left = 510
-        Top = 330
+        Top = 310
         Width = 190
         Height = 100
         BevelInner = bvRaised
@@ -322,13 +330,11 @@ object frmU220: TfrmU220
           ParentFont = False
           TabOrder = 0
           OnClick = Pnl_CellClick
-          ExplicitLeft = -6
-          ExplicitTop = -14
         end
       end
       object Panel10: TPanel
         Left = 720
-        Top = 330
+        Top = 310
         Width = 190
         Height = 100
         BevelInner = bvRaised
@@ -357,12 +363,11 @@ object frmU220: TfrmU220
           ParentFont = False
           TabOrder = 0
           OnClick = Pnl_CellClick
-          ExplicitLeft = 530
         end
       end
       object Pnl_InputCell: TPanel
         Left = 930
-        Top = 330
+        Top = 310
         Width = 800
         Height = 100
         BevelOuter = bvNone
@@ -494,7 +499,7 @@ object frmU220: TfrmU220
       end
       object Panel13: TPanel
         Left = 140
-        Top = 470
+        Top = 550
         Width = 350
         Height = 100
         BevelOuter = bvNone
@@ -511,7 +516,7 @@ object frmU220: TfrmU220
       end
       object Panel14: TPanel
         Left = 140
-        Top = 610
+        Top = 670
         Width = 350
         Height = 100
         BevelOuter = bvNone
@@ -528,7 +533,7 @@ object frmU220: TfrmU220
       end
       object edtMemo: TEdit
         Left = 510
-        Top = 470
+        Top = 550
         Width = 1220
         Height = 100
         AutoSelect = False
@@ -544,7 +549,7 @@ object frmU220: TfrmU220
       end
       object btnOrder: TButton
         Left = 760
-        Top = 791
+        Top = 790
         Width = 400
         Height = 150
         Caption = #51077#44256' '#51648#49884
@@ -576,7 +581,7 @@ object frmU220: TfrmU220
       end
       object Panel3: TPanel
         Left = 510
-        Top = 610
+        Top = 670
         Width = 600
         Height = 100
         TabOrder = 12
@@ -596,13 +601,11 @@ object frmU220: TfrmU220
           ImeName = 'Microsoft Office IME 2007'
           ParentFont = False
           TabOrder = 0
-          ExplicitWidth = 348
-          ExplicitHeight = 88
         end
       end
       object Panel4: TPanel
         Left = 1130
-        Top = 610
+        Top = 670
         Width = 600
         Height = 100
         TabOrder = 13
@@ -623,10 +626,47 @@ object frmU220: TfrmU220
           Kind = dtkTime
           ParentFont = False
           TabOrder = 0
-          ExplicitTop = 9
-          ExplicitWidth = 348
-          ExplicitHeight = 70
         end
+      end
+      object Panel7: TPanel
+        Left = 140
+        Top = 430
+        Width = 350
+        Height = 100
+        BevelOuter = bvNone
+        Caption = #51077#44256#45824
+        Color = clActiveCaption
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = 80
+        Font.Name = #46027#50880
+        Font.Style = [fsBold]
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 14
+      end
+      object cbOut: TComboBox
+        Left = 510
+        Top = 437
+        Width = 188
+        Height = 88
+        Style = csDropDownList
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = 80
+        Font.Name = #46027#50880
+        Font.Style = []
+        ImeName = 'Microsoft Office IME 2007'
+        ItemIndex = 0
+        ParentFont = False
+        TabOrder = 15
+        Text = #49440#53469
+        OnChange = cbOutChange
+        Items.Strings = (
+          #49440#53469
+          '1'
+          '2'
+          '3')
       end
     end
   end

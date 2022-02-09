@@ -46,6 +46,9 @@ type
     dtTimeFr: TDateTimePicker;
     Shape2: TShape;
     PD_GET_JOBNO: TADOStoredProc;
+    Panel7: TPanel;
+    cbOut: TComboBox;
+    lbloutstation: TLabel;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -53,6 +56,7 @@ type
     procedure Pnl_ITMClick(Sender: TObject);
     procedure Pnl_CellClick(Sender: TObject);
     procedure btnOrderClick(Sender: TObject);
+    procedure cbOutChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -130,7 +134,6 @@ end;
 //==============================================================================
 procedure TfrmU220.FormActivate(Sender: TObject);
 begin
-
   MainDm.M_Info.ActiveFormID := '220';
   frmMain.LblMenu000.Caption := MainDm.M_Info.ActiveFormID + '. ' + getLangMenuString(MainDm.M_Info.ActiveFormID, frmMain.LblMenu000.Caption, MainDm.M_Info.LANG_TYPE, 'N');
   frmU220.Caption := MainDm.M_Info.ActiveFormName;
@@ -193,11 +196,12 @@ end;
 //==============================================================================
 procedure TfrmU220.fnCommandStart;
 begin
+  cbOut.ItemIndex := 0;
   Pnl_CellClick(Pnl_Cell1);
 end;
 
 //==============================================================================
-// fnCommandNew [신규]
+// fnCommandOrder [지시]
 //==============================================================================
 procedure TfrmU220.fnCommandOrder  ;
 begin
@@ -355,116 +359,135 @@ end;
 //==============================================================================
 procedure TfrmU220.btnOrderClick(Sender: TObject);
 begin
-  if Trim(edtCode.Text)='' then
-  begin
-    MessageDlg('코드를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
-    Exit;
-  end;
-
-  if ( Pnl_Cell2.BevelInner=bvLowered ) then
-  begin
-    if ( (Trim(cbBank.Text)='') or (Trim(cbBay.Text)='') or (Trim(cbLevel.Text)='') ) then
+  try
+    if Trim(edtCode.Text)='' then
     begin
-      MessageDlg('적재위치를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
-      Exit;
-    end else
-    if ( StrToInt(cbBank.Text) > 2 ) then
-    begin
-      MessageDlg('적재[열]위치를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
-      Exit;
-    end else
-    if ( StrToInt(cbBay.Text) > 9 ) then
-    begin
-      MessageDlg('적재[연]위치를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
-      Exit;
-    end else
-    if ( StrToInt(cbLevel.Text) > 6 ) then
-    begin
-      MessageDlg('적재[단]위치를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+      MessageDlg('코드를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
       Exit;
     end;
-  end;
 
-  OrderDataClear(OrderData) ;
+    if ( Pnl_Cell2.BevelInner=bvLowered ) then
+    begin
+      if ( (Trim(cbBank.Text)='') or (Trim(cbBay.Text)='') or (Trim(cbLevel.Text)='') ) then
+      begin
+        MessageDlg('적재위치를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+        Exit;
+      end else
+      if ( StrToInt(cbBank.Text) > 2 ) then
+      begin
+        MessageDlg('적재[열]위치를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+        Exit;
+      end else
+      if ( StrToInt(cbBay.Text) > 9 ) then
+      begin
+        MessageDlg('적재[연]위치를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+        Exit;
+      end else
+      if ( StrToInt(cbLevel.Text) > 6 ) then
+      begin
+        MessageDlg('적재[단]위치를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+        Exit;
+      end;
+    end;
 
-  OrderData.REG_TIME   := FormatDateTime('YYYYMMDD',dtDateFr.Date) + FormatDateTime('HHNNSS',dtTimeFr.Time) ;
-
-  OrderData.LUGG       := Format('%.4d', [GetJobNo]) ;  // 작업번호
-
-  OrderData.JOBD       := '1';     // 입고지시
-
-  OrderData.SRCSITE    := '0100';  // 적재 호기
-  OrderData.SRCAISLE   := '0000';  // 적재 열
-  OrderData.SRCBAY     := '0000';  // 적재 연
-  OrderData.SRCLEVEL   := '0001';  // 적재 단
+    if cbOut.ItemIndex = 0 then
+    begin
+      MessageDlg('입고대를 선택해 주십시오.', mtConfirmation, [mbYes], 0) ;
+      Exit;
+    end;
 
 
-  if Pnl_Cell1.BevelInner=bvLowered then
-  begin
-    if not GetLocation then
+    OrderDataClear(OrderData) ;
+
+    OrderData.REG_TIME   := FormatDateTime('YYYYMMDD',dtDateFr.Date) + FormatDateTime('HHNNSS',dtTimeFr.Time) ;
+
+    OrderData.LUGG       := Format('%.4d', [GetJobNo]) ;  // 작업번호
+
+    OrderData.JOBD       := '1';     // 입고지시
+
+    OrderData.SRCSITE    := '0100';  // 적재 호기
+    OrderData.SRCAISLE   := '0001';  // 적재 열
+    case cbOut.ItemIndex of   // 적재 연
+      1  : begin OrderData.SRCBAY     := '0002'; end;
+      2  : begin OrderData.SRCBAY     := '0005'; end;
+      3  : begin OrderData.SRCBAY     := '0008'; end;
+    end;
+    OrderData.SRCLEVEL   := '0001';  // 적재 단
+
+
+    if Pnl_Cell1.BevelInner=bvLowered then
+    begin
+      if not GetLocation then
+      begin
+        MessageDlg('셀 찾기 실패 입니다.', mtError, [mbYes], 0) ;
+        Exit ;
+      end;
+    end else
+    if Pnl_Cell2.BevelInner=bvLowered then
+    begin
+      OrderData.DSTSITE    := Format('%.4d', [StrToInt('1'         )]) ;
+      OrderData.DSTAISLE   := Format('%.4d', [StrToInt(cbBank.Text )]) ;
+      OrderData.DSTBAY     := Format('%.4d', [StrToInt(cbBay.Text  )]) ;
+      OrderData.DSTLEVEL   := Format('%.4d', [StrToInt(cbLevel.Text)]) ;
+      OrderData.ID_CODE    := FormatFloat('0' ,StrToInt(cbBank.Text )) +
+                              FormatFloat('00',StrToInt(cbBay.Text  )) +
+                              FormatFloat('00',StrToInt(cbLevel.Text));
+    end else
     begin
       MessageDlg('셀 찾기 실패 입니다.', mtError, [mbYes], 0) ;
-      Exit ;
+      Exit;
     end;
-  end else
-  if Pnl_Cell2.BevelInner=bvLowered then
-  begin
-    OrderData.DSTSITE    := Format('%.4d', [StrToInt('1'         )]) ;
-    OrderData.DSTAISLE   := Format('%.4d', [StrToInt(cbBank.Text )]) ;
-    OrderData.DSTBAY     := Format('%.4d', [StrToInt(cbBay.Text  )]) ;
-    OrderData.DSTLEVEL   := Format('%.4d', [StrToInt(cbLevel.Text)]) ;
-    OrderData.ID_CODE    := FormatFloat('0' ,StrToInt(cbBank.Text )) +
-                            FormatFloat('00',StrToInt(cbBay.Text  )) +
-                            FormatFloat('00',StrToInt(cbLevel.Text));
-  end else
-  begin
-    MessageDlg('셀 찾기 실패 입니다.', mtError, [mbYes], 0) ;
-    Exit;
+
+
+    if (OrderData.DSTAISLE='0001') and (OrderData.DSTBAY='0001') and (OrderData.DSTLEVEL='0001')  then
+    begin
+      MessageDlg('입고위치를 입/출고대로 지정하셨습니다.' + #13#10 +
+                 '다시 설정해주시기 바랍니다.', mtError, [mbYes], 0) ;
+      Exit;
+    end;
+
+
+
+    OrderData.NOWMC      := '1';
+    OrderData.JOBSTATUS  := '4';
+    OrderData.NOWSTATUS  := '4';
+    OrderData.BUFFSTATUS := fnGetCHData('1','R','CH05','9'); // 입고레디
+    OrderData.JOBREWORK  := '';
+    OrderData.JOBERRORT  := '';
+    OrderData.JOBERRORC  := '';
+    OrderData.JOBERRORD  := '';
+    OrderData.JOB_END    := '0';
+    OrderData.CVFR       := '100';
+    OrderData.CVTO       := '100';
+    OrderData.CVCURR     := '100';
+    OrderData.ETC        := edtMemo.Text ;
+    OrderData.EMG        := '0';
+    OrderData.ITM_CD     := edtCode.Text ;
+    OrderData.UP_TIME    := '';
+
+
+    if SetJobOrder then
+    begin
+      MessageDlg('입고지시가 완료되었습니다.' + #13#10  + #13#10+
+                 '===============================' + #13#10+
+                 '▷작업번호 ['+ OrderData.LUGG   +'] ' + #13#10+
+                 '▷기종코드 ['+ OrderData.ITM_CD +'] ' + #13#10+
+                 '▷적재위치 ['+ Copy(OrderData.ID_CODE,1,1)+'-'
+                               + Copy(OrderData.ID_CODE,2,2)+'-'
+                               + Copy(OrderData.ID_CODE,4,2)+'] ' + #13#10+
+                 '===============================' + #13#10+
+                 '', mtConfirmation, [mbYes], 0) ;
+    end;
+
+    dtDateFr.Date := StrToDate(FormatDateTime('YYYY-MM-DD',Now));
+    dtTimeFr.Time := StrToTime(FormatDateTime('HH:NN:SS',Now));
+  except
+    on E : Exception do
+    begin
+      InsertPGMHist('['+FormNo+']', 'E', 'btnOrderClick', '', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure btnOrderClick Fail || ERR['+E.Message+']');
+    end;
   end;
-
-
-  if (OrderData.DSTAISLE='0001') and (OrderData.DSTBAY='0001') and (OrderData.DSTLEVEL='0001')  then
-  begin
-    MessageDlg('입고위치를 입/출고대로 지정하셨습니다.' + #13#10 +
-               '다시 설정해주시기 바랍니다.', mtError, [mbYes], 0) ;
-    Exit;
-  end;
-
-
-
-  OrderData.NOWMC      := '1';
-  OrderData.JOBSTATUS  := '4';
-  OrderData.NOWSTATUS  := '4';
-  OrderData.BUFFSTATUS := fnGetCHData('1','R','CH05','9'); // 입고레디
-  OrderData.JOBREWORK  := '';
-  OrderData.JOBERRORT  := '';
-  OrderData.JOBERRORC  := '';
-  OrderData.JOBERRORD  := '';
-  OrderData.JOB_END    := '0';
-  OrderData.CVFR       := '100';
-  OrderData.CVTO       := '100';
-  OrderData.CVCURR     := '100';
-  OrderData.ETC        := edtMemo.Text ;
-  OrderData.EMG        := '0';
-  OrderData.ITM_CD     := edtCode.Text ;
-  OrderData.UP_TIME    := '';
-
-
-  if SetJobOrder then
-  begin
-    MessageDlg('입고지시가 완료되었습니다.' + #13#10  + #13#10+
-               '===============================' + #13#10+
-               '▷작업번호 ['+ OrderData.LUGG   +'] ' + #13#10+
-               '▷기종코드 ['+ OrderData.ITM_CD +'] ' + #13#10+
-               '▷적재위치 ['+ Copy(OrderData.ID_CODE,1,1)+'-'
-                             + Copy(OrderData.ID_CODE,2,2)+'-'
-                             + Copy(OrderData.ID_CODE,4,2)+'] ' + #13#10+
-               '===============================' + #13#10+
-               '', mtConfirmation, [mbYes], 0) ;
-  end;
-
-  dtDateFr.Date := StrToDate(FormatDateTime('YYYY-MM-DD',Now));
-  dtTimeFr.Time := StrToTime(FormatDateTime('HH:NN:SS',Now));
 end;
 
 //==============================================================================
@@ -515,11 +538,6 @@ begin
     with PD_GET_JOBNO do
     begin
       Close;
-      {
-      ProcedureName := 'PD_GET_JOBNO';
-      Parameters.CreateParameter('@i_Type', ftInteger, pdInput, 0, 1);
-      //Parameters.CreateParameter('@o_JobNo', ftWideString, pdInputOutput, 10, '');
-      }
       ProcedureName := 'PD_GET_JOBNO';
       Parameters.ParamByName('@I_TYPE').Value := 1;
       ExecProc;
@@ -528,21 +546,12 @@ begin
       if (returnValue.Substring(0, 2) = 'OK') then
         Result := StrToInt(returnValue.Substring(3, 4));
     end;
-//    with qryTemp do
-//    begin
-//      Close;
-//      SQL.Clear;
-//      StrSQL :=  ' Select JobSeq.Nextval as JobSeq From Dual ';
-//      SQL.Text := StrSQL;
-//      Open;
-//      if Not (Eof and Bof) then
-//      begin
-//        Result := FieldByName('JobSeq').AsInteger;
-//      end;
-//      Close;
-//    end;
   except
-    if qryTemp.Active then qryTemp.Close;
+    on E : Exception do
+    begin
+      InsertPGMHist('['+FormNo+']', 'E', 'GetJobNo', '', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure GetJobNo Fail || ERR['+E.Message+']');
+    end;
   end;
 end;
 
@@ -551,6 +560,7 @@ end;
 //==============================================================================
 function TfrmU220.GetLocation : Boolean;
 var
+  StrSQL : String;
   ScNo : integer ;
 begin
   try
@@ -578,7 +588,12 @@ begin
       Close;
     end;
   except
-    if qryTemp.Active then qryTemp.Close;
+    on E : Exception do
+    begin
+      qryTemp.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'GetLocation', '', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure GetLocation Fail || ERR['+E.Message+']');
+    end;
   end;
 end;
 
@@ -669,9 +684,15 @@ begin
     if MainDm.MainDB.InTransaction then
        MainDm.MainDB.CommitTrans;
   except
-    if MainDm.MainDB.InTransaction then
+    on E : Exception do
+    begin
+      if MainDm.MainDB.InTransaction then
        MainDm.MainDB.RollbackTrans;
-    if qryTemp.Active then qryTemp.Close;
+      if qryTemp.Active then qryTemp.Close;
+      qryTemp.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'SetJobOrder', '', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure SetJobOrder Fail || ERR['+E.Message+']');
+    end;
   end;
 end;
 
@@ -703,11 +724,28 @@ begin
       Close;
     end;
   except
-    if qryTemp.Active then qryTemp.Close;
+    on E : Exception do
+    begin
+      qryTemp.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'fnGetCHData', '', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnGetCHData Fail || ERR['+E.Message+']');
+    end;
   end;
 end;
-
-
+//==============================================================================
+// cbOutChange
+//==============================================================================
+procedure TfrmU220.cbOutChange(Sender: TObject);
+var
+  tmpBay : string;
+begin
+  case (Sender as TComboBox).ItemIndex of
+    0  : begin lbloutstation.Caption := '입고대를 선택해 주십시오.' end;
+    1  : begin lbloutstation.Caption := '01-02-01 입고대' end;
+    2  : begin lbloutstation.Caption := '01-05-01 입고대' end;
+    3  : begin lbloutstation.Caption := '01-08-01 입고대' end;
+  end;
+end;
 end.
 
 

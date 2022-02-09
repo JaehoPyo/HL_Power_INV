@@ -15,7 +15,8 @@ uses
   Popup_Item in 'Form\Popup_Item.pas' {frmPopup_Item},
   U210 in 'Form\U210.pas' {frmU210},
   Popup_Item_Search in 'Form\Popup_Item_Search.pas' {frmPopup_Item_Search},
-  U220 in 'Form\U220.pas' {frmU220};
+  U220 in 'Form\U220.pas' {frmU220},
+  U230 in 'Form\U230.pas' {frmU230};
 
 {$R *.res}
 
@@ -24,5 +25,6 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TMainDm, MainDm);
   Application.CreateForm(TfrmMain, frmMain);
+  Application.CreateForm(TfrmU230, frmU230);
   Application.Run;
 end.
