@@ -82,12 +82,15 @@ type
   public
     { Public declarations }
     procedure fnCommandStart;
-    procedure fnCommandNew;
+    procedure fnCommandOrder;
+    procedure fnCommandAdd;
     procedure fnCommandExcel;
     procedure fnCommandDelete;
+    procedure fnCommandUpdate;
     procedure fnCommandPrint;
     procedure fnCommandQuery;
     procedure fnCommandClose;
+    procedure fnCommandLang;
     procedure fnWmMsgRecv (var MSG : TMessage) ; message WM_USER ;
     function  fnCellCreate(Wdt,Hgt : Integer) : Boolean ;
     procedure SetColorStatus (ID_HOGI, ID_CODE, ID_STATUS, ITM_CD, CELL_IN_USED, CELL_OT_USED : String );
@@ -100,8 +103,8 @@ const
 
   vHogi  =  1;
   vBank  =  2;
-  vBay   = 11;
-  vLevel =  3;
+  vBay   =  9;
+  vLevel =  6;
 
 var
   frmU310: TfrmU310;
@@ -139,12 +142,15 @@ end;
 procedure TfrmU310.fnWmMsgRecv(var MSG: TMessage);
 begin
   case MSG.WParam of
-    MSG_MDI_WIN_NEW     : begin fnCommandNew     ; end;
-    MSG_MDI_WIN_EXCEL   : begin fnCommandExcel   ; end;
-    MSG_MDI_WIN_DELETE  : begin fnCommandDelete  ; end;
-    MSG_MDI_WIN_PRINT   : begin fnCommandPrint   ; end;
-    MSG_MDI_WIN_QUERY   : begin fnCommandQuery   ; end;
-    MSG_MDI_WIN_CLOSE   : begin fnCommandClose   ; Close; end;
+    MSG_MDI_WIN_ORDER   : begin fnCommandOrder   ; end;           // MSG_MDI_WIN_ORDER   = 11 ; // 지시
+    MSG_MDI_WIN_ADD     : begin fnCommandAdd     ; end;           // MSG_MDI_WIN_ADD     = 12 ; // 신규
+    MSG_MDI_WIN_DELETE  : begin fnCommandDelete  ; end;           // MSG_MDI_WIN_DELETE  = 13 ; // 삭제
+    MSG_MDI_WIN_UPDATE  : begin fnCommandUpdate  ; end;           // MSG_MDI_WIN_UPDATE  = 14 ; // 수정
+    MSG_MDI_WIN_EXCEL   : begin fnCommandExcel   ; end;           // MSG_MDI_WIN_EXCEL   = 15 ; // 엑셀
+    MSG_MDI_WIN_PRINT   : begin fnCommandPrint   ; end;           // MSG_MDI_WIN_PRINT   = 16 ; // 인쇄
+    MSG_MDI_WIN_QUERY   : begin fnCommandQuery   ; end;           // MSG_MDI_WIN_QUERY   = 17 ; // 조회
+    MSG_MDI_WIN_CLOSE   : begin fnCommandClose   ; Close; end;    // MSG_MDI_WIN_CLOSE   = 20 ; // 닫기
+    MSG_MDI_WIN_LANG    : begin fnCommandLang    ; end;           // MSG_MDI_WIN_LANG    = 21 ; // 언어
   end;
 end;
 
@@ -153,8 +159,10 @@ end;
 //==============================================================================
 procedure TfrmU310.FormActivate(Sender: TObject);
 begin
-  frmMain.PnlMainMenu.Caption := (Sender as TForm).Caption ;
-  fnWmMsgSend( 22222,111 );
+  MainDm.M_Info.ActiveFormID := '310';
+  frmMain.LblMenu000.Caption := MainDm.M_Info.ActiveFormID + '. ' + getLangMenuString(MainDm.M_Info.ActiveFormID, frmMain.LblMenu000.Caption, MainDm.M_Info.LANG_TYPE, 'N');
+  frmU310.Caption := MainDm.M_Info.ActiveFormName;
+  fnWmMsgSend( 22221,11111 );
   fnCommandQuery ;
 
   if not tmrQry.Enabled then tmrQry.Enabled := True;
@@ -174,12 +182,6 @@ begin
   begin
     if (Self.Components[i] is TTimer) then
        (Self.Components[i] as TTimer).Enabled := False ;
-  end;
-
-  for i := 0 to Self.ComponentCount-1 Do
-  begin
-    if (Self.Components[i] is TADOQuery) then
-       (Self.Components[i] as TADOQuery).Active := False ;
   end;
 end;
 
@@ -217,9 +219,9 @@ begin
 end;
 
 //==============================================================================
-// fnCommandNew [신규]
+// fnCommandOrder [지시]
 //==============================================================================
-procedure TfrmU310.fnCommandNew  ;
+procedure TfrmU310.fnCommandOrder  ;
 begin
 //
 end;
@@ -229,8 +231,29 @@ end;
 //==============================================================================
 procedure TfrmU310.fnCommandExcel;
 begin
-  hlbEhgridListExcel ( dgInfo , frmU310.Caption + '_' + FormatDatetime('YYYYMMDDHHNN', Now) );
-  MessageDlg('엑셀 저장을 완료하였습니다.', mtConfirmation, [mbYes], 0)
+  try
+    if hlbEhgridListExcel(dgInfo, frmMain.LblMenu000.Caption + '_' + FormatDatetime('YYYYMMDD', Now)) then
+    begin
+      MessageDlg('엑셀 저장을 완료하였습니다.', mtConfirmation, [mbYes], 0);
+    end else
+    begin
+      MessageDlg('엑셀 저장을 실패하였습니다.', mtWarning, [mbYes], 0);
+    end;
+  except
+    on E : Exception do
+    begin
+      InsertPGMHist('['+FormNo+']', 'E', 'fnCommandExcel', '엑셀', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnCommandExcel Fail || ERR['+E.Message+']');
+    end;
+  end;
+end;
+
+//==============================================================================
+// fnCommandAdd [신규]                                                        //
+//==============================================================================
+procedure TfrmU310.fnCommandAdd  ;
+begin
+//
 end;
 
 //==============================================================================
@@ -242,11 +265,41 @@ begin
 end;
 
 //==============================================================================
+// fnCommandUpdate [수정]                                                     //
+//==============================================================================
+procedure TfrmU310.fnCommandUpdate;
+begin
+//
+end;
+
+//==============================================================================
 // fnCommandPrint [인쇄]
 //==============================================================================
 procedure TfrmU310.fnCommandPrint;
 begin
-//
+  try
+    if not qryInfo.Active then Exit;
+    fnCommandQuery;
+    EhPrint.DBGridEh := dgInfo;
+    EhPrint.PageHeader.LeftText.Clear;
+    EhPrint.PageHeader.LeftText.Add(Copy(MainDm.M_Info.ActiveFormName, 6,
+                                    Length(MainDm.M_Info.ActiveFormName)-5) );
+    EhPrint.PageHeader.Font.Name := '돋움';
+    EhPrint.PageHeader.Font.Size := 10;
+    EhPrint.PageFooter.RightText.Clear;
+    EhPrint.PageFooter.RightText.Add(FormatDateTime('YYYY-MM-DD HH:NN:SS', Now) + '   ' +
+                                     MainDM.M_Info.UserCode+' / '+MainDM.M_Info.UserName);
+    EhPrint.PageFooter.Font.Name := '돋움';
+    EhPrint.PageFooter.Font.Size := 10;
+
+    EhPrint.Preview;
+  except
+    on E : Exception do
+    begin
+      InsertPGMHist('['+FormNo+']', 'E', 'fnCommandPrint', '인쇄', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnCommandPrint Fail || ERR['+E.Message+']');
+    end;
+  end;
 end;
 
 //==============================================================================
@@ -315,10 +368,14 @@ begin
       SQL.Text := StrSql ;
       Open;
     end;
-
   except
-    if qryInfo.Active then qryInfo.Close;
-    if qryCell.Active then qryCell.Close;
+    on E : Exception do
+    begin
+      if qryInfo.Active then qryInfo.Close;
+      if qryCell.Active then qryCell.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'fnCommandQuery', '조회', 'Exception Error', 'SQL', StrSQL, '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnCommandQuery Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
+    end;
   end;
 end;
 
@@ -328,6 +385,14 @@ end;
 procedure TfrmU310.fnCommandClose;
 begin
   Close;
+end;
+
+//==============================================================================
+// fnCommandLang [언어]                                                       //
+//==============================================================================
+procedure TfrmU310.fnCommandLang;
+begin
+//
 end;
 
 //==============================================================================
@@ -438,7 +503,7 @@ function TfrmU310.fnCellCreate(Wdt,Hgt : Integer) : Boolean ;
         ParentCustomHint := False;
 
         Name        := 'BankPnl'+IntToStr(Hogi)+IntToStr(i) ;
-        Height      := (CanvasPanel1.Height div vBank)-1 ;
+        Height      := (CanvasPanel1.Height div vBank)-3 ;
         Caption     := '';
 
         Visible     := False ; Application.ProcessMessages;
@@ -509,6 +574,32 @@ var
   StrSQL, ID_HOGI, ID_CODE, IN_USE, OT_USE, INdt : String;
 begin
   try
+    if  (CB_ID_STATUS.ItemIndex <> 0)        //공셀
+    and (CB_ID_STATUS.ItemIndex <> 3)        //금지셀
+    and (CB_ID_STATUS.ItemIndex <> 7) then   //공출고
+    begin
+      if edtITM_CD.Text = '' then
+      begin
+        MessageDlg('기종코드를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+        Exit;
+      end else
+      if edtITM_NAME.Text = '' then
+      begin
+        MessageDlg('기종명을 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+        Exit;
+      end else
+      if edtITM_SPEC.Text = '' then
+      begin
+        MessageDlg('기종사양을 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+        Exit;
+      end else
+      if edtITM_QTY.Text = '0' then
+      begin
+        MessageDlg('수량을 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+        Exit;
+      end;
+    end;
+
     INdt := '';
 
     ID_HOGI := ComboBoxHogi.Text;
@@ -529,12 +620,12 @@ begin
                 '      , OT_USED      = ' + QuotedStr(OT_USE) +
                 '      , IN_USED      = ' + QuotedStr(IN_USE) +
                 '      , ID_MEMO      = ' + QuotedStr(edtID_MEMO.Text) +
-                '      , STOCK_REG_DT = Sysdate   ' +
+                '      , STOCK_REG_DT = GETDATE()   ' +
                 '  Where ID_HOGI = ' + QuotedStr(ID_HOGI) +
                 '    And ID_CODE = ' + QuotedStr(ID_CODE) ;
     end else
     begin
-      if CB_ID_STATUS.ItemIndex in [1,2] then INdt := ' , STOCK_IN_DT = Sysdate '
+      if CB_ID_STATUS.ItemIndex in [1,2] then INdt := ' , STOCK_IN_DT = GETDATE() '
       else                                    INdt := '';
 
       StrSQL := ' Update TT_STOCK ' +
@@ -547,7 +638,7 @@ begin
                 '      , OT_USED      = ' + QuotedStr(OT_USE) +
                 '      , IN_USED      = ' + QuotedStr(IN_USE) +
                 '      , ID_MEMO      = ' + QuotedStr(edtID_MEMO.Text) + INdt +
-                '      , STOCK_REG_DT = Sysdate ' +
+                '      , STOCK_REG_DT = GETDATE() ' +
                 '  Where ID_HOGI = ' + QuotedStr(ID_HOGI) +
                 '    And ID_CODE = ' + QuotedStr(ID_CODE) ;
     end;
@@ -560,7 +651,12 @@ begin
       if ExecSQL > 0 then ShowMessage('적재 정보 수정');
     end;
   except
-    if qryTemp.Active then qryTemp.Close;
+    on E : Exception do
+    begin
+      qryTemp.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'btnSaveClick', '', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure btnSaveClick Fail || ERR['+E.Message+']');
+    end;
   end;
 end;
 
@@ -656,7 +752,12 @@ begin
       end;
     end;
   except
-    if qryTemp.Active then qryTemp.Close;
+    on E : Exception do
+    begin
+      qryTemp.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'CellPanelDblClick', '', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure CellPanelDblClick Fail || ERR['+E.Message+']');
+    end;
   end;
 end;
 
@@ -672,11 +773,11 @@ begin
   begin
     try
       MainDm.MainDB.BeginTrans;
-      for i := 1 to 2 do      //열   기존 2열
+      for i := 1 to 2 do
       begin
-        for j := 1 to 11 do  //연   기존 15연에서 28연으로 증설
+        for j := 1 to 9 do
         begin
-          for k := 1 to 3 do  //단   기존 6단
+          for k := 1 to 6 do
           begin
             aStrSQL  := '' ;
             TempCode := '' ;
@@ -707,7 +808,12 @@ begin
       end;
       if MainDm.MainDB.InTransaction then MainDm.MainDB.CommitTrans;
     except
-      if qryCell.Active then qryCell.Close;
+      on E : Exception do
+      begin
+        qryCell.Close;
+        InsertPGMHist('['+FormNo+']', 'E', 'Button1Click', '', 'Exception Error', 'PGM', '', '', E.Message);
+        TraceLogWrite('['+FormNo+'] procedure Button1Click Fail || ERR['+E.Message+']');
+      end;
     end;
   end;
 

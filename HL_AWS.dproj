@@ -127,6 +127,10 @@
             <Form>frmU230</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Form\U310.pas">
+            <Form>frmU310</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <None Include="ModelSupport_DYMOS_AWS\default.txvpck"/>
         <None Include="ModelSupport_DYMOS_AWS\U130H\default.txvpck"/>
         <None Include="ModelSupport_DYMOS_AWS\h_ReferLib\default.txvpck"/>

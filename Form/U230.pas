@@ -382,7 +382,12 @@ begin
       edtOutIndate.Text := '';
     end;
   except
-    if qryInfo.Active then qryInfo.Close;
+    on E : Exception do
+    begin
+      qryInfo.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'dgInfoCellClick', '', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure dgInfoCellClick Fail || ERR['+E.Message+']');
+    end;
   end;
 end;
 
@@ -444,8 +449,13 @@ begin
     edtOutIndate.Text := '';
     fnCommandQuery ;
   except
-    if qryInfo.Active then qryInfo.Close;
-    if qryTemp.Active then qryTemp.Close;
+    on E : Exception do
+    begin
+      if qryInfo.Active then qryInfo.Close;
+      if qryTemp.Active then qryTemp.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'btnOrderClick', '', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure btnOrderClick Fail || ERR['+E.Message+']');
+    end;
   end;
 end;
 
@@ -506,7 +516,12 @@ begin
 
 
   except
-    if qryInfo.Active then qryInfo.Close;
+    on E : Exception do
+    begin
+      qryInfo.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'SetOutputOrder', '', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure SetOutputOrder Fail || ERR['+E.Message+']');
+    end;
   end;
 end;
 
@@ -596,9 +611,14 @@ begin
     if MainDm.MainDB.InTransaction then
        MainDm.MainDB.CommitTrans;
   except
-    if MainDm.MainDB.InTransaction then
-       MainDm.MainDB.RollbackTrans;
-    if qryTemp.Active then qryTemp.Close;
+    on E : Exception do
+    begin
+      if MainDm.MainDB.InTransaction then
+         MainDm.MainDB.RollbackTrans;
+      if qryTemp.Active then qryTemp.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'SetJobOrder', '', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure SetJobOrder Fail || ERR['+E.Message+']');
+    end;
   end;
 end;
 
@@ -642,7 +662,12 @@ begin
 
     end;
   except
-    if qryTemp.Active then qryTemp.Close;
+    on E : Exception do
+    begin
+      qryTemp.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'SetComboBox', '', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure SetComboBox Fail || ERR['+E.Message+']');
+    end;
   end;
 end;
 
@@ -747,7 +772,12 @@ begin
       Close;
     end;
   except
-    if qryTemp.Active then qryTemp.Close;
+    on E : Exception do
+    begin
+      qryTemp.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'fnGetCHData', '', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnGetCHData Fail || ERR['+E.Message+']');
+    end;
   end;
 end;
 
