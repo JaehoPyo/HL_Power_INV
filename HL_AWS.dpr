@@ -17,7 +17,9 @@ uses
   Popup_Item_Search in 'Form\Popup_Item_Search.pas' {frmPopup_Item_Search},
   U220 in 'Form\U220.pas' {frmU220},
   U230 in 'Form\U230.pas' {frmU230},
-  U310 in 'Form\U310.pas' {frmU310};
+  U310 in 'Form\U310.pas' {frmU310},
+  U320 in 'Form\U320.pas' {frmU320},
+  U410 in 'Form\U410.pas' {frmU410};
 
 {$R *.res}
 

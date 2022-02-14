@@ -2,8 +2,8 @@ object frmU220: TfrmU220
   Left = 2026
   Top = 265
   Caption = #51077#44256#51089#50629' '#46321#47197
-  ClientHeight = 1041
-  ClientWidth = 1904
+  ClientHeight = 869
+  ClientWidth = 1888
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -158,13 +158,15 @@ object frmU220: TfrmU220
   object Pnl_Main: TPanel
     Left = 0
     Top = 0
-    Width = 1904
-    Height = 1041
+    Width = 1888
+    Height = 869
     Align = alClient
     BevelInner = bvRaised
     BevelOuter = bvNone
     TabOrder = 0
     OnResize = Pnl_MainResize
+    ExplicitWidth = 1904
+    ExplicitHeight = 1041
     object Pnl_Sub: TPanel
       Left = 0
       Top = -23

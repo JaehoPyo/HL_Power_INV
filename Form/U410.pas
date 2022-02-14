@@ -47,12 +47,15 @@ type
   public
     { Public declarations }
     procedure fnCommandStart;
-    procedure fnCommandNew;
+    procedure fnCommandOrder;
+    procedure fnCommandAdd;
     procedure fnCommandExcel;
     procedure fnCommandDelete;
+    procedure fnCommandUpdate;
     procedure fnCommandPrint;
     procedure fnCommandQuery;
     procedure fnCommandClose;
+    procedure fnCommandLang;
     procedure fnWmMsgRecv (var MSG : TMessage) ; message WM_USER ;
 
     procedure  SetComboBox;
@@ -93,12 +96,15 @@ end;
 procedure TfrmU410.fnWmMsgRecv(var MSG: TMessage);
 begin
   case MSG.WParam of
-    MSG_MDI_WIN_NEW     : begin fnCommandNew     ; end;
-    MSG_MDI_WIN_EXCEL   : begin fnCommandExcel   ; end;
-    MSG_MDI_WIN_DELETE  : begin fnCommandDelete  ; end;
-    MSG_MDI_WIN_PRINT   : begin fnCommandPrint   ; end;
-    MSG_MDI_WIN_QUERY   : begin fnCommandQuery   ; end;
-    MSG_MDI_WIN_CLOSE   : begin fnCommandClose   ; Close; end;
+    MSG_MDI_WIN_ORDER   : begin fnCommandOrder   ; end;           // MSG_MDI_WIN_ORDER   = 11 ; // Áö½Ã
+    MSG_MDI_WIN_ADD     : begin fnCommandAdd     ; end;           // MSG_MDI_WIN_ADD     = 12 ; // ½Å±Ô
+    MSG_MDI_WIN_DELETE  : begin fnCommandDelete  ; end;           // MSG_MDI_WIN_DELETE  = 13 ; // »èÁ¦
+    MSG_MDI_WIN_UPDATE  : begin fnCommandUpdate  ; end;           // MSG_MDI_WIN_UPDATE  = 14 ; // ¼öÁ¤
+    MSG_MDI_WIN_EXCEL   : begin fnCommandExcel   ; end;           // MSG_MDI_WIN_EXCEL   = 15 ; // ¿¢¼¿
+    MSG_MDI_WIN_PRINT   : begin fnCommandPrint   ; end;           // MSG_MDI_WIN_PRINT   = 16 ; // ÀÎ¼â
+    MSG_MDI_WIN_QUERY   : begin fnCommandQuery   ; end;           // MSG_MDI_WIN_QUERY   = 17 ; // Á¶È¸
+    MSG_MDI_WIN_CLOSE   : begin fnCommandClose   ; Close; end;    // MSG_MDI_WIN_CLOSE   = 20 ; // ´Ý±â
+    MSG_MDI_WIN_LANG    : begin fnCommandLang    ; end;           // MSG_MDI_WIN_LANG    = 21 ; // ¾ð¾î
   end;
 end;
 
@@ -107,8 +113,10 @@ end;
 //==============================================================================
 procedure TfrmU410.FormActivate(Sender: TObject);
 begin
-  frmMain.PnlMainMenu.Caption := (Sender as TForm).Caption ;
-  fnWmMsgSend( 21211,111 );
+  MainDm.M_Info.ActiveFormID := '410';
+  frmMain.LblMenu000.Caption := MainDm.M_Info.ActiveFormID + '. ' + getLangMenuString(MainDm.M_Info.ActiveFormID, frmMain.LblMenu000.Caption, MainDm.M_Info.LANG_TYPE, 'N');
+  frmU410.Caption := MainDm.M_Info.ActiveFormName;
+  fnWmMsgSend( 22221,11111 );
 
   dtDateFr.Date := StrToDate(FormatDateTime('YYYY-MM-DD',Now));
   dtTimeFr.Time := StrToTime('00:00:00');
@@ -131,12 +139,6 @@ begin
   begin
     if (Self.Components[i] is TTimer) then
        (Self.Components[i] as TTimer).Enabled := False ;
-  end;
-
-  for i := 0 to Self.ComponentCount-1 Do
-  begin
-    if (Self.Components[i] is TADOQuery) then
-       (Self.Components[i] as TADOQuery).Active := False ;
   end;
 end;
 
@@ -175,7 +177,7 @@ end;
 //==============================================================================
 // fnCommandNew [½Å±Ô]
 //==============================================================================
-procedure TfrmU410.fnCommandNew  ;
+procedure TfrmU410.fnCommandOrder  ;
 begin
 //
 end;
@@ -185,8 +187,29 @@ end;
 //==============================================================================
 procedure TfrmU410.fnCommandExcel;
 begin
-  hlbEhgridListExcel ( dgInfo , frmU410.Caption + '_' + FormatDatetime('YYYYMMDDHHNN', Now) );
-  MessageDlg('¿¢¼¿ ÀúÀåÀ» ¿Ï·áÇÏ¿´½À´Ï´Ù.', mtConfirmation, [mbYes], 0);
+  try
+    if hlbEhgridListExcel(dgInfo, frmMain.LblMenu000.Caption + '_' + FormatDatetime('YYYYMMDD', Now)) then
+    begin
+      MessageDlg('¿¢¼¿ ÀúÀåÀ» ¿Ï·áÇÏ¿´½À´Ï´Ù.', mtConfirmation, [mbYes], 0);
+    end else
+    begin
+      MessageDlg('¿¢¼¿ ÀúÀåÀ» ½ÇÆÐÇÏ¿´½À´Ï´Ù.', mtWarning, [mbYes], 0);
+    end;
+  except
+    on E : Exception do
+    begin
+      InsertPGMHist('['+FormNo+']', 'E', 'fnCommandExcel', '¿¢¼¿', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnCommandExcel Fail || ERR['+E.Message+']');
+    end;
+  end;
+end;
+
+//==============================================================================
+// fnCommandAdd [½Å±Ô]                                                        //
+//==============================================================================
+procedure TfrmU410.fnCommandAdd  ;
+begin
+//
 end;
 
 //==============================================================================
@@ -198,13 +221,41 @@ begin
 end;
 
 //==============================================================================
+// fnCommandUpdate [¼öÁ¤]                                                     //
+//==============================================================================
+procedure TfrmU410.fnCommandUpdate;
+begin
+//
+end;
+
+//==============================================================================
 // fnCommandPrint [ÀÎ¼â]
 //==============================================================================
 procedure TfrmU410.fnCommandPrint;
 begin
-  if not qryInfo.Active then Exit;
-  EhPrint.PrinterSetupDialog;
-  EhPrint.Preview;
+  try
+    if not qryInfo.Active then Exit;
+    fnCommandQuery;
+    EhPrint.DBGridEh := dgInfo;
+    EhPrint.PageHeader.LeftText.Clear;
+    EhPrint.PageHeader.LeftText.Add(Copy(MainDm.M_Info.ActiveFormName, 6,
+                                    Length(MainDm.M_Info.ActiveFormName)-5) );
+    EhPrint.PageHeader.Font.Name := 'µ¸¿ò';
+    EhPrint.PageHeader.Font.Size := 10;
+    EhPrint.PageFooter.RightText.Clear;
+    EhPrint.PageFooter.RightText.Add(FormatDateTime('YYYY-MM-DD HH:NN:SS', Now) + '   ' +
+                                     MainDM.M_Info.UserCode+' / '+MainDM.M_Info.UserName);
+    EhPrint.PageFooter.Font.Name := 'µ¸¿ò';
+    EhPrint.PageFooter.Font.Size := 10;
+
+    EhPrint.Preview;
+  except
+    on E : Exception do
+    begin
+      InsertPGMHist('['+FormNo+']', 'E', 'fnCommandPrint', 'ÀÎ¼â', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnCommandPrint Fail || ERR['+E.Message+']');
+    end;
+  end;
 end;
 
 //==============================================================================
@@ -243,10 +294,10 @@ begin
                   '                       else JOBERRORD end) as JOBERRORD_DESC, ' +  #13#10+
                   '       (Case BUFFSTATUS when ''0'' then ''´ë±â'' ' +  #13#10+
                   '                        when ''1'' then ''ÀÔ°í°¡´É'' end) as BUFFSTATUS_DESC, ' +  #13#10+
-                  '       (SUBSTR(DSTAISLE,4,1)||''-''||SUBSTR(DSTBAY,3,2)||''-''||SUBSTR(DSTLEVEL,3,2)) as ID_CODE, ' +  #13#10+
-                  '       (SUBSTR(REG_TIME,1,4)||''-''||SUBSTR(REG_TIME,5,2)||''-''||SUBSTR(REG_TIME,7,2)||''  ''|| ' +  #13#10+
-                  '        SUBSTR(REG_TIME,9,2)||'':''||SUBSTR(REG_TIME,11,2)||'':''||SUBSTR(REG_TIME,13,2)) as REF_TIME_CONV, ' +  #13#10+
-                  '       TO_DATE(REG_TIME,''YYYYMMDDHH24MISS'') as REG_TIME_DESC ' +
+                  '       (SUBSTRING(DSTAISLE,4,1)+''-''+SUBSTRING(DSTBAY,3,2)+''-''+SUBSTRING(DSTLEVEL,3,2)) as ID_CODE, ' +  #13#10+
+                  '       (SUBSTRING(REG_TIME,1,4)+''-''+SUBSTRING(REG_TIME,5,2)+''-''+SUBSTRING(REG_TIME,7,2)+''  ''+ ' +  #13#10+
+                  '        SUBSTRING(REG_TIME,9,2)+'':''+SUBSTRING(REG_TIME,11,2)+'':''+SUBSTRING(REG_TIME,13,2)) as REF_TIME_CONV, ' +  #13#10+
+                  '       CONVERT(VARCHAR, REG_TIME, 120) as REG_TIME_DESC ' +
                   '   From TT_HISTORY ' +  #13#10+
                   '  Where JOBD    = ''1'' ' +  #13#10+
                   '    And JOB_END = ''1'' ' ;
@@ -273,7 +324,12 @@ begin
       Open;
     end;
   except
-    if qryInfo.Active then qryInfo.Close;
+    on E : Exception do
+    begin
+      qryInfo.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'fnCommandQuery', 'Á¶È¸', 'Exception Error', 'SQL', StrSQL, '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnCommandQuery Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
+    end;
   end;
 end;
 
@@ -283,6 +339,14 @@ end;
 procedure TfrmU410.fnCommandClose;
 begin
   Close;
+end;
+
+//==============================================================================
+// fnCommandLang [¾ð¾î]                                                       //
+//==============================================================================
+procedure TfrmU410.fnCommandLang;
+begin
+//
 end;
 
 //==============================================================================
@@ -316,7 +380,12 @@ begin
 
     end;
   except
-    if qryTemp.Active then qryTemp.Close;
+    on E : Exception do
+    begin
+      qryInfo.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'SetComboBox', '', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure SetComboBox Fail || ERR['+E.Message+']');
+    end;
   end;
 end;
 

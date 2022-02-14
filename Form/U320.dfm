@@ -2,8 +2,8 @@ object frmU320: TfrmU320
   Left = 2026
   Top = 265
   Caption = #51116#44256' '#54788#54889' '#51312#54924
-  ClientHeight = 612
-  ClientWidth = 1008
+  ClientHeight = 869
+  ClientWidth = 1888
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -154,47 +154,48 @@ object frmU320: TfrmU320
   OnClose = FormClose
   OnDeactivate = FormDeactivate
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 11
   object Pnl_Top1: TPanel
     Left = 0
     Top = 0
-    Width = 1008
-    Height = 60
+    Width = 1888
+    Height = 80
     Align = alTop
     BevelInner = bvRaised
     BevelOuter = bvNone
     TabOrder = 0
+    ExplicitWidth = 1008
     object GroupBox1: TGroupBox
       Left = 1
       Top = 1
-      Width = 493
-      Height = 58
+      Width = 720
+      Height = 78
       Align = alLeft
       Caption = '[ '#51077#44256#51068#51088' ]'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -16
+      Font.Height = 20
       Font.Name = #46027#50880
       Font.Style = []
       ParentFont = False
       TabOrder = 0
       object Label31: TLabel
-        Left = 249
-        Top = 29
-        Width = 12
-        Height = 16
+        Left = 355
+        Top = 33
+        Width = 15
+        Height = 20
         Caption = '~'
       end
       object dtDateFr: TDateTimePicker
         Left = 25
-        Top = 25
-        Width = 117
-        Height = 24
+        Top = 29
+        Width = 150
+        Height = 28
         Date = 42691.722841990740000000
         Time = 42691.722841990740000000
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -16
+        Font.Height = 20
         Font.Name = #46027#50880
         Font.Style = []
         ImeName = 'Microsoft Office IME 2007'
@@ -204,15 +205,15 @@ object frmU320: TfrmU320
         OnKeyPress = dtDateTimeKeyPress
       end
       object dtTimeFr: TDateTimePicker
-        Left = 148
-        Top = 25
-        Width = 97
-        Height = 24
+        Left = 195
+        Top = 29
+        Width = 150
+        Height = 28
         Date = 42691.000000000000000000
         Time = 42691.000000000000000000
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -16
+        Font.Height = -20
         Font.Name = #46027#50880
         Font.Style = []
         ImeName = 'Microsoft Office IME 2007'
@@ -223,15 +224,15 @@ object frmU320: TfrmU320
         OnKeyPress = dtDateTimeKeyPress
       end
       object dtDateTo: TDateTimePicker
-        Left = 265
-        Top = 25
-        Width = 117
-        Height = 24
+        Left = 380
+        Top = 29
+        Width = 150
+        Height = 28
         Date = 42691.722841990740000000
         Time = 42691.722841990740000000
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -16
+        Font.Height = 20
         Font.Name = #46027#50880
         Font.Style = []
         ImeName = 'Microsoft Office IME 2007'
@@ -241,15 +242,15 @@ object frmU320: TfrmU320
         OnKeyPress = dtDateTimeKeyPress
       end
       object dtTimeTo: TDateTimePicker
-        Left = 388
-        Top = 25
-        Width = 97
-        Height = 24
+        Left = 550
+        Top = 29
+        Width = 150
+        Height = 28
         Date = 42691.000000000000000000
         Time = 42691.000000000000000000
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -16
+        Font.Height = 20
         Font.Name = #46027#50880
         Font.Style = []
         ImeName = 'Microsoft Office IME 2007'
@@ -261,7 +262,7 @@ object frmU320: TfrmU320
       end
       object cbDateUse: TCheckBox
         Left = 6
-        Top = 29
+        Top = 33
         Width = 14
         Height = 17
         TabOrder = 4
@@ -271,18 +272,21 @@ object frmU320: TfrmU320
   end
   object Pnl_Main: TPanel
     Left = 0
-    Top = 120
-    Width = 1008
-    Height = 492
+    Top = 160
+    Width = 1888
+    Height = 709
     Align = alClient
     BevelInner = bvRaised
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitTop = 120
+    ExplicitWidth = 1008
+    ExplicitHeight = 492
     object dgInfo: TDBGridEh
       Left = 1
       Top = 1
-      Width = 1006
-      Height = 490
+      Width = 1886
+      Height = 707
       Align = alClient
       ColumnDefValues.Layout = tlCenter
       ColumnDefValues.Title.Alignment = taCenter
@@ -298,7 +302,7 @@ object frmU320: TfrmU320
       EditActions = [geaCopyEh]
       Font.Charset = GB2312_CHARSET
       Font.Color = clWindowText
-      Font.Height = -16
+      Font.Height = -20
       Font.Name = #46027#50880
       Font.Style = []
       FooterRowCount = 1
@@ -318,7 +322,7 @@ object frmU320: TfrmU320
       TitleParams.FillStyle = cfstSolidEh
       TitleParams.Font.Charset = GB2312_CHARSET
       TitleParams.Font.Color = clWindowText
-      TitleParams.Font.Height = -16
+      TitleParams.Font.Height = -20
       TitleParams.Font.Name = #46027#50880
       TitleParams.Font.Style = []
       TitleParams.HorzLineColor = 5592405
@@ -337,7 +341,7 @@ object frmU320: TfrmU320
           FieldName = 'ID_CODE_DESC'
           Footers = <>
           Title.Caption = #51201#51116#50948#52824
-          Width = 120
+          Width = 200
         end
         item
           Alignment = taCenter
@@ -347,7 +351,7 @@ object frmU320: TfrmU320
           FieldName = 'ID_STATUS_DESC'
           Footers = <>
           Title.Caption = #49472#49345#53468
-          Width = 120
+          Width = 200
         end
         item
           Alignment = taCenter
@@ -357,7 +361,7 @@ object frmU320: TfrmU320
           FieldName = 'ITM_CD'
           Footers = <>
           Title.Caption = #44592#51333#53076#46300
-          Width = 120
+          Width = 200
         end
         item
           Alignment = taCenter
@@ -367,7 +371,7 @@ object frmU320: TfrmU320
           FieldName = 'ITM_NAME'
           Footers = <>
           Title.Caption = #44592#51333#47749
-          Width = 120
+          Width = 200
         end
         item
           Alignment = taCenter
@@ -377,7 +381,7 @@ object frmU320: TfrmU320
           FieldName = 'ITM_SPEC'
           Footers = <>
           Title.Caption = #44592#51333#49324#50577
-          Width = 120
+          Width = 200
         end
         item
           Alignment = taCenter
@@ -387,7 +391,7 @@ object frmU320: TfrmU320
           FieldName = 'STOCK_IN_DT'
           Footers = <>
           Title.Caption = #51077#44256#51068#51088
-          Width = 200
+          Width = 320
         end
         item
           Alignment = taCenter
@@ -397,7 +401,7 @@ object frmU320: TfrmU320
           FieldName = 'ID_MEMO'
           Footers = <>
           Title.Caption = #52280#44256#49324#54637
-          Width = 400
+          Width = 510
         end
         item
           Alignment = taCenter
@@ -425,60 +429,66 @@ object frmU320: TfrmU320
   end
   object Pnl_Top2: TPanel
     Left = 0
-    Top = 60
-    Width = 1008
-    Height = 60
+    Top = 80
+    Width = 1888
+    Height = 80
     Align = alTop
     BevelInner = bvRaised
     BevelOuter = bvNone
     TabOrder = 2
+    ExplicitWidth = 1008
     object gbCell: TGroupBox
-      Left = 381
+      Left = 501
       Top = 1
-      Width = 257
-      Height = 58
+      Width = 340
+      Height = 78
       Align = alLeft
       Caption = '[ '#51201#51116#50948#52824' ]'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -16
+      Font.Height = 20
       Font.Name = #46027#50880
       Font.Style = []
       ParentFont = False
       TabOrder = 0
       object Label1: TLabel
-        Left = 70
-        Top = 29
-        Width = 16
-        Height = 16
+        Left = 86
+        Top = 33
+        Width = 20
+        Height = 20
         Caption = #50676
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = 20
+        Font.Name = #46027#50880
+        Font.Style = []
+        ParentFont = False
       end
       object Label2: TLabel
-        Left = 150
-        Top = 29
-        Width = 16
-        Height = 16
+        Left = 310
+        Top = 33
+        Width = 20
+        Height = 20
         Caption = #50672
       end
       object Label3: TLabel
-        Left = 231
-        Top = 29
-        Width = 16
-        Height = 16
+        Left = 310
+        Top = 33
+        Width = 20
+        Height = 20
         Caption = #45800
       end
       object ComboBoxBank: TComboBox
         Left = 10
-        Top = 25
-        Width = 58
-        Height = 24
+        Top = 30
+        Width = 70
+        Height = 28
         Font.Charset = GB2312_CHARSET
         Font.Color = clWindowText
-        Font.Height = -16
+        Font.Height = 20
         Font.Name = #46027#50880
         Font.Style = []
         ImeName = 'Microsoft Office IME 2007'
-        ItemIndex = 0
         ParentFont = False
         TabOrder = 0
         Text = #51204#52404
@@ -490,17 +500,16 @@ object frmU320: TfrmU320
           '2')
       end
       object ComboBoxBay: TComboBox
-        Left = 90
-        Top = 25
-        Width = 58
-        Height = 24
+        Left = 120
+        Top = 30
+        Width = 70
+        Height = 28
         Font.Charset = GB2312_CHARSET
         Font.Color = clWindowText
-        Font.Height = -16
+        Font.Height = 20
         Font.Name = #46027#50880
         Font.Style = []
         ImeName = 'Microsoft Office IME 2007'
-        ItemIndex = 0
         ParentFont = False
         TabOrder = 1
         Text = #51204#52404
@@ -517,21 +526,19 @@ object frmU320: TfrmU320
           '07'
           '08'
           '09'
-          '10'
-          '11')
+          '')
       end
       object ComboBoxLevel: TComboBox
-        Left = 170
-        Top = 25
-        Width = 58
-        Height = 24
+        Left = 230
+        Top = 30
+        Width = 70
+        Height = 28
         Font.Charset = GB2312_CHARSET
         Font.Color = clWindowText
-        Font.Height = -16
+        Font.Height = 20
         Font.Name = #46027#50880
         Font.Style = []
         ImeName = 'Microsoft Office IME 2007'
-        ItemIndex = 0
         ParentFont = False
         TabOrder = 2
         Text = #51204#52404
@@ -541,28 +548,31 @@ object frmU320: TfrmU320
           #51204#52404
           '01'
           '02'
-          '03')
+          '03'
+          '04'
+          '05'
+          '06')
       end
     end
     object gbCode: TGroupBox
       Left = 1
       Top = 1
-      Width = 190
-      Height = 58
+      Width = 250
+      Height = 78
       Align = alLeft
       Caption = '[ '#44592#51333#53076#46300' ]'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -16
+      Font.Height = 20
       Font.Name = #46027#50880
       Font.Style = []
       ParentFont = False
       TabOrder = 1
       object cbCode: TComboBox
         Left = 10
-        Top = 25
-        Width = 170
-        Height = 24
+        Top = 30
+        Width = 230
+        Height = 28
         ImeName = 'Microsoft Office IME 2007'
         ItemIndex = 0
         TabOrder = 0
@@ -574,24 +584,24 @@ object frmU320: TfrmU320
       end
     end
     object GroupBox2: TGroupBox
-      Left = 191
+      Left = 251
       Top = 1
-      Width = 190
-      Height = 58
+      Width = 250
+      Height = 78
       Align = alLeft
       Caption = '[ '#47001' '#49345#53468' ]'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -16
+      Font.Height = 20
       Font.Name = #46027#50880
       Font.Style = []
       ParentFont = False
       TabOrder = 2
       object cbStatus: TComboBox
         Left = 10
-        Top = 25
-        Width = 170
-        Height = 24
+        Top = 30
+        Width = 230
+        Height = 28
         ImeName = 'Microsoft Office IME 2007'
         TabOrder = 0
         Text = #51204#52404

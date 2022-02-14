@@ -498,8 +498,6 @@ object frmMain: TfrmMain
       Color = 14803425
       ParentBackground = False
       TabOrder = 0
-      ExplicitWidth = 996
-      ExplicitHeight = 57
       object Panel22: TPanel
         Left = 1
         Top = 1
@@ -510,8 +508,6 @@ object frmMain: TfrmMain
         Color = 14803425
         ParentBackground = False
         TabOrder = 0
-        ExplicitWidth = 994
-        ExplicitHeight = 55
         object LblMenu000: TLabel
           Left = 97
           Top = 2
@@ -534,7 +530,6 @@ object frmMain: TfrmMain
           ShowHint = False
           Layout = tlCenter
           StyleElements = [seClient, seBorder]
-          ExplicitLeft = 52
           ExplicitWidth = 426
           ExplicitHeight = 40
         end
@@ -854,7 +849,6 @@ object frmMain: TfrmMain
             BevelOuter = bvNone
             ParentBackground = False
             TabOrder = 3
-            ExplicitLeft = 555
             object cmdCLOSE: TSpeedButton
               Tag = 20
               Left = 1
@@ -1581,8 +1575,6 @@ object frmMain: TfrmMain
       Align = alRight
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitLeft = 1000
-      ExplicitHeight = 57
     end
   end
   object PnlDatabaseConn: TPanel
@@ -1783,8 +1775,6 @@ object frmMain: TfrmMain
     ParentShowHint = False
     ShowHint = False
     OnDrawPanel = staLoginInfoDrawPanel
-    ExplicitTop = 569
-    ExplicitWidth = 1008
   end
   object tmrSystem: TTimer
     OnTimer = tmrSystemTimer
