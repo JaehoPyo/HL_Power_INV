@@ -2,8 +2,8 @@ object frmU210: TfrmU210
   Left = 2026
   Top = 265
   Caption = '2'
-  ClientHeight = 1001
-  ClientWidth = 1904
+  ClientHeight = 869
+  ClientWidth = 1888
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -158,34 +158,34 @@ object frmU210: TfrmU210
   object Pnl_Main: TPanel
     Left = 0
     Top = 0
-    Width = 1904
-    Height = 1001
+    Width = 1888
+    Height = 869
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     OnResize = Pnl_MainResize
-    ExplicitWidth = 1008
-    ExplicitHeight = 612
+    ExplicitWidth = 1904
+    ExplicitHeight = 1001
     object Pnl_Ot: TPanel
       Left = 0
       Top = 300
-      Width = 1904
-      Height = 701
+      Width = 1888
+      Height = 569
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitWidth = 1008
-      ExplicitHeight = 312
+      ExplicitWidth = 1904
+      ExplicitHeight = 701
       object PnlTitle_Ot: TPanel
         Left = 0
         Top = 0
-        Width = 1904
+        Width = 1888
         Height = 80
         Align = alTop
         BevelInner = bvRaised
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 1008
+        ExplicitWidth = 1904
         object Panel4: TPanel
           Left = 57
           Top = 1
@@ -194,7 +194,6 @@ object frmU210: TfrmU210
           Align = alLeft
           BevelOuter = bvNone
           TabOrder = 0
-          ExplicitLeft = 1
           object Panel5: TPanel
             Left = 12
             Top = 2
@@ -226,7 +225,6 @@ object frmU210: TfrmU210
               ParentFont = False
               TabOrder = 0
               OnClick = PnlAutoQryClick
-              ExplicitWidth = 290
               object ImgOt: TImage
                 Tag = 1
                 Left = 240
@@ -292,15 +290,14 @@ object frmU210: TfrmU210
           end
         end
         object Panel10: TPanel
-          Left = 1705
+          Left = 1689
           Top = 1
           Width = 198
           Height = 78
           Align = alRight
           BevelOuter = bvNone
           TabOrder = 1
-          ExplicitLeft = 809
-          ExplicitHeight = 48
+          ExplicitLeft = 1705
         end
         object chkGridOut: TCheckBox
           Left = 370
@@ -335,8 +332,8 @@ object frmU210: TfrmU210
       object dgInfo_Ot: TDBGridEh
         Left = 0
         Top = 80
-        Width = 1904
-        Height = 621
+        Width = 1888
+        Height = 489
         Align = alClient
         ColumnDefValues.Layout = tlCenter
         ColumnDefValues.Title.Alignment = taCenter
@@ -478,7 +475,7 @@ object frmU210: TfrmU210
             FieldName = 'REG_TIME_DESC'
             Footers = <>
             Title.Caption = #46321#47197#51068#51088
-            Width = 390
+            Width = 370
           end>
         object RowDetailData: TRowDetailPanelControlEh
         end
@@ -487,22 +484,23 @@ object frmU210: TfrmU210
     object Pnl_In: TPanel
       Left = 0
       Top = 0
-      Width = 1904
+      Width = 1888
       Height = 300
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitWidth = 1008
+      ExplicitWidth = 1904
       object PnlTitle_In: TPanel
         Left = 0
         Top = 0
-        Width = 1904
+        Width = 1888
         Height = 80
         Align = alTop
         BevelInner = bvRaised
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 1008
+        ExplicitLeft = 1
+        ExplicitWidth = 1904
         object imgNo: TImage
           Left = 972
           Top = 5
@@ -629,7 +627,6 @@ object frmU210: TfrmU210
           Align = alLeft
           BevelOuter = bvNone
           TabOrder = 0
-          ExplicitLeft = 1
           object Panel2: TPanel
             Left = 12
             Top = 3
@@ -661,8 +658,6 @@ object frmU210: TfrmU210
               ParentFont = False
               TabOrder = 0
               OnClick = PnlAutoQryClick
-              ExplicitWidth = 166
-              ExplicitHeight = 39
               object ImgIn: TImage
                 Tag = 1
                 Left = 240
@@ -757,14 +752,12 @@ object frmU210: TfrmU210
           Align = alLeft
           BevelOuter = bvNone
           TabOrder = 2
-          ExplicitLeft = 9
-          ExplicitTop = 2
         end
       end
       object dgInfo_In: TDBGridEh
         Left = 0
         Top = 80
-        Width = 1904
+        Width = 1888
         Height = 220
         Align = alClient
         ColumnDefValues.Layout = tlCenter
@@ -907,7 +900,7 @@ object frmU210: TfrmU210
             FieldName = 'REG_TIME_DESC'
             Footers = <>
             Title.Caption = #46321#47197#51068#51088
-            Width = 390
+            Width = 370
           end>
         object RowDetailData: TRowDetailPanelControlEh
         end

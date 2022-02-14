@@ -2,8 +2,8 @@ object frmU230: TfrmU230
   Left = 2026
   Top = 265
   Caption = #52636#44256#51089#50629' '#46321#47197
-  ClientHeight = 1001
-  ClientWidth = 1904
+  ClientHeight = 869
+  ClientWidth = 1888
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -158,15 +158,15 @@ object frmU230: TfrmU230
   object Pnl_Main: TPanel
     Left = 0
     Top = 0
-    Width = 1904
-    Height = 1001
+    Width = 1888
+    Height = 869
     Align = alClient
     BevelInner = bvRaised
     BevelOuter = bvNone
     TabOrder = 0
     OnResize = Pnl_MainResize
-    ExplicitWidth = 1264
-    ExplicitHeight = 682
+    ExplicitWidth = 1904
+    ExplicitHeight = 1001
     object Pnl_Sub: TPanel
       Left = 1
       Top = 1
@@ -369,8 +369,6 @@ object frmU230: TfrmU230
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
-          ExplicitWidth = 1094
-          ExplicitHeight = 60
           object sbtReset: TSpeedButton
             Left = 1620
             Top = 0
@@ -577,7 +575,6 @@ object frmU230: TfrmU230
             TabOrder = 3
             Visible = False
             OnClick = rgITM_YNClick
-            ExplicitLeft = 921
           end
           object GroupBox2: TGroupBox
             Left = 993
@@ -596,7 +593,7 @@ object frmU230: TfrmU230
             object lbloutstation: TLabel
               Left = 102
               Top = 44
-              Width = 180
+              Width = 8
               Height = 25
             end
             object cbOut: TComboBox

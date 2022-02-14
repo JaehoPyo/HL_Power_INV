@@ -2,8 +2,8 @@ object frmU110: TfrmU110
   Left = 2026
   Top = 265
   Caption = #44592#51333#53076#46300' '#44288#47532
-  ClientHeight = 1001
-  ClientWidth = 1904
+  ClientHeight = 869
+  ClientWidth = 1888
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -158,12 +158,13 @@ object frmU110: TfrmU110
   object Pnl_Top: TPanel
     Left = 0
     Top = 0
-    Width = 1904
+    Width = 1888
     Height = 80
     Align = alTop
     BevelInner = bvRaised
     BevelOuter = bvNone
     TabOrder = 0
+    ExplicitWidth = 1904
     object rgITM_YN: TRadioGroup
       Left = 217
       Top = 1
@@ -187,7 +188,6 @@ object frmU110: TfrmU110
       ParentFont = False
       TabOrder = 0
       OnClick = rgITM_YNClick
-      ExplicitLeft = 281
     end
     object gbCode: TGroupBox
       Left = 1
@@ -230,20 +230,19 @@ object frmU110: TfrmU110
   object Pnl_Main: TPanel
     Left = 0
     Top = 80
-    Width = 1904
-    Height = 921
+    Width = 1888
+    Height = 789
     Align = alClient
     BevelInner = bvRaised
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitTop = 60
-    ExplicitWidth = 1008
-    ExplicitHeight = 552
+    ExplicitWidth = 1904
+    ExplicitHeight = 921
     object dgInfo: TDBGridEh
       Left = 1
       Top = 1
-      Width = 1902
-      Height = 919
+      Width = 1886
+      Height = 787
       Align = alClient
       ColumnDefValues.Layout = tlCenter
       ColumnDefValues.Title.Alignment = taCenter

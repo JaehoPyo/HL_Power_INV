@@ -2,8 +2,8 @@ object frmU310: TfrmU310
   Left = 2026
   Top = 265
   Caption = #49472#48324' '#47784#45768#53552#47553
-  ClientHeight = 1001
-  ClientWidth = 1904
+  ClientHeight = 869
+  ClientWidth = 1888
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -158,19 +158,19 @@ object frmU310: TfrmU310
   object Pnl_Main: TPanel
     Left = 0
     Top = 0
-    Width = 1904
-    Height = 901
+    Width = 1888
+    Height = 769
     Align = alClient
     BevelInner = bvRaised
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 1008
-    ExplicitHeight = 642
+    ExplicitWidth = 1904
+    ExplicitHeight = 901
     object CanvasPanel1: TPanel
       Left = 1
       Top = 1
-      Width = 1552
-      Height = 899
+      Width = 1536
+      Height = 767
       ParentCustomHint = False
       Align = alClient
       Alignment = taLeftJustify
@@ -193,21 +193,21 @@ object frmU310: TfrmU310
       ParentShowHint = False
       ShowHint = False
       TabOrder = 0
-      ExplicitLeft = -119
-      ExplicitTop = -3
+      ExplicitWidth = 1552
+      ExplicitHeight = 899
     end
     object Pnl_Info: TPanel
-      Left = 1553
+      Left = 1537
       Top = 1
       Width = 350
-      Height = 899
+      Height = 767
       Align = alRight
       BevelInner = bvRaised
       BevelOuter = bvNone
       ParentBackground = False
       TabOrder = 1
-      ExplicitLeft = 657
-      ExplicitHeight = 640
+      ExplicitLeft = 1553
+      ExplicitHeight = 899
       object Panel274: TPanel
         Left = 1
         Top = 1
@@ -573,13 +573,13 @@ object frmU310: TfrmU310
         Left = 1
         Top = 209
         Width = 348
-        Height = 689
+        Height = 557
         Align = alClient
         BevelInner = bvRaised
         BevelOuter = bvLowered
         ParentBackground = False
         TabOrder = 1
-        ExplicitHeight = 430
+        ExplicitHeight = 689
         object Panel15: TPanel
           Left = 2
           Top = 2
@@ -603,13 +603,13 @@ object frmU310: TfrmU310
           Left = 2
           Top = 32
           Width = 344
-          Height = 655
+          Height = 523
           Align = alClient
           BevelInner = bvLowered
           BevelOuter = bvNone
           ParentBackground = False
           TabOrder = 1
-          ExplicitHeight = 396
+          ExplicitHeight = 655
           object Panel19: TPanel
             Left = 10
             Top = 10
@@ -1059,17 +1059,19 @@ object frmU310: TfrmU310
   end
   object Panel1: TPanel
     Left = 0
-    Top = 901
-    Width = 1904
+    Top = 769
+    Width = 1888
     Height = 100
     Align = alBottom
     BevelInner = bvRaised
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitTop = 901
+    ExplicitWidth = 1904
     object dgInfo: TDBGridEh
       Left = 1
       Top = 1
-      Width = 1902
+      Width = 1886
       Height = 98
       Align = alClient
       ColumnDefValues.Layout = tlCenter
