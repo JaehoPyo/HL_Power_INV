@@ -486,7 +486,7 @@ begin
       2  : begin OrderData.DSTBAY     := '0004'; end;
       3  : begin OrderData.DSTBAY     := '0007'; end;
     end;
-    OrderData.DSTLEVEL   := '0001'; // 하역 단
+    OrderData.DSTLEVEL   := cbOut.ItemIndex.ToString; // 하역 단
 
     OrderData.ID_CODE    := qryInfo.FieldByName('ID_CODE').AsString ;
 
@@ -499,9 +499,9 @@ begin
     OrderData.JOBERRORC  := '';
     OrderData.JOBERRORD  := '';
     OrderData.JOB_END    := '0';
-    OrderData.CVFR       := '100';
-    OrderData.CVTO       := '100';
-    OrderData.CVCURR     := '100';
+    OrderData.CVFR       := cbOut.ItemIndex.ToString;
+    OrderData.CVTO       := cbOut.ItemIndex.ToString;
+    OrderData.CVCURR     := cbOut.ItemIndex.ToString;
     OrderData.ETC        := qryInfo.FieldByName('ID_MEMO').AsString ;
     OrderData.EMG        := IntToStr(rgEMG.ItemIndex);
     OrderData.ITM_CD     := qryInfo.FieldByName('ITM_CD').AsString ;
