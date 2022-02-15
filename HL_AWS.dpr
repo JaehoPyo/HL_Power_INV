@@ -19,7 +19,8 @@ uses
   U230 in 'Form\U230.pas' {frmU230},
   U310 in 'Form\U310.pas' {frmU310},
   U320 in 'Form\U320.pas' {frmU320},
-  U410 in 'Form\U410.pas' {frmU410};
+  U410 in 'Form\U410.pas' {frmU410},
+  U420 in 'Form\U420.pas' {frmU420};
 
 {$R *.res}
 

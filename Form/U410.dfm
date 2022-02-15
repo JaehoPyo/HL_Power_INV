@@ -338,7 +338,7 @@ object frmU410: TfrmU410
       end
       object ComboBoxBank: TComboBox
         Left = 10
-        Top = 30
+        Top = 29
         Width = 70
         Height = 28
         Font.Charset = GB2312_CHARSET
@@ -358,7 +358,7 @@ object frmU410: TfrmU410
       end
       object ComboBoxBay: TComboBox
         Left = 120
-        Top = 30
+        Top = 29
         Width = 70
         Height = 28
         Font.Charset = GB2312_CHARSET
@@ -386,7 +386,7 @@ object frmU410: TfrmU410
       end
       object ComboBoxLevel: TComboBox
         Left = 230
-        Top = 30
+        Top = 29
         Width = 70
         Height = 28
         Font.Charset = GB2312_CHARSET
@@ -442,7 +442,7 @@ object frmU410: TfrmU410
       EditActions = [geaCopyEh]
       Font.Charset = GB2312_CHARSET
       Font.Color = clWindowText
-      Font.Height = -16
+      Font.Height = 20
       Font.Name = #46027#50880
       Font.Style = []
       FooterRowCount = 1

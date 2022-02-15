@@ -412,7 +412,7 @@ begin
       2  : begin OrderData.SRCBAY     := '0005'; end;
       3  : begin OrderData.SRCBAY     := '0008'; end;
     end;
-    OrderData.SRCLEVEL   := '0001';  // 적재 단
+    OrderData.SRCLEVEL   := cbOut.ItemIndex.ToString;  // 적재 단
 
 
     if Pnl_Cell1.BevelInner=bvLowered then
@@ -457,9 +457,9 @@ begin
     OrderData.JOBERRORC  := '';
     OrderData.JOBERRORD  := '';
     OrderData.JOB_END    := '0';
-    OrderData.CVFR       := '100';
-    OrderData.CVTO       := '100';
-    OrderData.CVCURR     := '100';
+    OrderData.CVFR       := cbOut.ItemIndex.ToString;
+    OrderData.CVTO       := cbOut.ItemIndex.ToString;
+    OrderData.CVCURR     := cbOut.ItemIndex.ToString;
     OrderData.ETC        := edtMemo.Text ;
     OrderData.EMG        := '0';
     OrderData.ITM_CD     := edtCode.Text ;
