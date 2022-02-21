@@ -7,7 +7,8 @@ uses
   Dialogs, ExtCtrls, d_MainDm, h_MainLib, h_ReferLib, StdCtrls, DB, ADODB, ExLibrary, ExVclLib,
   Grids, StrUtils, DBGrids, comobj, frxClass, frxDBSet, DBGridEhGrouping, EhLibADO,
   ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh,DBGridEhImpExp,
-  DBGridEh, Vcl.Mask, Vcl.DBCtrls, DBCtrlsEh, PrnDbgeh, Vcl.Buttons ;
+  DBGridEh, Vcl.Mask, Vcl.DBCtrls, DBCtrlsEh, PrnDbgeh, Vcl.Buttons,
+  Vcl.Imaging.pngimage ;
 
 type
   TfrmU510 = class(TForm)
@@ -38,10 +39,6 @@ type
     Bay08: TPanel;
     RackBay09: TPanel;
     Bay09: TPanel;
-    RackBay10: TPanel;
-    Bay10: TPanel;
-    RackBay11: TPanel;
-    Bay11: TPanel;
     RackBay01: TPanel;
     Bay01: TPanel;
     Panel2: TPanel;
@@ -59,12 +56,6 @@ type
     Panel15: TPanel;
     Panel16: TPanel;
     Panel17: TPanel;
-    Panel18: TPanel;
-    Panel19: TPanel;
-    Panel20: TPanel;
-    Panel21: TPanel;
-    Panel22: TPanel;
-    Panel23: TPanel;
     Panel24: TPanel;
     Panel25: TPanel;
     Panel201: TPanel;
@@ -171,8 +162,6 @@ type
     Label2: TLabel;
     Label3: TLabel;
     imgRFork_Left: TImage;
-    Label11: TLabel;
-    Label12: TLabel;
     Label17: TLabel;
     Label18: TLabel;
     Label28: TLabel;
@@ -199,6 +188,14 @@ type
     lbl_JobType: TLabel;
     btnReset: TButton;
     btnRetry: TButton;
+    Panel18: TPanel;
+    Panel19: TPanel;
+    Image4: TImage;
+    Image3: TImage;
+    Image5: TImage;
+    Image6: TImage;
+    Image7: TImage;
+    Image8: TImage;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -210,12 +207,15 @@ type
   public
     { Public declarations }
     procedure fnCommandStart;
-    procedure fnCommandNew;
+    procedure fnCommandOrder;
+    procedure fnCommandAdd;
     procedure fnCommandExcel;
     procedure fnCommandDelete;
+    procedure fnCommandUpdate;
     procedure fnCommandPrint;
     procedure fnCommandQuery;
     procedure fnCommandClose;
+    procedure fnCommandLang;
     procedure fnWmMsgRecv (var MSG : TMessage) ; message WM_USER ;
 
     procedure SCTREAD(SC_NO: Integer);
@@ -277,12 +277,15 @@ end;
 procedure TfrmU510.fnWmMsgRecv(var MSG: TMessage);
 begin
   case MSG.WParam of
-    MSG_MDI_WIN_NEW     : begin fnCommandNew     ; end;
-    MSG_MDI_WIN_EXCEL   : begin fnCommandExcel   ; end;
-    MSG_MDI_WIN_DELETE  : begin fnCommandDelete  ; end;
-    MSG_MDI_WIN_PRINT   : begin fnCommandPrint   ; end;
-    MSG_MDI_WIN_QUERY   : begin fnCommandQuery   ; end;
-    MSG_MDI_WIN_CLOSE   : begin fnCommandClose   ; Close; end;
+    MSG_MDI_WIN_ORDER   : begin fnCommandOrder   ; end;           // MSG_MDI_WIN_ORDER   = 11 ; // 지시
+    MSG_MDI_WIN_ADD     : begin fnCommandAdd     ; end;           // MSG_MDI_WIN_ADD     = 12 ; // 신규
+    MSG_MDI_WIN_DELETE  : begin fnCommandDelete  ; end;           // MSG_MDI_WIN_DELETE  = 13 ; // 삭제
+    MSG_MDI_WIN_UPDATE  : begin fnCommandUpdate  ; end;           // MSG_MDI_WIN_UPDATE  = 14 ; // 수정
+    MSG_MDI_WIN_EXCEL   : begin fnCommandExcel   ; end;           // MSG_MDI_WIN_EXCEL   = 15 ; // 엑셀
+    MSG_MDI_WIN_PRINT   : begin fnCommandPrint   ; end;           // MSG_MDI_WIN_PRINT   = 16 ; // 인쇄
+    MSG_MDI_WIN_QUERY   : begin fnCommandQuery   ; end;           // MSG_MDI_WIN_QUERY   = 17 ; // 조회
+    MSG_MDI_WIN_CLOSE   : begin fnCommandClose   ; Close; end;    // MSG_MDI_WIN_CLOSE   = 20 ; // 닫기
+    MSG_MDI_WIN_LANG    : begin fnCommandLang    ; end;           // MSG_MDI_WIN_LANG    = 21 ; // 언어
   end;
 end;
 
@@ -291,8 +294,10 @@ end;
 //==============================================================================
 procedure TfrmU510.FormActivate(Sender: TObject);
 begin
-  frmMain.PnlMainMenu.Caption := (Sender as TForm).Caption ;
-  fnWmMsgSend( 22222,111 );
+  MainDm.M_Info.ActiveFormID := '510';
+  frmMain.LblMenu000.Caption := MainDm.M_Info.ActiveFormID + '. ' + getLangMenuString(MainDm.M_Info.ActiveFormID, frmMain.LblMenu000.Caption, MainDm.M_Info.LANG_TYPE, 'N');
+  frmU510.Caption := MainDm.M_Info.ActiveFormName;
+  fnWmMsgSend( 22221,11111 );
 
   fnCommandQuery ;
   if not tmrQry.Enabled then tmrQry.Enabled := True ;
@@ -351,9 +356,9 @@ begin
 end;
 
 //==============================================================================
-// fnCommandNew [신규]
+// fnCommandOrder [지시]
 //==============================================================================
-procedure TfrmU510.fnCommandNew  ;
+procedure TfrmU510.fnCommandOrder  ;
 begin
 //
 end;
@@ -367,9 +372,25 @@ begin
 end;
 
 //==============================================================================
+// fnCommandAdd [신규]                                                        //
+//==============================================================================
+procedure TfrmU510.fnCommandAdd  ;
+begin
+//
+end;
+
+//==============================================================================
 // fnCommandDelete [삭제]
 //==============================================================================
 procedure TfrmU510.fnCommandDelete;
+begin
+//
+end;
+
+//==============================================================================
+// fnCommandUpdate [수정]                                                     //
+//==============================================================================
+procedure TfrmU510.fnCommandUpdate;
 begin
 //
 end;
@@ -409,6 +430,14 @@ end;
 procedure TfrmU510.fnCommandClose;
 begin
   Close;
+end;
+
+//==============================================================================
+// fnCommandLang [언어]                                                       //
+//==============================================================================
+procedure TfrmU510.fnCommandLang;
+begin
+//
 end;
 
 //==============================================================================
@@ -650,7 +679,7 @@ begin
   //++++++++++++++++++++++
 //  edt_Step.Text := fnGetSCSetInfo(SC_NO, 'SC_STATUS');
 
-
+{
   //++++++++++++++++++++++
   // 기동지시
   //++++++++++++++++++++++
@@ -661,7 +690,9 @@ begin
   begin
     TEdit(Self.FindComponent('edt_MoveOn')).Text := '';
   end;
-
+}
+  // LHB
+  TEdit(Self.FindComponent('edt_MoveOn')).Text := '';
 
   //++++++++++++++++++++++
   // 데이터초기화
@@ -779,13 +810,13 @@ begin
   // 기상반 위치
   //++++++++++++++++++++++
   if StrToInt(SC_STATUS[SC_NO].D200)=0 then
-    TPanel(Self.FindComponent('SC')).Left := TPanel(Self.FindComponent('RackBay01')).Left+85
+    TPanel(Self.FindComponent('SC')).Left := TPanel(Self.FindComponent('RackBay01')).Left+315
   else
   begin
     if StrToInt(SC_STATUS[SC_NO].D200) < 12 then
-      TPanel(Self.FindComponent('SC')).Left := TPanel(Self.FindComponent('RackBay'+FormatFloat('00',StrToInt(SC_STATUS[SC_NO].D200)))).Left + 85
+      TPanel(Self.FindComponent('SC')).Left := TPanel(Self.FindComponent('RackBay'+FormatFloat('00',StrToInt(SC_STATUS[SC_NO].D200)))).Left + 315
     else
-      TPanel(Self.FindComponent('SC')).Left := TPanel(Self.FindComponent('RackBay11')).Left+85
+      TPanel(Self.FindComponent('SC')).Left := TPanel(Self.FindComponent('RackBay11')).Left+315
   end;
 end;
 

@@ -2,8 +2,8 @@
   Left = 2026
   Top = 265
   Caption = #49444#48708' '#47784#45768#53552#47553
-  ClientHeight = 682
-  ClientWidth = 1263
+  ClientHeight = 869
+  ClientWidth = 1888
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -154,94 +154,59 @@
   OnClose = FormClose
   OnDeactivate = FormDeactivate
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 11
   object Pnl_Main: TPanel
     Left = 0
     Top = 0
-    Width = 1263
-    Height = 682
+    Width = 1888
+    Height = 869
     Align = alClient
     BevelInner = bvRaised
     BevelOuter = bvNone
     TabOrder = 0
     OnResize = Pnl_MainResize
-    ExplicitWidth = 1264
+    ExplicitWidth = 1263
+    ExplicitHeight = 682
     object Pnl_Sub: TPanel
       Left = 1
       Top = 1
-      Width = 1262
-      Height = 680
+      Width = 1904
+      Height = 908
       BevelOuter = bvNone
       TabOrder = 0
       TabStop = True
       object Shape2: TShape
         Left = 0
         Top = 0
-        Width = 1262
-        Height = 680
+        Width = 1904
+        Height = 908
         Align = alClient
         Pen.Mode = pmMask
         Pen.Style = psDot
         ExplicitTop = -1
+        ExplicitWidth = 1262
+        ExplicitHeight = 680
       end
       object Panel4: TPanel
-        Left = 15
-        Top = 96
-        Width = 1230
-        Height = 572
+        Left = 13
+        Top = 120
+        Width = 1874
+        Height = 908
         BevelInner = bvLowered
         BevelOuter = bvNone
         TabOrder = 0
-        object Label11: TLabel
-          Left = 148
-          Top = 406
-          Width = 58
-          Height = 16
-          Alignment = taCenter
-          AutoSize = False
-          Caption = '10'
-          Color = clGray
-          Font.Charset = GB2312_CHARSET
-          Font.Color = clWhite
-          Font.Height = -11
-          Font.Name = #46027#50880
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
-          Transparent = False
-          Layout = tlCenter
-        end
-        object Label12: TLabel
-          Left = 88
-          Top = 406
-          Width = 58
-          Height = 16
-          Alignment = taCenter
-          AutoSize = False
-          Caption = '11'
-          Color = clGray
-          Font.Charset = GB2312_CHARSET
-          Font.Color = clWhite
-          Font.Height = -11
-          Font.Name = #46027#50880
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
-          Transparent = False
-          Layout = tlCenter
-        end
         object Label17: TLabel
-          Left = 266
-          Top = 406
-          Width = 58
-          Height = 16
+          Left = 393
+          Top = 210
+          Width = 100
+          Height = 20
           Alignment = taCenter
           AutoSize = False
           Caption = '08'
           Color = clGray
           Font.Charset = GB2312_CHARSET
           Font.Color = clWhite
-          Font.Height = -11
+          Font.Height = 20
           Font.Name = #46027#50880
           Font.Style = [fsBold]
           ParentColor = False
@@ -250,17 +215,17 @@
           Layout = tlCenter
         end
         object Label18: TLabel
-          Left = 208
-          Top = 406
-          Width = 58
-          Height = 16
+          Left = 295
+          Top = 210
+          Width = 100
+          Height = 20
           Alignment = taCenter
           AutoSize = False
           Caption = '09'
           Color = clGray
           Font.Charset = GB2312_CHARSET
           Font.Color = clWhite
-          Font.Height = -11
+          Font.Height = 20
           Font.Name = #46027#50880
           Font.Style = [fsBold]
           ParentColor = False
@@ -269,17 +234,17 @@
           Layout = tlCenter
         end
         object Label28: TLabel
-          Left = 326
-          Top = 406
-          Width = 58
-          Height = 16
+          Left = 493
+          Top = 210
+          Width = 100
+          Height = 20
           Alignment = taCenter
           AutoSize = False
           Caption = '07'
           Color = clGray
           Font.Charset = GB2312_CHARSET
           Font.Color = clWhite
-          Font.Height = -11
+          Font.Height = 20
           Font.Name = #46027#50880
           Font.Style = [fsBold]
           ParentColor = False
@@ -288,17 +253,17 @@
           Layout = tlCenter
         end
         object Label29: TLabel
-          Left = 386
-          Top = 406
-          Width = 58
-          Height = 16
+          Left = 593
+          Top = 210
+          Width = 100
+          Height = 20
           Alignment = taCenter
           AutoSize = False
           Caption = '06'
           Color = clGray
           Font.Charset = GB2312_CHARSET
           Font.Color = clWhite
-          Font.Height = -11
+          Font.Height = 20
           Font.Name = #46027#50880
           Font.Style = [fsBold]
           ParentColor = False
@@ -307,17 +272,17 @@
           Layout = tlCenter
         end
         object Label30: TLabel
-          Left = 446
-          Top = 406
-          Width = 58
-          Height = 16
+          Left = 693
+          Top = 210
+          Width = 100
+          Height = 20
           Alignment = taCenter
           AutoSize = False
           Caption = '05'
           Color = clGray
           Font.Charset = GB2312_CHARSET
           Font.Color = clWhite
-          Font.Height = -11
+          Font.Height = 20
           Font.Name = #46027#50880
           Font.Style = [fsBold]
           ParentColor = False
@@ -326,17 +291,17 @@
           Layout = tlCenter
         end
         object Label31: TLabel
-          Left = 506
-          Top = 406
-          Width = 58
-          Height = 16
+          Left = 793
+          Top = 210
+          Width = 100
+          Height = 20
           Alignment = taCenter
           AutoSize = False
           Caption = '04'
           Color = clGray
           Font.Charset = GB2312_CHARSET
           Font.Color = clWhite
-          Font.Height = -11
+          Font.Height = 20
           Font.Name = #46027#50880
           Font.Style = [fsBold]
           ParentColor = False
@@ -345,17 +310,17 @@
           Layout = tlCenter
         end
         object Label64: TLabel
-          Left = 566
-          Top = 406
-          Width = 58
-          Height = 16
+          Left = 893
+          Top = 210
+          Width = 100
+          Height = 20
           Alignment = taCenter
           AutoSize = False
           Caption = '03'
           Color = clGray
           Font.Charset = GB2312_CHARSET
           Font.Color = clWhite
-          Font.Height = -11
+          Font.Height = 20
           Font.Name = #46027#50880
           Font.Style = [fsBold]
           ParentColor = False
@@ -364,17 +329,17 @@
           Layout = tlCenter
         end
         object Label66: TLabel
-          Left = 686
-          Top = 406
-          Width = 58
-          Height = 16
+          Left = 1093
+          Top = 210
+          Width = 100
+          Height = 20
           Alignment = taCenter
           AutoSize = False
-          Caption = #51077#52636#44256#45824
+          Caption = '01'
           Color = clGray
           Font.Charset = GB2312_CHARSET
           Font.Color = clWhite
-          Font.Height = -11
+          Font.Height = 20
           Font.Name = #46027#50880
           Font.Style = [fsBold]
           ParentColor = False
@@ -383,17 +348,17 @@
           Layout = tlCenter
         end
         object Label65: TLabel
-          Left = 626
-          Top = 406
-          Width = 58
-          Height = 16
+          Left = 993
+          Top = 210
+          Width = 100
+          Height = 20
           Alignment = taCenter
           AutoSize = False
           Caption = '02'
           Color = clGray
           Font.Charset = GB2312_CHARSET
           Font.Color = clWhite
-          Font.Height = -11
+          Font.Height = 20
           Font.Name = #46027#50880
           Font.Style = [fsBold]
           ParentColor = False
@@ -402,10 +367,10 @@
           Layout = tlCenter
         end
         object Panel157: TPanel
-          Left = 85
-          Top = 344
-          Width = 662
-          Height = 60
+          Left = 293
+          Top = 230
+          Width = 901
+          Height = 100
           ParentCustomHint = False
           BevelOuter = bvNone
           BiDiMode = bdLeftToRight
@@ -426,164 +391,333 @@
           ShowHint = False
           TabOrder = 0
           object RackBay02: TPanel
-            Left = 540
+            Left = 700
             Top = 0
-            Width = 60
-            Height = 60
+            Width = 100
+            Height = 100
             Align = alLeft
             BevelInner = bvLowered
             TabOrder = 0
+            ExplicitLeft = 560
             object Bay02: TPanel
               Tag = 210
               Left = 2
               Top = 2
-              Width = 56
-              Height = 56
+              Width = 96
+              Height = 96
               Align = alClient
               BevelInner = bvRaised
               BevelOuter = bvNone
-              Color = 4737096
+              Color = clWhite
               ParentBackground = False
               TabOrder = 0
+              ExplicitWidth = 100
+              object Image3: TImage
+                Left = 1
+                Top = 1
+                Width = 94
+                Height = 94
+                Align = alClient
+                Center = True
+                Picture.Data = {
+                  0954506E67496D61676589504E470D0A1A0A0000000D49484452000000390000
+                  004D08060000001CABCC52000000017352474200AECE1CE90000000467414D41
+                  0000B18F0BFC6105000000097048597300000EC300000EC301C76FA864000001
+                  A34944415478DAEDD3B14A03411485E11348406314590C8A562216828AD85809
+                  626563E323D8FB08563E82BD8F90C6C64A042B1B11152C44AC14251244631412
+                  D0A40B21D9ECEECCBD59AEE76F672E331FCC647E9BC17819228D44A49588B412
+                  915622D24A445AC909F954BD45E9615FEC723B730798292C12A986BCFF010E5F
+                  FCE1F6A680F9212289249248228924924822892492482289249248228924D238
+                  B2D678C7CDDB49E4E1CF7A1977955331E442B089D15C31F2DCD2C416F2D9F170
+                  64ABABF231CE9F8F625D4A0A19A7F5E95DAC14B7BBAE757DAEEDD0D73A70F915
+                  7E40A5015C54FD21D70A40900DDFB33A024CE6FA037B223BA1A50A70F6E10FE1
+                  DAC658F3BF06D180A1C8B442E302FB22D3064D028C844C0B3429303272D05017
+                  602CE4A0A0AEC0D8486DA80F6022A416D4173031521AEA13E8849482FA063A23
+                  7D4325805E90BEA052406F4857A824D02B3229541AE81D1917AA01144146856A
+                  01C590FDA09A4051642FA836501CD909BDAE01CB795DA00AB213AA0D5443B643
+                  B581AAC856E5EF471487675581EAC84145A49588B412915622D24A445A89482B
+                  FD0BE41F05C21847BABF0B1F0000000049454E44AE426082}
+                Transparent = True
+                ExplicitLeft = 2
+                ExplicitTop = 2
+              end
             end
           end
           object RackBay03: TPanel
-            Left = 480
+            Left = 600
             Top = 0
-            Width = 60
-            Height = 60
+            Width = 100
+            Height = 100
             Align = alLeft
             BevelInner = bvLowered
             TabOrder = 1
+            ExplicitLeft = 480
             object Bay03: TPanel
               Tag = 209
               Left = 2
               Top = 2
-              Width = 56
-              Height = 56
+              Width = 96
+              Height = 96
               Align = alClient
               BevelInner = bvRaised
               BevelOuter = bvNone
               Color = 4737096
               ParentBackground = False
               TabOrder = 0
+              ExplicitWidth = 100
             end
           end
           object RackBay04: TPanel
-            Left = 420
+            Left = 500
             Top = 0
-            Width = 60
-            Height = 60
+            Width = 100
+            Height = 100
             Align = alLeft
             BevelInner = bvLowered
             TabOrder = 2
+            ExplicitLeft = 400
             object Bay04: TPanel
               Tag = 208
               Left = 2
               Top = 2
-              Width = 56
-              Height = 56
+              Width = 96
+              Height = 96
               Align = alClient
               BevelInner = bvRaised
               BevelOuter = bvNone
-              Color = 4737096
+              Color = clWhite
               ParentBackground = False
               TabOrder = 0
+              ExplicitWidth = 100
+              object Image5: TImage
+                Left = 1
+                Top = 1
+                Width = 94
+                Height = 94
+                Align = alClient
+                Center = True
+                Picture.Data = {
+                  0954506E67496D61676589504E470D0A1A0A0000000D49484452000000490000
+                  0069080600000076DF0EEA000000017352474200AECE1CE90000000467414D41
+                  0000B18F0BFC6105000000097048597300000EC300000EC301C76FA864000002
+                  3C4944415478DAEDD92F8B54511880F1774014C4B0416111D16016F70318D4B4
+                  C5E607301A0CFA49D66030DA2C2693490D069BEB073028A2623258B48C27EC81
+                  4176769E3B73FE313C0FBCE5DE3B97C38F736F983B9BA7C24E6C26D2EA440289
+                  0412092412482490482091402281440289041209241248249048209140228144
+                  028904120924124824D01848BF0F23CEEDF55EC5D2FA237D7D1CF1E951C4D583
+                  884B0F7B7B1C5B5FA40C941B14AA1FD222D0BB34378E8E0F08D5076911E8499A
+                  1769EEA67970747E30A8F648C701E506856A8B7412506E40A876480428371854
+                  1BA42940B981A0EA23AD03941B04AA2ED22640B901A0EA219500CA7586AA8354
+                  1228D711AA3C520DA05C27A8B2483581721DA0CA21B500CA35862A83D41228D7
+                  106A73A41E40B946509B21F504CA35805A1F6904A05C65A8F5904602CA55849A
+                  8E342250AE12D434A445A02F695EAFB8FE479A570511F6D3ECAEB8E6769ACB65
+                  A138D2FF7FDA930ED3947C3DA425C4D42F4F05A018D2DFB425BE3DE577FDF339
+                  EDA267F59076EF459CB9C27F77F17EC4E9555B7053A4A9FD7A1BF1F1563DA4EB
+                  6F22766E165FF6B266EFBF3F9F5F3BBF1F674FED88B40CE9C3CF97F3BD0B77CA
+                  DE75DB907CDC5627124824904820914022814402890412092412482490482091
+                  402281440289041209241248249048A0BA48B51209B415485B96482091402281
+                  4402890412092412482490482091402281440289041209241248249048209140
+                  228144028904120924124824904820914022814402890412092412E81FE872C7
+                  E4172D13E40000000049454E44AE426082}
+                Transparent = True
+                ExplicitLeft = 2
+                ExplicitTop = 2
+              end
             end
           end
           object RackBay05: TPanel
-            Left = 360
+            Left = 400
             Top = 0
-            Width = 60
-            Height = 60
+            Width = 100
+            Height = 100
             Align = alLeft
             BevelInner = bvLowered
             TabOrder = 3
+            ExplicitLeft = 320
             object Bay05: TPanel
               Tag = 207
               Left = 2
               Top = 2
-              Width = 56
-              Height = 56
+              Width = 96
+              Height = 96
               Align = alClient
               BevelInner = bvRaised
               BevelOuter = bvNone
-              Color = 4737096
+              Color = clWhite
               ParentBackground = False
               TabOrder = 0
+              ExplicitWidth = 100
+              object Image7: TImage
+                Left = 1
+                Top = 1
+                Width = 94
+                Height = 94
+                Align = alClient
+                Center = True
+                Picture.Data = {
+                  0954506E67496D61676589504E470D0A1A0A0000000D49484452000000390000
+                  004D08060000001CABCC52000000017352474200AECE1CE90000000467414D41
+                  0000B18F0BFC6105000000097048597300000EC300000EC301C76FA864000001
+                  A34944415478DAEDD3B14A03411485E11348406314590C8A562216828AD85809
+                  626563E323D8FB08563E82BD8F90C6C64A042B1B11152C44AC14251244631412
+                  D0A40B21D9ECEECCBD59AEE76F672E331FCC647E9BC17819228D44A49588B412
+                  915622D24A445AC909F954BD45E9615FEC723B730798292C12A986BCFF010E5F
+                  FCE1F6A680F9212289249248228924924822892492482289249248228924D238
+                  B2D678C7CDDB49E4E1CF7A1977955331E442B089D15C31F2DCD2C416F2D9F170
+                  64ABABF231CE9F8F625D4A0A19A7F5E95DAC14B7BBAE757DAEEDD0D73A70F915
+                  7E40A5015C54FD21D70A40900DDFB33A024CE6FA037B223BA1A50A70F6E10FE1
+                  DAC658F3BF06D180A1C8B442E302FB22D3064D028C844C0B3429303272D05017
+                  602CE4A0A0AEC0D8486DA80F6022A416D4173031521AEA13E8849482FA063A23
+                  7D4325805E90BEA052406F4857A824D02B3229541AE81D1917AA01144146856A
+                  01C590FDA09A4051642FA836501CD909BDAE01CB795DA00AB213AA0D5443B643
+                  B581AAC856E5EF471487675581EAC84145A49588B412915622D24A445A89482B
+                  FD0BE41F05C21847BABF0B1F0000000049454E44AE426082}
+                Transparent = True
+                ExplicitLeft = 2
+                ExplicitTop = 2
+              end
             end
           end
           object RackBay06: TPanel
             Left = 300
             Top = 0
-            Width = 60
-            Height = 60
+            Width = 100
+            Height = 100
             Align = alLeft
             BevelInner = bvLowered
             TabOrder = 4
+            ExplicitLeft = 240
             object Bay06: TPanel
               Tag = 206
               Left = 2
               Top = 2
-              Width = 56
-              Height = 56
+              Width = 96
+              Height = 96
               Align = alClient
               BevelInner = bvRaised
               BevelOuter = bvNone
               Color = 4737096
               ParentBackground = False
               TabOrder = 0
+              ExplicitWidth = 100
             end
           end
           object RackBay07: TPanel
-            Left = 240
+            Left = 200
             Top = 0
-            Width = 60
-            Height = 60
+            Width = 100
+            Height = 100
             Align = alLeft
             BevelInner = bvLowered
             TabOrder = 5
+            ExplicitLeft = 160
             object Bay07: TPanel
               Tag = 205
               Left = 2
               Top = 2
-              Width = 56
-              Height = 56
+              Width = 96
+              Height = 96
               Align = alClient
               BevelInner = bvRaised
               BevelOuter = bvNone
-              Color = 4737096
+              Color = clWhite
               ParentBackground = False
               TabOrder = 0
+              ExplicitWidth = 100
+              object Image6: TImage
+                Left = 1
+                Top = 1
+                Width = 94
+                Height = 94
+                Align = alClient
+                Center = True
+                Picture.Data = {
+                  0954506E67496D61676589504E470D0A1A0A0000000D49484452000000490000
+                  0069080600000076DF0EEA000000017352474200AECE1CE90000000467414D41
+                  0000B18F0BFC6105000000097048597300000EC300000EC301C76FA864000002
+                  3C4944415478DAEDD92F8B54511880F1774014C4B0416111D16016F70318D4B4
+                  C5E607301A0CFA49D66030DA2C2693490D069BEB073028A2623258B48C27EC81
+                  4176769E3B73FE313C0FBCE5DE3B97C38F736F983B9BA7C24E6C26D2EA440289
+                  0412092412482490482091402281440289041209241248249048209140228144
+                  028904120924124824D01848BF0F23CEEDF55EC5D2FA237D7D1CF1E951C4D583
+                  884B0F7B7B1C5B5FA40C941B14AA1FD222D0BB34378E8E0F08D5076911E8499A
+                  1769EEA67970747E30A8F648C701E506856A8B7412506E40A876480428371854
+                  1BA42940B981A0EA23AD03941B04AA2ED22640B901A0EA219500CA7586AA8354
+                  1228D711AA3C520DA05C27A8B2483581721DA0CA21B500CA35862A83D41228D7
+                  106A73A41E40B946509B21F504CA35805A1F6904A05C65A8F5904602CA55849A
+                  8E342250AE12D434A445A02F695EAFB8FE479A570511F6D3ECAEB8E6769ACB65
+                  A138D2FF7FDA930ED3947C3DA425C4D42F4F05A018D2DFB425BE3DE577FDF339
+                  EDA267F59076EF459CB9C27F77F17EC4E9555B7053A4A9FD7A1BF1F1563DA4EB
+                  6F22766E165FF6B266EFBF3F9F5F3BBF1F674FED88B40CE9C3CF97F3BD0B77CA
+                  DE75DB907CDC5627124824904820914022814402890412092412482490482091
+                  402281440289041209241248249048A0BA48B51209B415485B96482091402281
+                  4402890412092412482490482091402281440289041209241248249048209140
+                  228144028904120924124824904820914022814402890412092412E81FE872C7
+                  E4172D13E40000000049454E44AE426082}
+                Transparent = True
+                ExplicitLeft = 2
+                ExplicitTop = 2
+              end
             end
           end
           object RackBay08: TPanel
-            Left = 180
+            Left = 100
             Top = 0
-            Width = 60
-            Height = 60
+            Width = 100
+            Height = 100
             Align = alLeft
             BevelInner = bvLowered
             TabOrder = 6
+            ExplicitLeft = 80
             object Bay08: TPanel
               Tag = 204
               Left = 2
               Top = 2
-              Width = 56
-              Height = 56
+              Width = 96
+              Height = 96
               Align = alClient
               BevelInner = bvRaised
               BevelOuter = bvNone
-              Color = 4737096
+              Color = clWhite
               ParentBackground = False
               TabOrder = 0
+              ExplicitWidth = 100
+              object Image8: TImage
+                Left = 1
+                Top = 1
+                Width = 94
+                Height = 94
+                Align = alClient
+                Center = True
+                Picture.Data = {
+                  0954506E67496D61676589504E470D0A1A0A0000000D49484452000000390000
+                  004D08060000001CABCC52000000017352474200AECE1CE90000000467414D41
+                  0000B18F0BFC6105000000097048597300000EC300000EC301C76FA864000001
+                  A34944415478DAEDD3B14A03411485E11348406314590C8A562216828AD85809
+                  626563E323D8FB08563E82BD8F90C6C64A042B1B11152C44AC14251244631412
+                  D0A40B21D9ECEECCBD59AEE76F672E331FCC647E9BC17819228D44A49588B412
+                  915622D24A445AC909F954BD45E9615FEC723B730798292C12A986BCFF010E5F
+                  FCE1F6A680F9212289249248228924924822892492482289249248228924D238
+                  B2D678C7CDDB49E4E1CF7A1977955331E442B089D15C31F2DCD2C416F2D9F170
+                  64ABABF231CE9F8F625D4A0A19A7F5E95DAC14B7BBAE757DAEEDD0D73A70F915
+                  7E40A5015C54FD21D70A40900DDFB33A024CE6FA037B223BA1A50A70F6E10FE1
+                  DAC658F3BF06D180A1C8B442E302FB22D3064D028C844C0B3429303272D05017
+                  602CE4A0A0AEC0D8486DA80F6022A416D4173031521AEA13E8849482FA063A23
+                  7D4325805E90BEA052406F4857A824D02B3229541AE81D1917AA01144146856A
+                  01C590FDA09A4051642FA836501CD909BDAE01CB795DA00AB213AA0D5443B643
+                  B581AAC856E5EF471487675581EAC84145A49588B412915622D24A445A89482B
+                  FD0BE41F05C21847BABF0B1F0000000049454E44AE426082}
+                Transparent = True
+                ExplicitLeft = 2
+                ExplicitTop = 2
+              end
             end
           end
           object RackBay09: TPanel
-            Left = 120
+            Left = 0
             Top = 0
-            Width = 60
-            Height = 60
+            Width = 100
+            Height = 100
             Align = alLeft
             BevelInner = bvLowered
             TabOrder = 7
@@ -591,88 +725,81 @@
               Tag = 203
               Left = 2
               Top = 2
-              Width = 56
-              Height = 56
+              Width = 96
+              Height = 96
               Align = alClient
               BevelInner = bvRaised
               BevelOuter = bvNone
               Color = 4737096
               ParentBackground = False
               TabOrder = 0
-            end
-          end
-          object RackBay10: TPanel
-            Left = 60
-            Top = 0
-            Width = 60
-            Height = 60
-            Align = alLeft
-            BevelInner = bvLowered
-            TabOrder = 8
-            object Bay10: TPanel
-              Tag = 202
-              Left = 2
-              Top = 2
-              Width = 56
-              Height = 56
-              Align = alClient
-              BevelInner = bvRaised
-              BevelOuter = bvNone
-              Color = 4737096
-              ParentBackground = False
-              TabOrder = 0
-            end
-          end
-          object RackBay11: TPanel
-            Left = 0
-            Top = 0
-            Width = 60
-            Height = 60
-            Align = alLeft
-            BevelInner = bvLowered
-            TabOrder = 9
-            object Bay11: TPanel
-              Tag = 201
-              Left = 2
-              Top = 2
-              Width = 56
-              Height = 56
-              Align = alClient
-              BevelInner = bvRaised
-              BevelOuter = bvNone
-              Color = 4737096
-              ParentBackground = False
-              TabOrder = 0
+              ExplicitWidth = 80
+              ExplicitHeight = 76
             end
           end
           object RackBay01: TPanel
-            Left = 600
+            Left = 800
             Top = 0
-            Width = 60
-            Height = 60
+            Width = 100
+            Height = 100
             Align = alLeft
             BevelInner = bvLowered
-            TabOrder = 10
+            TabOrder = 8
+            ExplicitLeft = 640
             object Bay01: TPanel
               Tag = 211
               Left = 2
               Top = 2
-              Width = 56
-              Height = 56
+              Width = 96
+              Height = 96
               Align = alClient
               BevelInner = bvRaised
               BevelOuter = bvNone
               Color = clWhite
               ParentBackground = False
               TabOrder = 0
+              ExplicitWidth = 100
+              object Image4: TImage
+                Left = 1
+                Top = 1
+                Width = 94
+                Height = 94
+                Align = alClient
+                Center = True
+                Picture.Data = {
+                  0954506E67496D61676589504E470D0A1A0A0000000D49484452000000490000
+                  0069080600000076DF0EEA000000017352474200AECE1CE90000000467414D41
+                  0000B18F0BFC6105000000097048597300000EC300000EC301C76FA864000002
+                  3C4944415478DAEDD92F8B54511880F1774014C4B0416111D16016F70318D4B4
+                  C5E607301A0CFA49D66030DA2C2693490D069BEB073028A2623258B48C27EC81
+                  4176769E3B73FE313C0FBCE5DE3B97C38F736F983B9BA7C24E6C26D2EA440289
+                  0412092412482490482091402281440289041209241248249048209140228144
+                  028904120924124824D01848BF0F23CEEDF55EC5D2FA237D7D1CF1E951C4D583
+                  884B0F7B7B1C5B5FA40C941B14AA1FD222D0BB34378E8E0F08D5076911E8499A
+                  1769EEA67970747E30A8F648C701E506856A8B7412506E40A876480428371854
+                  1BA42940B981A0EA23AD03941B04AA2ED22640B901A0EA219500CA7586AA8354
+                  1228D711AA3C520DA05C27A8B2483581721DA0CA21B500CA35862A83D41228D7
+                  106A73A41E40B946509B21F504CA35805A1F6904A05C65A8F5904602CA55849A
+                  8E342250AE12D434A445A02F695EAFB8FE479A570511F6D3ECAEB8E6769ACB65
+                  A138D2FF7FDA930ED3947C3DA425C4D42F4F05A018D2DFB425BE3DE577FDF339
+                  EDA267F59076EF459CB9C27F77F17EC4E9555B7053A4A9FD7A1BF1F1563DA4EB
+                  6F22766E165FF6B266EFBF3F9F5F3BBF1F674FED88B40CE9C3CF97F3BD0B77CA
+                  DE75DB907CDC5627124824904820914022814402890412092412482490482091
+                  402281440289041209241248249048A0BA48B51209B415485B96482091402281
+                  4402890412092412482490482091402281440289041209241248249048209140
+                  228144028904120924124824904820914022814402890412092412E81FE872C7
+                  E4172D13E40000000049454E44AE426082}
+                Transparent = True
+                ExplicitTop = 4
+              end
             end
           end
         end
         object Panel2: TPanel
-          Left = 85
-          Top = 222
-          Width = 662
-          Height = 60
+          Left = 293
+          Top = 450
+          Width = 901
+          Height = 100
           ParentCustomHint = False
           BevelOuter = bvNone
           BiDiMode = bdLeftToRight
@@ -693,54 +820,58 @@
           ShowHint = False
           TabOrder = 1
           object Panel3: TPanel
-            Left = 540
+            Left = 700
             Top = 0
-            Width = 60
-            Height = 60
+            Width = 100
+            Height = 100
             Align = alLeft
             BevelInner = bvLowered
             TabOrder = 0
+            ExplicitLeft = 660
             object Panel5: TPanel
               Tag = 210
               Left = 2
               Top = 2
-              Width = 56
-              Height = 56
+              Width = 96
+              Height = 96
               Align = alClient
               BevelInner = bvRaised
               BevelOuter = bvNone
               Color = 4737096
               ParentBackground = False
               TabOrder = 0
+              ExplicitWidth = 100
             end
           end
           object Panel6: TPanel
-            Left = 480
+            Left = 600
             Top = 0
-            Width = 60
-            Height = 60
+            Width = 100
+            Height = 100
             Align = alLeft
             BevelInner = bvLowered
             TabOrder = 1
+            ExplicitLeft = 580
             object Panel7: TPanel
               Tag = 209
               Left = 2
               Top = 2
-              Width = 56
-              Height = 56
+              Width = 96
+              Height = 96
               Align = alClient
               BevelInner = bvRaised
               BevelOuter = bvNone
               Color = 4737096
               ParentBackground = False
               TabOrder = 0
+              ExplicitWidth = 100
             end
           end
           object Panel8: TPanel
-            Left = 420
+            Left = 500
             Top = 0
-            Width = 60
-            Height = 60
+            Width = 100
+            Height = 100
             Align = alLeft
             BevelInner = bvLowered
             TabOrder = 2
@@ -748,184 +879,152 @@
               Tag = 208
               Left = 2
               Top = 2
-              Width = 56
-              Height = 56
+              Width = 96
+              Height = 96
               Align = alClient
               BevelInner = bvRaised
               BevelOuter = bvNone
               Color = 4737096
               ParentBackground = False
               TabOrder = 0
+              ExplicitWidth = 56
+              ExplicitHeight = 56
             end
           end
           object Panel10: TPanel
-            Left = 360
+            Left = 400
             Top = 0
-            Width = 60
-            Height = 60
+            Width = 100
+            Height = 100
             Align = alLeft
             BevelInner = bvLowered
             TabOrder = 3
+            ExplicitLeft = 320
             object Panel11: TPanel
               Tag = 207
               Left = 2
               Top = 2
-              Width = 56
-              Height = 56
+              Width = 96
+              Height = 96
               Align = alClient
               BevelInner = bvRaised
               BevelOuter = bvNone
               Color = 4737096
               ParentBackground = False
               TabOrder = 0
+              ExplicitWidth = 100
             end
           end
           object Panel12: TPanel
             Left = 300
             Top = 0
-            Width = 60
-            Height = 60
+            Width = 100
+            Height = 100
             Align = alLeft
             BevelInner = bvLowered
             TabOrder = 4
+            ExplicitLeft = 240
             object Panel13: TPanel
               Tag = 206
               Left = 2
               Top = 2
-              Width = 56
-              Height = 56
+              Width = 96
+              Height = 96
               Align = alClient
               BevelInner = bvRaised
               BevelOuter = bvNone
               Color = 4737096
               ParentBackground = False
               TabOrder = 0
+              ExplicitWidth = 100
             end
           end
           object Panel14: TPanel
-            Left = 240
+            Left = 200
             Top = 0
-            Width = 60
-            Height = 60
+            Width = 100
+            Height = 100
             Align = alLeft
             BevelInner = bvLowered
             TabOrder = 5
+            ExplicitLeft = 160
             object Panel15: TPanel
               Tag = 205
               Left = 2
               Top = 2
-              Width = 56
-              Height = 56
+              Width = 96
+              Height = 96
               Align = alClient
               BevelInner = bvRaised
               BevelOuter = bvNone
               Color = 4737096
               ParentBackground = False
               TabOrder = 0
+              ExplicitWidth = 100
             end
           end
           object Panel16: TPanel
-            Left = 180
+            Left = 100
             Top = 0
-            Width = 60
-            Height = 60
+            Width = 100
+            Height = 100
             Align = alLeft
             BevelInner = bvLowered
             TabOrder = 6
+            ExplicitLeft = 80
             object Panel17: TPanel
               Tag = 204
               Left = 2
               Top = 2
-              Width = 56
-              Height = 56
+              Width = 96
+              Height = 96
               Align = alClient
               BevelInner = bvRaised
               BevelOuter = bvNone
               Color = 4737096
               ParentBackground = False
               TabOrder = 0
-            end
-          end
-          object Panel18: TPanel
-            Left = 120
-            Top = 0
-            Width = 60
-            Height = 60
-            Align = alLeft
-            BevelInner = bvLowered
-            TabOrder = 7
-            object Panel19: TPanel
-              Tag = 203
-              Left = 2
-              Top = 2
-              Width = 56
-              Height = 56
-              Align = alClient
-              BevelInner = bvRaised
-              BevelOuter = bvNone
-              Color = 4737096
-              ParentBackground = False
-              TabOrder = 0
-            end
-          end
-          object Panel20: TPanel
-            Left = 60
-            Top = 0
-            Width = 60
-            Height = 60
-            Align = alLeft
-            BevelInner = bvLowered
-            TabOrder = 8
-            object Panel21: TPanel
-              Tag = 202
-              Left = 2
-              Top = 2
-              Width = 56
-              Height = 56
-              Align = alClient
-              BevelInner = bvRaised
-              BevelOuter = bvNone
-              Color = 4737096
-              ParentBackground = False
-              TabOrder = 0
-            end
-          end
-          object Panel22: TPanel
-            Left = 0
-            Top = 0
-            Width = 60
-            Height = 60
-            Align = alLeft
-            BevelInner = bvLowered
-            TabOrder = 9
-            object Panel23: TPanel
-              Tag = 201
-              Left = 2
-              Top = 2
-              Width = 56
-              Height = 56
-              Align = alClient
-              BevelInner = bvRaised
-              BevelOuter = bvNone
-              Color = 4737096
-              ParentBackground = False
-              TabOrder = 0
+              ExplicitWidth = 100
             end
           end
           object Panel24: TPanel
-            Left = 600
+            Left = 800
             Top = 0
-            Width = 60
-            Height = 60
+            Width = 100
+            Height = 100
             Align = alLeft
             BevelInner = bvLowered
-            TabOrder = 10
+            TabOrder = 7
+            ExplicitLeft = 740
             object Panel25: TPanel
               Tag = 211
               Left = 2
               Top = 2
-              Width = 56
-              Height = 56
+              Width = 96
+              Height = 96
+              Align = alClient
+              BevelInner = bvRaised
+              BevelOuter = bvNone
+              Color = 4737096
+              ParentBackground = False
+              TabOrder = 0
+              ExplicitWidth = 100
+            end
+          end
+          object Panel18: TPanel
+            Left = 0
+            Top = 0
+            Width = 100
+            Height = 100
+            Align = alLeft
+            BevelInner = bvLowered
+            TabOrder = 8
+            object Panel19: TPanel
+              Tag = 203
+              Left = 2
+              Top = 2
+              Width = 96
+              Height = 96
               Align = alClient
               BevelInner = bvRaised
               BevelOuter = bvNone
@@ -936,15 +1035,16 @@
           end
         end
         object Panel201: TPanel
-          Left = 824
+          Left = 1468
           Top = 1
           Width = 405
-          Height = 570
+          Height = 906
           Align = alRight
           BevelInner = bvRaised
           BevelOuter = bvLowered
           Color = 14803425
           TabOrder = 2
+          ExplicitTop = 0
           object Panel231: TPanel
             Left = 2
             Top = 2
@@ -967,10 +1067,11 @@
             Left = 2
             Top = 26
             Width = 401
-            Height = 542
+            Height = 878
             Align = alClient
             BevelOuter = bvNone
             TabOrder = 1
+            ExplicitHeight = 542
             object Panel232: TPanel
               Left = 0
               Top = 0
@@ -2284,13 +2385,14 @@
               Left = 0
               Top = 412
               Width = 401
-              Height = 130
+              Height = 466
               Align = alClient
               BevelInner = bvLowered
               BevelOuter = bvNone
               Color = 16185078
               ParentBackground = False
               TabOrder = 2
+              ExplicitHeight = 130
               object Panel51: TPanel
                 Left = 7
                 Top = 103
@@ -2764,9 +2866,9 @@
           end
         end
         object SCLine1: TPanel
-          Left = 79
-          Top = 309
-          Width = 675
+          Left = 295
+          Top = 390
+          Width = 899
           Height = 11
           ParentCustomHint = False
           BevelOuter = bvNone
@@ -2788,8 +2890,8 @@
           object Panel159: TPanel
             Left = 0
             Top = 4
-            Width = 810
-            Height = 3
+            Width = 910
+            Height = 5
             ParentCustomHint = False
             BevelOuter = bvNone
             BiDiMode = bdLeftToRight
@@ -2813,7 +2915,7 @@
           object Panel161: TPanel
             Left = 0
             Top = 0
-            Width = 3
+            Width = 5
             Height = 11
             ParentCustomHint = False
             Align = alLeft
@@ -2835,11 +2937,12 @@
             ParentShowHint = False
             ShowHint = False
             TabOrder = 1
+            ExplicitLeft = -1
           end
           object Panel162: TPanel
-            Left = 672
+            Left = 894
             Top = 0
-            Width = 3
+            Width = 5
             Height = 11
             ParentCustomHint = False
             Align = alRight
@@ -2861,10 +2964,11 @@
             ParentShowHint = False
             ShowHint = False
             TabOrder = 2
+            ExplicitLeft = 896
           end
         end
         object Panel65: TPanel
-          Left = 279
+          Left = 590
           Top = 76
           Width = 480
           Height = 60
@@ -2944,8 +3048,8 @@
           end
         end
         object SC: TPanel
-          Left = 685
-          Top = 283
+          Left = 1115
+          Top = 367
           Width = 60
           Height = 60
           ParentCustomHint = False
@@ -3188,7 +3292,7 @@
           end
         end
         object Panel84: TPanel
-          Left = 69
+          Left = 395
           Top = 76
           Width = 205
           Height = 60
@@ -3220,8 +3324,8 @@
         end
         object btnReset: TButton
           Tag = 1
-          Left = 87
-          Top = 459
+          Left = 385
+          Top = 635
           Width = 325
           Height = 65
           Caption = #45936#51060#53552#52488#44592#54868
@@ -3236,8 +3340,8 @@
         end
         object btnRetry: TButton
           Tag = 2
-          Left = 418
-          Top = 459
+          Left = 783
+          Top = 635
           Width = 325
           Height = 65
           Caption = #51116#44592#46041'('#51060#51473#51077#44256','#44277#52636#44256')'
