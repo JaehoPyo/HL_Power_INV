@@ -20,7 +20,8 @@ uses
   U310 in 'Form\U310.pas' {frmU310},
   U320 in 'Form\U320.pas' {frmU320},
   U410 in 'Form\U410.pas' {frmU410},
-  U420 in 'Form\U420.pas' {frmU420};
+  U420 in 'Form\U420.pas' {frmU420},
+  U510 in 'Form\U510.pas' {frmU510};
 
 {$R *.res}
 
