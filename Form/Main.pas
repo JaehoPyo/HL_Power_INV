@@ -72,6 +72,7 @@ type
     tmrLogFileCheck: TTimer;
     PnlSBar2: TPanel;
     LblVersion: TLabel;
+    M2400: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -113,7 +114,7 @@ var
 
 implementation
 
-uses U110, U210, U220, U230, U310, U320, U410, U420, U510;//, U520 ;
+uses U110, U210, U220, U230, U240, U310, U320, U410, U420, U510, U520 ;
 
 {$R *.dfm}
 
@@ -384,6 +385,7 @@ begin
     2100 : U210Create();           // 입출고 진행현황
     2200 : U220Create();           // 입고 작업등록
     2300 : U230Create();           // 출고 작업등록
+    2400 : U240Create();           // 출고 작업등록
     // 재고관리
     3100 : U310Create();           // Cell 모니터링
     3200 : U320Create();           // 지정출고
@@ -392,7 +394,7 @@ begin
     4200 : U420Create();           // 지정출고
     // 모니터링------------------------------------------
     5100 : U510Create();           // 설비 모니터링
-//    5200 : U520Create();           // 설비 에러 이력 조회
+    5200 : U520Create();           // 설비 에러 이력 조회
 //    else exit;
   end;
 end;

@@ -1,0 +1,29 @@
+2022-02-24 09:13:48 09:13:48.443 Program Start v1.4 []
+2022-02-24 09:13:49 09:13:49.039 [000] procedure InsertPGMHist Fail || ERR[Missing Connection or ConnectionString]
+2022-02-24 09:13:49 09:13:49.039 [520] procedure fnCommandQuery Fail || ERR['TO_CHAR'은(는) 인식할 수 없는 기본 제공 함수 이름입니다], SQL[ Select ERR_DEV, ERR_DEVNO, ERR_CODE,                   
+        ERR_NAME, ERR_DESC, CR_DATE,                     
+       (Case ERR_DEV when 'SC' then '스태커크레인'  
+                     else ERR_DEV end) as ERR_DEV_DESC  
+   From TT_ERROR 
+  Where 1=1  And TRIM(TO_CHAR(CR_DATE,'YYYYMMDDHH24MISS')) BetWeen       '20220224000000'   And '20220224091349'   Order By CR_DATE ]
+2022-02-24 09:22:55 09:22:55.762 Program Start v1.4 []
+2022-02-24 09:22:56 09:22:56.219 [000] procedure InsertPGMHist Fail || ERR[Missing Connection or ConnectionString]
+2022-02-24 09:22:56 09:22:56.219 [520] procedure fnCommandQuery Fail || ERR['TO_CHAR'은(는) 인식할 수 없는 기본 제공 함수 이름입니다], SQL[ Select ERR_DEV, ERR_DEVNO, ERR_CODE,                   
+        ERR_NAME, ERR_DESC, CR_DATE,                     
+       (Case ERR_DEV when 'SC' then '스태커크레인'  
+                     else ERR_DEV end) as ERR_DEV_DESC  
+   From TT_ERROR 
+  Where 1=1  And TRIM(TO_CHAR(CR_DATE,'YYYYMMDDHH24MISS')) BetWeen       '20220224000000'   And '20220224092256'   Order By CR_DATE ]
+2022-02-24 09:51:49 09:51:49.943 Program Start v1.4 []
+2022-02-24 11:09:51 11:09:51.355 Program Start v1.4 []
+2022-02-24 11:11:26 11:11:26.100 Program Start v1.4 []
+2022-02-24 11:24:17 11:24:17.988 Program Start v1.4 []
+2022-02-24 11:25:27 11:25:27.516 Program Start v1.4 []
+2022-02-24 11:27:33 11:27:33.918 Program Start v1.4 []
+2022-02-24 11:28:29 11:28:29.206 Program Start v1.4 []
+2022-02-24 11:29:38 11:29:38.498 Program Start v1.4 []
+2022-02-24 11:35:13 11:35:13.710 Program Start v1.4 []
+2022-02-24 11:44:57 11:44:57.943 Program Start v1.4 []
+2022-02-24 11:47:04 11:47:04.445 Program Start v1.4 []
+2022-02-24 11:48:31 11:48:31.441 Program Start v1.4 []
+2022-02-24 11:49:44 11:49:44.168 Program Start v1.4 []

@@ -383,7 +383,7 @@ begin
   except
     on E : Exception do
     begin
-      qryInfo.Close;
+      qryTemp.Close;
       InsertPGMHist('['+FormNo+']', 'E', 'SetComboBox', '', 'Exception Error', 'PGM', '', '', E.Message);
       TraceLogWrite('['+FormNo+'] procedure SetComboBox Fail || ERR['+E.Message+']');
     end;

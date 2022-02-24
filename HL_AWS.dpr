@@ -21,7 +21,9 @@ uses
   U320 in 'Form\U320.pas' {frmU320},
   U410 in 'Form\U410.pas' {frmU410},
   U420 in 'Form\U420.pas' {frmU420},
-  U510 in 'Form\U510.pas' {frmU510};
+  U510 in 'Form\U510.pas' {frmU510},
+  U520 in 'Form\U520.pas' {frmU520},
+  U240 in 'Form\U240.pas' {frmU240};
 
 {$R *.res}
 
@@ -30,5 +32,6 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TMainDm, MainDm);
   Application.CreateForm(TfrmMain, frmMain);
+  Application.CreateForm(TfrmU240, frmU240);
   Application.Run;
 end.

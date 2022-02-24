@@ -2025,6 +2025,10 @@ object frmMain: TfrmMain
         Caption = #52636#44256' '#51089#50629' '#46321#47197
         OnClick = execMenuClick
       end
+      object M2400: TMenuItem
+        Caption = #51060#46041' '#51089#50629' '#46321#47197
+        OnClick = execMenuClick
+      end
     end
     object M3000: TMenuItem
       Bitmap.Data = {

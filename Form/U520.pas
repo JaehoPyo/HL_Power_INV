@@ -39,12 +39,15 @@ type
   public
     { Public declarations }
     procedure fnCommandStart;
-    procedure fnCommandNew;
+    procedure fnCommandOrder;
+    procedure fnCommandAdd;
     procedure fnCommandExcel;
     procedure fnCommandDelete;
+    procedure fnCommandUpdate;
     procedure fnCommandPrint;
     procedure fnCommandQuery;
     procedure fnCommandClose;
+    procedure fnCommandLang;
     procedure fnWmMsgRecv (var MSG : TMessage) ; message WM_USER ;
 
     procedure SetComboBox;
@@ -85,12 +88,15 @@ end;
 procedure TfrmU520.fnWmMsgRecv(var MSG: TMessage);
 begin
   case MSG.WParam of
-    MSG_MDI_WIN_NEW     : begin fnCommandNew     ; end;
-    MSG_MDI_WIN_EXCEL   : begin fnCommandExcel   ; end;
-    MSG_MDI_WIN_DELETE  : begin fnCommandDelete  ; end;
-    MSG_MDI_WIN_PRINT   : begin fnCommandPrint   ; end;
-    MSG_MDI_WIN_QUERY   : begin fnCommandQuery   ; end;
-    MSG_MDI_WIN_CLOSE   : begin fnCommandClose   ; Close; end;
+    MSG_MDI_WIN_ORDER   : begin fnCommandOrder   ; end;           // MSG_MDI_WIN_ORDER   = 11 ; // Áö½Ã
+    MSG_MDI_WIN_ADD     : begin fnCommandAdd     ; end;           // MSG_MDI_WIN_ADD     = 12 ; // ½Å±Ô
+    MSG_MDI_WIN_DELETE  : begin fnCommandDelete  ; end;           // MSG_MDI_WIN_DELETE  = 13 ; // »èÁ¦
+    MSG_MDI_WIN_UPDATE  : begin fnCommandUpdate  ; end;           // MSG_MDI_WIN_UPDATE  = 14 ; // ¼öÁ¤
+    MSG_MDI_WIN_EXCEL   : begin fnCommandExcel   ; end;           // MSG_MDI_WIN_EXCEL   = 15 ; // ¿¢¼¿
+    MSG_MDI_WIN_PRINT   : begin fnCommandPrint   ; end;           // MSG_MDI_WIN_PRINT   = 16 ; // ÀÎ¼â
+    MSG_MDI_WIN_QUERY   : begin fnCommandQuery   ; end;           // MSG_MDI_WIN_QUERY   = 17 ; // Á¶È¸
+    MSG_MDI_WIN_CLOSE   : begin fnCommandClose   ; Close; end;    // MSG_MDI_WIN_CLOSE   = 20 ; // ´Ý±â
+    MSG_MDI_WIN_LANG    : begin fnCommandLang    ; end;           // MSG_MDI_WIN_LANG    = 21 ; // ¾ð¾î
   end;
 end;
 
@@ -99,8 +105,10 @@ end;
 //==============================================================================
 procedure TfrmU520.FormActivate(Sender: TObject);
 begin
-  frmMain.PnlMainMenu.Caption := (Sender as TForm).Caption ;
-  fnWmMsgSend( 21211,111 );
+  MainDm.M_Info.ActiveFormID := '520';
+  frmMain.LblMenu000.Caption := MainDm.M_Info.ActiveFormID + '. ' + getLangMenuString(MainDm.M_Info.ActiveFormID, frmMain.LblMenu000.Caption, MainDm.M_Info.LANG_TYPE, 'N');
+  frmU520.Caption := MainDm.M_Info.ActiveFormName;
+  fnWmMsgSend( 22221,11111 );
 
   dtDateFr.Date := StrToDate(FormatDateTime('YYYY-MM-DD',Now));
   dtTimeFr.Time := StrToTime('00:00:00');
@@ -123,12 +131,6 @@ begin
   begin
     if (Self.Components[i] is TTimer) then
        (Self.Components[i] as TTimer).Enabled := False ;
-  end;
-
-  for i := 0 to Self.ComponentCount-1 Do
-  begin
-    if (Self.Components[i] is TADOQuery) then
-       (Self.Components[i] as TADOQuery).Active := False ;
   end;
 end;
 
@@ -165,9 +167,9 @@ begin
 end;
 
 //==============================================================================
-// fnCommandNew [½Å±Ô]
+// fnCommandOrder [Áö½Ã]
 //==============================================================================
-procedure TfrmU520.fnCommandNew  ;
+procedure TfrmU520.fnCommandOrder  ;
 begin
 //
 end;
@@ -177,8 +179,29 @@ end;
 //==============================================================================
 procedure TfrmU520.fnCommandExcel;
 begin
-  hlbEhgridListExcel ( dgInfo , frmU520.Caption + '_' + FormatDatetime('YYYYMMDDHHNN', Now) );
-  MessageDlg('¿¢¼¿ ÀúÀåÀ» ¿Ï·áÇÏ¿´½À´Ï´Ù.', mtConfirmation, [mbYes], 0);
+  try
+    if hlbEhgridListExcel(dgInfo, frmMain.LblMenu000.Caption + '_' + FormatDatetime('YYYYMMDD', Now)) then
+    begin
+      MessageDlg('¿¢¼¿ ÀúÀåÀ» ¿Ï·áÇÏ¿´½À´Ï´Ù.', mtConfirmation, [mbYes], 0);
+    end else
+    begin
+      MessageDlg('¿¢¼¿ ÀúÀåÀ» ½ÇÆÐÇÏ¿´½À´Ï´Ù.', mtWarning, [mbYes], 0);
+    end;
+  except
+    on E : Exception do
+    begin
+      InsertPGMHist('['+FormNo+']', 'E', 'fnCommandExcel', '¿¢¼¿', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnCommandExcel Fail || ERR['+E.Message+']');
+    end;
+  end;
+end;
+
+//==============================================================================
+// fnCommandAdd [½Å±Ô]                                                        //
+//==============================================================================
+procedure TfrmU520.fnCommandAdd  ;
+begin
+//
 end;
 
 //==============================================================================
@@ -190,13 +213,41 @@ begin
 end;
 
 //==============================================================================
+// fnCommandUpdate [¼öÁ¤]                                                     //
+//==============================================================================
+procedure TfrmU520.fnCommandUpdate;
+begin
+//
+end;
+
+//==============================================================================
 // fnCommandPrint [ÀÎ¼â]
 //==============================================================================
 procedure TfrmU520.fnCommandPrint;
 begin
-  if not qryInfo.Active then Exit;
-  EhPrint.PrinterSetupDialog;
-  EhPrint.Preview;
+  try
+    if not qryInfo.Active then Exit;
+    fnCommandQuery;
+    EhPrint.DBGridEh := dgInfo;
+    EhPrint.PageHeader.LeftText.Clear;
+    EhPrint.PageHeader.LeftText.Add(Copy(MainDm.M_Info.ActiveFormName, 6,
+                                    Length(MainDm.M_Info.ActiveFormName)-5) );
+    EhPrint.PageHeader.Font.Name := 'µ¸¿ò';
+    EhPrint.PageHeader.Font.Size := 10;
+    EhPrint.PageFooter.RightText.Clear;
+    EhPrint.PageFooter.RightText.Add(FormatDateTime('YYYY-MM-DD HH:NN:SS', Now) + '   ' +
+                                     MainDM.M_Info.UserCode+' / '+MainDM.M_Info.UserName);
+    EhPrint.PageFooter.Font.Name := 'µ¸¿ò';
+    EhPrint.PageFooter.Font.Size := 10;
+
+    EhPrint.Preview;
+  except
+    on E : Exception do
+    begin
+      InsertPGMHist('['+FormNo+']', 'E', 'fnCommandPrint', 'ÀÎ¼â', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnCommandPrint Fail || ERR['+E.Message+']');
+    end;
+  end;
 end;
 
 //==============================================================================
@@ -233,7 +284,12 @@ begin
       Open;
     end;
   except
-    if qryInfo.Active then qryInfo.Close;
+    on E : Exception do
+    begin
+      qryInfo.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'fnCommandQuery', 'Á¶È¸', 'Exception Error', 'SQL', StrSQL, '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnCommandQuery Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
+    end;
   end;
 end;
 
@@ -243,6 +299,14 @@ end;
 procedure TfrmU520.fnCommandClose;
 begin
   Close;
+end;
+
+//==============================================================================
+// fnCommandLang [¾ð¾î]                                                       //
+//==============================================================================
+procedure TfrmU520.fnCommandLang;
+begin
+//
 end;
 
 //==============================================================================
@@ -278,7 +342,12 @@ begin
 
     end;
   except
-    if qryTemp.Active then qryTemp.Close;
+    on E : Exception do
+    begin
+      qryTemp.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'SetComboBox', '', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure SetComboBox Fail || ERR['+E.Message+']');
+    end;
   end;
 end;
 
