@@ -1689,7 +1689,6 @@ object frmMain: TfrmMain
       Pen.Style = psClear
       Shape = stRoundRect
       ShowHint = True
-      Visible = False
     end
   end
   object PnlSBar2: TPanel
@@ -2377,6 +2376,12 @@ object frmMain: TfrmMain
     Connection = MainDm.MainDB
     Parameters = <>
     Left = 157
+    Top = 98
+  end
+  object qryTemp: TADOQuery
+    Connection = MainDm.MainDB
+    Parameters = <>
+    Left = 184
     Top = 98
   end
 end

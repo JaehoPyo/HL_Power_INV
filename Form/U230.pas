@@ -544,7 +544,7 @@ begin
       SQL.Clear;
       SQL.Text :=
       ' INSERT INTO TT_ORDER (                             ' + #13#10+
-      '    REG_TIME, LUGG, JOBD,                           ' + #13#10 +
+      '    REG_TIME, LUGG, JOBD, LINE_NO                   ' + #13#10 +
       '    SRCSITE, SRCAISLE, SRCBAY, SRCLEVEL,            ' + #13#10 +
       '    DSTSITE, DSTAISLE, DSTBAY, DSTLEVEL,            ' + #13#10 +
       '    NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS,        ' + #13#10 +
@@ -552,7 +552,7 @@ begin
       '    JOB_END, CVFR, CVTO, CVCURR,                    ' + #13#10 +
       '    ETC, EMG, ITM_CD                                ' + #13#10 +
       '  ) VALUES (                                        ' + #13#10 +
-      '    :REG_TIME, :LUGG, :JOBD,                        ' + #13#10 +
+      '    :REG_TIME, :LUGG, :JOBD, :LINE_NO               ' + #13#10 +
       '    :SRCSITE, :SRCAISLE, :SRCBAY, :SRCLEVEL,        ' + #13#10 +
       '    :DSTSITE, :DSTAISLE, :DSTBAY, :DSTLEVEL,        ' + #13#10 +
       '    :NOWMC, :JOBSTATUS, :NOWSTATUS, :BUFFSTATUS,    ' + #13#10 +
@@ -565,6 +565,7 @@ begin
       Parameters[i].Value := OrderData.REG_TIME;    Inc(i);
       Parameters[i].Value := OrderData.LUGG;        Inc(i);
       Parameters[i].Value := OrderData.JOBD;        Inc(i);
+      Parameters[i].Value := OrderData.DSTLEVEL;    Inc(i); //LINE_NO
       Parameters[i].Value := OrderData.SRCSITE;     Inc(i);
       Parameters[i].Value := OrderData.SRCAISLE;    Inc(i);
       Parameters[i].Value := OrderData.SRCBAY;      Inc(i);

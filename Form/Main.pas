@@ -73,6 +73,7 @@ type
     PnlSBar2: TPanel;
     LblVersion: TLabel;
     M2400: TMenuItem;
+    qryTemp: TADOQuery;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -95,6 +96,7 @@ type
 
     // 로그자동삭제 관련
     procedure LogFileDelete;
+    procedure HistoryDelete;
     Function  DeleteRecodingFile(fileDir: string; iOption: integer): boolean;
     function  MinDeleteFile(const DirName : string; const UseRecycleBin: Boolean): Boolean;
 
@@ -153,7 +155,12 @@ begin
     frmMain.Caption := IniRead( INI_PATH, 'PROGRAM', 'ProgramName' ,'부산교통공사 자동 창고 관리시스템' );
     fnWmMsgSend( 22222,22222 );
 
-//    InsertPGMHist('[000]', 'N', 'FormCreate', '시작', 'Program Start ' + MainDm.pVersion, 'PGM', '', '', '');
+    // 로그 삭제 옵션
+    DeleteOption := StrToIntDef(IniRead(INI_PATH, 'Delete', 'DeleteOption', '0'), 0);
+    LogFileDelete;
+    HistoryDelete;
+
+    InsertPGMHist('[000]', 'N', 'FormCreate', '시작', 'Program Start ' + MainDm.pVersion, 'PGM', '', '', '');
     TraceLogWrite('Program Start ' + MainDm.pVersion + ' ['+MainDm.M_Info.UserCode+']');
   except
     on E : Exception do
@@ -456,12 +463,27 @@ begin
         begin
           while not (Eof) do
           begin
-            TShape(Self.FindComponent('ShpMFCInterfaceConn'+FieldByName('SCC_NO').AsString)).Brush.Color := CONN_STATUS_COLOR[FieldByName('STATUS').AsInteger];
+            TShape(Self.FindComponent('ShpMFCInterfaceConn1')).Brush.Color := CONN_STATUS_COLOR[FieldByName('STATUS').AsInteger];
             Next;
           end;
         end else
         begin
-          frmMain.ShpMFCInterfaceConn1.Brush.Color := CONN_STATUS_COLOR[0];
+          frmMain.ShpMFCInterfaceConn2.Brush.Color := CONN_STATUS_COLOR[0];
+        end;
+        SQL.Clear;
+        StrSQL := ' SELECT (CASE WHEN BACKUP_UPTIME > DATEADD(SECOND, -5, GETDATE()) THEN 1 ELSE 0 END) STATUS ' +
+                  '   FROM TC_CURRENT WITH (NOLOCK) ' ;
+        SQL.Text := StrSQL;
+        Open;
+        if not (Bof and Eof) then
+        begin
+          while not (Eof) do
+          begin
+            TShape(Self.FindComponent('ShpMFCInterfaceConn2')).Brush.Color := CONN_STATUS_COLOR[FieldByName('STATUS').AsInteger];
+            Next;
+          end;
+        end else
+        begin
           frmMain.ShpMFCInterfaceConn2.Brush.Color := CONN_STATUS_COLOR[0];
         end;
       end else
@@ -615,6 +637,55 @@ begin
     Result := (SHFileOperation(SHFileOpStruct)=0);
   except
     Result := False;
+  end;
+end;
+
+
+//==============================================================================
+// HistoryDelete
+//==============================================================================
+procedure TfrmMain.HistoryDelete;
+var
+  ExecNo : integer;
+  StrSQL : String;
+begin
+  try
+    with qryTemp do
+    begin
+      ExecNo := 0;
+      Close;
+      SQL.Clear;
+      StrSQL := ' DELETE FROM TT_PROGRAM_HIST ' +
+                '  WHERE CRT_DT < GETDATE() - 15 ' ;
+      SQL.Text := StrSQL;
+      ExecNo := ExecSQL;
+
+      if ExecNo > 0 then
+      begin
+        InsertPGMHist('[000]', 'N', 'HistoryDelete', '', 'Automatically Delete Program History ['+IntToStr(ExecNo)+']', 'PGM', '', '', '');
+      end;
+
+      ExecNo := 0;
+      Close;
+      SQL.Clear;
+      StrSQL := ' DELETE FROM TT_ERROR ' +
+                '  WHERE ERR_END < GETDATE() - 30 ' ;
+      SQL.Text := StrSQL;
+      ExecNo := ExecSQL;
+
+      if ExecNo > 0 then
+      begin
+        InsertPGMHist('[000]', 'N', 'HistoryDelete', '', 'Automatically Delete Error History ['+IntToStr(ExecNo)+']', 'PGM', '', '', '');
+      end;
+      Close;
+    end;
+  except
+    on E : Exception do
+    begin
+      qryTemp.Close;
+      InsertPGMHist('[000]', 'E', 'HistoryDelete', '', 'Exception Error', 'SQL', StrSQL, '', E.Message);
+      TraceLogWrite('[000] procedure HistoryDelete Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
+    end;
   end;
 end;
 

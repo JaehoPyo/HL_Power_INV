@@ -32,6 +32,5 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TMainDm, MainDm);
   Application.CreateForm(TfrmMain, frmMain);
-  Application.CreateForm(TfrmU240, frmU240);
   Application.Run;
 end.

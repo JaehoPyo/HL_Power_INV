@@ -877,6 +877,7 @@ var
 begin
   try
     Result := False;
+
     StrSQL  := ' SELECT * FROM TT_STOCK ' +
                '  WHERE ID_CODE = ''' + ID_Code + ''' ' +
                '    AND ID_STATUS = ''0'' ';  // AGV가 화물 내려놓고 완료 일때 CV로 변경할 예정

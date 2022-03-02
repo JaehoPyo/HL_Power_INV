@@ -106,6 +106,7 @@ object MainDm: TMainDm
     Top = 64
   end
   object PD_INS_PGM_HIST: TADOStoredProc
+    Connection = MainDB
     ProcedureName = 'PD_INS_PGM_HIST'
     Parameters = <
       item
