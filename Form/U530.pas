@@ -1,4 +1,4 @@
-unit U520;
+unit U530;
 
 interface
 
@@ -11,13 +11,7 @@ uses
   Vcl.ComCtrls ;
 
 type
-  TfrmU520 = class(TForm)
-    qryTemp: TADOQuery;
-    qryInfo: TADOQuery;
-    dsInfo: TDataSource;
-    EhPrint: TPrintDBGridEh;
-    Pnl_Main: TPanel;
-    dgInfo: TDBGridEh;
+  TfrmU530 = class(TForm)
     Pnl_Top: TPanel;
     GroupBox1: TGroupBox;
     Label31: TLabel;
@@ -26,14 +20,27 @@ type
     dtDateTo: TDateTimePicker;
     dtTimeTo: TDateTimePicker;
     cbDateUse: TCheckBox;
-    gbCode: TGroupBox;
-    cbCode: TComboBox;
+    GroupBox4: TGroupBox;
+    GroupBox2: TGroupBox;
+    edtName: TEdit;
+    GroupBox3: TGroupBox;
+    GroupBox5: TGroupBox;
+    edtMenu: TEdit;
+    edtDesc: TEdit;
+    cbType: TComboBox;
+    Pnl_Main: TPanel;
+    dgInfo: TDBGridEh;
+    dsInfo: TDataSource;
+    qryInfo: TADOQuery;
+    qryTemp: TADOQuery;
+    EhPrint: TPrintDBGridEh;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure dtDateTimeChange(Sender: TObject);
-    procedure cbCodeChange(Sender: TObject);
     procedure dgInfoTitleClick(Column: TColumnEh);
+    procedure KeyPress(Sender: TObject; var Key: Char);
+    procedure cbTypeClick(Sender: TObject);
+    procedure DatePickerKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -49,15 +56,13 @@ type
     procedure fnCommandClose;
     procedure fnCommandLang;
     procedure fnWmMsgRecv (var MSG : TMessage) ; message WM_USER ;
-
-    procedure SetComboBox;
   end;
-  procedure U520Create();
+  procedure U530Create();
 
 const
-  FormNo ='520';
+  FormNo ='530';
 var
-  frmU520: TfrmU520;
+  frmU530: TfrmU530;
   SrtFlag : integer = 0 ;
 
 implementation
@@ -67,25 +72,25 @@ uses Main ;
 {$R *.dfm}
 
 //==============================================================================
-// U520Create
+// U530Create
 //==============================================================================
-procedure U520Create();
+procedure U530Create();
 begin
-  if not Assigned( frmU520 ) then
+  if not Assigned( frmU530 ) then
   begin
-    frmU520 := TfrmU520.Create(Application);
-    with frmU520 do
+    frmU530 := TfrmU530.Create(Application);
+    with frmU530 do
     begin
       fnCommandStart;
     end;
   end;
-  frmU520.Show;
+  frmU530.Show;
 end;
 
 //==============================================================================
 // fnWmMsgRecv
 //==============================================================================
-procedure TfrmU520.fnWmMsgRecv(var MSG: TMessage);
+procedure TfrmU530.fnWmMsgRecv(var MSG: TMessage);
 begin
   case MSG.WParam of
     MSG_MDI_WIN_ORDER   : begin fnCommandOrder   ; end;           // MSG_MDI_WIN_ORDER   = 11 ; // 지시
@@ -103,11 +108,11 @@ end;
 //==============================================================================
 // FormActivate
 //==============================================================================
-procedure TfrmU520.FormActivate(Sender: TObject);
+procedure TfrmU530.FormActivate(Sender: TObject);
 begin
-  MainDm.M_Info.ActiveFormID := '520';
+  MainDm.M_Info.ActiveFormID := '530';
   frmMain.LblMenu000.Caption := MainDm.M_Info.ActiveFormID + '. ' + getLangMenuString(MainDm.M_Info.ActiveFormID, frmMain.LblMenu000.Caption, MainDm.M_Info.LANG_TYPE, 'N');
-  frmU520.Caption := MainDm.M_Info.ActiveFormName;
+  frmU530.Caption := MainDm.M_Info.ActiveFormName;
   fnWmMsgSend( 22221,11111 );
 
   dtDateFr.Date := StrToDate(FormatDateTime('YYYY-MM-DD',Now));
@@ -116,14 +121,13 @@ begin
   dtDateTo.Date := StrToDate(FormatDateTime('YYYY-MM-DD',Now));
   dtTimeTo.Time := StrToTime(FormatDateTime('HH:NN:SS',Now));
 
-  SetComboBox ;
   fnCommandQuery ;
 end;
 
 //==============================================================================
 // FormDeactivate
 //==============================================================================
-procedure TfrmU520.FormDeactivate(Sender: TObject);
+procedure TfrmU530.FormDeactivate(Sender: TObject);
 var
   i : integer ;
 begin
@@ -137,7 +141,7 @@ end;
 //==============================================================================
 // FormClose
 //==============================================================================
-procedure TfrmU520.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TfrmU530.FormClose(Sender: TObject; var Action: TCloseAction);
 var
   i : integer ;
 begin
@@ -154,14 +158,14 @@ begin
   end;
 
   Action := Cafree;
-  try frmU520 := Nil ;
+  try frmU530 := Nil ;
   except end;
 end;
 
 //==============================================================================
 // fnCommandStart
 //==============================================================================
-procedure TfrmU520.fnCommandStart;
+procedure TfrmU530.fnCommandStart;
 begin
 //
 end;
@@ -169,7 +173,7 @@ end;
 //==============================================================================
 // fnCommandOrder [지시]
 //==============================================================================
-procedure TfrmU520.fnCommandOrder  ;
+procedure TfrmU530.fnCommandOrder  ;
 begin
 //
 end;
@@ -177,7 +181,7 @@ end;
 //==============================================================================
 // fnCommandExcel [엑셀]
 //==============================================================================
-procedure TfrmU520.fnCommandExcel;
+procedure TfrmU530.fnCommandExcel;
 begin
   try
     if hlbEhgridListExcel(dgInfo, frmMain.LblMenu000.Caption + '_' + FormatDatetime('YYYYMMDD', Now)) then
@@ -199,7 +203,7 @@ end;
 //==============================================================================
 // fnCommandAdd [신규]                                                        //
 //==============================================================================
-procedure TfrmU520.fnCommandAdd  ;
+procedure TfrmU530.fnCommandAdd  ;
 begin
 //
 end;
@@ -207,7 +211,7 @@ end;
 //==============================================================================
 // fnCommandDelete [삭제]
 //==============================================================================
-procedure TfrmU520.fnCommandDelete;
+procedure TfrmU530.fnCommandDelete;
 begin
 //
 end;
@@ -215,7 +219,7 @@ end;
 //==============================================================================
 // fnCommandUpdate [수정]                                                     //
 //==============================================================================
-procedure TfrmU520.fnCommandUpdate;
+procedure TfrmU530.fnCommandUpdate;
 begin
 //
 end;
@@ -223,7 +227,7 @@ end;
 //==============================================================================
 // fnCommandPrint [인쇄]
 //==============================================================================
-procedure TfrmU520.fnCommandPrint;
+procedure TfrmU530.fnCommandPrint;
 begin
   try
     if not qryInfo.Active then Exit;
@@ -253,41 +257,55 @@ end;
 //==============================================================================
 // fnCommandQuery
 //==============================================================================
-procedure TfrmU520.fnCommandQuery;
+procedure TfrmU530.fnCommandQuery;
 var
-  StrSQL : String;
+  WhereStr, StrSQL : String;
   TmpDate1, TmpDate2, TmpTime1, TmpTime2 : String;
 begin
-  // 발생일시
+  WhereStr := '' ;
+
+  // 메뉴코드/명
+  if (Trim(edtMenu.Text) <> '') then
+    WhereStr := WhereStr + ' AND (UPPER(H.MENU_ID  ) LIKE ' + QuotedStr('%'+UpperCase(edtMenu.Text)+'%') + ' OR ' +
+                           '      UPPER(M.MENU_NAME) LIKE ' + QuotedStr('%'+UpperCase(edtMenu.Text)+'%') + ' ) ' ;
+
+  // 이벤트타입
+  if (cbType.ItemIndex > 0) then
+    WhereStr := WhereStr + ' AND H.HIST_TYPE = ' + QuotedStr(Copy(cbType.Text,1,1)) ;
+
+  // 이벤트명
+  if (Trim(edtName.Text) <> '') then
+    WhereStr := WhereStr + ' AND UPPER(H.EVENT_NAME) LIKE ' + QuotedStr('%'+UpperCase(edtName.Text)+'%');
+
+  // 이벤트정보
+  if (Trim(edtDesc.Text) <> '') then
+    WhereStr := WhereStr + ' AND UPPER(H.EVENT_DESC) LIKE ' + QuotedStr('%'+UpperCase(edtDesc.Text)+'%');
+
+  // 완료일시
   TmpDate1 := FormatDateTime('YYYY-MM-DD'   , dtDateFr.Date);
   TmpTime1 := FormatDateTime(' HH:NN:SS.ZZZ', dtTimeFr.Time);
 
   TmpDate2 := FormatDateTime('YYYY-MM-DD'   , dtDateTo.Date);
   TmpTime2 := FormatDateTime(' HH:NN:SS.ZZZ', dtTimeTo.Time);
 
+  WhereStr := WhereStr + ' AND H.CRT_DT BETWEEN ''' + TmpDate1 + TmpTime1 + ''' ' +
+                         '                  AND ''' + TmpDate2 + TmpTime2 + ''' ' ;
   try
     with qryInfo do
     begin
       Close;
       SQL.Clear;
-      StrSQL   := ' Select ERR_DEV, ERR_DEVNO, ERR_CODE,                   ' +  #13#10+
-                  '        ERR_NAME, ERR_DESC, ERR_START,                     ' +  #13#10+
-                  '       (Case ERR_DEV when ''SC'' then ''스태커크레인''  ' +  #13#10+
-                  '                     else ERR_DEV end) as ERR_DEV_DESC  ' +  #13#10+
-
-                  '   From TT_ERROR ' +  #13#10+
-                  '  Where 1=1 ';
-
-                  if (Trim(cbCode.Text)<>'') and (Trim(cbCode.Text)<>'전체') then
-                    StrSQL := StrSQL + ' And ERR_CODE= ' + QuotedStr(Trim(Copy(cbCode.Text,1,4))) ;
-
-
-                  if cbDateUse.Checked then
-                    StrSQL := StrSQL + ' AND ERR_START BETWEEN ''' + TmpDate1 + TmpTime1 + ''' ' +
-                                       '                   AND ''' + TmpDate2 + TmpTime2 + ''' ' ;
-
-                  StrSQL := StrSQL + '  Order By ERR_START ' ;
-      SQL.Text := StrSQL ;
+      StrSQL := ' SELECT H.SEQ, H.CRT_DT, H.MENU_ID, H.HIST_TYPE, H.PGM_FUNCTION, ' +
+                '        H.EVENT_NAME, H.EVENT_DESC, H.COMMAND_TYPE, ' +
+                '        H.COMMAND_TEXT, H.PARAM, H.ERROR_MSG, H.USER_ID, ' +
+                '        M.MENU_NAME, ' +
+                '        CONVERT(VARCHAR(19), H.CRT_DT, 20) AS CRT_DT_DESC ' +
+                '   FROM TT_SYSTEM_HIST H WITH (NOLOCK) ' +
+                '   LEFT JOIN TM_MENU M WITH (NOLOCK) ' +
+                '     ON REPLACE(REPLACE(H.MENU_ID,''['',''''),'']'','''') = M.MENU_ID ' +
+                '  WHERE 1 = 1 ' + WhereStr +
+                '  ORDER BY H.CRT_DT DESC ';
+      SQL.Text := StrSQL;
       Open;
     end;
   except
@@ -303,7 +321,7 @@ end;
 //==============================================================================
 // fnCommandClose
 //==============================================================================
-procedure TfrmU520.fnCommandClose;
+procedure TfrmU530.fnCommandClose;
 begin
   Close;
 end;
@@ -311,73 +329,15 @@ end;
 //==============================================================================
 // fnCommandLang [언어]                                                       //
 //==============================================================================
-procedure TfrmU520.fnCommandLang;
+procedure TfrmU530.fnCommandLang;
 begin
 //
 end;
 
 //==============================================================================
-// SetComboBox [콤보박스 데이터 추가]
-//==============================================================================
-procedure TfrmU520.SetComboBox;
-var
-  StrSQL : String;
-begin
-  try
-    cbCode.Clear ;
-    cbCode.Items.Add('전체');
-    cbCode.ItemIndex := 0;
-
-    StrSQL := ' Select ERR_CODE, ERR_NAME From TM_ERROR ' +
-              '  Order By ERR_CODE ' ;
-
-    with qryTemp do
-    begin
-      Close;
-      SQL.Clear;
-      SQL.Text := StrSQL ;
-      Open ;
-      First;
-
-      while not(Eof) do
-      begin
-        cbCode.Items.Add((FieldByName('ERR_CODE').AsString) +
-                         ' : ' +
-                         (FieldByName('ERR_NAME').AsString) );
-        Next ;
-      end;
-
-    end;
-  except
-    on E : Exception do
-    begin
-      qryTemp.Close;
-      InsertPGMHist('['+FormNo+']', 'E', 'SetComboBox', '', 'Exception Error', 'PGM', '', '', E.Message);
-      TraceLogWrite('['+FormNo+'] procedure SetComboBox Fail || ERR['+E.Message+']');
-    end;
-  end;
-end;
-
-//==============================================================================
-// dtDateTimeChange
-//==============================================================================
-procedure TfrmU520.dtDateTimeChange(Sender: TObject);
-begin
-  fnCommandQuery;
-end;
-
-//==============================================================================
-// cbCodeChange
-//==============================================================================
-procedure TfrmU520.cbCodeChange(Sender: TObject);
-begin
-  fnCommandQuery;
-end;
-
-//==============================================================================
 // dgInfoTitleClick
 //==============================================================================
-procedure TfrmU520.dgInfoTitleClick(Column: TColumnEh);
+procedure TfrmU530.dgInfoTitleClick(Column: TColumnEh);
 begin
   if Column.Field.DataSet is TADOQuery then
   begin
@@ -395,12 +355,46 @@ begin
   end;
 end;
 
+//==============================================================================
+// KeyPress
+//==============================================================================
+procedure TfrmU530.KeyPress(Sender: TObject; var Key: Char);
+begin
+  if key = #13 then
+  begin
+    fnCommandQuery;
+  end else
+  if (Key = #27) then
+  begin
+    (Sender as TEdit).Text := '';
+  end;
+end;
 
+//==============================================================================
+// cbTypeClick
+//==============================================================================
+procedure TfrmU530.cbTypeClick(Sender: TObject);
+begin
+  fnCommandQuery;
+end;
 
-
+//==============================================================================
+// DatePickerKeyPress
+//==============================================================================
+procedure TfrmU530.DatePickerKeyPress(Sender: TObject; var Key: Char);
+begin
+  if (key = #13) then
+  begin
+    fnCommandQuery;
+  end else
+  if (Key = #27) then
+  begin
+    Case (Sender as TDateTimePicker).Tag of
+      0 : (Sender as TDateTimePicker).Date := Now;
+      1 : (Sender as TDateTimePicker).Time := StrToTime('00:00:00.000');
+      2 : (Sender as TDateTimePicker).Time := StrToTime('23:59:59.999');
+    end;
+  end;
+end;
 
 end.
-
-
-
-

@@ -23,7 +23,8 @@ uses
   U420 in 'Form\U420.pas' {frmU420},
   U510 in 'Form\U510.pas' {frmU510},
   U520 in 'Form\U520.pas' {frmU520},
-  U240 in 'Form\U240.pas' {frmU240};
+  U240 in 'Form\U240.pas' {frmU240},
+  U530 in 'Form\U530.pas' {frmU530};
 
 {$R *.res}
 
@@ -32,5 +33,6 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TMainDm, MainDm);
   Application.CreateForm(TfrmMain, frmMain);
+  Application.CreateForm(TfrmU530, frmU530);
   Application.Run;
 end.

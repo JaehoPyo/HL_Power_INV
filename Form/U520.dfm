@@ -164,9 +164,6 @@ object frmU520: TfrmU520
     BevelInner = bvRaised
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitTop = 60
-    ExplicitWidth = 1008
-    ExplicitHeight = 552
     object dgInfo: TDBGridEh
       Left = 1
       Top = 1
@@ -229,8 +226,18 @@ object frmU520: TfrmU520
           DynProps = <>
           EditButtons = <>
           FieldName = 'ERR_DEV_DESC'
+          Font.Charset = GB2312_CHARSET
+          Font.Color = clWindowText
+          Font.Height = 20
+          Font.Name = #46027#50880
+          Font.Style = []
           Footers = <>
           Title.Caption = #49444#48708#47749
+          Title.Font.Charset = GB2312_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = 20
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
           Width = 345
         end
         item
@@ -239,8 +246,18 @@ object frmU520: TfrmU520
           DynProps = <>
           EditButtons = <>
           FieldName = 'ERR_CODE'
+          Font.Charset = GB2312_CHARSET
+          Font.Color = clWindowText
+          Font.Height = 20
+          Font.Name = #46027#50880
+          Font.Style = []
           Footers = <>
           Title.Caption = #50640#47084#53076#46300
+          Title.Font.Charset = GB2312_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -20
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
           Width = 345
         end
         item
@@ -249,8 +266,18 @@ object frmU520: TfrmU520
           DynProps = <>
           EditButtons = <>
           FieldName = 'ERR_DESC'
+          Font.Charset = GB2312_CHARSET
+          Font.Color = clWindowText
+          Font.Height = 20
+          Font.Name = #46027#50880
+          Font.Style = []
           Footers = <>
           Title.Caption = #50640#47084#45236#50857
+          Title.Font.Charset = GB2312_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -20
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
           Width = 700
         end
         item
@@ -258,9 +285,19 @@ object frmU520: TfrmU520
           AutoFitColWidth = False
           DynProps = <>
           EditButtons = <>
-          FieldName = 'CR_DATE'
+          FieldName = 'ERR_START'
+          Font.Charset = GB2312_CHARSET
+          Font.Color = clWindowText
+          Font.Height = 20
+          Font.Name = #46027#50880
+          Font.Style = []
           Footers = <>
           Title.Caption = #48156#49373#51068#51088
+          Title.Font.Charset = GB2312_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -20
+          Title.Font.Name = #46027#50880
+          Title.Font.Style = []
           Width = 450
         end>
       object RowDetailData: TRowDetailPanelControlEh
@@ -391,8 +428,6 @@ object frmU520: TfrmU520
       Font.Style = []
       ParentFont = False
       TabOrder = 1
-      ExplicitLeft = 494
-      ExplicitHeight = 58
       object cbCode: TComboBox
         Left = 10
         Top = 29
