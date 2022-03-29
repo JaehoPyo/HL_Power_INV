@@ -23,6 +23,7 @@ type
    REG_TIME,
    LUGG,
    JOBD,
+   LINE_NO,
    SRCSITE,
    SRCAISLE,
    SRCBAY,

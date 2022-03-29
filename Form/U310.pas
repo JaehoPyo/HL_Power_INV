@@ -70,6 +70,10 @@ type
     dgInfo: TDBGridEh;
     tmrQry: TTimer;
     qryCell: TADOQuery;
+    CellStatus8: TPanel;
+    Panel9: TPanel;
+    CellStatus9: TPanel;
+    Panel17: TPanel;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -459,7 +463,12 @@ function TfrmU310.fnCellCreate(Wdt,Hgt : Integer) : Boolean ;
               end;
             end else
             begin
-              if (Bank=1) and (i=1) and (j=1)  then
+              if ((Bank=1) and (i=1) and (j=1)) or
+                 ((Bank=1) and (i=2) and (j=1)) or
+                 ((Bank=1) and (i=4) and (j=1)) or
+                 ((Bank=1) and (i=5) and (j=1)) or
+                 ((Bank=1) and (i=7) and (j=1)) or
+                 ((Bank=1) and (i=8) and (j=1)) then
               begin
                 Color := clWhite;
                 Font.Size  := 14 ;
@@ -560,7 +569,9 @@ begin
     else if (ID_STATUS = '4')   then TmpCell.Color := CellStatus4.Color   // 입고예약
     else if (ID_STATUS = '5')   then TmpCell.Color := CellStatus5.Color   // 출고예약
     else if (ID_STATUS = '6')   then TmpCell.Color := CellStatus6.Color   // 이중입고
-    else if (ID_STATUS = '7')   then TmpCell.Color := CellStatus7.Color;  // 공출고
+    else if (ID_STATUS = '7')   then TmpCell.Color := CellStatus7.Color   // 공출고
+    else if (ID_STATUS = '8')   then TmpCell.Color := CellStatus8.Color   // 입출고대
+    else if (ID_STATUS = '9')   then TmpCell.Color := CellStatus9.Color;  // 비상렉
 
     TmpCell.Caption := ITM_CD ;
   end;

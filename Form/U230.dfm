@@ -165,7 +165,6 @@ object frmU230: TfrmU230
     BevelOuter = bvNone
     TabOrder = 0
     OnResize = Pnl_MainResize
-    ExplicitWidth = 1904
     object Pnl_Sub: TPanel
       Left = 1
       Top = 1
@@ -554,12 +553,12 @@ object frmU230: TfrmU230
           object rgEMG: TRadioGroup
             Left = 1281
             Top = 0
-            Width = 192
+            Width = 250
             Height = 100
             Align = alLeft
             Caption = '[ '#52636#44256#50976#54805' ]'
             Color = clBtnFace
-            Columns = 2
+            Columns = 3
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = 25
@@ -568,7 +567,8 @@ object frmU230: TfrmU230
             ItemIndex = 0
             Items.Strings = (
               #51068#48152
-              #44596#44553)
+              #44596#44553
+              #48708#49345)
             ParentColor = False
             ParentFont = False
             TabOrder = 3
@@ -615,9 +615,9 @@ object frmU230: TfrmU230
               OnKeyPress = ComboBoxKeyPress
               Items.Strings = (
                 #49440#53469
-                '1'
                 '2'
-                '3')
+                '4'
+                '6')
             end
           end
         end

@@ -74,6 +74,7 @@ type
     LblVersion: TLabel;
     M2400: TMenuItem;
     qryTemp: TADOQuery;
+    M5300: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -116,7 +117,7 @@ var
 
 implementation
 
-uses U110, U210, U220, U230, U240, U310, U320, U410, U420, U510, U520 ;
+uses U110, U210, U220, U230, U240, U310, U320, U410, U420, U510, U520, U530 ;
 
 {$R *.dfm}
 
@@ -402,6 +403,7 @@ begin
     // 모니터링------------------------------------------
     5100 : U510Create();           // 설비 모니터링
     5200 : U520Create();           // 설비 에러 이력 조회
+    5300 : U530Create();           // 프로그램 사용이력
 //    else exit;
   end;
 end;
@@ -652,6 +654,7 @@ begin
   try
     with qryTemp do
     begin
+{
       ExecNo := 0;
       Close;
       SQL.Clear;
@@ -664,7 +667,7 @@ begin
       begin
         InsertPGMHist('[000]', 'N', 'HistoryDelete', '', 'Automatically Delete Program History ['+IntToStr(ExecNo)+']', 'PGM', '', '', '');
       end;
-
+}
       ExecNo := 0;
       Close;
       SQL.Clear;

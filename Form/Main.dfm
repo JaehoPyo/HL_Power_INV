@@ -2364,6 +2364,11 @@ object frmMain: TfrmMain
         Hint = #44033' '#49444#48708#50640' '#45824#54620' '#50640#47084' '#51060#47141' '#51312#54924' '#54868#47732
         OnClick = execMenuClick
       end
+      object M5300: TMenuItem
+        Caption = #54532#47196#44536#47016' '#49324#50857#51060#47141
+        Hint = #54532#47196#44536#47016' '#49324#50857#51060#47141' '#51312#54924
+        OnClick = execMenuClick
+      end
     end
   end
   object tmrLogFileCheck: TTimer

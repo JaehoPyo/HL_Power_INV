@@ -472,6 +472,7 @@ begin
     OrderData.LUGG       := Format('%.4d', [GetJobNo]) ; // 작업번호
 
     OrderData.JOBD       := '2'; // 출고지시
+    OrderData.LINE_NO    := cbOut.Text; //LINE_NO
 
     OrderData.SRCSITE    := Format('%.4d', [StrToInt('1')]) ;                                      // 적재 호기
     OrderData.SRCAISLE   := Format('%.4d', [StrToInt(qryInfo.FieldByName('ID_BANK' ).AsString)]) ; // 적재 열
@@ -479,14 +480,18 @@ begin
     OrderData.SRCLEVEL   := Format('%.4d', [StrToInt(qryInfo.FieldByName('ID_LEVEL').AsString)]) ; // 적재 단
 
 
-    OrderData.DSTSITE    := '0100'; // 하역 위치
+    OrderData.DSTSITE    := '0001'; // 하역 위치
+{
     OrderData.DSTAISLE   := '0001'; // 하역 열
     case cbOut.ItemIndex of   // 하역 연
       1  : begin OrderData.DSTBAY     := '0001'; end;
       2  : begin OrderData.DSTBAY     := '0004'; end;
       3  : begin OrderData.DSTBAY     := '0007'; end;
     end;
-    OrderData.DSTLEVEL   := cbOut.ItemIndex.ToString; // 하역 단
+}
+    OrderData.DSTAISLE   := '0000';
+    OrderData.DSTBAY     := '0000';
+    OrderData.DSTLEVEL   := Format('%.4d', [StrToInt(cbOut.Text)]); // 하역 단
 
     OrderData.ID_CODE    := qryInfo.FieldByName('ID_CODE').AsString ;
 
@@ -499,9 +504,9 @@ begin
     OrderData.JOBERRORC  := '';
     OrderData.JOBERRORD  := '';
     OrderData.JOB_END    := '0';
-    OrderData.CVFR       := cbOut.ItemIndex.ToString;
-    OrderData.CVTO       := cbOut.ItemIndex.ToString;
-    OrderData.CVCURR     := cbOut.ItemIndex.ToString;
+    OrderData.CVFR       := cbOut.Text;
+    OrderData.CVTO       := cbOut.Text;
+    OrderData.CVCURR     := cbOut.Text;
     OrderData.ETC        := qryInfo.FieldByName('ID_MEMO').AsString ;
     OrderData.EMG        := IntToStr(rgEMG.ItemIndex);
     OrderData.ITM_CD     := qryInfo.FieldByName('ITM_CD').AsString ;
@@ -544,7 +549,7 @@ begin
       SQL.Clear;
       SQL.Text :=
       ' INSERT INTO TT_ORDER (                             ' + #13#10+
-      '    REG_TIME, LUGG, JOBD, LINE_NO                   ' + #13#10 +
+      '    REG_TIME, LUGG, JOBD, LINE_NO,                  ' + #13#10 +
       '    SRCSITE, SRCAISLE, SRCBAY, SRCLEVEL,            ' + #13#10 +
       '    DSTSITE, DSTAISLE, DSTBAY, DSTLEVEL,            ' + #13#10 +
       '    NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS,        ' + #13#10 +
@@ -552,7 +557,7 @@ begin
       '    JOB_END, CVFR, CVTO, CVCURR,                    ' + #13#10 +
       '    ETC, EMG, ITM_CD                                ' + #13#10 +
       '  ) VALUES (                                        ' + #13#10 +
-      '    :REG_TIME, :LUGG, :JOBD, :LINE_NO               ' + #13#10 +
+      '    :REG_TIME, :LUGG, :JOBD, :LINE_NO,              ' + #13#10 +
       '    :SRCSITE, :SRCAISLE, :SRCBAY, :SRCLEVEL,        ' + #13#10 +
       '    :DSTSITE, :DSTAISLE, :DSTBAY, :DSTLEVEL,        ' + #13#10 +
       '    :NOWMC, :JOBSTATUS, :NOWSTATUS, :BUFFSTATUS,    ' + #13#10 +
@@ -565,7 +570,7 @@ begin
       Parameters[i].Value := OrderData.REG_TIME;    Inc(i);
       Parameters[i].Value := OrderData.LUGG;        Inc(i);
       Parameters[i].Value := OrderData.JOBD;        Inc(i);
-      Parameters[i].Value := OrderData.DSTLEVEL;    Inc(i); //LINE_NO
+      Parameters[i].Value := OrderData.LINE_NO;     Inc(i); //LINE_NO
       Parameters[i].Value := OrderData.SRCSITE;     Inc(i);
       Parameters[i].Value := OrderData.SRCAISLE;    Inc(i);
       Parameters[i].Value := OrderData.SRCBAY;      Inc(i);

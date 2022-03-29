@@ -159,6 +159,10 @@
             <Form>frmU530</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Form\Popup_Item_Update.pas">
+            <Form>frmPopup_Item_Update</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <None Include="ModelSupport_DYMOS_AWS\default.txvpck"/>
         <None Include="ModelSupport_DYMOS_AWS\U130H\default.txvpck"/>
         <None Include="ModelSupport_DYMOS_AWS\h_ReferLib\default.txvpck"/>

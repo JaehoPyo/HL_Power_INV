@@ -30,7 +30,6 @@ object frmU240: TfrmU240
     BevelOuter = bvNone
     TabOrder = 0
     OnResize = Pnl_MainResize
-    ExplicitWidth = 1904
     object Pnl_Sub: TPanel
       Left = 1
       Top = 1
@@ -438,7 +437,6 @@ object frmU240: TfrmU240
             ParentFont = False
             TabOrder = 3
             Visible = False
-            ExplicitLeft = 1281
           end
         end
       end
@@ -575,7 +573,6 @@ object frmU240: TfrmU240
           Font.Style = []
           ParentFont = False
           TabOrder = 0
-          ExplicitWidth = 407
           object Label4: TLabel
             Left = 100
             Top = 63
