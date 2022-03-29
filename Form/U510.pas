@@ -105,10 +105,10 @@ type
     Panel45: TPanel;
     edt_Complete: TEdit;
     Panel46: TPanel;
-    edt_InReady: TEdit;
+    edt_InReady1: TEdit;
     edt_Double: TEdit;
     Panel47: TPanel;
-    edt_OutReady: TEdit;
+    edt_OutReady1: TEdit;
     Panel48: TPanel;
     edt_StandBy: TEdit;
     Panel49: TPanel;
@@ -138,10 +138,10 @@ type
     Panel161: TPanel;
     Panel162: TPanel;
     Panel65: TPanel;
-    PnlOtRdy: TPanel;
-    PnlInRdy: TPanel;
-    shpInRdy: TShape;
-    shpOtRdy: TShape;
+    PnlOtRdy2: TPanel;
+    PnlInRdy2: TPanel;
+    shpInRdy2: TShape;
+    shpOtRdy2: TShape;
     SC: TPanel;
     SCStatus: TPanel;
     SCRFork: TPanel;
@@ -184,8 +184,6 @@ type
     Label5: TLabel;
     Panel82: TPanel;
     Panel83: TPanel;
-    Panel84: TPanel;
-    lbl_JobType: TLabel;
     btnReset: TButton;
     btnRetry: TButton;
     Panel18: TPanel;
@@ -196,6 +194,34 @@ type
     Image6: TImage;
     Image7: TImage;
     Image8: TImage;
+    Panel20: TPanel;
+    edt_InReady2: TEdit;
+    Panel21: TPanel;
+    edt_OutReady2: TEdit;
+    Panel22: TPanel;
+    edt_InReady3: TEdit;
+    Panel23: TPanel;
+    edt_OutReady3: TEdit;
+    Panel61: TPanel;
+    PnlOtRdy1: TPanel;
+    shpOtRdy1: TShape;
+    Panel86: TPanel;
+    PnlInRdy1: TPanel;
+    shpInRdy1: TShape;
+    Panel88: TPanel;
+    Panel89: TPanel;
+    PnlOtRdy3: TPanel;
+    shpOtRdy3: TShape;
+    Panel91: TPanel;
+    PnlInRdy3: TPanel;
+    shpInRdy3: TShape;
+    Panel93: TPanel;
+    Panel84: TPanel;
+    lbl_JobType: TLabel;
+    Panel94: TPanel;
+    Panel95: TPanel;
+    Panel96: TPanel;
+    Panel97: TPanel;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -563,8 +589,12 @@ begin
   TEdit(Self.FindComponent('edt_Double'       )).Text := fnSignalMsg(SC_STATUS[SC_NO].D211[03]); // 이중입고
   TEdit(Self.FindComponent('edt_Empty'        )).Text := fnSignalMsg(SC_STATUS[SC_NO].D211[04]); // 공출고
   TEdit(Self.FindComponent('edt_ForceComplete')).Text := fnSignalMsg(SC_STATUS[SC_NO].D211[07]); // 강제완료
-  TEdit(Self.FindComponent('edt_InReady'      )).Text := fnSignalMsg(SC_STATUS[SC_NO].D211[08]); // 입고레디
-  TEdit(Self.FindComponent('edt_OutReady'     )).Text := fnSignalMsg(SC_STATUS[SC_NO].D211[09]); // 출고레디
+  TEdit(Self.FindComponent('edt_InReady1'     )).Text := fnSignalMsg(SC_STATUS[SC_NO].D211[08]); // 입고레디1
+  TEdit(Self.FindComponent('edt_OutReady1'    )).Text := fnSignalMsg(SC_STATUS[SC_NO].D211[09]); // 출고레디1
+  TEdit(Self.FindComponent('edt_InReady2'     )).Text := fnSignalMsg(SC_STATUS[SC_NO].D211[10]); // 입고레디2
+  TEdit(Self.FindComponent('edt_OutReady2'    )).Text := fnSignalMsg(SC_STATUS[SC_NO].D211[11]); // 출고레디2
+  TEdit(Self.FindComponent('edt_InReady3'     )).Text := fnSignalMsg(SC_STATUS[SC_NO].D211[12]); // 입고레디3
+  TEdit(Self.FindComponent('edt_OutReady3'    )).Text := fnSignalMsg(SC_STATUS[SC_NO].D211[13]); // 출고레디3
 
   //++++++++++++++++++++++++++++++++++++++++++++
   // 에디트 색상 변경 (D210.00 ~ D210.15)
@@ -588,8 +618,12 @@ begin
   TEdit(Self.FindComponent('edt_Double'       )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D211[03],'1'); // 이중입고
   TEdit(Self.FindComponent('edt_Empty'        )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D211[04],'1'); // 공출고
   TEdit(Self.FindComponent('edt_ForceComplete')).Color := fnSignalEditColor(SC_STATUS[SC_NO].D211[07],'3'); // 강제완료
-  TEdit(Self.FindComponent('edt_InReady'      )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D211[08],'2'); // 입고레디
-  TEdit(Self.FindComponent('edt_OutReady'     )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D211[09],'2'); // 출고레디
+  TEdit(Self.FindComponent('edt_InReady1'     )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D211[08],'2'); // 입고레디1
+  TEdit(Self.FindComponent('edt_OutReady1'    )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D211[09],'2'); // 출고레디1
+  TEdit(Self.FindComponent('edt_InReady2'     )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D211[10],'2'); // 입고레디2
+  TEdit(Self.FindComponent('edt_OutReady2'    )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D211[11],'2'); // 출고레디2
+  TEdit(Self.FindComponent('edt_InReady3'     )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D211[12],'2'); // 입고레디3
+  TEdit(Self.FindComponent('edt_OutReady3'    )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D211[13],'2'); // 출고레디3
 
   //++++++++++++++++++++++++++++++++++++++++++++
   // 에디트 폰트 색상 변경 (D210.00 ~ D210.15)
@@ -613,31 +647,74 @@ begin
   TEdit(Self.FindComponent('edt_Double'       )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D211[03],'1'); // 이중입고
   TEdit(Self.FindComponent('edt_Empty'        )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D211[04],'1'); // 공출고
   TEdit(Self.FindComponent('edt_ForceComplete')).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D211[07],'3'); // 강제완료
-  TEdit(Self.FindComponent('edt_InReady'      )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D211[08],'2'); // 입고레디
-  TEdit(Self.FindComponent('edt_OutReady'     )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D211[09],'2'); // 출고레디
-
+  TEdit(Self.FindComponent('edt_InReady1'     )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D211[08],'2'); // 입고레디1
+  TEdit(Self.FindComponent('edt_OutReady1'    )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D211[09],'2'); // 출고레디1
+  TEdit(Self.FindComponent('edt_InReady2'     )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D211[10],'2'); // 입고레디2
+  TEdit(Self.FindComponent('edt_OutReady2'    )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D211[11],'2'); // 출고레디2
+  TEdit(Self.FindComponent('edt_InReady3'     )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D211[12],'2'); // 입고레디3
+  TEdit(Self.FindComponent('edt_OutReady3'    )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D211[13],'2'); // 출고레디3
 
   //++++++++++++++++++++++++++++++++++++++++++++
   // 입&출고 레디
   //++++++++++++++++++++++++++++++++++++++++++++
   if SC_STATUS[SC_NO].D211[08]='1' then
   begin
-    shpInRdy.Brush.Color := clLime;
-    PnlInRdy.Caption := '   입고가능';
+    shpInRdy1.Brush.Color := clLime;
+    PnlInRdy1.Caption := '   입고가능';
   end else
   begin
-    shpInRdy.Brush.Color := clYellow;
-    PnlInRdy.Caption := '    입고 불가능';
+    shpInRdy1.Brush.Color := clYellow;
+    PnlInRdy1.Caption := '    입고 불가능';
   end;
 
   if SC_STATUS[SC_NO].D211[09]='1' then
   begin
-    shpOtRdy.Brush.Color := clLime;
-    PnlOtRdy.Caption := '   출고가능';
+    shpOtRdy1.Brush.Color := clLime;
+    PnlOtRdy1.Caption := '   출고가능';
   end else
   begin
-    shpOtRdy.Brush.Color := clYellow;
-    PnlOtRdy.Caption := '    출고 불가능';
+    shpOtRdy1.Brush.Color := clYellow;
+    PnlOtRdy1.Caption := '    출고 불가능';
+  end;
+
+    if SC_STATUS[SC_NO].D211[10]='1' then
+  begin
+    shpInRdy2.Brush.Color := clLime;
+    PnlInRdy2.Caption := '   입고가능';
+  end else
+  begin
+    shpInRdy2.Brush.Color := clYellow;
+    PnlInRdy2.Caption := '    입고 불가능';
+  end;
+
+  if SC_STATUS[SC_NO].D211[11]='1' then
+  begin
+    shpOtRdy2.Brush.Color := clLime;
+    PnlOtRdy2.Caption := '   출고가능';
+  end else
+  begin
+    shpOtRdy2.Brush.Color := clYellow;
+    PnlOtRdy2.Caption := '    출고 불가능';
+  end;
+
+    if SC_STATUS[SC_NO].D211[12]='1' then
+  begin
+    shpInRdy3.Brush.Color := clLime;
+    PnlInRdy3.Caption := '   입고가능';
+  end else
+  begin
+    shpInRdy3.Brush.Color := clYellow;
+    PnlInRdy3.Caption := '    입고 불가능';
+  end;
+
+  if SC_STATUS[SC_NO].D211[13]='1' then
+  begin
+    shpOtRdy3.Brush.Color := clLime;
+    PnlOtRdy3.Caption := '   출고가능';
+  end else
+  begin
+    shpOtRdy3.Brush.Color := clYellow;
+    PnlOtRdy3.Caption := '    출고 불가능';
   end;
 
 
@@ -988,8 +1065,8 @@ begin
               '      , TT_ORDER ORD  ' +
               '  WHERE SCIO.ID_NO = ''' + IntToStr(SC_NO) + ''' ' +
               '    AND LTRIM(SCIO.ID_INDEX) = LTRIM(ORD.LUGG)' +
-              '    AND LTRIM(SCIO.ID_DATE)  = SUBSTR(LTRIM(ORD.REG_TIME),1,8)  ' +
-              '    AND LTRIM(SCIO.ID_TIME)  = SUBSTR(LTRIM(ORD.REG_TIME),9,6)  ' ;
+              '    AND LTRIM(SCIO.ID_DATE)  = SUBSTRING(LTRIM(ORD.REG_TIME),1,8)  ' +
+              '    AND LTRIM(SCIO.ID_TIME)  = SUBSTRING(LTRIM(ORD.REG_TIME),9,6)  ' ;
 
     with qryTemp do
     begin

@@ -164,8 +164,6 @@ object frmU310: TfrmU310
     BevelInner = bvRaised
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 1904
-    ExplicitHeight = 901
     object CanvasPanel1: TPanel
       Left = 1
       Top = 1
@@ -193,8 +191,6 @@ object frmU310: TfrmU310
       ParentShowHint = False
       ShowHint = False
       TabOrder = 0
-      ExplicitWidth = 1552
-      ExplicitHeight = 899
     end
     object Pnl_Info: TPanel
       Left = 1537
@@ -206,13 +202,11 @@ object frmU310: TfrmU310
       BevelOuter = bvNone
       ParentBackground = False
       TabOrder = 1
-      ExplicitLeft = 1553
-      ExplicitHeight = 899
       object Panel274: TPanel
         Left = 1
         Top = 1
         Width = 348
-        Height = 208
+        Height = 248
         Align = alTop
         BevelInner = bvRaised
         BevelOuter = bvLowered
@@ -241,12 +235,13 @@ object frmU310: TfrmU310
           Left = 2
           Top = 32
           Width = 344
-          Height = 174
+          Height = 214
           Align = alClient
           BevelInner = bvLowered
           BevelOuter = bvNone
           ParentBackground = False
           TabOrder = 1
+          ExplicitHeight = 177
           object CellStatus0: TPanel
             Left = 10
             Top = 10
@@ -567,19 +562,100 @@ object frmU310: TfrmU310
             ParentFont = False
             TabOrder = 15
           end
+          object CellStatus8: TPanel
+            Left = 10
+            Top = 170
+            Width = 60
+            Height = 35
+            ParentCustomHint = False
+            BevelOuter = bvNone
+            BiDiMode = bdLeftToRight
+            Color = clSilver
+            Ctl3D = True
+            DoubleBuffered = False
+            Font.Charset = GB2312_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentBiDiMode = False
+            ParentBackground = False
+            ParentCtl3D = False
+            ParentDoubleBuffered = False
+            ParentFont = False
+            ParentShowHint = False
+            ShowHint = False
+            TabOrder = 16
+          end
+          object Panel9: TPanel
+            Left = 75
+            Top = 177
+            Width = 100
+            Height = 20
+            BevelOuter = bvNone
+            Caption = #51077#52636#44256#45824
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -21
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 17
+          end
+          object CellStatus9: TPanel
+            Left = 175
+            Top = 170
+            Width = 60
+            Height = 35
+            ParentCustomHint = False
+            BevelOuter = bvNone
+            BiDiMode = bdLeftToRight
+            Color = clSkyBlue
+            Ctl3D = True
+            DoubleBuffered = False
+            Font.Charset = GB2312_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentBiDiMode = False
+            ParentBackground = False
+            ParentCtl3D = False
+            ParentDoubleBuffered = False
+            ParentFont = False
+            ParentShowHint = False
+            ShowHint = False
+            TabOrder = 18
+          end
+          object Panel17: TPanel
+            Left = 240
+            Top = 177
+            Width = 100
+            Height = 20
+            BevelOuter = bvNone
+            Caption = #48708#49345#47113
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -21
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 19
+          end
         end
       end
       object Panel14: TPanel
         Left = 1
-        Top = 209
+        Top = 249
         Width = 348
-        Height = 557
+        Height = 517
         Align = alClient
         BevelInner = bvRaised
         BevelOuter = bvLowered
         ParentBackground = False
         TabOrder = 1
-        ExplicitHeight = 689
+        ExplicitTop = 209
+        ExplicitHeight = 557
         object Panel15: TPanel
           Left = 2
           Top = 2
@@ -603,13 +679,13 @@ object frmU310: TfrmU310
           Left = 2
           Top = 32
           Width = 344
-          Height = 523
+          Height = 483
           Align = alClient
           BevelInner = bvLowered
           BevelOuter = bvNone
           ParentBackground = False
           TabOrder = 1
-          ExplicitHeight = 655
+          ExplicitHeight = 523
           object Panel19: TPanel
             Left = 10
             Top = 10
@@ -1066,8 +1142,6 @@ object frmU310: TfrmU310
     BevelInner = bvRaised
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitTop = 901
-    ExplicitWidth = 1904
     object dgInfo: TDBGridEh
       Left = 1
       Top = 1

@@ -164,18 +164,14 @@ object frmU210: TfrmU210
     BevelOuter = bvNone
     TabOrder = 0
     OnResize = Pnl_MainResize
-    ExplicitWidth = 1904
-    ExplicitHeight = 1001
     object Pnl_Ot: TPanel
       Left = 0
       Top = 300
       Width = 1888
-      Height = 569
-      Align = alClient
+      Height = 300
+      Align = alTop
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitWidth = 1904
-      ExplicitHeight = 701
       object PnlTitle_Ot: TPanel
         Left = 0
         Top = 0
@@ -185,7 +181,6 @@ object frmU210: TfrmU210
         BevelInner = bvRaised
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 1904
         object Panel4: TPanel
           Left = 57
           Top = 1
@@ -289,16 +284,6 @@ object frmU210: TfrmU210
             end
           end
         end
-        object Panel10: TPanel
-          Left = 1689
-          Top = 1
-          Width = 198
-          Height = 78
-          Align = alRight
-          BevelOuter = bvNone
-          TabOrder = 1
-          ExplicitLeft = 1705
-        end
         object chkGridOut: TCheckBox
           Left = 370
           Top = 32
@@ -316,7 +301,7 @@ object frmU210: TfrmU210
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 2
+          TabOrder = 1
           OnClick = chkGridOutClick
         end
         object Panel3: TPanel
@@ -326,14 +311,155 @@ object frmU210: TfrmU210
           Height = 78
           Align = alLeft
           BevelOuter = bvNone
+          TabOrder = 2
+        end
+        object PnlSelInfo2: TPanel
+          Left = 1360
+          Top = 1
+          Width = 527
+          Height = 78
+          Hint = #51089#50629' '#49688#46041#52376#47532' '#54056#45328
+          Align = alRight
+          BevelOuter = bvNone
+          ParentBackground = False
+          ParentShowHint = False
+          ShowHint = True
           TabOrder = 3
+          Visible = False
+          object Panel12: TPanel
+            Left = 281
+            Top = 2
+            Width = 240
+            Height = 71
+            Alignment = taLeftJustify
+            BevelOuter = bvNone
+            Color = 15132364
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -15
+            Font.Name = #46027#50880
+            Font.Style = []
+            ParentBackground = False
+            ParentFont = False
+            TabOrder = 0
+            object Panel14: TPanel
+              Left = 0
+              Top = 0
+              Width = 120
+              Height = 71
+              Align = alLeft
+              BevelOuter = bvNone
+              Color = 15132364
+              ParentBackground = False
+              TabOrder = 0
+              object sbtCancel2: TSpeedButton
+                Tag = 3
+                Left = 0
+                Top = 0
+                Width = 120
+                Height = 71
+                Cursor = crHandPoint
+                Hint = #54644#45817' '#51089#50629#51012' '#52712#49548' '#54633#45768#45796'.'
+                Align = alClient
+                Caption = #51089#50629#52712#49548
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -27
+                Font.Name = #46027#50880
+                Font.Style = [fsBold]
+                ParentFont = False
+                ParentShowHint = False
+                ShowHint = True
+                OnClick = sbtClick
+              end
+            end
+            object Panel17: TPanel
+              Left = 120
+              Top = 0
+              Width = 120
+              Height = 71
+              Align = alLeft
+              BevelOuter = bvNone
+              Color = 15132364
+              ParentBackground = False
+              TabOrder = 1
+              object sbtComplete2: TSpeedButton
+                Tag = 4
+                Left = 0
+                Top = 0
+                Width = 120
+                Height = 71
+                Cursor = crHandPoint
+                Hint = #54644#45817' '#51089#50629#51012' '#50756#47308' '#54633#45768#45796'.'
+                Align = alClient
+                Caption = #44053#51228#50756#47308
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -27
+                Font.Name = #46027#50880
+                Font.Style = [fsBold]
+                ParentFont = False
+                ParentShowHint = False
+                ShowHint = True
+                OnClick = sbtClick
+                ExplicitWidth = 100
+                ExplicitHeight = 52
+              end
+            end
+          end
+          object Panel19: TPanel
+            Left = 5
+            Top = 3
+            Width = 120
+            Height = 71
+            BevelOuter = bvNone
+            Caption = #51089#50629#48264#54840
+            Color = 14540253
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -27
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentBackground = False
+            ParentFont = False
+            TabOrder = 1
+          end
+          object edtJOB_NO_SEL2: TEdit
+            Tag = 1
+            Left = 128
+            Top = 3
+            Width = 150
+            Height = 71
+            Hint = #49688#46041#52376#47532' '#51089#50629#48264#54840
+            Alignment = taCenter
+            CharCase = ecUpperCase
+            Color = 14935011
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -60
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 2
+          end
+          object Panel23: TPanel
+            Left = 0
+            Top = 0
+            Width = 2
+            Height = 78
+            Align = alLeft
+            Color = clBlack
+            ParentBackground = False
+            TabOrder = 3
+          end
         end
       end
       object dgInfo_Ot: TDBGridEh
         Left = 0
         Top = 80
         Width = 1888
-        Height = 489
+        Height = 220
         Align = alClient
         ColumnDefValues.Layout = tlCenter
         ColumnDefValues.Title.Alignment = taCenter
@@ -382,6 +508,7 @@ object frmU210: TfrmU210
         TitleParams.ParentFont = False
         TitleParams.RowHeight = 30
         TitleParams.VertLineColor = 5592405
+        OnCellClick = dgInfoCellClick_Ot
         OnDrawColumnCell = dgInfoDrawColumnCell
         OnTitleClick = dgInfoTitleClick
         Columns = <
@@ -489,7 +616,6 @@ object frmU210: TfrmU210
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitWidth = 1904
       object PnlTitle_In: TPanel
         Left = 0
         Top = 0
@@ -499,8 +625,6 @@ object frmU210: TfrmU210
         BevelInner = bvRaised
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitLeft = 1
-        ExplicitWidth = 1904
         object imgNo: TImage
           Left = 972
           Top = 5
@@ -753,6 +877,164 @@ object frmU210: TfrmU210
           BevelOuter = bvNone
           TabOrder = 2
         end
+        object PnlSelInfo1: TPanel
+          Left = 1360
+          Top = 1
+          Width = 527
+          Height = 78
+          Hint = #51089#50629' '#49688#46041#52376#47532' '#54056#45328
+          Align = alRight
+          BevelOuter = bvNone
+          ParentBackground = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 3
+          Visible = False
+          object PnlManual: TPanel
+            Left = 281
+            Top = 2
+            Width = 240
+            Height = 71
+            Alignment = taLeftJustify
+            BevelOuter = bvNone
+            Color = 15132364
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -15
+            Font.Name = #46027#50880
+            Font.Style = []
+            ParentBackground = False
+            ParentFont = False
+            TabOrder = 0
+            object Panel57: TPanel
+              Left = 0
+              Top = 0
+              Width = 120
+              Height = 71
+              Align = alLeft
+              BevelOuter = bvNone
+              Color = 15132364
+              ParentBackground = False
+              TabOrder = 0
+              object sbtCancel1: TSpeedButton
+                Tag = 1
+                Left = 0
+                Top = 0
+                Width = 120
+                Height = 71
+                Cursor = crHandPoint
+                Hint = #54644#45817' '#51089#50629#51012' '#52712#49548' '#54633#45768#45796'.'
+                Align = alClient
+                Caption = #51089#50629#52712#49548
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -27
+                Font.Name = #46027#50880
+                Font.Style = [fsBold]
+                ParentFont = False
+                ParentShowHint = False
+                ShowHint = True
+                OnClick = sbtClick
+                ExplicitLeft = 2
+                ExplicitTop = -1
+                ExplicitWidth = 100
+                ExplicitHeight = 52
+              end
+            end
+            object Panel38: TPanel
+              Left = 120
+              Top = 0
+              Width = 120
+              Height = 71
+              Align = alLeft
+              BevelOuter = bvNone
+              Color = 15132364
+              ParentBackground = False
+              TabOrder = 1
+              object sbtComplete1: TSpeedButton
+                Tag = 2
+                Left = 0
+                Top = 0
+                Width = 120
+                Height = 71
+                Cursor = crHandPoint
+                Hint = #54644#45817' '#51089#50629#51012' '#50756#47308' '#54633#45768#45796'.'
+                Align = alClient
+                Caption = #44053#51228#50756#47308
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -27
+                Font.Name = #46027#50880
+                Font.Style = [fsBold]
+                ParentFont = False
+                ParentShowHint = False
+                ShowHint = True
+                OnClick = sbtClick
+                ExplicitWidth = 130
+              end
+            end
+            object Panel16: TPanel
+              Left = 240
+              Top = 0
+              Width = 0
+              Height = 71
+              Align = alClient
+              BevelOuter = bvNone
+              Color = 15132364
+              ParentBackground = False
+              TabOrder = 2
+              ExplicitLeft = 200
+              ExplicitWidth = 100
+              ExplicitHeight = 52
+            end
+          end
+          object Panel7: TPanel
+            Left = 5
+            Top = 3
+            Width = 120
+            Height = 71
+            BevelOuter = bvNone
+            Caption = #51089#50629#48264#54840
+            Color = 14540253
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -27
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentBackground = False
+            ParentFont = False
+            TabOrder = 1
+          end
+          object edtJOB_NO_SEL1: TEdit
+            Tag = 1
+            Left = 128
+            Top = 3
+            Width = 150
+            Height = 71
+            Hint = #49688#46041#52376#47532' '#51089#50629#48264#54840
+            Alignment = taCenter
+            CharCase = ecUpperCase
+            Color = 14935011
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -60
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 2
+          end
+          object Panel13: TPanel
+            Left = 0
+            Top = 0
+            Width = 2
+            Height = 78
+            Align = alLeft
+            Color = clBlack
+            ParentBackground = False
+            TabOrder = 3
+          end
+        end
       end
       object dgInfo_In: TDBGridEh
         Left = 0
@@ -807,6 +1089,7 @@ object frmU210: TfrmU210
         TitleParams.ParentFont = False
         TitleParams.RowHeight = 30
         TitleParams.VertLineColor = 5592405
+        OnCellClick = dgInfoCellClick_In
         OnDrawColumnCell = dgInfoDrawColumnCell
         OnTitleClick = dgInfoTitleClick
         Columns = <
@@ -849,6 +1132,452 @@ object frmU210: TfrmU210
             FieldName = 'ID_CODE'
             Footers = <>
             Title.Caption = #51201#51116#50948#52824
+            Width = 210
+          end
+          item
+            Alignment = taCenter
+            AutoFitColWidth = False
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'NOWMC_DESC'
+            Footers = <>
+            Title.Caption = #51652#54665#49345#53468
+            Width = 210
+          end
+          item
+            Alignment = taCenter
+            AutoFitColWidth = False
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'BUFFSTATUS_DESC'
+            Footers = <>
+            Title.Caption = #48260#54140#49345#53468
+            Visible = False
+            Width = 210
+          end
+          item
+            Alignment = taCenter
+            AutoFitColWidth = False
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'JOBERRORC_DESC'
+            Footers = <>
+            Title.Caption = #50640#47084#49345#53468
+            Width = 210
+          end
+          item
+            Alignment = taCenter
+            AutoFitColWidth = False
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'JOBERRORD_DESC'
+            Footers = <>
+            Title.Caption = #50640#47084#53076#46300
+            Width = 210
+          end
+          item
+            Alignment = taCenter
+            AutoFitColWidth = False
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'REG_TIME_DESC'
+            Footers = <>
+            Title.Caption = #46321#47197#51068#51088
+            Width = 370
+          end>
+        object RowDetailData: TRowDetailPanelControlEh
+        end
+      end
+    end
+    object Pnl_Rack: TPanel
+      Left = 0
+      Top = 600
+      Width = 1888
+      Height = 269
+      Align = alClient
+      BevelOuter = bvNone
+      TabOrder = 2
+      ExplicitTop = 300
+      ExplicitHeight = 300
+      object Panel9: TPanel
+        Left = 0
+        Top = 0
+        Width = 1888
+        Height = 80
+        Align = alTop
+        BevelInner = bvRaised
+        BevelOuter = bvNone
+        TabOrder = 0
+        object Panel10: TPanel
+          Left = 57
+          Top = 1
+          Width = 315
+          Height = 78
+          Align = alLeft
+          BevelOuter = bvNone
+          TabOrder = 0
+          object Panel11: TPanel
+            Left = 12
+            Top = 2
+            Width = 295
+            Height = 72
+            BevelInner = bvRaised
+            BevelOuter = bvLowered
+            Color = clBlue
+            ParentBackground = False
+            TabOrder = 0
+            object Pnl_AutoQry_Rack: TPanel
+              Tag = 1
+              Left = 2
+              Top = 2
+              Width = 291
+              Height = 68
+              Hint = 'RACK'
+              Align = alClient
+              BevelInner = bvRaised
+              BevelOuter = bvNone
+              BevelWidth = 2
+              Caption = #47001#51060#46041#54788#54889
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clGreen
+              Font.Height = -35
+              Font.Name = #46027#50880
+              Font.Style = [fsBold]
+              ParentBackground = False
+              ParentFont = False
+              TabOrder = 0
+              OnClick = PnlAutoQryClick
+              object ImgRack: TImage
+                Tag = 1
+                Left = 240
+                Top = 22
+                Width = 22
+                Height = 22
+                Hint = 'RACK'
+                AutoSize = True
+                Picture.Data = {
+                  07544269746D61700E060000424D0E0600000000000036000000280000001600
+                  0000160000000100180000000000D80500001217000012170000000000000000
+                  0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFEDDEEE881BFA632976F
+                  14885A14885A31976E7DBDA4DBEDE6FEFEFEFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFF0003FFFFFFFBFDFCFEFEFEFFFFFFFFFFFFFDFEFE90C7B1208B633196
+                  7837A58937AB9036AE9134AA8C2E9D7B1E8D648EC6AFFCFEFDFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFF0003D6EAE249A4847CBCA3ECF5F2B5DACB40A4812EA58332
+                  B49532BA9933BD9C33BE9E33BF9E32BD9C31BA9931B6972DA68441A482B4D9CB
+                  FFFFFFFFFFFFFFFFFFFFFFFF0003B7DACC329E7D309E7D55A88834A17E32B697
+                  31B99932C3A138CFAB3DDAB741E1BE40E0BD3DDAB737CDAB32C19F31B99832B4
+                  9535A17EB4D9CAFFFFFFFFFFFFFFFFFF0003B7DACC31A07F36AB8E2FA88630B5
+                  9531BB9A35C6A537C9A544BD996DC1A584C4AC81C4AB6BC1A442BC9937CAA634
+                  C7A530BB9931B5953EA787B3D9CAFFFFFFFFFFFF0003B8DBCD31A58335AE9132
+                  B39431B89834C09F36C29E54AB8AE4F1ECFFFFFFFFFFFFFFFFFFFFFFFFE3F1EB
+                  53AB8936C7A232C5A330BA9932B695329E77FBFDFDFFFFFF0003B8DBCD31A785
+                  34B19332B59530B89830BB9935A27BCEE6DDFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFE5F2ED62B99B34C5A132C5A333C19F34B79598CAB6FEFEFE0003BADB
+                  CE32AA8733B49531B79730BB992FBD9A2CB5905EAE8FE9F4F0FFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFDDEEE746BD9A41E0BD43E0BE42DCBB65BD9FECF5F2
+                  0003BADCCE37B6923ECBAC3ECFAF3DD2B13CD4B23BD5B237C6A063B89AFCFDFD
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7FAF9BEDED196C9B492C7B294C8B4D7EA
+                  E2FFFFFF0003D7EAE349A27F289168289168289168289168289168399A7498CA
+                  B7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFF0003FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFF0003FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF9ACBB83D9C762C936A2C93
+                  6A2C936A2C936A31956DB1D7C8FFFFFF0003FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4F9F73FAE8A3AD3AF30
+                  C7A32DC29E2DC29E2DC29E31C6A37ABCA3FCFEFD0003F5FAF88FCBB634B08B2E
+                  AB8535AD897AC3ABEDF5F2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBEDED2
+                  50B79738CDA92FC6A22DC29E2DC29E32C6A37EBCA3FFFFFF0003FCFEFD7DBEA4
+                  38CEAB2EC4A02DC29E31B28DA9D5C4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFD1E7DE43A98731C3A02DC29E2DC29E32C6A37FBDA5FFFFFF0003FFFF
+                  FFD4E9E141BA9734CCA92DC29E2EC09C3DAE8BADD5C5F7FBF9FFFFFFFFFFFFFF
+                  FFFFFFFFFFF6FAF9ABD4C43CAE8B2EC19D2DC39F2EC39F32C7A381BEA6FFFFFF
+                  0003FFFFFFFFFFFF87C7B13BC8A432CAA62DC29E2EC19D34AD8881BFA8E9F3F0
+                  FFFFFFFFFFFFE9F3EF81BFA834AD882DC19D2EC39F33CDA937D2AE37CEAA82BE
+                  A7FFFFFF0003FFFFFFFFFFFFEDF5F272C2A73CCBA733CDA92EC4A02DC29E30BB
+                  9634B08C43B29043B29034B08C30BB972DC29E2EC5A135CEAB42C6A358C0A041
+                  CEAB90C6B1FFFFFF0003FFFFFFFFFFFFFFFFFFEAF4F087C6B040CDAA39D5B232
+                  CAA62EC4A02DC29E2DC29E2DC29E2DC29E2FC4A032CAA73AD7B340C8A58EC8B3
+                  DFEEE863B194D1E7DFFFFFFF0003FFFFFFFFFFFFFFFFFFFFFFFFF3F9F7A6D4C3
+                  62C5A83FC9A63CD4B13AD6B338D4B138D4B13AD6B33DD3B03FC8A567C5A9AAD5
+                  C6F5F9F8FFFFFFFBFDFCFFFFFFFFFFFF0003FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFF9FCFBBCDCD067B19441A68242B18D42B08C41A5826FB599C3E0D4FB
+                  FDFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0003FFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFEF3F8F6E6F2EDE7F3EEF3F9F7FEFEFE
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0003}
+                Transparent = True
+                OnClick = ImgAutoQryClick
+              end
+            end
+          end
+        end
+        object chkGridRack: TCheckBox
+          Left = 370
+          Top = 32
+          Width = 20
+          Height = 20
+          Cursor = crHandPoint
+          Hint = 'Select Grid - Excel or Print'
+          Color = 15987699
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -24
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 1
+          OnClick = chkGridRackClick
+        end
+        object Panel18: TPanel
+          Left = 1
+          Top = 1
+          Width = 56
+          Height = 78
+          Align = alLeft
+          BevelOuter = bvNone
+          TabOrder = 2
+        end
+        object PnlSelInfo3: TPanel
+          Left = 1360
+          Top = 1
+          Width = 527
+          Height = 78
+          Hint = #51089#50629' '#49688#46041#52376#47532' '#54056#45328
+          Align = alRight
+          BevelOuter = bvNone
+          ParentBackground = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 3
+          Visible = False
+          object Panel21: TPanel
+            Left = 281
+            Top = 2
+            Width = 240
+            Height = 71
+            Alignment = taLeftJustify
+            BevelOuter = bvNone
+            Color = 15132364
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -15
+            Font.Name = #46027#50880
+            Font.Style = []
+            ParentBackground = False
+            ParentFont = False
+            TabOrder = 0
+            object Panel22: TPanel
+              Left = 0
+              Top = 0
+              Width = 120
+              Height = 71
+              Align = alLeft
+              BevelOuter = bvNone
+              Color = 15132364
+              ParentBackground = False
+              TabOrder = 0
+              object sbtCancel3: TSpeedButton
+                Tag = 5
+                Left = 0
+                Top = 0
+                Width = 120
+                Height = 71
+                Cursor = crHandPoint
+                Hint = #54644#45817' '#51089#50629#51012' '#52712#49548' '#54633#45768#45796'.'
+                Align = alClient
+                Caption = #51089#50629#52712#49548
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -27
+                Font.Name = #46027#50880
+                Font.Style = [fsBold]
+                ParentFont = False
+                ParentShowHint = False
+                ShowHint = True
+                OnClick = sbtClick
+              end
+            end
+            object Panel24: TPanel
+              Left = 120
+              Top = 0
+              Width = 120
+              Height = 71
+              Align = alLeft
+              BevelOuter = bvNone
+              Color = 15132364
+              ParentBackground = False
+              TabOrder = 1
+              object sbtComplete3: TSpeedButton
+                Tag = 6
+                Left = 0
+                Top = 0
+                Width = 120
+                Height = 71
+                Cursor = crHandPoint
+                Hint = #54644#45817' '#51089#50629#51012' '#50756#47308' '#54633#45768#45796'.'
+                Align = alClient
+                Caption = #44053#51228#50756#47308
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -27
+                Font.Name = #46027#50880
+                Font.Style = [fsBold]
+                ParentFont = False
+                ParentShowHint = False
+                ShowHint = True
+                OnClick = sbtClick
+                ExplicitWidth = 100
+                ExplicitHeight = 52
+              end
+            end
+          end
+          object Panel25: TPanel
+            Left = 5
+            Top = 3
+            Width = 120
+            Height = 71
+            BevelOuter = bvNone
+            Caption = #51089#50629#48264#54840
+            Color = 14540253
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -27
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentBackground = False
+            ParentFont = False
+            TabOrder = 1
+          end
+          object edtJOB_NO_SEL3: TEdit
+            Tag = 1
+            Left = 128
+            Top = 3
+            Width = 150
+            Height = 68
+            Hint = #49688#46041#52376#47532' '#51089#50629#48264#54840
+            Alignment = taCenter
+            CharCase = ecUpperCase
+            Color = 14935011
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -60
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 2
+          end
+          object Panel26: TPanel
+            Left = 0
+            Top = 0
+            Width = 2
+            Height = 78
+            Align = alLeft
+            Color = clBlack
+            ParentBackground = False
+            TabOrder = 3
+          end
+        end
+      end
+      object dgInfo_Rack: TDBGridEh
+        Left = 0
+        Top = 80
+        Width = 1888
+        Height = 189
+        Align = alClient
+        ColumnDefValues.Layout = tlCenter
+        ColumnDefValues.Title.Alignment = taCenter
+        DataGrouping.Font.Charset = GB2312_CHARSET
+        DataGrouping.Font.Color = clWindowText
+        DataGrouping.Font.Height = -11
+        DataGrouping.Font.Name = 'Tahoma'
+        DataGrouping.Font.Style = []
+        DataGrouping.ParentFont = False
+        DataSource = dsInfo_Rack
+        DrawGraphicData = True
+        DynProps = <>
+        EditActions = [geaCopyEh]
+        Font.Charset = GB2312_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -20
+        Font.Name = #46027#50880
+        Font.Style = []
+        FooterRowCount = 1
+        FooterParams.FillStyle = cfstSolidEh
+        FooterParams.Font.Charset = GB2312_CHARSET
+        FooterParams.Font.Color = clWindowText
+        FooterParams.Font.Height = -16
+        FooterParams.Font.Name = #46027#50880
+        FooterParams.Font.Style = []
+        FooterParams.ParentFont = False
+        ImeName = 'Microsoft Office IME 2007'
+        IndicatorOptions = [gioShowRowIndicatorEh, gioShowRecNoEh]
+        IndicatorParams.FillStyle = cfstSolidEh
+        IndicatorTitle.TitleButton = True
+        IndicatorTitle.UseGlobalMenu = False
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
+        OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghShowRecNo, dghColumnResize, dghColumnMove, dghExtendVertLines]
+        ParentFont = False
+        RowHeight = 10
+        RowLines = 1
+        TabOrder = 1
+        TitleParams.BorderInFillStyle = True
+        TitleParams.FillStyle = cfstSolidEh
+        TitleParams.Font.Charset = GB2312_CHARSET
+        TitleParams.Font.Color = clWindowText
+        TitleParams.Font.Height = -20
+        TitleParams.Font.Name = #46027#50880
+        TitleParams.Font.Style = []
+        TitleParams.HorzLineColor = 5592405
+        TitleParams.ParentFont = False
+        TitleParams.RowHeight = 30
+        TitleParams.VertLineColor = 5592405
+        OnCellClick = dgInfoCellClick_Rack
+        OnDrawColumnCell = dgInfoDrawColumnCell
+        OnTitleClick = dgInfoTitleClick
+        Columns = <
+          item
+            Alignment = taCenter
+            AutoFitColWidth = False
+            Color = 16710378
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'JOBD_DESC'
+            Footers = <>
+            Title.Caption = #51089#50629#50976#54805
+            Width = 210
+          end
+          item
+            Alignment = taCenter
+            AutoFitColWidth = False
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'ITM_CD'
+            Footers = <>
+            Title.Caption = #44592#51333#53076#46300
+            Width = 210
+          end
+          item
+            Alignment = taCenter
+            AutoFitColWidth = False
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'LUGG'
+            Footers = <>
+            Title.Caption = #51089#50629#48264#54840
+            Width = 210
+          end
+          item
+            Alignment = taCenter
+            AutoFitColWidth = False
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'ID_CODE'
+            Footers = <>
+            Title.Caption = #54616#50669#50948#52824
             Width = 210
           end
           item
@@ -959,5 +1688,17 @@ object frmU210: TfrmU210
     OnTimer = tmrQryTimer
     Left = 849
     Top = 131
+  end
+  object dsInfo_Rack: TDataSource
+    DataSet = qryInfo_Rack
+    Left = 8
+    Top = 718
+  end
+  object qryInfo_Rack: TADOQuery
+    Connection = MainDm.MainDB
+    CursorType = ctStatic
+    Parameters = <>
+    Left = 40
+    Top = 718
   end
 end

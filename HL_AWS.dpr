@@ -23,7 +23,9 @@ uses
   U420 in 'Form\U420.pas' {frmU420},
   U510 in 'Form\U510.pas' {frmU510},
   U520 in 'Form\U520.pas' {frmU520},
-  U240 in 'Form\U240.pas' {frmU240};
+  U240 in 'Form\U240.pas' {frmU240},
+  U530 in 'Form\U530.pas' {frmU530},
+  Popup_Item_Update in 'Form\Popup_Item_Update.pas' {frmPopup_Item_Update};
 
 {$R *.res}
 
@@ -32,6 +34,6 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TMainDm, MainDm);
   Application.CreateForm(TfrmMain, frmMain);
-  Application.CreateForm(TfrmU240, frmU240);
+  Application.CreateForm(TfrmPopup_Item_Update, frmPopup_Item_Update);
   Application.Run;
 end.

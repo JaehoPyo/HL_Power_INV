@@ -479,6 +479,7 @@ begin
     OrderData.LUGG       := Format('%.4d', [GetJobNo]) ; // 작업번호
 
     OrderData.JOBD       := '7'; // 렉 투 렉 이동지시
+    OrderData.LINE_NO    := '0';
 
     OrderData.SRCSITE    := Format('%.4d', [StrToInt('1')]) ;                                      // 적재 호기
     OrderData.SRCAISLE   := Format('%.4d', [StrToInt(qryInfo.FieldByName('ID_BANK' ).AsString)]) ; // 적재 열
@@ -547,7 +548,7 @@ begin
       SQL.Clear;
       SQL.Text :=
       ' INSERT INTO TT_ORDER (                             ' + #13#10+
-      '    REG_TIME, LUGG, AGV, JOBD,                      ' + #13#10 +
+      '    REG_TIME, LUGG, JOBD, LINE_NO,             ' + #13#10 +
       '    SRCSITE, SRCAISLE, SRCBAY, SRCLEVEL,            ' + #13#10 +
       '    DSTSITE, DSTAISLE, DSTBAY, DSTLEVEL,            ' + #13#10 +
       '    NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS,        ' + #13#10 +
@@ -555,7 +556,7 @@ begin
       '    JOB_END, CVFR, CVTO, CVCURR,                    ' + #13#10 +
       '    ETC, EMG, ITM_CD                                ' + #13#10 +
       '  ) VALUES (                                        ' + #13#10 +
-      '    :REG_TIME, :LUGG, ''0'', :JOBD,                 ' + #13#10 +
+      '    :REG_TIME, :LUGG, :JOBD, :LINE_NO,       ' + #13#10 +
       '    :SRCSITE, :SRCAISLE, :SRCBAY, :SRCLEVEL,        ' + #13#10 +
       '    :DSTSITE, :DSTAISLE, :DSTBAY, :DSTLEVEL,        ' + #13#10 +
       '    :NOWMC, :JOBSTATUS, :NOWSTATUS, :BUFFSTATUS,    ' + #13#10 +
@@ -568,6 +569,7 @@ begin
       Parameters[i].Value := OrderData.REG_TIME;    Inc(i);
       Parameters[i].Value := OrderData.LUGG;        Inc(i);
       Parameters[i].Value := OrderData.JOBD;        Inc(i);
+      Parameters[i].Value := OrderData.LINE_NO;     Inc(i);
       Parameters[i].Value := OrderData.SRCSITE;     Inc(i);
       Parameters[i].Value := OrderData.SRCAISLE;    Inc(i);
       Parameters[i].Value := OrderData.SRCBAY;      Inc(i);
@@ -877,6 +879,7 @@ var
 begin
   try
     Result := False;
+
     StrSQL  := ' SELECT * FROM TT_STOCK ' +
                '  WHERE ID_CODE = ''' + ID_Code + ''' ' +
                '    AND ID_STATUS = ''0'' ';  // AGV가 화물 내려놓고 완료 일때 CV로 변경할 예정

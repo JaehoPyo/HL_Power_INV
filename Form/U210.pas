@@ -29,7 +29,6 @@ type
     Panel4: TPanel;
     Panel5: TPanel;
     Pnl_AutoQry_Ot: TPanel;
-    Panel10: TPanel;
     imgNo: TImage;
     imgOK: TImage;
     tmrQry: TTimer;
@@ -40,6 +39,45 @@ type
     chkGridIn: TCheckBox;
     Panel3: TPanel;
     Panel6: TPanel;
+    PnlSelInfo1: TPanel;
+    PnlManual: TPanel;
+    Panel57: TPanel;
+    sbtCancel1: TSpeedButton;
+    Panel38: TPanel;
+    sbtComplete1: TSpeedButton;
+    Panel7: TPanel;
+    edtJOB_NO_SEL1: TEdit;
+    PnlSelInfo2: TPanel;
+    Panel12: TPanel;
+    Panel14: TPanel;
+    sbtCancel2: TSpeedButton;
+    Panel17: TPanel;
+    sbtComplete2: TSpeedButton;
+    Panel19: TPanel;
+    edtJOB_NO_SEL2: TEdit;
+    Panel23: TPanel;
+    Panel16: TPanel;
+    Panel13: TPanel;
+    Pnl_Rack: TPanel;
+    Panel9: TPanel;
+    Panel10: TPanel;
+    Panel11: TPanel;
+    Pnl_AutoQry_Rack: TPanel;
+    ImgRack: TImage;
+    chkGridRack: TCheckBox;
+    Panel18: TPanel;
+    PnlSelInfo3: TPanel;
+    Panel21: TPanel;
+    Panel22: TPanel;
+    sbtCancel3: TSpeedButton;
+    Panel24: TPanel;
+    sbtComplete3: TSpeedButton;
+    Panel25: TPanel;
+    edtJOB_NO_SEL3: TEdit;
+    Panel26: TPanel;
+    dgInfo_Rack: TDBGridEh;
+    dsInfo_Rack: TDataSource;
+    qryInfo_Rack: TADOQuery;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -52,8 +90,14 @@ type
     procedure ImgAutoQryClick(Sender: TObject);
     procedure chkGridInClick(Sender: TObject);
     procedure chkGridOutClick(Sender: TObject);
+    procedure dgInfoCellClick_In(Column: TColumnEh);
+    procedure dgInfoCellClick_Ot(Column: TColumnEh);
+    procedure dgInfoCellClick_Rack(Column: TColumnEh);
+    procedure chkGridRackClick(Sender: TObject);
+    procedure sbtClick(Sender: TObject);
   private
     { Private declarations }
+    function fnJobCheck(JobNo: String): Boolean; //작업진행 체크
   public
     { Public declarations }
     procedure fnCommandStart;
@@ -206,10 +250,16 @@ begin
       TmpGrid := dgInfo_In;
       tStr := '';
     end else
+    if chkGridOut.Checked then
     begin
       TmpGrid := dgInfo_Ot;
-      tStr := '(Detail)';
+      tStr := '';
+    end else
+    begin
+      TmpGrid := dgInfo_Rack;
+      tStr := '';
     end;
+    
 
     if hlbEhgridListExcel(TmpGrid, frmMain.LblMenu000.Caption + '_' + FormatDatetime('YYYYMMDD', Now)) then
     begin
@@ -258,10 +308,16 @@ begin
       tStr := '';
       if not qryInfo_In.Active then Exit;
     end else
+    if chkGridOut.Checked then
     begin
       TmpGrid := dgInfo_Ot;
-      tStr := '(Detail)';
+      tStr := '';
       if not qryInfo_Ot.Active then Exit;
+    end else
+    begin
+      TmpGrid := dgInfo_Rack;
+      tStr := '';
+      if not qryInfo_Rack.Active then Exit;    
     end;
 
     fnCommandQuery;
@@ -375,6 +431,48 @@ begin
         Open;
       end;
     end;
+
+    // 렉이동현황
+    if Pnl_AutoQry_Rack.Tag=1 then
+    begin
+      with qryInfo_Rack do
+      begin
+        Close;
+        SQL.Clear;
+        SQL.Text := ' Select REG_TIME, LUGG, JOBD,                      ' +  #13#10+
+                    '        SRCSITE, SRCAISLE, SRCBAY, SRCLEVEL        ' +  #13#10+
+                    '        DSTSITE, DSTAISLE, DSTBAY, DSTLEVEL        ' +  #13#10+
+                    '        NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS    ' +  #13#10+
+                    '        JOBREWORK, JOBERRORT, JOBERRORC, JOBERRORD ' +  #13#10+
+                    '        CVFR, CVTO, CVCURR, ETC, EMG, ITM_CD,      ' +  #13#10+
+                    '       (Case when (JOBD=''1'') then ''입고'' ' +  #13#10+
+                    '             when (JOBD=''2'') and (EMG=''0'') then ''출고'' ' +  #13#10+
+                    '             when (JOBD=''2'') and (EMG=''1'') then ''긴급출고'' ' +  #13#10+
+                    '             when (JOBD=''7'') then ''랙이동'' end) as JOBD_DESC, ' +  #13#10+
+                    '       (Case NOWMC when ''1'' then ''컨베어 작업'' ' +  #13#10+
+                    '                   when ''2'' then ''스태커 적재'' ' +  #13#10+
+                    '                   when ''3'' then ''스태커 하역'' end) as NOWMC_DESC, ' +  #13#10+
+                    '       (Case NOWSTATUS when ''1'' then ''등록'' ' +  #13#10+
+                    '                       when ''2'' then ''지시'' ' +  #13#10+
+                    '                       when ''3'' then ''진행'' ' +  #13#10+
+                    '                       when ''4'' then ''완료'' end) as NOWSTATUS_DESC, ' +  #13#10+
+                    '       (Case JOBERRORC when ''0'' then ''정상'' ' +  #13#10+
+                    '                       when ''1'' then ''에러'' end) as JOBERRORC_DESC, ' +  #13#10+
+                    '       (Case JOBERRORD when ''0000'' then ''정상'' ' +  #13#10+
+                    '                       else JOBERRORD end) as JOBERRORD_DESC, ' +  #13#10+
+                    '       (Case BUFFSTATUS when ''0'' then ''대기'' ' +  #13#10+
+                    '                        when ''1'' then ''입고가능'' end) as BUFFSTATUS_DESC, ' +  #13#10+
+                    '       (SUBSTRING(DSTAISLE,4,1)+''-''+SUBSTRING(DSTBAY,3,2)+''-''+FORMAT(CONVERT(INT,DSTLEVEL), ''D2'')) as ID_CODE,           ' +
+                    '       (SUBSTRING(REG_TIME,1,4)+''-''+SUBSTRING(REG_TIME,5,2)+''-''+SUBSTRING(REG_TIME,7,2)+                     ' +
+                    '        SUBSTRING(REG_TIME,9,2)+'':''+SUBSTRING(REG_TIME,11,2)+'':''+SUBSTRING(REG_TIME,13,2)) as REF_TIME_CONV, ' +
+                    '       CONVERT(VARCHAR, REG_TIME, 120) as REG_TIME_DESC ' +
+                    '   From TT_ORDER ' +  #13#10+
+                    '  Where JOBD    = ''7'' ' +  #13#10+
+                    '    And JOB_END = ''0'' ' +  #13#10+
+                    '  Order By EMG DESC, REG_TIME, LUGG ASC ' ;
+        Open;
+      end;
+    end;    
   except
     on E : Exception do
     begin
@@ -407,9 +505,9 @@ end;
 //==============================================================================
 procedure TfrmU210.Pnl_MainResize(Sender: TObject);
 begin
-  Pnl_In.Height := ((Sender as TPanel).Height div 2) -2 ;
+  Pnl_In.Height := ((Sender as TPanel).Height div 3) -2 ;
+  Pnl_Ot.Height := ((Sender as TPanel).Height div 3) -2 ;
 end;
-
 
 //==============================================================================
 // tmrQryTimer
@@ -438,10 +536,21 @@ begin
     begin
       ImgIn.Tag := 2;
       ImgIn.Picture.Bitmap := imgNO.Picture.Bitmap;
+      PnlSelInfo1.Visible := True;
+      edtJOB_NO_SEL1.Text := '';
     end else
+    if (Sender as TPanel).Hint='OUT' then
     begin
       ImgOt.Tag := 2;
       ImgOt.Picture.Bitmap := imgNO.Picture.Bitmap;
+      PnlSelInfo2.Visible := True;
+      edtJOB_NO_SEL2.Text := '';
+    end else
+    begin
+      ImgRack.Tag := 2;
+      ImgRack.Picture.Bitmap := imgNO.Picture.Bitmap;
+      PnlSelInfo3.Visible := True;
+      edtJOB_NO_SEL3.Text := '';
     end;
   end else
   begin
@@ -452,10 +561,21 @@ begin
     begin
       ImgIn.Tag := 1;
       ImgIn.Picture.Bitmap := imgOK.Picture.Bitmap;
+      PnlSelInfo1.Visible := False;
+      edtJOB_NO_SEL1.Text := '';
     end else
+    if (Sender as TPanel).Hint='OUT' then
     begin
       ImgOt.Tag := 1;
       ImgOt.Picture.Bitmap := imgOK.Picture.Bitmap;
+      PnlSelInfo2.Visible := False;
+      edtJOB_NO_SEL2.Text := '';
+    end else
+    begin
+      ImgRack.Tag := 1;
+      ImgRack.Picture.Bitmap := imgOK.Picture.Bitmap;
+      PnlSelInfo3.Visible := False;
+      edtJOB_NO_SEL3.Text := '';
     end;
   end;
 end;
@@ -474,11 +594,23 @@ begin
       Pnl_AutoQry_In.Tag := 2 ;
       Pnl_AutoQry_In.BevelInner := bvLowered ;
       ImgIn.Picture.Bitmap := imgNO.Picture.Bitmap;
+      PnlSelInfo1.Visible := True;
+      edtJOB_NO_SEL1.Text := '';
     end else
+    if (Sender as TImage).Hint='OUT' then
     begin
       Pnl_AutoQry_Ot.Tag := 2 ;
       Pnl_AutoQry_Ot.BevelInner := bvLowered ;
       ImgOt.Picture.Bitmap := imgNO.Picture.Bitmap;
+      PnlSelInfo2.Visible := True;
+      edtJOB_NO_SEL2.Text := '';
+    end else
+    begin
+      Pnl_AutoQry_Rack.Tag := 2;
+      Pnl_AutoQry_Rack.BevelInner := bvLowered ;
+      ImgRack.Picture.Bitmap := imgNO.Picture.Bitmap;
+      PnlSelInfo3.Visible := True;
+      edtJOB_NO_SEL3.Text := '';
     end;
   end else
   begin
@@ -489,11 +621,23 @@ begin
       Pnl_AutoQry_In.Tag := 1 ;
       Pnl_AutoQry_In.BevelInner := bvRaised ;
       ImgIn.Picture.Bitmap := imgOK.Picture.Bitmap;
+      PnlSelInfo1.Visible := False;
+      edtJOB_NO_SEL1.Text := '';
     end else
+    if (Sender as TImage).Hint='OUT' then
     begin
       Pnl_AutoQry_Ot.Tag := 1 ;
       Pnl_AutoQry_Ot.BevelInner := bvRaised ;
       ImgOt.Picture.Bitmap := imgOK.Picture.Bitmap;
+      PnlSelInfo2.Visible := False;
+      edtJOB_NO_SEL2.Text := '';
+    end else
+    begin
+      Pnl_AutoQry_Rack.Tag := 1 ;
+      Pnl_AutoQry_Rack.BevelInner := bvRaised ;
+      ImgRack.Picture.Bitmap := imgOK.Picture.Bitmap;
+      PnlSelInfo3.Visible := False;
+      edtJOB_NO_SEL3.Text := '';
     end;
   end;
 end;
@@ -547,12 +691,15 @@ begin
               begin
                 Canvas.Font.Color := clNavy;
               end else                                       // 출고
+              if (FieldByName('JOBD').AsString = '2') then
               begin
                 if (FieldByName('EMG').AsString = '0') then
                      Canvas.Font.Color := clMaroon      // 일반출고
                 else Canvas.Font.Color := clRed;        // 긴급출고
+              end else
+              begin
+                Canvas.Font.Color := clGreen;
               end;
-
             end;
           end;
         end;
@@ -569,8 +716,10 @@ end;
 procedure TfrmU210.chkGridInClick(Sender: TObject);
 begin
   if (Sender as TCheckBox).Checked then
-       chkGridOut.Checked := False
-  else chkGridOut.Checked := True;
+  begin
+    chkGridOut.Checked := False;
+    chkGridRack.Checked := False;
+  end;
 end;
 
 //==============================================================================
@@ -579,8 +728,171 @@ end;
 procedure TfrmU210.chkGridOutClick(Sender: TObject);
 begin
   if (Sender as TCheckBox).Checked then
-       chkGridIn.Checked := False
-  else chkGridIn.Checked := True;
+  begin
+    chkGridIn.Checked := False;
+    chkGridRack.Checked := False;
+  end;
+end;
+
+//==============================================================================
+// chkGridOutClick
+//==============================================================================
+procedure TfrmU210.chkGridRackClick(Sender: TObject);
+begin
+  if (Sender as TCheckBox).Checked then
+  begin
+    chkGridIn.Checked := False;
+    chkGridOut.Checked := False;
+  end;
+end;
+
+//==============================================================================
+// dgInfoCellClick
+//==============================================================================
+procedure TfrmU210.dgInfoCellClick_In(Column: TColumnEh);
+begin
+  try
+    if (not qryInfo_In.Active) or (qryInfo_In.RecordCount = 0) then Exit;
+
+    if ImgIn.Tag = 2 then
+    begin // 자동조회 OFF 상태
+      edtJOB_NO_SEL1.Text   := qryInfo_In.FieldByName('LUGG').AsString;
+    end;
+  except
+    on E : Exception do
+    begin
+      InsertPGMHist('['+FormNo+']', 'E', 'dgInfoCellClick_In', '', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure dgInfoCellClick Fail || ERR['+E.Message+']');
+    end;
+  end;
+end;
+
+procedure TfrmU210.dgInfoCellClick_Ot(Column: TColumnEh);
+begin
+  try
+    if (not qryInfo_Ot.Active) or (qryInfo_Ot.RecordCount = 0) then Exit;
+
+    if ImgOt.Tag = 2 then
+    begin // 자동조회 OFF 상태
+      edtJOB_NO_SEL2.Text   := qryInfo_Ot.FieldByName('LUGG').AsString;
+    end;
+  except
+    on E : Exception do
+    begin
+      InsertPGMHist('['+FormNo+']', 'E', 'dgInfoCellClick_Ot', '', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure dgInfoCellClick Fail || ERR['+E.Message+']');
+    end;
+  end;
+end;
+
+procedure TfrmU210.dgInfoCellClick_Rack(Column: TColumnEh);
+begin
+  try
+    if (not qryInfo_Rack.Active) or (qryInfo_Rack.RecordCount = 0) then Exit;
+
+    if ImgRack.Tag = 2 then
+    begin // 자동조회 OFF 상태
+      edtJOB_NO_SEL3.Text   := qryInfo_Rack.FieldByName('LUGG').AsString;
+    end;
+  except
+    on E : Exception do
+    begin
+      InsertPGMHist('['+FormNo+']', 'E', 'dgInfoCellClick_Rack', '', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure dgInfoCellClick Fail || ERR['+E.Message+']');
+    end;
+  end;
+end;
+
+//==============================================================================
+// dgInfoCellClick 작업 취소/강제완료
+//==============================================================================
+procedure TfrmU210.sbtClick(Sender: TObject);
+var
+  JobNo : String;
+begin
+  if (((Sender as TSpeedButton).Tag = 1) or ((Sender as TSpeedButton).Tag = 2)) and 
+     ((Trim(edtJOB_NO_SEL1.Text) = '') or
+      (not qryInfo_In.Active) or
+      (qryInfo_In.RecordCount < 1) or
+      (dgInfo_In.SelectedRows.Count <1) ) then
+  begin
+      MessageDlg('  입고 작업을 선택하지 않았습니다.' + #13#10 + #13#10 +
+                 '  수동처리 할 입고 작업을 선택 후 진행해 주십시오.', mtConfirmation, [mbYes], 0);
+      dgInfo_In.SetFocus;
+      Exit;  
+  end;
+  
+  if (((Sender as TSpeedButton).Tag = 3) or ((Sender as TSpeedButton).Tag = 4)) and 
+     ((Trim(edtJOB_NO_SEL2.Text) = '') or
+      (not qryInfo_Ot.Active) or
+      (qryInfo_Ot.RecordCount < 1) or
+      (dgInfo_Ot.SelectedRows.Count <1) ) then
+  begin
+      MessageDlg('  출고 작업을 선택하지 않았습니다.' + #13#10 + #13#10 +
+                 '  수동처리 할 출고 작업을 선택 후 진행해 주십시오.', mtConfirmation, [mbYes], 0);
+      dgInfo_In.SetFocus;
+      Exit;  
+  end;
+  
+  if (((Sender as TSpeedButton).Tag = 5) or ((Sender as TSpeedButton).Tag = 6)) and 
+     ((Trim(edtJOB_NO_SEL3.Text) = '') or
+      (not qryInfo_Rack.Active) or
+      (qryInfo_Rack.RecordCount < 1) or
+      (dgInfo_Rack.SelectedRows.Count <1) ) then
+  begin
+      MessageDlg('  이동 작업을 선택하지 않았습니다.' + #13#10 + #13#10 +
+                 '  수동처리 할 이동 작업을 선택 후 진행해 주십시오.', mtConfirmation, [mbYes], 0);
+      dgInfo_In.SetFocus;
+      Exit;  
+  end;
+
+  Case (Sender as TSpeedButton).Tag of
+    1,2 : JobNo := edtJOB_NO_SEL1.Text;
+    3,4 : JobNo := edtJOB_NO_SEL2.Text;    
+    5,6 : JobNo := edtJOB_NO_SEL3.Text;  
+  End;
+
+  if fnJobCheck(JobNo) then
+  begin
+    MessageDlg('작업중', mtConfirmation, [mbYes], 0);
+  end else
+  begin
+    MessageDlg('작업중 아님', mtConfirmation, [mbYes], 0);
+  end;
+
+end;
+
+//==============================================================================
+// fnJobCheck 작업중 체크
+//==============================================================================
+function TfrmU210.fnJobCheck(JobNo: String): Boolean;
+begin
+  try
+    Result := True;
+
+    with qryTemp do
+    begin  
+      Close;
+      SQL.Clear;
+      SQL.Text := 'SELECT * FROM TT_SCIO ' +
+                  ' WHERE ID_INDEX = ''' + JobNo + ''' ' ;
+      Open;
+      
+      if RecordCount < 1 then
+      begin
+        Result := False;
+      end;
+      Close;
+    end;
+  except
+    on E : Exception do
+    begin
+      InsertPGMHist('['+FormNo+']', 'E', 'dgInfoCellClick_Rack', '', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure dgInfoCellClick Fail || ERR['+E.Message+']');
+      qryTemp.Close;
+      Result := True;
+    end;
+  end;
 end;
 
 end.

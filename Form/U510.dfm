@@ -165,8 +165,6 @@
     BevelOuter = bvNone
     TabOrder = 0
     OnResize = Pnl_MainResize
-    ExplicitWidth = 1263
-    ExplicitHeight = 682
     object Pnl_Sub: TPanel
       Left = 1
       Top = 1
@@ -398,7 +396,6 @@
             Align = alLeft
             BevelInner = bvLowered
             TabOrder = 0
-            ExplicitLeft = 560
             object Bay02: TPanel
               Tag = 210
               Left = 2
@@ -411,7 +408,6 @@
               Color = clWhite
               ParentBackground = False
               TabOrder = 0
-              ExplicitWidth = 100
               object Image3: TImage
                 Left = 1
                 Top = 1
@@ -451,7 +447,6 @@
             Align = alLeft
             BevelInner = bvLowered
             TabOrder = 1
-            ExplicitLeft = 480
             object Bay03: TPanel
               Tag = 209
               Left = 2
@@ -464,7 +459,6 @@
               Color = 4737096
               ParentBackground = False
               TabOrder = 0
-              ExplicitWidth = 100
             end
           end
           object RackBay04: TPanel
@@ -475,7 +469,6 @@
             Align = alLeft
             BevelInner = bvLowered
             TabOrder = 2
-            ExplicitLeft = 400
             object Bay04: TPanel
               Tag = 208
               Left = 2
@@ -488,7 +481,6 @@
               Color = clWhite
               ParentBackground = False
               TabOrder = 0
-              ExplicitWidth = 100
               object Image5: TImage
                 Left = 1
                 Top = 1
@@ -533,7 +525,6 @@
             Align = alLeft
             BevelInner = bvLowered
             TabOrder = 3
-            ExplicitLeft = 320
             object Bay05: TPanel
               Tag = 207
               Left = 2
@@ -546,7 +537,6 @@
               Color = clWhite
               ParentBackground = False
               TabOrder = 0
-              ExplicitWidth = 100
               object Image7: TImage
                 Left = 1
                 Top = 1
@@ -586,7 +576,6 @@
             Align = alLeft
             BevelInner = bvLowered
             TabOrder = 4
-            ExplicitLeft = 240
             object Bay06: TPanel
               Tag = 206
               Left = 2
@@ -599,7 +588,6 @@
               Color = 4737096
               ParentBackground = False
               TabOrder = 0
-              ExplicitWidth = 100
             end
           end
           object RackBay07: TPanel
@@ -610,7 +598,6 @@
             Align = alLeft
             BevelInner = bvLowered
             TabOrder = 5
-            ExplicitLeft = 160
             object Bay07: TPanel
               Tag = 205
               Left = 2
@@ -623,7 +610,6 @@
               Color = clWhite
               ParentBackground = False
               TabOrder = 0
-              ExplicitWidth = 100
               object Image6: TImage
                 Left = 1
                 Top = 1
@@ -668,7 +654,6 @@
             Align = alLeft
             BevelInner = bvLowered
             TabOrder = 6
-            ExplicitLeft = 80
             object Bay08: TPanel
               Tag = 204
               Left = 2
@@ -681,7 +666,6 @@
               Color = clWhite
               ParentBackground = False
               TabOrder = 0
-              ExplicitWidth = 100
               object Image8: TImage
                 Left = 1
                 Top = 1
@@ -733,8 +717,6 @@
               Color = 4737096
               ParentBackground = False
               TabOrder = 0
-              ExplicitWidth = 80
-              ExplicitHeight = 76
             end
           end
           object RackBay01: TPanel
@@ -745,7 +727,6 @@
             Align = alLeft
             BevelInner = bvLowered
             TabOrder = 8
-            ExplicitLeft = 640
             object Bay01: TPanel
               Tag = 211
               Left = 2
@@ -758,7 +739,6 @@
               Color = clWhite
               ParentBackground = False
               TabOrder = 0
-              ExplicitWidth = 100
               object Image4: TImage
                 Left = 1
                 Top = 1
@@ -827,7 +807,6 @@
             Align = alLeft
             BevelInner = bvLowered
             TabOrder = 0
-            ExplicitLeft = 660
             object Panel5: TPanel
               Tag = 210
               Left = 2
@@ -840,7 +819,6 @@
               Color = 4737096
               ParentBackground = False
               TabOrder = 0
-              ExplicitWidth = 100
             end
           end
           object Panel6: TPanel
@@ -851,7 +829,6 @@
             Align = alLeft
             BevelInner = bvLowered
             TabOrder = 1
-            ExplicitLeft = 580
             object Panel7: TPanel
               Tag = 209
               Left = 2
@@ -864,7 +841,6 @@
               Color = 4737096
               ParentBackground = False
               TabOrder = 0
-              ExplicitWidth = 100
             end
           end
           object Panel8: TPanel
@@ -887,8 +863,6 @@
               Color = 4737096
               ParentBackground = False
               TabOrder = 0
-              ExplicitWidth = 56
-              ExplicitHeight = 56
             end
           end
           object Panel10: TPanel
@@ -899,7 +873,6 @@
             Align = alLeft
             BevelInner = bvLowered
             TabOrder = 3
-            ExplicitLeft = 320
             object Panel11: TPanel
               Tag = 207
               Left = 2
@@ -912,7 +885,6 @@
               Color = 4737096
               ParentBackground = False
               TabOrder = 0
-              ExplicitWidth = 100
             end
           end
           object Panel12: TPanel
@@ -923,7 +895,6 @@
             Align = alLeft
             BevelInner = bvLowered
             TabOrder = 4
-            ExplicitLeft = 240
             object Panel13: TPanel
               Tag = 206
               Left = 2
@@ -936,7 +907,6 @@
               Color = 4737096
               ParentBackground = False
               TabOrder = 0
-              ExplicitWidth = 100
             end
           end
           object Panel14: TPanel
@@ -947,7 +917,6 @@
             Align = alLeft
             BevelInner = bvLowered
             TabOrder = 5
-            ExplicitLeft = 160
             object Panel15: TPanel
               Tag = 205
               Left = 2
@@ -960,7 +929,6 @@
               Color = 4737096
               ParentBackground = False
               TabOrder = 0
-              ExplicitWidth = 100
             end
           end
           object Panel16: TPanel
@@ -971,7 +939,6 @@
             Align = alLeft
             BevelInner = bvLowered
             TabOrder = 6
-            ExplicitLeft = 80
             object Panel17: TPanel
               Tag = 204
               Left = 2
@@ -984,7 +951,6 @@
               Color = 4737096
               ParentBackground = False
               TabOrder = 0
-              ExplicitWidth = 100
             end
           end
           object Panel24: TPanel
@@ -995,7 +961,6 @@
             Align = alLeft
             BevelInner = bvLowered
             TabOrder = 7
-            ExplicitLeft = 740
             object Panel25: TPanel
               Tag = 211
               Left = 2
@@ -1008,7 +973,6 @@
               Color = 4737096
               ParentBackground = False
               TabOrder = 0
-              ExplicitWidth = 100
             end
           end
           object Panel18: TPanel
@@ -1044,7 +1008,6 @@
           BevelOuter = bvLowered
           Color = 14803425
           TabOrder = 2
-          ExplicitTop = 0
           object Panel231: TPanel
             Left = 2
             Top = 2
@@ -1071,12 +1034,11 @@
             Align = alClient
             BevelOuter = bvNone
             TabOrder = 1
-            ExplicitHeight = 542
             object Panel232: TPanel
               Left = 0
               Top = 0
               Width = 401
-              Height = 388
+              Height = 436
               Align = alTop
               BevelInner = bvLowered
               BevelOuter = bvNone
@@ -2109,7 +2071,7 @@
                 ParentCustomHint = False
                 BevelOuter = bvNone
                 BiDiMode = bdLeftToRight
-                Caption = #51077#44256#44032#45733
+                Caption = #51077#44256#44032#45733'1'
                 Color = 16444898
                 Ctl3D = True
                 DoubleBuffered = False
@@ -2127,7 +2089,7 @@
                 ShowHint = False
                 TabOrder = 38
               end
-              object edt_InReady: TEdit
+              object edt_InReady1: TEdit
                 Left = 109
                 Top = 361
                 Width = 90
@@ -2206,7 +2168,7 @@
                 ShowHint = False
                 TabOrder = 41
               end
-              object edt_OutReady: TEdit
+              object edt_OutReady1: TEdit
                 Left = 306
                 Top = 361
                 Width = 90
@@ -2240,7 +2202,7 @@
                 ParentCustomHint = False
                 BevelOuter = bvNone
                 BiDiMode = bdLeftToRight
-                Caption = #52636#44256#44032#45733
+                Caption = #52636#44256#44032#45733'1'
                 Color = 16444898
                 Ctl3D = True
                 DoubleBuffered = False
@@ -2362,10 +2324,220 @@
                 ShowHint = False
                 TabOrder = 47
               end
+              object Panel20: TPanel
+                Left = 7
+                Top = 385
+                Width = 100
+                Height = 22
+                ParentCustomHint = False
+                BevelOuter = bvNone
+                BiDiMode = bdLeftToRight
+                Caption = #51077#44256#44032#45733'2'
+                Color = 16444898
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = []
+                ParentBiDiMode = False
+                ParentBackground = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ShowHint = False
+                TabOrder = 48
+              end
+              object edt_InReady2: TEdit
+                Left = 109
+                Top = 385
+                Width = 90
+                Height = 22
+                ParentCustomHint = False
+                Alignment = taCenter
+                AutoSize = False
+                BiDiMode = bdLeftToRight
+                Color = clWhite
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = [fsBold]
+                ImeName = 'Microsoft Office IME 2007'
+                ParentBiDiMode = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ReadOnly = True
+                ShowHint = False
+                TabOrder = 49
+              end
+              object Panel21: TPanel
+                Left = 204
+                Top = 385
+                Width = 100
+                Height = 22
+                ParentCustomHint = False
+                BevelOuter = bvNone
+                BiDiMode = bdLeftToRight
+                Caption = #52636#44256#44032#45733'2'
+                Color = 16444898
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = []
+                ParentBiDiMode = False
+                ParentBackground = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ShowHint = False
+                TabOrder = 50
+              end
+              object edt_OutReady2: TEdit
+                Left = 306
+                Top = 385
+                Width = 90
+                Height = 22
+                ParentCustomHint = False
+                Alignment = taCenter
+                AutoSize = False
+                BiDiMode = bdLeftToRight
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = [fsBold]
+                ImeName = 'Microsoft Office IME 2007'
+                ParentBiDiMode = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ReadOnly = True
+                ShowHint = False
+                TabOrder = 51
+              end
+              object Panel22: TPanel
+                Left = 7
+                Top = 409
+                Width = 100
+                Height = 22
+                ParentCustomHint = False
+                BevelOuter = bvNone
+                BiDiMode = bdLeftToRight
+                Caption = #51077#44256#44032#45733'3'
+                Color = 16444898
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = []
+                ParentBiDiMode = False
+                ParentBackground = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ShowHint = False
+                TabOrder = 52
+              end
+              object edt_InReady3: TEdit
+                Left = 109
+                Top = 409
+                Width = 90
+                Height = 22
+                ParentCustomHint = False
+                Alignment = taCenter
+                AutoSize = False
+                BiDiMode = bdLeftToRight
+                Color = clWhite
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = [fsBold]
+                ImeName = 'Microsoft Office IME 2007'
+                ParentBiDiMode = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ReadOnly = True
+                ShowHint = False
+                TabOrder = 53
+              end
+              object Panel23: TPanel
+                Left = 204
+                Top = 409
+                Width = 100
+                Height = 22
+                ParentCustomHint = False
+                BevelOuter = bvNone
+                BiDiMode = bdLeftToRight
+                Caption = #52636#44256#44032#45733'3'
+                Color = 16444898
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = []
+                ParentBiDiMode = False
+                ParentBackground = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ShowHint = False
+                TabOrder = 54
+              end
+              object edt_OutReady3: TEdit
+                Left = 306
+                Top = 409
+                Width = 90
+                Height = 22
+                ParentCustomHint = False
+                Alignment = taCenter
+                AutoSize = False
+                BiDiMode = bdLeftToRight
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = [fsBold]
+                ImeName = 'Microsoft Office IME 2007'
+                ParentBiDiMode = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ReadOnly = True
+                ShowHint = False
+                TabOrder = 55
+              end
             end
             object Panel55: TPanel
               Left = 0
-              Top = 388
+              Top = 436
               Width = 401
               Height = 24
               Align = alTop
@@ -2380,19 +2552,21 @@
               Font.Style = [fsBold]
               ParentFont = False
               TabOrder = 1
+              ExplicitTop = 388
             end
             object Panel56: TPanel
               Left = 0
-              Top = 412
+              Top = 460
               Width = 401
-              Height = 466
+              Height = 418
               Align = alClient
               BevelInner = bvLowered
               BevelOuter = bvNone
               Color = 16185078
               ParentBackground = False
               TabOrder = 2
-              ExplicitHeight = 130
+              ExplicitTop = 412
+              ExplicitHeight = 466
               object Panel51: TPanel
                 Left = 7
                 Top = 103
@@ -2937,7 +3111,6 @@
             ParentShowHint = False
             ShowHint = False
             TabOrder = 1
-            ExplicitLeft = -1
           end
           object Panel162: TPanel
             Left = 894
@@ -2964,20 +3137,19 @@
             ParentShowHint = False
             ShowHint = False
             TabOrder = 2
-            ExplicitLeft = 896
           end
         end
         object Panel65: TPanel
-          Left = 590
+          Left = 515
           Top = 76
-          Width = 480
+          Width = 666
           Height = 60
           BevelOuter = bvLowered
           TabOrder = 4
-          object PnlOtRdy: TPanel
+          object PnlOtRdy2: TPanel
             Left = 241
             Top = 1
-            Width = 238
+            Width = 239
             Height = 58
             Align = alClient
             BevelOuter = bvNone
@@ -2990,7 +3162,8 @@
             ParentBackground = False
             ParentFont = False
             TabOrder = 0
-            object shpOtRdy: TShape
+            ExplicitWidth = 238
+            object shpOtRdy2: TShape
               Left = 10
               Top = 0
               Width = 40
@@ -3010,7 +3183,7 @@
               TabOrder = 0
             end
           end
-          object PnlInRdy: TPanel
+          object PnlInRdy2: TPanel
             Left = 1
             Top = 1
             Width = 240
@@ -3026,7 +3199,7 @@
             ParentBackground = False
             ParentFont = False
             TabOrder = 1
-            object shpInRdy: TShape
+            object shpInRdy2: TShape
               Left = 10
               Top = 0
               Width = 40
@@ -3045,6 +3218,25 @@
               BevelOuter = bvNone
               TabOrder = 0
             end
+          end
+          object Panel96: TPanel
+            Left = 480
+            Top = 1
+            Width = 185
+            Height = 58
+            Align = alRight
+            BevelOuter = bvNone
+            Caption = #46972#51064' 02'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = 29
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 2
+            ExplicitLeft = 295
+            ExplicitTop = 19
+            ExplicitHeight = 41
           end
         end
         object SC: TPanel
@@ -3291,37 +3483,6 @@
             end
           end
         end
-        object Panel84: TPanel
-          Left = 395
-          Top = 76
-          Width = 205
-          Height = 60
-          BevelOuter = bvLowered
-          TabOrder = 6
-          object lbl_JobType: TLabel
-            Left = 1
-            Top = 1
-            Width = 203
-            Height = 58
-            Align = alClient
-            AutoSize = False
-            Caption = '  '#51077#44256#51089#50629' '#51473
-            Color = clBtnFace
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -29
-            Font.Name = #46027#50880
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Transparent = False
-            Layout = tlCenter
-            ExplicitLeft = -40
-            ExplicitTop = -19
-            ExplicitWidth = 225
-            ExplicitHeight = 60
-          end
-        end
         object btnReset: TButton
           Tag = 1
           Left = 385
@@ -3335,7 +3496,7 @@
           Font.Name = #46027#50880
           Font.Style = [fsBold]
           ParentFont = False
-          TabOrder = 7
+          TabOrder = 6
           OnClick = btnClick
         end
         object btnRetry: TButton
@@ -3352,8 +3513,256 @@
           Font.Name = #46027#50880
           Font.Style = [fsBold]
           ParentFont = False
-          TabOrder = 8
+          TabOrder = 7
           OnClick = btnClick
+        end
+        object Panel61: TPanel
+          Left = 515
+          Top = 16
+          Width = 667
+          Height = 60
+          BevelOuter = bvLowered
+          TabOrder = 8
+          object PnlOtRdy1: TPanel
+            Left = 241
+            Top = 1
+            Width = 240
+            Height = 58
+            Align = alClient
+            BevelOuter = bvNone
+            Caption = '    '#52636#44256' '#48520#44032#45733
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -29
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentBackground = False
+            ParentFont = False
+            TabOrder = 0
+            ExplicitLeft = 239
+            ExplicitWidth = 238
+            object shpOtRdy1: TShape
+              Left = 10
+              Top = 0
+              Width = 40
+              Height = 58
+              Align = alLeft
+              Shape = stCircle
+              ExplicitLeft = 0
+              ExplicitHeight = 60
+            end
+            object Panel86: TPanel
+              Left = 0
+              Top = 0
+              Width = 10
+              Height = 58
+              Align = alLeft
+              BevelOuter = bvNone
+              TabOrder = 0
+            end
+          end
+          object PnlInRdy1: TPanel
+            Left = 1
+            Top = 1
+            Width = 240
+            Height = 58
+            Align = alLeft
+            BevelOuter = bvNone
+            Caption = '    '#51077#44256' '#48520#44032#45733
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -29
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentBackground = False
+            ParentFont = False
+            TabOrder = 1
+            object shpInRdy1: TShape
+              Left = 10
+              Top = 0
+              Width = 40
+              Height = 58
+              Align = alLeft
+              Shape = stCircle
+              ExplicitLeft = 0
+              ExplicitHeight = 60
+            end
+            object Panel88: TPanel
+              Left = 0
+              Top = 0
+              Width = 10
+              Height = 58
+              Align = alLeft
+              BevelOuter = bvNone
+              TabOrder = 0
+            end
+          end
+          object Panel95: TPanel
+            Left = 481
+            Top = 1
+            Width = 185
+            Height = 58
+            Align = alRight
+            BevelOuter = bvNone
+            Caption = #46972#51064' 01'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = 29
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 2
+            ExplicitLeft = 295
+            ExplicitTop = 19
+            ExplicitHeight = 41
+          end
+        end
+        object Panel89: TPanel
+          Left = 515
+          Top = 135
+          Width = 667
+          Height = 60
+          BevelOuter = bvLowered
+          TabOrder = 9
+          object PnlOtRdy3: TPanel
+            Left = 241
+            Top = 1
+            Width = 240
+            Height = 58
+            Align = alClient
+            BevelOuter = bvNone
+            Caption = '    '#52636#44256' '#48520#44032#45733
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -29
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentBackground = False
+            ParentFont = False
+            TabOrder = 0
+            ExplicitWidth = 238
+            object shpOtRdy3: TShape
+              Left = 10
+              Top = 0
+              Width = 40
+              Height = 58
+              Align = alLeft
+              Shape = stCircle
+              ExplicitLeft = 0
+              ExplicitHeight = 60
+            end
+            object Panel91: TPanel
+              Left = 0
+              Top = 0
+              Width = 10
+              Height = 58
+              Align = alLeft
+              BevelOuter = bvNone
+              TabOrder = 0
+            end
+          end
+          object PnlInRdy3: TPanel
+            Left = 1
+            Top = 1
+            Width = 240
+            Height = 58
+            Align = alLeft
+            BevelOuter = bvNone
+            Caption = '    '#51077#44256' '#48520#44032#45733
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -29
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentBackground = False
+            ParentFont = False
+            TabOrder = 1
+            ExplicitLeft = 2
+            ExplicitTop = 6
+            object shpInRdy3: TShape
+              Left = 10
+              Top = 0
+              Width = 40
+              Height = 58
+              Align = alLeft
+              Shape = stCircle
+              ExplicitLeft = 0
+              ExplicitHeight = 60
+            end
+            object Panel93: TPanel
+              Left = 0
+              Top = 0
+              Width = 10
+              Height = 58
+              Align = alLeft
+              BevelOuter = bvNone
+              TabOrder = 0
+            end
+          end
+          object Panel97: TPanel
+            Left = 481
+            Top = 1
+            Width = 185
+            Height = 58
+            Align = alRight
+            BevelOuter = bvNone
+            Caption = #46972#51064' 03'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = 29
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 2
+            ExplicitLeft = 295
+            ExplicitTop = 19
+            ExplicitHeight = 41
+          end
+        end
+        object Panel84: TPanel
+          Left = 313
+          Top = 16
+          Width = 205
+          Height = 178
+          BevelOuter = bvLowered
+          TabOrder = 10
+          object lbl_JobType: TLabel
+            Left = 1
+            Top = 59
+            Width = 203
+            Height = 118
+            Align = alClient
+            AutoSize = False
+            Caption = '  '#51077#44256#51089#50629' '#51473
+            Color = clBtnFace
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -29
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Transparent = False
+            Layout = tlCenter
+            ExplicitTop = 80
+            ExplicitHeight = 97
+          end
+          object Panel94: TPanel
+            Left = 1
+            Top = 1
+            Width = 203
+            Height = 58
+            Align = alTop
+            BevelOuter = bvNone
+            Caption = 'SC '#49345#53468
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -29
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 0
+          end
         end
       end
       object Panel1: TPanel
@@ -3382,7 +3791,7 @@
             Color = clBtnFace
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -16
+            Font.Height = 20
             Font.Name = #46027#50880
             Font.Style = []
             ParentColor = False

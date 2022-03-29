@@ -164,7 +164,6 @@ object frmU320: TfrmU320
     BevelInner = bvRaised
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 1008
     object GroupBox1: TGroupBox
       Left = 1
       Top = 1
@@ -279,9 +278,6 @@ object frmU320: TfrmU320
     BevelInner = bvRaised
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitTop = 120
-    ExplicitWidth = 1008
-    ExplicitHeight = 492
     object dgInfo: TDBGridEh
       Left = 1
       Top = 1
@@ -436,7 +432,6 @@ object frmU320: TfrmU320
     BevelInner = bvRaised
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitWidth = 1008
     object gbCell: TGroupBox
       Left = 501
       Top = 1

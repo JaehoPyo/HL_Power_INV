@@ -1689,7 +1689,6 @@ object frmMain: TfrmMain
       Pen.Style = psClear
       Shape = stRoundRect
       ShowHint = True
-      Visible = False
     end
   end
   object PnlSBar2: TPanel
@@ -2365,6 +2364,11 @@ object frmMain: TfrmMain
         Hint = #44033' '#49444#48708#50640' '#45824#54620' '#50640#47084' '#51060#47141' '#51312#54924' '#54868#47732
         OnClick = execMenuClick
       end
+      object M5300: TMenuItem
+        Caption = #54532#47196#44536#47016' '#49324#50857#51060#47141
+        Hint = #54532#47196#44536#47016' '#49324#50857#51060#47141' '#51312#54924
+        OnClick = execMenuClick
+      end
     end
   end
   object tmrLogFileCheck: TTimer
@@ -2377,6 +2381,12 @@ object frmMain: TfrmMain
     Connection = MainDm.MainDB
     Parameters = <>
     Left = 157
+    Top = 98
+  end
+  object qryTemp: TADOQuery
+    Connection = MainDm.MainDB
+    Parameters = <>
+    Left = 184
     Top = 98
   end
 end

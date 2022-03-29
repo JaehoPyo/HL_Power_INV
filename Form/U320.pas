@@ -77,7 +77,7 @@ var
 
 implementation
 
-uses Main ;
+uses Main, Popup_Item_Update ;
 
 {$R *.dfm}
 
@@ -124,7 +124,7 @@ begin
   MainDm.M_Info.ActiveFormID := '320';
   frmMain.LblMenu000.Caption := MainDm.M_Info.ActiveFormID + '. ' + getLangMenuString(MainDm.M_Info.ActiveFormID, frmMain.LblMenu000.Caption, MainDm.M_Info.LANG_TYPE, 'N');
   frmU320.Caption := MainDm.M_Info.ActiveFormName;
-  fnWmMsgSend( 22221,11111 );
+  fnWmMsgSend( 22211,11111 );
 
   dtDateFr.Date := StrToDate(FormatDateTime('YYYY-MM-DD',Now));
   dtTimeFr.Time := StrToTime('00:00:00');
@@ -233,7 +233,7 @@ end;
 //==============================================================================
 procedure TfrmU320.fnCommandUpdate;
 begin
-//
+  frmPopup_Item_Update.ShowModal ;
 end;
 
 //==============================================================================

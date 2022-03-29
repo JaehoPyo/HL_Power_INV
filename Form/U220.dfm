@@ -165,8 +165,6 @@ object frmU220: TfrmU220
     BevelOuter = bvNone
     TabOrder = 0
     OnResize = Pnl_MainResize
-    ExplicitWidth = 1904
-    ExplicitHeight = 1041
     object Pnl_Sub: TPanel
       Left = 0
       Top = -23
@@ -667,8 +665,8 @@ object frmU220: TfrmU220
         Items.Strings = (
           #49440#53469
           '1'
-          '2'
-          '3')
+          '3'
+          '5')
       end
     end
   end
