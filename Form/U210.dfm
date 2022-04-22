@@ -181,6 +181,8 @@ object frmU210: TfrmU210
         BevelInner = bvRaised
         BevelOuter = bvNone
         TabOrder = 0
+        ExplicitLeft = -24
+        ExplicitTop = 232
         object Panel4: TPanel
           Left = 57
           Top = 1
@@ -429,7 +431,7 @@ object frmU210: TfrmU210
             Left = 128
             Top = 3
             Width = 150
-            Height = 71
+            Height = 68
             Hint = #49688#46041#52376#47532' '#51089#50629#48264#54840
             Alignment = taCenter
             CharCase = ecUpperCase
@@ -521,7 +523,7 @@ object frmU210: TfrmU210
             FieldName = 'JOBD_DESC'
             Footers = <>
             Title.Caption = #51089#50629#50976#54805
-            Width = 210
+            Width = 170
           end
           item
             Alignment = taCenter
@@ -531,7 +533,7 @@ object frmU210: TfrmU210
             FieldName = 'ITM_CD'
             Footers = <>
             Title.Caption = #44592#51333#53076#46300
-            Width = 210
+            Width = 170
           end
           item
             Alignment = taCenter
@@ -541,7 +543,17 @@ object frmU210: TfrmU210
             FieldName = 'LUGG'
             Footers = <>
             Title.Caption = #51089#50629#48264#54840
-            Width = 210
+            Width = 170
+          end
+          item
+            Alignment = taCenter
+            AutoFitColWidth = False
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'LINE_NO'
+            Footers = <>
+            Title.Caption = #49828#53580#51060#49496
+            Width = 170
           end
           item
             Alignment = taCenter
@@ -551,7 +563,7 @@ object frmU210: TfrmU210
             FieldName = 'ID_CODE'
             Footers = <>
             Title.Caption = #54616#50669#50948#52824
-            Width = 210
+            Width = 170
           end
           item
             Alignment = taCenter
@@ -561,17 +573,6 @@ object frmU210: TfrmU210
             FieldName = 'NOWMC_DESC'
             Footers = <>
             Title.Caption = #51652#54665#49345#53468
-            Width = 210
-          end
-          item
-            Alignment = taCenter
-            AutoFitColWidth = False
-            DynProps = <>
-            EditButtons = <>
-            FieldName = 'BUFFSTATUS_DESC'
-            Footers = <>
-            Title.Caption = #48260#54140#49345#53468
-            Visible = False
             Width = 210
           end
           item
@@ -983,9 +984,6 @@ object frmU210: TfrmU210
               Color = 15132364
               ParentBackground = False
               TabOrder = 2
-              ExplicitLeft = 200
-              ExplicitWidth = 100
-              ExplicitHeight = 52
             end
           end
           object Panel7: TPanel
@@ -1010,7 +1008,7 @@ object frmU210: TfrmU210
             Left = 128
             Top = 3
             Width = 150
-            Height = 71
+            Height = 68
             Hint = #49688#46041#52376#47532' '#51089#50629#48264#54840
             Alignment = taCenter
             CharCase = ecUpperCase
@@ -1102,7 +1100,7 @@ object frmU210: TfrmU210
             FieldName = 'JOBD_DESC'
             Footers = <>
             Title.Caption = #51089#50629#50976#54805
-            Width = 210
+            Width = 170
           end
           item
             Alignment = taCenter
@@ -1112,7 +1110,7 @@ object frmU210: TfrmU210
             FieldName = 'ITM_CD'
             Footers = <>
             Title.Caption = #44592#51333#53076#46300
-            Width = 210
+            Width = 170
           end
           item
             Alignment = taCenter
@@ -1122,7 +1120,17 @@ object frmU210: TfrmU210
             FieldName = 'LUGG'
             Footers = <>
             Title.Caption = #51089#50629#48264#54840
-            Width = 210
+            Width = 170
+          end
+          item
+            Alignment = taCenter
+            AutoFitColWidth = False
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'LINE_NO'
+            Footers = <>
+            Title.Caption = #49828#53580#51060#49496
+            Width = 170
           end
           item
             Alignment = taCenter
@@ -1132,7 +1140,7 @@ object frmU210: TfrmU210
             FieldName = 'ID_CODE'
             Footers = <>
             Title.Caption = #51201#51116#50948#52824
-            Width = 210
+            Width = 170
           end
           item
             Alignment = taCenter
@@ -1142,17 +1150,6 @@ object frmU210: TfrmU210
             FieldName = 'NOWMC_DESC'
             Footers = <>
             Title.Caption = #51652#54665#49345#53468
-            Width = 210
-          end
-          item
-            Alignment = taCenter
-            AutoFitColWidth = False
-            DynProps = <>
-            EditButtons = <>
-            FieldName = 'BUFFSTATUS_DESC'
-            Footers = <>
-            Title.Caption = #48260#54140#49345#53468
-            Visible = False
             Width = 210
           end
           item
@@ -1197,8 +1194,6 @@ object frmU210: TfrmU210
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 2
-      ExplicitTop = 300
-      ExplicitHeight = 300
       object Panel9: TPanel
         Left = 0
         Top = 0
@@ -1548,7 +1543,7 @@ object frmU210: TfrmU210
             FieldName = 'JOBD_DESC'
             Footers = <>
             Title.Caption = #51089#50629#50976#54805
-            Width = 210
+            Width = 170
           end
           item
             Alignment = taCenter
@@ -1558,7 +1553,7 @@ object frmU210: TfrmU210
             FieldName = 'ITM_CD'
             Footers = <>
             Title.Caption = #44592#51333#53076#46300
-            Width = 210
+            Width = 170
           end
           item
             Alignment = taCenter
@@ -1568,7 +1563,17 @@ object frmU210: TfrmU210
             FieldName = 'LUGG'
             Footers = <>
             Title.Caption = #51089#50629#48264#54840
-            Width = 210
+            Width = 170
+          end
+          item
+            Alignment = taCenter
+            AutoFitColWidth = False
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'LINE_NO'
+            Footers = <>
+            Title.Caption = #49828#53580#51060#49496
+            Width = 170
           end
           item
             Alignment = taCenter
@@ -1578,7 +1583,7 @@ object frmU210: TfrmU210
             FieldName = 'ID_CODE'
             Footers = <>
             Title.Caption = #54616#50669#50948#52824
-            Width = 210
+            Width = 170
           end
           item
             Alignment = taCenter
@@ -1588,17 +1593,6 @@ object frmU210: TfrmU210
             FieldName = 'NOWMC_DESC'
             Footers = <>
             Title.Caption = #51652#54665#49345#53468
-            Width = 210
-          end
-          item
-            Alignment = taCenter
-            AutoFitColWidth = False
-            DynProps = <>
-            EditButtons = <>
-            FieldName = 'BUFFSTATUS_DESC'
-            Footers = <>
-            Title.Caption = #48260#54140#49345#53468
-            Visible = False
             Width = 210
           end
           item

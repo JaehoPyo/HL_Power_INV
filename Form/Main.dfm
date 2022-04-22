@@ -474,9 +474,7 @@ object frmMain: TfrmMain
       00001C208001007080000600C0010218000007086000001C2080010070E0FF00
       158DC1F48370CF2E0000000049454E44AE426082}
     Transparent = True
-    ExplicitTop = 64
-    ExplicitWidth = 1008
-    ExplicitHeight = 504
+    ExplicitTop = 91
   end
   object Panel1: TPanel
     Left = 0
@@ -509,9 +507,9 @@ object frmMain: TfrmMain
         ParentBackground = False
         TabOrder = 0
         object LblMenu000: TLabel
-          Left = 97
+          Left = 17
           Top = 2
-          Width = 1047
+          Width = 465
           Height = 76
           ParentCustomHint = False
           Align = alClient
@@ -530,13 +528,40 @@ object frmMain: TfrmMain
           ShowHint = False
           Layout = tlCenter
           StyleElements = [seClient, seBorder]
-          ExplicitWidth = 426
+          ExplicitLeft = 79
+          ExplicitTop = 3
+          ExplicitWidth = 536
+        end
+        object Lbl_error: TLabel
+          Left = 482
+          Top = 2
+          Width = 662
+          Height = 76
+          ParentCustomHint = False
+          Align = alRight
+          BiDiMode = bdLeftToRight
+          Caption = '#ER - '#46972#51060#53944#52964#53948' SAFETY '#52264#45800#51473
+          Color = clWhite
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clFuchsia
+          Font.Height = 40
+          Font.Name = 'HY'#44204#44256#46357
+          Font.Style = []
+          ParentBiDiMode = False
+          ParentColor = False
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = False
+          Layout = tlCenter
+          Visible = False
+          StyleElements = [seClient, seBorder]
+          ExplicitLeft = 514
           ExplicitHeight = 40
         end
         object Panel11: TPanel
           Left = 2
           Top = 2
-          Width = 95
+          Width = 15
           Height = 76
           Align = alLeft
           BevelOuter = bvNone
@@ -1630,8 +1655,8 @@ object frmMain: TfrmMain
   end
   object PnlMFCInterfaceConn: TPanel
     Left = 272
-    Top = 124
-    Width = 105
+    Top = 126
+    Width = 133
     Height = 20
     BevelOuter = bvNone
     Font.Charset = DEFAULT_CHARSET
@@ -1648,7 +1673,7 @@ object frmMain: TfrmMain
       Width = 105
       Height = 20
       Hint = #49444#48708' '#53685#49888' '#49345#53468' - '#51221#49345'['#45433#49353'] '#51060#49345'['#51201#49353']'
-      Align = alClient
+      Align = alLeft
       Alignment = taCenter
       Caption = #49444#48708#53685#49888'        '
       Color = clBtnFace
@@ -1671,7 +1696,7 @@ object frmMain: TfrmMain
       Top = 2
       Width = 16
       Height = 16
-      Hint = #52968#48288#51060#50612'1/'#49828#53468#52964#53356#47112#51064' '#49444#48708' '#53685#49888' '#49345#53468' - '#51221#49345'['#45433#49353'] '#51060#49345'['#51201#49353']'
+      Hint = 'MELSEC '#53685#49888' '#49345#53468' - '#51221#49345'['#45433#49353'] '#51060#49345'['#51201#49353']'
       Brush.Color = 8684799
       ParentShowHint = False
       Pen.Style = psClear
@@ -1679,11 +1704,23 @@ object frmMain: TfrmMain
       ShowHint = True
     end
     object ShpMFCInterfaceConn2: TShape
-      Left = 80
+      Left = 84
       Top = 2
       Width = 16
       Height = 16
-      Hint = #52968#48288#51060#50612'2 '#49444#48708' '#53685#49888' '#49345#53468' - '#51221#49345'['#45433#49353'] '#51060#49345'['#51201#49353']'
+      Hint = 'ACS '#51064#53552#54168#51060#49828' '#49345#53468' - '#51221#49345'['#45433#49353'] '#51060#49345'['#51201#49353']'
+      Brush.Color = 8684799
+      ParentShowHint = False
+      Pen.Style = psClear
+      Shape = stRoundRect
+      ShowHint = True
+    end
+    object ShpMFCInterfaceConn3: TShape
+      Left = 106
+      Top = 2
+      Width = 16
+      Height = 16
+      Hint = #49828#53468#52964' '#51064#53552#54168#51060#49828' '#49345#53468' - '#51221#49345'['#45433#49353'] '#51060#49345'['#51201#49353']'
       Brush.Color = 8684799
       ParentShowHint = False
       Pen.Style = psClear
@@ -1760,7 +1797,7 @@ object frmMain: TfrmMain
       item
         Alignment = taCenter
         Text = 'MFC Interface'
-        Width = 110
+        Width = 150
       end
       item
         Alignment = taCenter
@@ -2251,6 +2288,10 @@ object frmMain: TfrmMain
         Caption = #52636#44256' '#51060#47141' '#51312#54924
         OnClick = execMenuClick
       end
+      object M4300: TMenuItem
+        Caption = #47001#51060#46041' '#51060#47141' '#51312#54924
+        OnClick = execMenuClick
+      end
     end
     object M5000: TMenuItem
       Bitmap.Data = {
@@ -2374,6 +2415,7 @@ object frmMain: TfrmMain
   object tmrLogFileCheck: TTimer
     Tag = 1
     Interval = 6000000
+    OnTimer = tmrLogFileCheckTimer
     Left = 16
     Top = 173
   end
@@ -2388,5 +2430,23 @@ object frmMain: TfrmMain
     Parameters = <>
     Left = 184
     Top = 98
+  end
+  object qryInfo: TADOQuery
+    Connection = MainDm.MainDB
+    Parameters = <>
+    Left = 211
+    Top = 98
+  end
+  object tmrQry: TTimer
+    Enabled = False
+    OnTimer = tmrQryTimer
+    Left = 57
+    Top = 174
+  end
+  object tmrErrorColor: TTimer
+    Enabled = False
+    OnTimer = tmrErrorColorTimer
+    Left = 97
+    Top = 174
   end
 end

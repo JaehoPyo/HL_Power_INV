@@ -3,11 +3,12 @@ object MainDm: TMainDm
   Height = 247
   Width = 272
   object MainDB: TADOConnection
-    Connected = True
     ConnectionString = 
       'Provider=SQLOLEDB.1;Password=netis4321;Persist Security Info=Tru' +
-      'e;User ID=sa;Initial Catalog=WMS_TEMP;Data Source=192.168.0.123,' +
-      '44333'
+      'e;User ID=sa;Initial Catalog=WMS_HL;Data Source=192.168.0.201;Us' +
+      'e Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;W' +
+      'orkstation ID=DESKTOP-HHLGCFH;Use Encryption for Data=False;Tag ' +
+      'with column collation when possible=False'
     LoginPrompt = False
     Provider = 'SQLOLEDB.1'
     AfterConnect = MainDBAfterConnect

@@ -265,7 +265,7 @@ object frmU520: TfrmU520
           AutoFitColWidth = False
           DynProps = <>
           EditButtons = <>
-          FieldName = 'ERR_DESC'
+          FieldName = 'ERR_NAME'
           Font.Charset = GB2312_CHARSET
           Font.Color = clWindowText
           Font.Height = 20

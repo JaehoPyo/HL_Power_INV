@@ -169,27 +169,16 @@ object frmU310: TfrmU310
       Top = 1
       Width = 1536
       Height = 767
-      ParentCustomHint = False
       Align = alClient
-      Alignment = taLeftJustify
       BevelOuter = bvNone
-      BiDiMode = bdLeftToRight
-      BorderStyle = bsSingle
       Color = clWhite
-      Ctl3D = True
-      DoubleBuffered = False
       Font.Charset = GB2312_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
       Font.Name = 'MS Sans Serif'
       Font.Style = []
-      ParentBiDiMode = False
       ParentBackground = False
-      ParentCtl3D = False
-      ParentDoubleBuffered = False
       ParentFont = False
-      ParentShowHint = False
-      ShowHint = False
       TabOrder = 0
     end
     object Pnl_Info: TPanel
@@ -206,7 +195,7 @@ object frmU310: TfrmU310
         Left = 1
         Top = 1
         Width = 348
-        Height = 248
+        Height = 224
         Align = alTop
         BevelInner = bvRaised
         BevelOuter = bvLowered
@@ -235,13 +224,12 @@ object frmU310: TfrmU310
           Left = 2
           Top = 32
           Width = 344
-          Height = 214
+          Height = 190
           Align = alClient
           BevelInner = bvLowered
           BevelOuter = bvNone
           ParentBackground = False
           TabOrder = 1
-          ExplicitHeight = 177
           object CellStatus0: TPanel
             Left = 10
             Top = 10
@@ -269,7 +257,7 @@ object frmU310: TfrmU310
           end
           object CellStatus2: TPanel
             Left = 10
-            Top = 50
+            Top = 46
             Width = 60
             Height = 35
             ParentCustomHint = False
@@ -294,7 +282,7 @@ object frmU310: TfrmU310
           end
           object CellStatus4: TPanel
             Left = 10
-            Top = 90
+            Top = 82
             Width = 60
             Height = 35
             ParentCustomHint = False
@@ -319,7 +307,7 @@ object frmU310: TfrmU310
           end
           object CellStatus6: TPanel
             Left = 10
-            Top = 130
+            Top = 118
             Width = 60
             Height = 35
             ParentCustomHint = False
@@ -369,7 +357,7 @@ object frmU310: TfrmU310
           end
           object CellStatus3: TPanel
             Left = 175
-            Top = 50
+            Top = 46
             Width = 60
             Height = 35
             ParentCustomHint = False
@@ -394,7 +382,7 @@ object frmU310: TfrmU310
           end
           object CellStatus5: TPanel
             Left = 175
-            Top = 90
+            Top = 82
             Width = 60
             Height = 35
             ParentCustomHint = False
@@ -419,7 +407,7 @@ object frmU310: TfrmU310
           end
           object CellStatus7: TPanel
             Left = 175
-            Top = 130
+            Top = 118
             Width = 60
             Height = 35
             ParentCustomHint = False
@@ -474,7 +462,7 @@ object frmU310: TfrmU310
           end
           object Panel5: TPanel
             Left = 75
-            Top = 57
+            Top = 54
             Width = 100
             Height = 20
             BevelOuter = bvNone
@@ -489,7 +477,7 @@ object frmU310: TfrmU310
           end
           object Panel6: TPanel
             Left = 75
-            Top = 97
+            Top = 91
             Width = 100
             Height = 20
             BevelOuter = bvNone
@@ -504,7 +492,7 @@ object frmU310: TfrmU310
           end
           object Panel7: TPanel
             Left = 75
-            Top = 137
+            Top = 128
             Width = 100
             Height = 20
             BevelOuter = bvNone
@@ -519,7 +507,7 @@ object frmU310: TfrmU310
           end
           object Panel10: TPanel
             Left = 240
-            Top = 137
+            Top = 128
             Width = 100
             Height = 20
             BevelOuter = bvNone
@@ -534,7 +522,7 @@ object frmU310: TfrmU310
           end
           object Panel12: TPanel
             Left = 240
-            Top = 97
+            Top = 91
             Width = 100
             Height = 20
             BevelOuter = bvNone
@@ -549,7 +537,7 @@ object frmU310: TfrmU310
           end
           object Panel13: TPanel
             Left = 240
-            Top = 57
+            Top = 54
             Width = 100
             Height = 20
             BevelOuter = bvNone
@@ -564,7 +552,7 @@ object frmU310: TfrmU310
           end
           object CellStatus8: TPanel
             Left = 10
-            Top = 170
+            Top = 154
             Width = 60
             Height = 35
             ParentCustomHint = False
@@ -589,7 +577,7 @@ object frmU310: TfrmU310
           end
           object Panel9: TPanel
             Left = 75
-            Top = 177
+            Top = 165
             Width = 100
             Height = 20
             BevelOuter = bvNone
@@ -604,7 +592,7 @@ object frmU310: TfrmU310
           end
           object CellStatus9: TPanel
             Left = 175
-            Top = 170
+            Top = 154
             Width = 60
             Height = 35
             ParentCustomHint = False
@@ -629,7 +617,7 @@ object frmU310: TfrmU310
           end
           object Panel17: TPanel
             Left = 240
-            Top = 177
+            Top = 165
             Width = 100
             Height = 20
             BevelOuter = bvNone
@@ -646,16 +634,14 @@ object frmU310: TfrmU310
       end
       object Panel14: TPanel
         Left = 1
-        Top = 249
+        Top = 225
         Width = 348
-        Height = 517
+        Height = 541
         Align = alClient
         BevelInner = bvRaised
         BevelOuter = bvLowered
         ParentBackground = False
         TabOrder = 1
-        ExplicitTop = 209
-        ExplicitHeight = 557
         object Panel15: TPanel
           Left = 2
           Top = 2
@@ -679,13 +665,12 @@ object frmU310: TfrmU310
           Left = 2
           Top = 32
           Width = 344
-          Height = 483
+          Height = 507
           Align = alClient
           BevelInner = bvLowered
           BevelOuter = bvNone
           ParentBackground = False
           TabOrder = 1
-          ExplicitHeight = 523
           object Panel19: TPanel
             Left = 10
             Top = 10
@@ -831,8 +816,8 @@ object frmU310: TfrmU310
             TabOrder = 7
           end
           object Panel32: TPanel
-            Left = 10
-            Top = 253
+            Left = 170
+            Top = 229
             Width = 100
             Height = 24
             Alignment = taRightJustify
@@ -853,6 +838,7 @@ object frmU310: TfrmU310
             Top = 10
             Width = 54
             Height = 24
+            Enabled = False
             Font.Charset = GB2312_CHARSET
             Font.Color = clWindowText
             Font.Height = -16
@@ -863,16 +849,14 @@ object frmU310: TfrmU310
             TabOrder = 9
             Items.Strings = (
               ''
-              '1'
-              '2'
-              '3'
-              '4')
+              '1')
           end
           object ComboBoxBank: TComboBox
             Left = 170
             Top = 10
             Width = 54
             Height = 24
+            Enabled = False
             Font.Charset = GB2312_CHARSET
             Font.Color = clWindowText
             Font.Height = -16
@@ -892,6 +876,7 @@ object frmU310: TfrmU310
             Top = 10
             Width = 54
             Height = 24
+            Enabled = False
             Font.Charset = GB2312_CHARSET
             Font.Color = clWindowText
             Font.Height = -16
@@ -910,16 +895,14 @@ object frmU310: TfrmU310
               '06'
               '07'
               '08'
-              '09'
-              '10'
-              '11'
-              '12')
+              '09')
           end
           object ComboBoxLevel: TComboBox
             Left = 280
             Top = 10
             Width = 55
             Height = 24
+            Enabled = False
             Font.Charset = GB2312_CHARSET
             Font.Color = clWindowText
             Font.Height = -16
@@ -935,11 +918,7 @@ object frmU310: TfrmU310
               '03'
               '04'
               '05'
-              '06'
-              '07'
-              '08'
-              '09'
-              '10')
+              '06')
           end
           object CB_ID_STATUS: TComboBox
             Left = 115
@@ -1036,8 +1015,8 @@ object frmU310: TfrmU310
             TabOrder = 18
           end
           object cbOtUSED: TCheckBox
-            Left = 114
-            Top = 254
+            Left = 276
+            Top = 229
             Width = 57
             Height = 21
             Caption = #44552#51648
@@ -1051,9 +1030,9 @@ object frmU310: TfrmU310
           end
           object btnSave: TButton
             Left = 10
-            Top = 283
+            Top = 442
             Width = 325
-            Height = 65
+            Height = 63
             Caption = #51200' '#51109
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -1128,6 +1107,230 @@ object frmU310: TfrmU310
             Kind = dtkTime
             ParentFont = False
             TabOrder = 24
+          end
+          object Panel2: TPanel
+            Left = 10
+            Top = 280
+            Width = 100
+            Height = 24
+            Alignment = taRightJustify
+            BevelOuter = bvNone
+            Caption = #49885#48324#51088#51060#47492'2'
+            Color = 9365209
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -16
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentBackground = False
+            ParentFont = False
+            TabOrder = 25
+          end
+          object Panel11: TPanel
+            Left = 10
+            Top = 307
+            Width = 100
+            Height = 24
+            Alignment = taRightJustify
+            BevelOuter = bvNone
+            Caption = #49885#48324#48264#54840'1'
+            Color = 9365209
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -16
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentBackground = False
+            ParentFont = False
+            TabOrder = 26
+          end
+          object Panel20: TPanel
+            Left = 10
+            Top = 334
+            Width = 100
+            Height = 24
+            Alignment = taRightJustify
+            BevelOuter = bvNone
+            Caption = #49885#48324#48264#54840'2'
+            Color = 9365209
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -16
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentBackground = False
+            ParentFont = False
+            TabOrder = 27
+          end
+          object Panel21: TPanel
+            Left = 10
+            Top = 253
+            Width = 100
+            Height = 24
+            Alignment = taRightJustify
+            BevelOuter = bvNone
+            Caption = #49885#48324#51088#51060#47492'1'
+            Color = 9365209
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -16
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentBackground = False
+            ParentFont = False
+            TabOrder = 28
+          end
+          object Panel22: TPanel
+            Left = 10
+            Top = 361
+            Width = 100
+            Height = 24
+            Alignment = taRightJustify
+            BevelOuter = bvNone
+            Caption = #52264#51333'#1'
+            Color = 9365209
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -16
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentBackground = False
+            ParentFont = False
+            TabOrder = 29
+          end
+          object Panel25: TPanel
+            Left = 10
+            Top = 388
+            Width = 100
+            Height = 24
+            Alignment = taRightJustify
+            BevelOuter = bvNone
+            Caption = #52264#51333'#2'
+            Color = 9365209
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -16
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentBackground = False
+            ParentFont = False
+            TabOrder = 30
+          end
+          object Panel28: TPanel
+            Left = 10
+            Top = 415
+            Width = 100
+            Height = 24
+            Alignment = taRightJustify
+            BevelOuter = bvNone
+            Caption = #49373#49328#51648
+            Color = 9365209
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -16
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentBackground = False
+            ParentFont = False
+            TabOrder = 31
+          end
+          object edtLineName1: TEdit
+            Left = 115
+            Top = 253
+            Width = 220
+            Height = 24
+            Font.Charset = GB2312_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = #46027#50880
+            Font.Style = []
+            ImeName = 'Microsoft Office IME 2007'
+            ParentFont = False
+            TabOrder = 32
+          end
+          object edtLineName2: TEdit
+            Left = 115
+            Top = 280
+            Width = 220
+            Height = 24
+            Font.Charset = GB2312_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = #46027#50880
+            Font.Style = []
+            ImeName = 'Microsoft Office IME 2007'
+            ParentFont = False
+            TabOrder = 33
+          end
+          object edtPalletNo1: TEdit
+            Left = 115
+            Top = 307
+            Width = 220
+            Height = 24
+            Font.Charset = GB2312_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = #46027#50880
+            Font.Style = []
+            ImeName = 'Microsoft Office IME 2007'
+            ParentFont = False
+            TabOrder = 34
+          end
+          object edtPalletNo2: TEdit
+            Left = 115
+            Top = 334
+            Width = 220
+            Height = 24
+            Font.Charset = GB2312_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = #46027#50880
+            Font.Style = []
+            ImeName = 'Microsoft Office IME 2007'
+            ParentFont = False
+            TabOrder = 35
+          end
+          object edtModelNo1: TEdit
+            Left = 115
+            Top = 361
+            Width = 220
+            Height = 24
+            Font.Charset = GB2312_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = #46027#50880
+            Font.Style = []
+            ImeName = 'Microsoft Office IME 2007'
+            ParentFont = False
+            TabOrder = 36
+          end
+          object edtModelNo2: TEdit
+            Left = 115
+            Top = 388
+            Width = 220
+            Height = 24
+            Font.Charset = GB2312_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = #46027#50880
+            Font.Style = []
+            ImeName = 'Microsoft Office IME 2007'
+            ParentFont = False
+            TabOrder = 37
+          end
+          object edtArea: TEdit
+            Left = 115
+            Top = 415
+            Width = 220
+            Height = 24
+            Font.Charset = GB2312_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = #46027#50880
+            Font.Style = []
+            ImeName = 'Microsoft Office IME 2007'
+            ParentFont = False
+            TabOrder = 38
           end
         end
       end

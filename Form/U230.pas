@@ -32,7 +32,6 @@ type
     ComboBoxBank: TComboBox;
     ComboBoxBay: TComboBox;
     ComboBoxLevel: TComboBox;
-    dgInfo: TDBGridEh;
     sbtReset: TSpeedButton;
     GroupBox1: TGroupBox;
     Panel2: TPanel;
@@ -46,6 +45,7 @@ type
     GroupBox2: TGroupBox;
     lbloutstation: TLabel;
     cbOut: TComboBox;
+    dgInfo: TDBGridEh;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -302,7 +302,10 @@ begin
                 '                       when ''5'' then ''출고예약'' ' +
                 '                       when ''6'' then ''이중입고'' ' +
                 '                       when ''7'' then ''공출고'' end) as ID_STATUS_DESC, ' +
-                '       (SUBSTRING(ID_CODE,1,1)+''-''+SUBSTRING(ID_CODE,2,2)+''-''+SUBSTRING(ID_CODE,4,2)) as ID_CODE_DESC ' +
+                '       (SUBSTRING(ID_CODE,1,1)+''-''+SUBSTRING(ID_CODE,2,2)+''-''+SUBSTRING(ID_CODE,4,2)) as ID_CODE_DESC, ' +
+                '        RF_LINE_NAME1, RF_LINE_NAME2, RF_PALLET_NO1, RF_PALLET_NO2, RF_MODEL_NO1, ' +
+                '        RF_MODEL_NO2, RF_BMA_NO, RF_PALLET_BMA1, RF_PALLET_BMA2, RF_PALLET_BMA3,  ' +
+                '        RF_AREA  ' +
                 '   From TT_STOCK ' +
                 '  Where 1=1 ' ;
 
@@ -408,6 +411,13 @@ begin
       Exit;
     end;
 
+    if (cbOut.Text = '2') and (SC_STATUS[1].D213[11] = '1') or
+       (cbOut.Text = '4') and (SC_STATUS[1].D213[13] = '1') or
+       (cbOut.Text = '6') and (SC_STATUS[1].D213[15] = '1') then
+    begin
+      MessageDlg('AGV가 도킹중 입니다.', mtConfirmation, [mbYes], 0) ;
+      Exit;
+    end;
 
     if (dgInfo.SelectedRows.Count = 1) then
     begin
@@ -472,6 +482,7 @@ begin
     OrderData.LUGG       := Format('%.4d', [GetJobNo]) ; // 작업번호
 
     OrderData.JOBD       := '2'; // 출고지시
+    OrderData.IS_AUTO    := 'N';
     OrderData.LINE_NO    := cbOut.Text; //LINE_NO
 
     OrderData.SRCSITE    := Format('%.4d', [StrToInt('1')]) ;                                      // 적재 호기
@@ -549,7 +560,7 @@ begin
       SQL.Clear;
       SQL.Text :=
       ' INSERT INTO TT_ORDER (                             ' + #13#10+
-      '    REG_TIME, LUGG, JOBD, LINE_NO,                  ' + #13#10 +
+      '    REG_TIME, LUGG, JOBD, IS_AUTO, LINE_NO,         ' + #13#10 +
       '    SRCSITE, SRCAISLE, SRCBAY, SRCLEVEL,            ' + #13#10 +
       '    DSTSITE, DSTAISLE, DSTBAY, DSTLEVEL,            ' + #13#10 +
       '    NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS,        ' + #13#10 +
@@ -557,7 +568,7 @@ begin
       '    JOB_END, CVFR, CVTO, CVCURR,                    ' + #13#10 +
       '    ETC, EMG, ITM_CD                                ' + #13#10 +
       '  ) VALUES (                                        ' + #13#10 +
-      '    :REG_TIME, :LUGG, :JOBD, :LINE_NO,              ' + #13#10 +
+      '    :REG_TIME, :LUGG, :JOBD, :IS_AUTO, :LINE_NO,    ' + #13#10 +
       '    :SRCSITE, :SRCAISLE, :SRCBAY, :SRCLEVEL,        ' + #13#10 +
       '    :DSTSITE, :DSTAISLE, :DSTBAY, :DSTLEVEL,        ' + #13#10 +
       '    :NOWMC, :JOBSTATUS, :NOWSTATUS, :BUFFSTATUS,    ' + #13#10 +
@@ -570,6 +581,7 @@ begin
       Parameters[i].Value := OrderData.REG_TIME;    Inc(i);
       Parameters[i].Value := OrderData.LUGG;        Inc(i);
       Parameters[i].Value := OrderData.JOBD;        Inc(i);
+      Parameters[i].Value := OrderData.IS_AUTO;     Inc(i);
       Parameters[i].Value := OrderData.LINE_NO;     Inc(i); //LINE_NO
       Parameters[i].Value := OrderData.SRCSITE;     Inc(i);
       Parameters[i].Value := OrderData.SRCAISLE;    Inc(i);
@@ -795,6 +807,8 @@ begin
   OrderData.REG_TIME   := '';
   OrderData.LUGG       := '';
   OrderData.JOBD       := '';
+  OrderData.IS_AUTO    := '';
+  OrderData.LINE_NO    := '';
   OrderData.SRCSITE    := '';
   OrderData.SRCAISLE   := '';
   OrderData.SRCBAY     := '';
@@ -861,9 +875,9 @@ var
 begin
   case (Sender as TComboBox).ItemIndex of
     0  : begin lbloutstation.Caption := '' end;
-    1  : begin lbloutstation.Caption := '01-01-01 출고대' end;
-    2  : begin lbloutstation.Caption := '01-04-01 출고대' end;
-    3  : begin lbloutstation.Caption := '01-07-01 출고대' end;
+    1  : begin lbloutstation.Caption := '02-07-01 출고대' end;
+    2  : begin lbloutstation.Caption := '02-04-01 출고대' end;
+    3  : begin lbloutstation.Caption := '02-01-01 출고대' end;
   end;
 end;
 

@@ -67,7 +67,7 @@ uses U110;
 //==============================================================================
 procedure TfrmPopup_Item.btnSaveClick(Sender: TObject);
 var
-  strSQL, ITM_YN : String;
+  strSQL, ITM_YN, tmpLogStr : String;
   ExecNo : integer ;
 begin
   ITM_YN := '';
@@ -98,6 +98,10 @@ begin
               ' GETDATE(), GETDATE() ) ' ;
   end;
 
+  tmpLogStr := '적재위치[' + Trim(edtITM_CD.Text)   + '], ' +
+               '셀상태['   + Trim(edtITM_Name.Text) + '], ' +
+               '기종코드[' + Trim(edtITM_Spec.Text) + '], ' ;
+
   try
     with qryCommand do
     begin
@@ -106,6 +110,15 @@ begin
       SQL.Text := strSQL ;
       ExecNo := ExecSQL;
     end;
+
+    if btnSave.Caption = '등 록' then
+    begin
+      InsertPGMHist('['+FormNo+']', 'N', 'btnSaveClick', '등록','등록 - ' + tmpLogStr, StrSQL, '', '', '');
+    end else
+    begin
+      InsertPGMHist('['+FormNo+']', 'N', 'btnSaveClick', '수정','수정 - ' + tmpLogStr, StrSQL, '', '', '');
+    end;
+
     frmU110.SetComboBox ;
     frmU110.fnCommandQuery;
     Close;

@@ -186,15 +186,15 @@
         ExplicitHeight = 680
       end
       object Panel4: TPanel
-        Left = 13
-        Top = 120
+        Left = 21
+        Top = 38
         Width = 1874
         Height = 908
         BevelInner = bvLowered
         BevelOuter = bvNone
         TabOrder = 0
         object Label17: TLabel
-          Left = 393
+          Left = 390
           Top = 210
           Width = 100
           Height = 20
@@ -395,24 +395,24 @@
             Height = 100
             Align = alLeft
             BevelInner = bvLowered
+            Color = clLime
+            ParentBackground = False
             TabOrder = 0
             object Bay02: TPanel
               Tag = 210
-              Left = 2
-              Top = 2
-              Width = 96
-              Height = 96
-              Align = alClient
-              BevelInner = bvRaised
+              Left = 7
+              Top = 7
+              Width = 86
+              Height = 86
               BevelOuter = bvNone
               Color = clWhite
               ParentBackground = False
               TabOrder = 0
               object Image3: TImage
-                Left = 1
-                Top = 1
-                Width = 94
-                Height = 94
+                Left = 0
+                Top = 0
+                Width = 86
+                Height = 86
                 Align = alClient
                 Center = True
                 Picture.Data = {
@@ -436,6 +436,76 @@
                 Transparent = True
                 ExplicitLeft = 2
                 ExplicitTop = 2
+                ExplicitWidth = 94
+                ExplicitHeight = 94
+              end
+              object ImgCV_Cago5: TImage
+                Tag = 10
+                Left = 70
+                Top = 7
+                Width = 16
+                Height = 16
+                Hint = '#15 '#54868#47932#44048#51648
+                Margins.Left = 0
+                Margins.Top = 0
+                Margins.Right = 0
+                Margins.Bottom = 0
+                AutoSize = True
+                ParentShowHint = False
+                Picture.Data = {
+                  07544269746D617036050000424D360500000000000036040000280000001000
+                  0000100000000100080000000000000100000000000000000000000100000000
+                  000000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF0000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF0000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF0000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF0000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF0000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF00000000000000800000800000008080008000000080008000F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF00131313131313131313131313131313131313000000000000000000000000
+                  1313131300000C0C0C000C0C0C00000000131313130000000000000000000C0C
+                  0000131313000E0E0E000E0E0E00000C0C00131313000E0E0E000E0E0E000E00
+                  0013131313000E0E0E000E0E0E000E0013131313130000000000000000000E00
+                  1313131313000E0E0E000E0E0E0000001313131313000E0E0E000E0E0E000E00
+                  1313131313000E0E0E000E0E0E000E0013131313130000000000000000000E00
+                  1313131313130007070700000707000013131313131313000000000000000000
+                  1313131313131313131313131313131313131313131313131313131313131313
+                  1313}
+                ShowHint = True
+                Transparent = True
+                Visible = False
+              end
+              object Label11: TLabel
+                Left = 19
+                Top = 70
+                Width = 58
+                Height = 13
+                Caption = 'Station 05'
               end
             end
           end
@@ -468,24 +538,24 @@
             Height = 100
             Align = alLeft
             BevelInner = bvLowered
+            Color = clLime
+            ParentBackground = False
             TabOrder = 2
             object Bay04: TPanel
               Tag = 208
-              Left = 2
-              Top = 2
-              Width = 96
-              Height = 96
-              Align = alClient
-              BevelInner = bvRaised
+              Left = 7
+              Top = 7
+              Width = 86
+              Height = 86
               BevelOuter = bvNone
               Color = clWhite
               ParentBackground = False
               TabOrder = 0
               object Image5: TImage
-                Left = 1
-                Top = 1
-                Width = 94
-                Height = 94
+                Left = 0
+                Top = 0
+                Width = 86
+                Height = 86
                 Align = alClient
                 Center = True
                 Picture.Data = {
@@ -512,8 +582,77 @@
                   228144028904120924124824904820914022814402890412092412E81FE872C7
                   E4172D13E40000000049454E44AE426082}
                 Transparent = True
-                ExplicitLeft = 2
-                ExplicitTop = 2
+                ExplicitTop = 4
+                ExplicitWidth = 94
+                ExplicitHeight = 94
+              end
+              object ImgCV_Cago4: TImage
+                Tag = 10
+                Left = 70
+                Top = 7
+                Width = 16
+                Height = 16
+                Hint = '#15 '#54868#47932#44048#51648
+                Margins.Left = 0
+                Margins.Top = 0
+                Margins.Right = 0
+                Margins.Bottom = 0
+                AutoSize = True
+                ParentShowHint = False
+                Picture.Data = {
+                  07544269746D617036050000424D360500000000000036040000280000001000
+                  0000100000000100080000000000000100000000000000000000000100000000
+                  000000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF0000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF0000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF0000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF0000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF0000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF00000000000000800000800000008080008000000080008000F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF00131313131313131313131313131313131313000000000000000000000000
+                  1313131300000C0C0C000C0C0C00000000131313130000000000000000000C0C
+                  0000131313000E0E0E000E0E0E00000C0C00131313000E0E0E000E0E0E000E00
+                  0013131313000E0E0E000E0E0E000E0013131313130000000000000000000E00
+                  1313131313000E0E0E000E0E0E0000001313131313000E0E0E000E0E0E000E00
+                  1313131313000E0E0E000E0E0E000E0013131313130000000000000000000E00
+                  1313131313130007070700000707000013131313131313000000000000000000
+                  1313131313131313131313131313131313131313131313131313131313131313
+                  1313}
+                ShowHint = True
+                Transparent = True
+                Visible = False
+              end
+              object Label23: TLabel
+                Left = 19
+                Top = 70
+                Width = 58
+                Height = 13
+                Caption = 'Station 04'
               end
             end
           end
@@ -524,24 +663,24 @@
             Height = 100
             Align = alLeft
             BevelInner = bvLowered
+            Color = clLime
+            ParentBackground = False
             TabOrder = 3
             object Bay05: TPanel
               Tag = 207
-              Left = 2
-              Top = 2
-              Width = 96
-              Height = 96
-              Align = alClient
-              BevelInner = bvRaised
+              Left = 7
+              Top = 7
+              Width = 86
+              Height = 86
               BevelOuter = bvNone
               Color = clWhite
               ParentBackground = False
               TabOrder = 0
               object Image7: TImage
-                Left = 1
-                Top = 1
-                Width = 94
-                Height = 94
+                Left = 0
+                Top = 0
+                Width = 86
+                Height = 86
                 Align = alClient
                 Center = True
                 Picture.Data = {
@@ -563,8 +702,78 @@
                   B581AAC856E5EF471487675581EAC84145A49588B412915622D24A445A89482B
                   FD0BE41F05C21847BABF0B1F0000000049454E44AE426082}
                 Transparent = True
-                ExplicitLeft = 2
-                ExplicitTop = 2
+                ExplicitLeft = -1
+                ExplicitTop = -1
+                ExplicitWidth = 84
+                ExplicitHeight = 84
+              end
+              object ImgCV_Cago3: TImage
+                Tag = 10
+                Left = 70
+                Top = 7
+                Width = 16
+                Height = 16
+                Hint = '#15 '#54868#47932#44048#51648
+                Margins.Left = 0
+                Margins.Top = 0
+                Margins.Right = 0
+                Margins.Bottom = 0
+                AutoSize = True
+                ParentShowHint = False
+                Picture.Data = {
+                  07544269746D617036050000424D360500000000000036040000280000001000
+                  0000100000000100080000000000000100000000000000000000000100000000
+                  000000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF0000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF0000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF0000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF0000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF0000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF00000000000000800000800000008080008000000080008000F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF00131313131313131313131313131313131313000000000000000000000000
+                  1313131300000C0C0C000C0C0C00000000131313130000000000000000000C0C
+                  0000131313000E0E0E000E0E0E00000C0C00131313000E0E0E000E0E0E000E00
+                  0013131313000E0E0E000E0E0E000E0013131313130000000000000000000E00
+                  1313131313000E0E0E000E0E0E0000001313131313000E0E0E000E0E0E000E00
+                  1313131313000E0E0E000E0E0E000E0013131313130000000000000000000E00
+                  1313131313130007070700000707000013131313131313000000000000000000
+                  1313131313131313131313131313131313131313131313131313131313131313
+                  1313}
+                ShowHint = True
+                Transparent = True
+                Visible = False
+              end
+              object Label24: TLabel
+                Left = 19
+                Top = 70
+                Width = 58
+                Height = 13
+                Caption = 'Station 03'
               end
             end
           end
@@ -597,24 +806,24 @@
             Height = 100
             Align = alLeft
             BevelInner = bvLowered
+            Color = clLime
+            ParentBackground = False
             TabOrder = 5
             object Bay07: TPanel
               Tag = 205
-              Left = 2
-              Top = 2
-              Width = 96
-              Height = 96
-              Align = alClient
-              BevelInner = bvRaised
+              Left = 7
+              Top = 7
+              Width = 86
+              Height = 86
               BevelOuter = bvNone
               Color = clWhite
               ParentBackground = False
               TabOrder = 0
               object Image6: TImage
-                Left = 1
-                Top = 1
-                Width = 94
-                Height = 94
+                Left = 0
+                Top = 0
+                Width = 86
+                Height = 86
                 Align = alClient
                 Center = True
                 Picture.Data = {
@@ -641,8 +850,77 @@
                   228144028904120924124824904820914022814402890412092412E81FE872C7
                   E4172D13E40000000049454E44AE426082}
                 Transparent = True
-                ExplicitLeft = 2
-                ExplicitTop = 2
+                ExplicitTop = 4
+                ExplicitWidth = 94
+                ExplicitHeight = 94
+              end
+              object ImgCV_Cago2: TImage
+                Tag = 10
+                Left = 70
+                Top = 7
+                Width = 16
+                Height = 16
+                Hint = '#15 '#54868#47932#44048#51648
+                Margins.Left = 0
+                Margins.Top = 0
+                Margins.Right = 0
+                Margins.Bottom = 0
+                AutoSize = True
+                ParentShowHint = False
+                Picture.Data = {
+                  07544269746D617036050000424D360500000000000036040000280000001000
+                  0000100000000100080000000000000100000000000000000000000100000000
+                  000000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF0000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF0000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF0000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF0000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF0000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF00000000000000800000800000008080008000000080008000F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF00131313131313131313131313131313131313000000000000000000000000
+                  1313131300000C0C0C000C0C0C00000000131313130000000000000000000C0C
+                  0000131313000E0E0E000E0E0E00000C0C00131313000E0E0E000E0E0E000E00
+                  0013131313000E0E0E000E0E0E000E0013131313130000000000000000000E00
+                  1313131313000E0E0E000E0E0E0000001313131313000E0E0E000E0E0E000E00
+                  1313131313000E0E0E000E0E0E000E0013131313130000000000000000000E00
+                  1313131313130007070700000707000013131313131313000000000000000000
+                  1313131313131313131313131313131313131313131313131313131313131313
+                  1313}
+                ShowHint = True
+                Transparent = True
+                Visible = False
+              end
+              object Label25: TLabel
+                Left = 19
+                Top = 70
+                Width = 58
+                Height = 13
+                Caption = 'Station 02'
               end
             end
           end
@@ -653,24 +931,24 @@
             Height = 100
             Align = alLeft
             BevelInner = bvLowered
+            Color = clLime
+            ParentBackground = False
             TabOrder = 6
             object Bay08: TPanel
               Tag = 204
-              Left = 2
-              Top = 2
-              Width = 96
-              Height = 96
-              Align = alClient
-              BevelInner = bvRaised
+              Left = 7
+              Top = 7
+              Width = 86
+              Height = 86
               BevelOuter = bvNone
               Color = clWhite
               ParentBackground = False
               TabOrder = 0
               object Image8: TImage
-                Left = 1
-                Top = 1
-                Width = 94
-                Height = 94
+                Left = 0
+                Top = 0
+                Width = 86
+                Height = 86
                 Align = alClient
                 Center = True
                 Picture.Data = {
@@ -692,8 +970,76 @@
                   B581AAC856E5EF471487675581EAC84145A49588B412915622D24A445A89482B
                   FD0BE41F05C21847BABF0B1F0000000049454E44AE426082}
                 Transparent = True
-                ExplicitLeft = 2
-                ExplicitTop = 2
+                ExplicitLeft = -1
+                ExplicitTop = -1
+              end
+              object ImgCV_Cago1: TImage
+                Tag = 10
+                Left = 70
+                Top = 7
+                Width = 16
+                Height = 16
+                Hint = '#15 '#54868#47932#44048#51648
+                Margins.Left = 0
+                Margins.Top = 0
+                Margins.Right = 0
+                Margins.Bottom = 0
+                AutoSize = True
+                ParentShowHint = False
+                Picture.Data = {
+                  07544269746D617036050000424D360500000000000036040000280000001000
+                  0000100000000100080000000000000100000000000000000000000100000000
+                  000000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF0000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF0000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF0000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF0000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF0000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF00000000000000800000800000008080008000000080008000F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF00131313131313131313131313131313131313000000000000000000000000
+                  1313131300000C0C0C000C0C0C00000000131313130000000000000000000C0C
+                  0000131313000E0E0E000E0E0E00000C0C00131313000E0E0E000E0E0E000E00
+                  0013131313000E0E0E000E0E0E000E0013131313130000000000000000000E00
+                  1313131313000E0E0E000E0E0E0000001313131313000E0E0E000E0E0E000E00
+                  1313131313000E0E0E000E0E0E000E0013131313130000000000000000000E00
+                  1313131313130007070700000707000013131313131313000000000000000000
+                  1313131313131313131313131313131313131313131313131313131313131313
+                  1313}
+                ShowHint = True
+                Transparent = True
+                Visible = False
+              end
+              object Label26: TLabel
+                Left = 19
+                Top = 70
+                Width = 58
+                Height = 13
+                Caption = 'Station 01'
               end
             end
           end
@@ -726,24 +1072,24 @@
             Height = 100
             Align = alLeft
             BevelInner = bvLowered
+            Color = clLime
+            ParentBackground = False
             TabOrder = 8
             object Bay01: TPanel
               Tag = 211
-              Left = 2
-              Top = 2
-              Width = 96
-              Height = 96
-              Align = alClient
-              BevelInner = bvRaised
+              Left = 7
+              Top = 7
+              Width = 86
+              Height = 86
               BevelOuter = bvNone
               Color = clWhite
               ParentBackground = False
               TabOrder = 0
               object Image4: TImage
-                Left = 1
-                Top = 1
-                Width = 94
-                Height = 94
+                Left = 0
+                Top = 0
+                Width = 86
+                Height = 86
                 Align = alClient
                 Center = True
                 Picture.Data = {
@@ -770,7 +1116,78 @@
                   228144028904120924124824904820914022814402890412092412E81FE872C7
                   E4172D13E40000000049454E44AE426082}
                 Transparent = True
+                ExplicitLeft = 1
                 ExplicitTop = 4
+                ExplicitWidth = 94
+                ExplicitHeight = 94
+              end
+              object ImgCV_Cago6: TImage
+                Tag = 10
+                Left = 70
+                Top = 7
+                Width = 16
+                Height = 16
+                Hint = '#15 '#54868#47932#44048#51648
+                Margins.Left = 0
+                Margins.Top = 0
+                Margins.Right = 0
+                Margins.Bottom = 0
+                AutoSize = True
+                ParentShowHint = False
+                Picture.Data = {
+                  07544269746D617036050000424D360500000000000036040000280000001000
+                  0000100000000100080000000000000100000000000000000000000100000000
+                  000000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF0000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF0000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF0000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF0000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF0000000000000080000080000000808000800000008000800080800000C0C0
+                  C000C0DCC000F0CAA600F0FBFF00A4A0A000808080000000FF0000FF000000FF
+                  FF00FF000000FF00FF00FFFF0000FFFFFF000000000000008000008000000080
+                  8000800000008000800080800000C0C0C000C0DCC000F0CAA600F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF00000000000000800000800000008080008000000080008000F0FBFF00A4A0
+                  A000808080000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+                  FF00131313131313131313131313131313131313000000000000000000000000
+                  1313131300000C0C0C000C0C0C00000000131313130000000000000000000C0C
+                  0000131313000E0E0E000E0E0E00000C0C00131313000E0E0E000E0E0E000E00
+                  0013131313000E0E0E000E0E0E000E0013131313130000000000000000000E00
+                  1313131313000E0E0E000E0E0E0000001313131313000E0E0E000E0E0E000E00
+                  1313131313000E0E0E000E0E0E000E0013131313130000000000000000000E00
+                  1313131313130007070700000707000013131313131313000000000000000000
+                  1313131313131313131313131313131313131313131313131313131313131313
+                  1313}
+                ShowHint = True
+                Transparent = True
+                Visible = False
+              end
+              object Label10: TLabel
+                Left = 19
+                Top = 70
+                Width = 58
+                Height = 13
+                Caption = 'Station 06'
               end
             end
           end
@@ -1038,7 +1455,7 @@
               Left = 0
               Top = 0
               Width = 401
-              Height = 436
+              Height = 652
               Align = alTop
               BevelInner = bvLowered
               BevelOuter = bvNone
@@ -1256,7 +1673,7 @@
               end
               object edt_UnLoading: TEdit
                 Left = 306
-                Top = 208
+                Top = 210
                 Width = 90
                 Height = 22
                 ParentCustomHint = False
@@ -2071,7 +2488,7 @@
                 ParentCustomHint = False
                 BevelOuter = bvNone
                 BiDiMode = bdLeftToRight
-                Caption = #51077#44256#44032#45733'1'
+                Caption = #54868#47932#44048#51648'1'
                 Color = 16444898
                 Ctl3D = True
                 DoubleBuffered = False
@@ -2202,7 +2619,7 @@
                 ParentCustomHint = False
                 BevelOuter = bvNone
                 BiDiMode = bdLeftToRight
-                Caption = #52636#44256#44032#45733'1'
+                Caption = #54868#47932#44048#51648'2'
                 Color = 16444898
                 Ctl3D = True
                 DoubleBuffered = False
@@ -2332,7 +2749,7 @@
                 ParentCustomHint = False
                 BevelOuter = bvNone
                 BiDiMode = bdLeftToRight
-                Caption = #51077#44256#44032#45733'2'
+                Caption = #54868#47932#44048#51648'3'
                 Color = 16444898
                 Ctl3D = True
                 DoubleBuffered = False
@@ -2385,7 +2802,7 @@
                 ParentCustomHint = False
                 BevelOuter = bvNone
                 BiDiMode = bdLeftToRight
-                Caption = #52636#44256#44032#45733'2'
+                Caption = #54868#47932#44048#51648'4'
                 Color = 16444898
                 Ctl3D = True
                 DoubleBuffered = False
@@ -2437,7 +2854,7 @@
                 ParentCustomHint = False
                 BevelOuter = bvNone
                 BiDiMode = bdLeftToRight
-                Caption = #51077#44256#44032#45733'3'
+                Caption = #54868#47932#44048#51648'5'
                 Color = 16444898
                 Ctl3D = True
                 DoubleBuffered = False
@@ -2490,7 +2907,7 @@
                 ParentCustomHint = False
                 BevelOuter = bvNone
                 BiDiMode = bdLeftToRight
-                Caption = #52636#44256#44032#45733'3'
+                Caption = #54868#47932#44048#51648'6'
                 Color = 16444898
                 Ctl3D = True
                 DoubleBuffered = False
@@ -2534,10 +2951,964 @@
                 ShowHint = False
                 TabOrder = 55
               end
+              object Panel85: TPanel
+                Left = 7
+                Top = 433
+                Width = 100
+                Height = 22
+                ParentCustomHint = False
+                BevelOuter = bvNone
+                BiDiMode = bdLeftToRight
+                Caption = #46972#51060#53944#52964#53948'1'
+                Color = 16444898
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = []
+                ParentBiDiMode = False
+                ParentBackground = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ShowHint = False
+                TabOrder = 56
+              end
+              object Panel86: TPanel
+                Left = 7
+                Top = 457
+                Width = 100
+                Height = 22
+                ParentCustomHint = False
+                BevelOuter = bvNone
+                BiDiMode = bdLeftToRight
+                Caption = #46972#51060#53944#52964#53948'3'
+                Color = 16444898
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = []
+                ParentBiDiMode = False
+                ParentBackground = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ShowHint = False
+                TabOrder = 57
+              end
+              object Panel87: TPanel
+                Left = 7
+                Top = 481
+                Width = 100
+                Height = 22
+                ParentCustomHint = False
+                BevelOuter = bvNone
+                BiDiMode = bdLeftToRight
+                Caption = #46972#51060#53944#52964#53948'5'
+                Color = 16444898
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = []
+                ParentBiDiMode = False
+                ParentBackground = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ShowHint = False
+                TabOrder = 58
+              end
+              object Panel88: TPanel
+                Left = 7
+                Top = 505
+                Width = 100
+                Height = 22
+                ParentCustomHint = False
+                BevelOuter = bvNone
+                BiDiMode = bdLeftToRight
+                Caption = #54868#51116#44048#51648'1'
+                Color = 16444898
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = []
+                ParentBiDiMode = False
+                ParentBackground = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ShowHint = False
+                TabOrder = 59
+              end
+              object Panel89: TPanel
+                Left = 7
+                Top = 529
+                Width = 100
+                Height = 22
+                ParentCustomHint = False
+                BevelOuter = bvNone
+                BiDiMode = bdLeftToRight
+                Caption = #54868#51116#44048#51648'3'
+                Color = 16444898
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = []
+                ParentBiDiMode = False
+                ParentBackground = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ShowHint = False
+                TabOrder = 60
+              end
+              object Panel90: TPanel
+                Left = 7
+                Top = 553
+                Width = 100
+                Height = 22
+                ParentCustomHint = False
+                BevelOuter = bvNone
+                BiDiMode = bdLeftToRight
+                Caption = #54868#51116#44048#51648'5'
+                Color = 16444898
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = []
+                ParentBiDiMode = False
+                ParentBackground = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ShowHint = False
+                TabOrder = 61
+              end
+              object Panel91: TPanel
+                Left = 204
+                Top = 433
+                Width = 100
+                Height = 22
+                ParentCustomHint = False
+                BevelOuter = bvNone
+                BiDiMode = bdLeftToRight
+                Caption = #46972#51060#53944#52964#53948'2'
+                Color = 16444898
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = []
+                ParentBiDiMode = False
+                ParentBackground = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ShowHint = False
+                TabOrder = 62
+              end
+              object Panel92: TPanel
+                Left = 204
+                Top = 457
+                Width = 100
+                Height = 22
+                ParentCustomHint = False
+                BevelOuter = bvNone
+                BiDiMode = bdLeftToRight
+                Caption = #46972#51060#53944#52964#53948'4'
+                Color = 16444898
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = []
+                ParentBiDiMode = False
+                ParentBackground = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ShowHint = False
+                TabOrder = 63
+              end
+              object Panel93: TPanel
+                Left = 204
+                Top = 481
+                Width = 100
+                Height = 22
+                ParentCustomHint = False
+                BevelOuter = bvNone
+                BiDiMode = bdLeftToRight
+                Caption = #46972#51060#53944#52964#53948'6'
+                Color = 16444898
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = []
+                ParentBiDiMode = False
+                ParentBackground = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ShowHint = False
+                TabOrder = 64
+              end
+              object Panel94: TPanel
+                Left = 204
+                Top = 505
+                Width = 100
+                Height = 22
+                ParentCustomHint = False
+                BevelOuter = bvNone
+                BiDiMode = bdLeftToRight
+                Caption = #54868#51116#44048#51648'2'
+                Color = 16444898
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = []
+                ParentBiDiMode = False
+                ParentBackground = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ShowHint = False
+                TabOrder = 65
+              end
+              object Panel95: TPanel
+                Left = 204
+                Top = 529
+                Width = 100
+                Height = 22
+                ParentCustomHint = False
+                BevelOuter = bvNone
+                BiDiMode = bdLeftToRight
+                Caption = #54868#51116#44048#51648'4'
+                Color = 16444898
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = []
+                ParentBiDiMode = False
+                ParentBackground = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ShowHint = False
+                TabOrder = 66
+              end
+              object Panel96: TPanel
+                Left = 204
+                Top = 553
+                Width = 100
+                Height = 22
+                ParentCustomHint = False
+                BevelOuter = bvNone
+                BiDiMode = bdLeftToRight
+                Caption = #54868#51116#44048#51648'6'
+                Color = 16444898
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = []
+                ParentBiDiMode = False
+                ParentBackground = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ShowHint = False
+                TabOrder = 67
+              end
+              object edt_Curtain1: TEdit
+                Left = 109
+                Top = 433
+                Width = 90
+                Height = 22
+                ParentCustomHint = False
+                Alignment = taCenter
+                AutoSize = False
+                BiDiMode = bdLeftToRight
+                Color = clWhite
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = [fsBold]
+                ImeName = 'Microsoft Office IME 2007'
+                ParentBiDiMode = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ReadOnly = True
+                ShowHint = False
+                TabOrder = 68
+              end
+              object edt_Curtain3: TEdit
+                Left = 109
+                Top = 457
+                Width = 90
+                Height = 22
+                ParentCustomHint = False
+                Alignment = taCenter
+                AutoSize = False
+                BiDiMode = bdLeftToRight
+                Color = clWhite
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = [fsBold]
+                ImeName = 'Microsoft Office IME 2007'
+                ParentBiDiMode = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ReadOnly = True
+                ShowHint = False
+                TabOrder = 69
+              end
+              object edt_Curtain5: TEdit
+                Left = 109
+                Top = 481
+                Width = 90
+                Height = 22
+                ParentCustomHint = False
+                Alignment = taCenter
+                AutoSize = False
+                BiDiMode = bdLeftToRight
+                Color = clWhite
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = [fsBold]
+                ImeName = 'Microsoft Office IME 2007'
+                ParentBiDiMode = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ReadOnly = True
+                ShowHint = False
+                TabOrder = 70
+              end
+              object edt_Fire1: TEdit
+                Left = 109
+                Top = 505
+                Width = 90
+                Height = 22
+                ParentCustomHint = False
+                Alignment = taCenter
+                AutoSize = False
+                BiDiMode = bdLeftToRight
+                Color = clWhite
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = [fsBold]
+                ImeName = 'Microsoft Office IME 2007'
+                ParentBiDiMode = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ReadOnly = True
+                ShowHint = False
+                TabOrder = 71
+              end
+              object edt_Fire3: TEdit
+                Left = 109
+                Top = 529
+                Width = 90
+                Height = 22
+                ParentCustomHint = False
+                Alignment = taCenter
+                AutoSize = False
+                BiDiMode = bdLeftToRight
+                Color = clWhite
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = [fsBold]
+                ImeName = 'Microsoft Office IME 2007'
+                ParentBiDiMode = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ReadOnly = True
+                ShowHint = False
+                TabOrder = 72
+              end
+              object edt_Fire5: TEdit
+                Left = 109
+                Top = 553
+                Width = 90
+                Height = 22
+                ParentCustomHint = False
+                Alignment = taCenter
+                AutoSize = False
+                BiDiMode = bdLeftToRight
+                Color = clWhite
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = [fsBold]
+                ImeName = 'Microsoft Office IME 2007'
+                ParentBiDiMode = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ReadOnly = True
+                ShowHint = False
+                TabOrder = 73
+              end
+              object edt_Curtain2: TEdit
+                Left = 306
+                Top = 433
+                Width = 90
+                Height = 22
+                ParentCustomHint = False
+                Alignment = taCenter
+                AutoSize = False
+                BiDiMode = bdLeftToRight
+                Color = clWhite
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = [fsBold]
+                ImeName = 'Microsoft Office IME 2007'
+                ParentBiDiMode = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ReadOnly = True
+                ShowHint = False
+                TabOrder = 74
+              end
+              object edt_Curtain4: TEdit
+                Left = 306
+                Top = 457
+                Width = 90
+                Height = 22
+                ParentCustomHint = False
+                Alignment = taCenter
+                AutoSize = False
+                BiDiMode = bdLeftToRight
+                Color = clWhite
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = [fsBold]
+                ImeName = 'Microsoft Office IME 2007'
+                ParentBiDiMode = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ReadOnly = True
+                ShowHint = False
+                TabOrder = 75
+              end
+              object edt_Curtain6: TEdit
+                Left = 306
+                Top = 481
+                Width = 90
+                Height = 22
+                ParentCustomHint = False
+                Alignment = taCenter
+                AutoSize = False
+                BiDiMode = bdLeftToRight
+                Color = clWhite
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = [fsBold]
+                ImeName = 'Microsoft Office IME 2007'
+                ParentBiDiMode = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ReadOnly = True
+                ShowHint = False
+                TabOrder = 76
+              end
+              object edt_Fire2: TEdit
+                Left = 306
+                Top = 505
+                Width = 90
+                Height = 22
+                ParentCustomHint = False
+                Alignment = taCenter
+                AutoSize = False
+                BiDiMode = bdLeftToRight
+                Color = clWhite
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = [fsBold]
+                ImeName = 'Microsoft Office IME 2007'
+                ParentBiDiMode = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ReadOnly = True
+                ShowHint = False
+                TabOrder = 77
+              end
+              object edt_Fire4: TEdit
+                Left = 306
+                Top = 529
+                Width = 90
+                Height = 22
+                ParentCustomHint = False
+                Alignment = taCenter
+                AutoSize = False
+                BiDiMode = bdLeftToRight
+                Color = clWhite
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = [fsBold]
+                ImeName = 'Microsoft Office IME 2007'
+                ParentBiDiMode = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ReadOnly = True
+                ShowHint = False
+                TabOrder = 78
+              end
+              object edt_Fire6: TEdit
+                Left = 306
+                Top = 553
+                Width = 90
+                Height = 22
+                ParentCustomHint = False
+                Alignment = taCenter
+                AutoSize = False
+                BiDiMode = bdLeftToRight
+                Color = clWhite
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = [fsBold]
+                ImeName = 'Microsoft Office IME 2007'
+                ParentBiDiMode = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ReadOnly = True
+                ShowHint = False
+                TabOrder = 79
+              end
+              object Panel97: TPanel
+                Left = 7
+                Top = 577
+                Width = 100
+                Height = 22
+                ParentCustomHint = False
+                BevelOuter = bvNone
+                BiDiMode = bdLeftToRight
+                Caption = #46020#53433#44048#51648'1'
+                Color = 16444898
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = []
+                ParentBiDiMode = False
+                ParentBackground = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ShowHint = False
+                TabOrder = 80
+              end
+              object Panel98: TPanel
+                Left = 7
+                Top = 601
+                Width = 100
+                Height = 22
+                ParentCustomHint = False
+                BevelOuter = bvNone
+                BiDiMode = bdLeftToRight
+                Caption = #46020#53433#44048#51648'3'
+                Color = 16444898
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = []
+                ParentBiDiMode = False
+                ParentBackground = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ShowHint = False
+                TabOrder = 81
+              end
+              object Panel99: TPanel
+                Left = 7
+                Top = 625
+                Width = 100
+                Height = 22
+                ParentCustomHint = False
+                BevelOuter = bvNone
+                BiDiMode = bdLeftToRight
+                Caption = #46020#53433#44048#51648'5'
+                Color = 16444898
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = []
+                ParentBiDiMode = False
+                ParentBackground = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ShowHint = False
+                TabOrder = 82
+              end
+              object edt_Docking5: TEdit
+                Left = 109
+                Top = 625
+                Width = 90
+                Height = 22
+                ParentCustomHint = False
+                Alignment = taCenter
+                AutoSize = False
+                BiDiMode = bdLeftToRight
+                Color = clWhite
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = [fsBold]
+                ImeName = 'Microsoft Office IME 2007'
+                ParentBiDiMode = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ReadOnly = True
+                ShowHint = False
+                TabOrder = 83
+              end
+              object edt_Docking3: TEdit
+                Left = 109
+                Top = 601
+                Width = 90
+                Height = 22
+                ParentCustomHint = False
+                Alignment = taCenter
+                AutoSize = False
+                BiDiMode = bdLeftToRight
+                Color = clWhite
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = [fsBold]
+                ImeName = 'Microsoft Office IME 2007'
+                ParentBiDiMode = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ReadOnly = True
+                ShowHint = False
+                TabOrder = 84
+              end
+              object edt_Docking1: TEdit
+                Left = 109
+                Top = 577
+                Width = 90
+                Height = 22
+                ParentCustomHint = False
+                Alignment = taCenter
+                AutoSize = False
+                BiDiMode = bdLeftToRight
+                Color = clWhite
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = [fsBold]
+                ImeName = 'Microsoft Office IME 2007'
+                ParentBiDiMode = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ReadOnly = True
+                ShowHint = False
+                TabOrder = 85
+              end
+              object Panel100: TPanel
+                Left = 204
+                Top = 577
+                Width = 100
+                Height = 22
+                ParentCustomHint = False
+                BevelOuter = bvNone
+                BiDiMode = bdLeftToRight
+                Caption = #46020#53433#44048#51648'2'
+                Color = 16444898
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = []
+                ParentBiDiMode = False
+                ParentBackground = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ShowHint = False
+                TabOrder = 86
+              end
+              object Panel101: TPanel
+                Left = 204
+                Top = 601
+                Width = 100
+                Height = 22
+                ParentCustomHint = False
+                BevelOuter = bvNone
+                BiDiMode = bdLeftToRight
+                Caption = #46020#53433#44048#51648'4'
+                Color = 16444898
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = []
+                ParentBiDiMode = False
+                ParentBackground = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ShowHint = False
+                TabOrder = 87
+              end
+              object Panel102: TPanel
+                Left = 204
+                Top = 625
+                Width = 100
+                Height = 22
+                ParentCustomHint = False
+                BevelOuter = bvNone
+                BiDiMode = bdLeftToRight
+                Caption = #46020#53433#44048#51648'6'
+                Color = 16444898
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = []
+                ParentBiDiMode = False
+                ParentBackground = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ShowHint = False
+                TabOrder = 88
+              end
+              object edt_Docking6: TEdit
+                Left = 306
+                Top = 625
+                Width = 90
+                Height = 22
+                ParentCustomHint = False
+                Alignment = taCenter
+                AutoSize = False
+                BiDiMode = bdLeftToRight
+                Color = clWhite
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = [fsBold]
+                ImeName = 'Microsoft Office IME 2007'
+                ParentBiDiMode = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ReadOnly = True
+                ShowHint = False
+                TabOrder = 89
+              end
+              object edt_Docking4: TEdit
+                Left = 306
+                Top = 601
+                Width = 90
+                Height = 22
+                ParentCustomHint = False
+                Alignment = taCenter
+                AutoSize = False
+                BiDiMode = bdLeftToRight
+                Color = clWhite
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = [fsBold]
+                ImeName = 'Microsoft Office IME 2007'
+                ParentBiDiMode = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ReadOnly = True
+                ShowHint = False
+                TabOrder = 90
+              end
+              object edt_Docking2: TEdit
+                Left = 306
+                Top = 577
+                Width = 90
+                Height = 22
+                ParentCustomHint = False
+                Alignment = taCenter
+                AutoSize = False
+                BiDiMode = bdLeftToRight
+                Color = clWhite
+                Ctl3D = True
+                DoubleBuffered = False
+                Font.Charset = GB2312_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = #46027#50880
+                Font.Style = [fsBold]
+                ImeName = 'Microsoft Office IME 2007'
+                ParentBiDiMode = False
+                ParentCtl3D = False
+                ParentDoubleBuffered = False
+                ParentFont = False
+                ParentShowHint = False
+                ReadOnly = True
+                ShowHint = False
+                TabOrder = 91
+              end
             end
             object Panel55: TPanel
               Left = 0
-              Top = 436
+              Top = 652
               Width = 401
               Height = 24
               Align = alTop
@@ -2552,21 +3923,22 @@
               Font.Style = [fsBold]
               ParentFont = False
               TabOrder = 1
-              ExplicitTop = 388
+              ExplicitLeft = -2
+              ExplicitTop = 591
             end
             object Panel56: TPanel
               Left = 0
-              Top = 460
+              Top = 676
               Width = 401
-              Height = 418
+              Height = 202
               Align = alClient
               BevelInner = bvLowered
               BevelOuter = bvNone
               Color = 16185078
               ParentBackground = False
               TabOrder = 2
-              ExplicitTop = 412
-              ExplicitHeight = 466
+              ExplicitTop = 609
+              ExplicitHeight = 269
               object Panel51: TPanel
                 Left = 7
                 Top = 103
@@ -3139,106 +4511,6 @@
             TabOrder = 2
           end
         end
-        object Panel65: TPanel
-          Left = 515
-          Top = 76
-          Width = 666
-          Height = 60
-          BevelOuter = bvLowered
-          TabOrder = 4
-          object PnlOtRdy2: TPanel
-            Left = 241
-            Top = 1
-            Width = 239
-            Height = 58
-            Align = alClient
-            BevelOuter = bvNone
-            Caption = '    '#52636#44256' '#48520#44032#45733
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -29
-            Font.Name = #46027#50880
-            Font.Style = [fsBold]
-            ParentBackground = False
-            ParentFont = False
-            TabOrder = 0
-            ExplicitWidth = 238
-            object shpOtRdy2: TShape
-              Left = 10
-              Top = 0
-              Width = 40
-              Height = 58
-              Align = alLeft
-              Shape = stCircle
-              ExplicitLeft = 0
-              ExplicitHeight = 60
-            end
-            object Panel83: TPanel
-              Left = 0
-              Top = 0
-              Width = 10
-              Height = 58
-              Align = alLeft
-              BevelOuter = bvNone
-              TabOrder = 0
-            end
-          end
-          object PnlInRdy2: TPanel
-            Left = 1
-            Top = 1
-            Width = 240
-            Height = 58
-            Align = alLeft
-            BevelOuter = bvNone
-            Caption = '    '#51077#44256' '#48520#44032#45733
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -29
-            Font.Name = #46027#50880
-            Font.Style = [fsBold]
-            ParentBackground = False
-            ParentFont = False
-            TabOrder = 1
-            object shpInRdy2: TShape
-              Left = 10
-              Top = 0
-              Width = 40
-              Height = 58
-              Align = alLeft
-              Shape = stCircle
-              ExplicitLeft = 0
-              ExplicitHeight = 60
-            end
-            object Panel82: TPanel
-              Left = 0
-              Top = 0
-              Width = 10
-              Height = 58
-              Align = alLeft
-              BevelOuter = bvNone
-              TabOrder = 0
-            end
-          end
-          object Panel96: TPanel
-            Left = 480
-            Top = 1
-            Width = 185
-            Height = 58
-            Align = alRight
-            BevelOuter = bvNone
-            Caption = #46972#51064' 02'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = 29
-            Font.Name = #46027#50880
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 2
-            ExplicitLeft = 295
-            ExplicitTop = 19
-            ExplicitHeight = 41
-          end
-        end
         object SC: TPanel
           Left = 1115
           Top = 367
@@ -3263,7 +4535,7 @@
           ParentFont = False
           ParentShowHint = False
           ShowHint = False
-          TabOrder = 5
+          TabOrder = 4
           object SCStatus: TPanel
             Left = 2
             Top = 2
@@ -3496,7 +4768,7 @@
           Font.Name = #46027#50880
           Font.Style = [fsBold]
           ParentFont = False
-          TabOrder = 6
+          TabOrder = 5
           OnClick = btnClick
         end
         object btnRetry: TButton
@@ -3513,256 +4785,2030 @@
           Font.Name = #46027#50880
           Font.Style = [fsBold]
           ParentFont = False
-          TabOrder = 7
+          TabOrder = 6
           OnClick = btnClick
         end
-        object Panel61: TPanel
-          Left = 515
-          Top = 16
-          Width = 667
-          Height = 60
-          BevelOuter = bvLowered
+        object pnlCurtain1: TPanel
+          Left = 393
+          Top = 163
+          Width = 97
+          Height = 41
+          BevelOuter = bvNone
+          Caption = #52964#53948' ON'
+          Color = clLime
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = 15
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          ParentBackground = False
+          ParentFont = False
+          TabOrder = 7
+        end
+        object pnlCurtain2: TPanel
+          Left = 496
+          Top = 163
+          Width = 97
+          Height = 41
+          BevelOuter = bvNone
+          Caption = #52964#53948' ON'
+          Color = clLime
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = 15
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          ParentBackground = False
+          ParentFont = False
           TabOrder = 8
-          object PnlOtRdy1: TPanel
-            Left = 241
-            Top = 1
-            Width = 240
-            Height = 58
-            Align = alClient
-            BevelOuter = bvNone
-            Caption = '    '#52636#44256' '#48520#44032#45733
+        end
+        object pnlCurtain3: TPanel
+          Left = 696
+          Top = 163
+          Width = 97
+          Height = 41
+          BevelOuter = bvNone
+          Caption = #52964#53948' ON'
+          Color = clLime
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = 15
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          ParentBackground = False
+          ParentFont = False
+          TabOrder = 9
+        end
+        object pnlCurtain4: TPanel
+          Left = 796
+          Top = 163
+          Width = 97
+          Height = 41
+          BevelOuter = bvNone
+          Caption = #52964#53948' ON'
+          Color = clLime
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = 15
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          ParentBackground = False
+          ParentFont = False
+          TabOrder = 10
+        end
+        object pnlCurtain5: TPanel
+          Left = 993
+          Top = 163
+          Width = 97
+          Height = 41
+          BevelOuter = bvNone
+          Caption = #52964#53948' ON'
+          Color = clLime
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = 15
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          ParentBackground = False
+          ParentFont = False
+          TabOrder = 11
+        end
+        object pnlCurtain6: TPanel
+          Left = 1096
+          Top = 163
+          Width = 97
+          Height = 41
+          BevelOuter = bvNone
+          Caption = #52964#53948' ON'
+          Color = clLime
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = 15
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          ParentBackground = False
+          ParentFont = False
+          TabOrder = 12
+        end
+        object Panel104: TPanel
+          Left = 1196
+          Top = 56
+          Width = 266
+          Height = 250
+          BevelInner = bvLowered
+          BevelOuter = bvNone
+          Color = clCream
+          ParentBackground = False
+          TabOrder = 13
+          object Label8: TLabel
+            Left = 8
+            Top = 6
+            Width = 151
+            Height = 18
+            Caption = '#Station 01 RFID'
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -29
+            Font.Color = clNavy
+            Font.Height = 18
             Font.Name = #46027#50880
             Font.Style = [fsBold]
-            ParentBackground = False
             ParentFont = False
-            TabOrder = 0
-            ExplicitLeft = 239
-            ExplicitWidth = 238
-            object shpOtRdy1: TShape
-              Left = 10
-              Top = 0
-              Width = 40
-              Height = 58
-              Align = alLeft
-              Shape = stCircle
-              ExplicitLeft = 0
-              ExplicitHeight = 60
-            end
-            object Panel86: TPanel
-              Left = 0
-              Top = 0
-              Width = 10
-              Height = 58
-              Align = alLeft
-              BevelOuter = bvNone
-              TabOrder = 0
-            end
           end
-          object PnlInRdy1: TPanel
-            Left = 1
-            Top = 1
-            Width = 240
-            Height = 58
-            Align = alLeft
-            BevelOuter = bvNone
-            Caption = '    '#51077#44256' '#48520#44032#45733
+          object Label9: TLabel
+            Left = 8
+            Top = 29
+            Width = 85
+            Height = 14
+            Caption = #49885#48324#51088#51060#47492'1'
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -29
+            Font.Color = clGreen
+            Font.Height = 14
             Font.Name = #46027#50880
             Font.Style = [fsBold]
-            ParentBackground = False
             ParentFont = False
-            TabOrder = 1
-            object shpInRdy1: TShape
-              Left = 10
-              Top = 0
-              Width = 40
-              Height = 58
-              Align = alLeft
-              Shape = stCircle
-              ExplicitLeft = 0
-              ExplicitHeight = 60
-            end
-            object Panel88: TPanel
-              Left = 0
-              Top = 0
-              Width = 10
-              Height = 58
-              Align = alLeft
-              BevelOuter = bvNone
-              TabOrder = 0
-            end
           end
-          object Panel95: TPanel
-            Left = 481
-            Top = 1
-            Width = 185
-            Height = 58
-            Align = alRight
-            BevelOuter = bvNone
-            Caption = #46972#51064' 01'
+          object lblLineName1_RF01: TLabel
+            Left = 100
+            Top = 30
+            Width = 7
+            Height = 13
+            Caption = '-'
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = 29
+            Font.Color = clOlive
+            Font.Height = -13
             Font.Name = #46027#50880
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 2
-            ExplicitLeft = 295
-            ExplicitTop = 19
-            ExplicitHeight = 41
+          end
+          object Label7: TLabel
+            Left = 8
+            Top = 49
+            Width = 85
+            Height = 14
+            Caption = #49885#48324#51088#51060#47492'2'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblLineName2_RF01: TLabel
+            Left = 100
+            Top = 50
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label12: TLabel
+            Left = 23
+            Top = 69
+            Width = 70
+            Height = 14
+            Caption = #49885#48324#48264#54840'1'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label13: TLabel
+            Left = 23
+            Top = 89
+            Width = 70
+            Height = 14
+            Caption = #49885#48324#48264#54840'2'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label14: TLabel
+            Left = 44
+            Top = 109
+            Width = 49
+            Height = 14
+            Caption = #52264#51333'#1'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label15: TLabel
+            Left = 44
+            Top = 129
+            Width = 49
+            Height = 14
+            Caption = #52264#51333'#2'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label16: TLabel
+            Left = 24
+            Top = 149
+            Width = 69
+            Height = 14
+            Caption = 'BMA '#44060#49688
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label19: TLabel
+            Left = 48
+            Top = 169
+            Width = 45
+            Height = 14
+            Caption = #49373#49328#51648
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label20: TLabel
+            Left = 29
+            Top = 189
+            Width = 64
+            Height = 14
+            Caption = 'BMA 1'#50676
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label21: TLabel
+            Left = 29
+            Top = 209
+            Width = 64
+            Height = 14
+            Caption = 'BMA 2'#50676
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label22: TLabel
+            Left = 29
+            Top = 229
+            Width = 64
+            Height = 14
+            Caption = 'BMA 3'#50676
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblPalletBma3_RF01: TLabel
+            Left = 99
+            Top = 229
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = -13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblPalletNo1_RF01: TLabel
+            Left = 100
+            Top = 70
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblPalletNo2_RF01: TLabel
+            Left = 100
+            Top = 90
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblModelNo1_RF01: TLabel
+            Left = 100
+            Top = 110
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblModelNo2_RF01: TLabel
+            Left = 100
+            Top = 130
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblBmaNo_RF01: TLabel
+            Left = 100
+            Top = 151
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblArea_RF01: TLabel
+            Left = 100
+            Top = 170
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblPalletBma1_RF01: TLabel
+            Left = 100
+            Top = 190
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblPalletBma2_RF01: TLabel
+            Left = 100
+            Top = 210
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
           end
         end
-        object Panel89: TPanel
-          Left = 515
-          Top = 135
-          Width = 667
-          Height = 60
-          BevelOuter = bvLowered
-          TabOrder = 9
-          object PnlOtRdy3: TPanel
-            Left = 241
-            Top = 1
-            Width = 240
-            Height = 58
-            Align = alClient
-            BevelOuter = bvNone
-            Caption = '    '#52636#44256' '#48520#44032#45733
+        object Panel65: TPanel
+          Left = 1196
+          Top = 306
+          Width = 266
+          Height = 250
+          BevelInner = bvLowered
+          BevelOuter = bvNone
+          Color = clCream
+          ParentBackground = False
+          TabOrder = 14
+          object Label36: TLabel
+            Left = 8
+            Top = 6
+            Width = 151
+            Height = 18
+            Caption = '#Station 02 RFID'
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -29
+            Font.Color = clNavy
+            Font.Height = 18
             Font.Name = #46027#50880
             Font.Style = [fsBold]
-            ParentBackground = False
             ParentFont = False
-            TabOrder = 0
-            ExplicitWidth = 238
-            object shpOtRdy3: TShape
-              Left = 10
-              Top = 0
-              Width = 40
-              Height = 58
-              Align = alLeft
-              Shape = stCircle
-              ExplicitLeft = 0
-              ExplicitHeight = 60
-            end
-            object Panel91: TPanel
-              Left = 0
-              Top = 0
-              Width = 10
-              Height = 58
-              Align = alLeft
-              BevelOuter = bvNone
-              TabOrder = 0
-            end
           end
-          object PnlInRdy3: TPanel
-            Left = 1
-            Top = 1
-            Width = 240
-            Height = 58
-            Align = alLeft
-            BevelOuter = bvNone
-            Caption = '    '#51077#44256' '#48520#44032#45733
+          object Label37: TLabel
+            Left = 8
+            Top = 29
+            Width = 85
+            Height = 14
+            Caption = #49885#48324#51088#51060#47492'1'
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -29
+            Font.Color = clGreen
+            Font.Height = 14
             Font.Name = #46027#50880
             Font.Style = [fsBold]
-            ParentBackground = False
             ParentFont = False
-            TabOrder = 1
-            ExplicitLeft = 2
-            ExplicitTop = 6
-            object shpInRdy3: TShape
-              Left = 10
-              Top = 0
-              Width = 40
-              Height = 58
-              Align = alLeft
-              Shape = stCircle
-              ExplicitLeft = 0
-              ExplicitHeight = 60
-            end
-            object Panel93: TPanel
-              Left = 0
-              Top = 0
-              Width = 10
-              Height = 58
-              Align = alLeft
-              BevelOuter = bvNone
-              TabOrder = 0
-            end
           end
-          object Panel97: TPanel
-            Left = 481
-            Top = 1
-            Width = 185
-            Height = 58
-            Align = alRight
-            BevelOuter = bvNone
-            Caption = #46972#51064' 03'
+          object lblLineName1_RF02: TLabel
+            Left = 100
+            Top = 30
+            Width = 7
+            Height = 13
+            Caption = '-'
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = 29
+            Font.Color = clOlive
+            Font.Height = -13
             Font.Name = #46027#50880
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 2
-            ExplicitLeft = 295
-            ExplicitTop = 19
-            ExplicitHeight = 41
+          end
+          object Label39: TLabel
+            Left = 8
+            Top = 49
+            Width = 85
+            Height = 14
+            Caption = #49885#48324#51088#51060#47492'2'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblLineName2_RF02: TLabel
+            Left = 100
+            Top = 50
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label41: TLabel
+            Left = 23
+            Top = 69
+            Width = 70
+            Height = 14
+            Caption = #49885#48324#48264#54840'1'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label42: TLabel
+            Left = 23
+            Top = 89
+            Width = 70
+            Height = 14
+            Caption = #49885#48324#48264#54840'2'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label43: TLabel
+            Left = 44
+            Top = 109
+            Width = 49
+            Height = 14
+            Caption = #52264#51333'#1'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label44: TLabel
+            Left = 44
+            Top = 129
+            Width = 49
+            Height = 14
+            Caption = #52264#51333'#2'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label45: TLabel
+            Left = 24
+            Top = 149
+            Width = 69
+            Height = 14
+            Caption = 'BMA '#44060#49688
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label46: TLabel
+            Left = 48
+            Top = 169
+            Width = 45
+            Height = 14
+            Caption = #49373#49328#51648
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label47: TLabel
+            Left = 29
+            Top = 189
+            Width = 64
+            Height = 14
+            Caption = 'BMA 1'#50676
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label48: TLabel
+            Left = 29
+            Top = 209
+            Width = 64
+            Height = 14
+            Caption = 'BMA 2'#50676
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label49: TLabel
+            Left = 29
+            Top = 229
+            Width = 64
+            Height = 14
+            Caption = 'BMA 3'#50676
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblPalletBma3_RF02: TLabel
+            Left = 99
+            Top = 229
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = -13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblPalletNo1_RF02: TLabel
+            Left = 100
+            Top = 70
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblPalletNo2_RF02: TLabel
+            Left = 100
+            Top = 90
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblModelNo1_RF02: TLabel
+            Left = 100
+            Top = 110
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblModelNo2_RF02: TLabel
+            Left = 100
+            Top = 130
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblBmaNo_RF02: TLabel
+            Left = 100
+            Top = 151
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblArea_RF02: TLabel
+            Left = 100
+            Top = 170
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblPalletBma1_RF02: TLabel
+            Left = 100
+            Top = 190
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblPalletBma2_RF02: TLabel
+            Left = 100
+            Top = 210
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+        end
+        object Panel83: TPanel
+          Left = 1196
+          Top = 556
+          Width = 266
+          Height = 250
+          BevelInner = bvLowered
+          BevelOuter = bvNone
+          Color = clCream
+          ParentBackground = False
+          TabOrder = 15
+          object Label59: TLabel
+            Left = 8
+            Top = 6
+            Width = 151
+            Height = 18
+            Caption = '#Station 03 RFID'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clNavy
+            Font.Height = 18
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label60: TLabel
+            Left = 8
+            Top = 29
+            Width = 85
+            Height = 14
+            Caption = #49885#48324#51088#51060#47492'1'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblLineName1_RF03: TLabel
+            Left = 100
+            Top = 30
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = -13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label62: TLabel
+            Left = 8
+            Top = 49
+            Width = 85
+            Height = 14
+            Caption = #49885#48324#51088#51060#47492'2'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblLineName2_RF03: TLabel
+            Left = 100
+            Top = 50
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label67: TLabel
+            Left = 23
+            Top = 69
+            Width = 70
+            Height = 14
+            Caption = #49885#48324#48264#54840'1'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label68: TLabel
+            Left = 23
+            Top = 89
+            Width = 70
+            Height = 14
+            Caption = #49885#48324#48264#54840'2'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label69: TLabel
+            Left = 44
+            Top = 109
+            Width = 49
+            Height = 14
+            Caption = #52264#51333'#1'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label70: TLabel
+            Left = 44
+            Top = 129
+            Width = 49
+            Height = 14
+            Caption = #52264#51333'#2'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label71: TLabel
+            Left = 24
+            Top = 149
+            Width = 69
+            Height = 14
+            Caption = 'BMA '#44060#49688
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label72: TLabel
+            Left = 48
+            Top = 169
+            Width = 45
+            Height = 14
+            Caption = #49373#49328#51648
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label73: TLabel
+            Left = 29
+            Top = 189
+            Width = 64
+            Height = 14
+            Caption = 'BMA 1'#50676
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label74: TLabel
+            Left = 29
+            Top = 209
+            Width = 64
+            Height = 14
+            Caption = 'BMA 2'#50676
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label75: TLabel
+            Left = 29
+            Top = 229
+            Width = 64
+            Height = 14
+            Caption = 'BMA 3'#50676
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblPalletBma3_RF03: TLabel
+            Left = 99
+            Top = 229
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = -13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblPalletNo1_RF03: TLabel
+            Left = 100
+            Top = 70
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblPalletNo2_RF03: TLabel
+            Left = 100
+            Top = 90
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblModelNo1_RF03: TLabel
+            Left = 100
+            Top = 110
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblModelNo2_RF03: TLabel
+            Left = 100
+            Top = 130
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblBmaNo_RF03: TLabel
+            Left = 100
+            Top = 151
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblArea_RF03: TLabel
+            Left = 100
+            Top = 170
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblPalletBma1_RF03: TLabel
+            Left = 100
+            Top = 190
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblPalletBma2_RF03: TLabel
+            Left = 100
+            Top = 210
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+        end
+        object Panel61: TPanel
+          Left = 8
+          Top = 56
+          Width = 266
+          Height = 250
+          BevelInner = bvLowered
+          BevelOuter = bvNone
+          Color = clCream
+          ParentBackground = False
+          TabOrder = 16
+          object Label6: TLabel
+            Left = 8
+            Top = 6
+            Width = 151
+            Height = 18
+            Caption = '#Station 04 RFID'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clNavy
+            Font.Height = 18
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label85: TLabel
+            Left = 8
+            Top = 29
+            Width = 85
+            Height = 14
+            Caption = #49885#48324#51088#51060#47492'1'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblLineName1_RF04: TLabel
+            Left = 100
+            Top = 30
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = -13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label87: TLabel
+            Left = 8
+            Top = 49
+            Width = 85
+            Height = 14
+            Caption = #49885#48324#51088#51060#47492'2'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblLineName2_RF04: TLabel
+            Left = 100
+            Top = 50
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label89: TLabel
+            Left = 23
+            Top = 69
+            Width = 70
+            Height = 14
+            Caption = #49885#48324#48264#54840'1'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label90: TLabel
+            Left = 23
+            Top = 89
+            Width = 70
+            Height = 14
+            Caption = #49885#48324#48264#54840'2'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label91: TLabel
+            Left = 44
+            Top = 109
+            Width = 49
+            Height = 14
+            Caption = #52264#51333'#1'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label92: TLabel
+            Left = 44
+            Top = 129
+            Width = 49
+            Height = 14
+            Caption = #52264#51333'#2'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label93: TLabel
+            Left = 24
+            Top = 149
+            Width = 69
+            Height = 14
+            Caption = 'BMA '#44060#49688
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label94: TLabel
+            Left = 48
+            Top = 169
+            Width = 45
+            Height = 14
+            Caption = #49373#49328#51648
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label95: TLabel
+            Left = 29
+            Top = 189
+            Width = 64
+            Height = 14
+            Caption = 'BMA 1'#50676
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label96: TLabel
+            Left = 29
+            Top = 209
+            Width = 64
+            Height = 14
+            Caption = 'BMA 2'#50676
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label97: TLabel
+            Left = 29
+            Top = 229
+            Width = 64
+            Height = 14
+            Caption = 'BMA 3'#50676
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblPalletBma3_RF04: TLabel
+            Left = 99
+            Top = 229
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = -13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblPalletNo1_RF04: TLabel
+            Left = 100
+            Top = 70
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblPalletNo2_RF04: TLabel
+            Left = 100
+            Top = 90
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblModelNo1_RF04: TLabel
+            Left = 100
+            Top = 110
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblModelNo2_RF04: TLabel
+            Left = 100
+            Top = 130
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblBmaNo_RF04: TLabel
+            Left = 100
+            Top = 151
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblArea_RF04: TLabel
+            Left = 100
+            Top = 170
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblPalletBma1_RF04: TLabel
+            Left = 100
+            Top = 190
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblPalletBma2_RF04: TLabel
+            Left = 100
+            Top = 210
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+        end
+        object Panel82: TPanel
+          Left = 8
+          Top = 306
+          Width = 266
+          Height = 250
+          BevelInner = bvLowered
+          BevelOuter = bvNone
+          Color = clCream
+          ParentBackground = False
+          TabOrder = 17
+          object Label107: TLabel
+            Left = 8
+            Top = 6
+            Width = 151
+            Height = 18
+            Caption = '#Station 05 RFID'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clNavy
+            Font.Height = 18
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label108: TLabel
+            Left = 8
+            Top = 29
+            Width = 85
+            Height = 14
+            Caption = #49885#48324#51088#51060#47492'1'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblLineName1_RF05: TLabel
+            Left = 100
+            Top = 30
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = -13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label110: TLabel
+            Left = 8
+            Top = 49
+            Width = 85
+            Height = 14
+            Caption = #49885#48324#51088#51060#47492'2'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblLineName2_RF05: TLabel
+            Left = 100
+            Top = 50
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label112: TLabel
+            Left = 23
+            Top = 69
+            Width = 70
+            Height = 14
+            Caption = #49885#48324#48264#54840'1'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label113: TLabel
+            Left = 23
+            Top = 89
+            Width = 70
+            Height = 14
+            Caption = #49885#48324#48264#54840'2'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label114: TLabel
+            Left = 44
+            Top = 109
+            Width = 49
+            Height = 14
+            Caption = #52264#51333'#1'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label115: TLabel
+            Left = 44
+            Top = 129
+            Width = 49
+            Height = 14
+            Caption = #52264#51333'#2'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label116: TLabel
+            Left = 24
+            Top = 149
+            Width = 69
+            Height = 14
+            Caption = 'BMA '#44060#49688
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label117: TLabel
+            Left = 48
+            Top = 169
+            Width = 45
+            Height = 14
+            Caption = #49373#49328#51648
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label118: TLabel
+            Left = 29
+            Top = 189
+            Width = 64
+            Height = 14
+            Caption = 'BMA 1'#50676
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label119: TLabel
+            Left = 29
+            Top = 209
+            Width = 64
+            Height = 14
+            Caption = 'BMA 2'#50676
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label120: TLabel
+            Left = 29
+            Top = 229
+            Width = 64
+            Height = 14
+            Caption = 'BMA 3'#50676
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblPalletBma3_RF05: TLabel
+            Left = 99
+            Top = 229
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = -13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblPalletNo1_RF05: TLabel
+            Left = 100
+            Top = 70
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblPalletNo2_RF05: TLabel
+            Left = 100
+            Top = 90
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblModelNo1_RF05: TLabel
+            Left = 100
+            Top = 110
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblModelNo2_RF05: TLabel
+            Left = 100
+            Top = 130
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblBmaNo_RF05: TLabel
+            Left = 100
+            Top = 151
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblArea_RF05: TLabel
+            Left = 100
+            Top = 170
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblPalletBma1_RF05: TLabel
+            Left = 100
+            Top = 190
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblPalletBma2_RF05: TLabel
+            Left = 100
+            Top = 210
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
           end
         end
         object Panel84: TPanel
-          Left = 313
-          Top = 16
-          Width = 205
-          Height = 178
-          BevelOuter = bvLowered
-          TabOrder = 10
-          object lbl_JobType: TLabel
-            Left = 1
-            Top = 59
-            Width = 203
-            Height = 118
-            Align = alClient
-            AutoSize = False
-            Caption = '  '#51077#44256#51089#50629' '#51473
-            Color = clBtnFace
+          Left = 8
+          Top = 556
+          Width = 266
+          Height = 250
+          BevelInner = bvLowered
+          BevelOuter = bvNone
+          Color = clCream
+          ParentBackground = False
+          TabOrder = 18
+          object Label130: TLabel
+            Left = 8
+            Top = 6
+            Width = 151
+            Height = 18
+            Caption = '#Station 06 RFID'
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -29
-            Font.Name = #46027#50880
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Transparent = False
-            Layout = tlCenter
-            ExplicitTop = 80
-            ExplicitHeight = 97
-          end
-          object Panel94: TPanel
-            Left = 1
-            Top = 1
-            Width = 203
-            Height = 58
-            Align = alTop
-            BevelOuter = bvNone
-            Caption = 'SC '#49345#53468
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -29
+            Font.Color = clNavy
+            Font.Height = 18
             Font.Name = #46027#50880
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 0
           end
+          object Label131: TLabel
+            Left = 8
+            Top = 29
+            Width = 85
+            Height = 14
+            Caption = #49885#48324#51088#51060#47492'1'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblLineName1_RF06: TLabel
+            Left = 100
+            Top = 30
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = -13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label133: TLabel
+            Left = 8
+            Top = 49
+            Width = 85
+            Height = 14
+            Caption = #49885#48324#51088#51060#47492'2'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblLineName2_RF06: TLabel
+            Left = 100
+            Top = 50
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label135: TLabel
+            Left = 23
+            Top = 69
+            Width = 70
+            Height = 14
+            Caption = #49885#48324#48264#54840'1'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label136: TLabel
+            Left = 23
+            Top = 89
+            Width = 70
+            Height = 14
+            Caption = #49885#48324#48264#54840'2'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label137: TLabel
+            Left = 44
+            Top = 109
+            Width = 49
+            Height = 14
+            Caption = #52264#51333'#1'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label138: TLabel
+            Left = 44
+            Top = 129
+            Width = 49
+            Height = 14
+            Caption = #52264#51333'#2'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label139: TLabel
+            Left = 24
+            Top = 149
+            Width = 69
+            Height = 14
+            Caption = 'BMA '#44060#49688
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label140: TLabel
+            Left = 48
+            Top = 169
+            Width = 45
+            Height = 14
+            Caption = #49373#49328#51648
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label141: TLabel
+            Left = 29
+            Top = 189
+            Width = 64
+            Height = 14
+            Caption = 'BMA 1'#50676
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label142: TLabel
+            Left = 29
+            Top = 209
+            Width = 64
+            Height = 14
+            Caption = 'BMA 2'#50676
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label143: TLabel
+            Left = 29
+            Top = 229
+            Width = 64
+            Height = 14
+            Caption = 'BMA 3'#50676
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clGreen
+            Font.Height = 14
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblPalletBma3_RF06: TLabel
+            Left = 99
+            Top = 229
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = -13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblPalletNo1_RF06: TLabel
+            Left = 100
+            Top = 70
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblPalletNo2_RF06: TLabel
+            Left = 100
+            Top = 90
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblModelNo1_RF06: TLabel
+            Left = 100
+            Top = 110
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblModelNo2_RF06: TLabel
+            Left = 100
+            Top = 130
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblBmaNo_RF06: TLabel
+            Left = 100
+            Top = 151
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblArea_RF06: TLabel
+            Left = 100
+            Top = 170
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblPalletBma1_RF06: TLabel
+            Left = 100
+            Top = 190
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblPalletBma2_RF06: TLabel
+            Left = 100
+            Top = 210
+            Width = 7
+            Height = 13
+            Caption = '-'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clOlive
+            Font.Height = 13
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+        end
+        object btnCurtain6: TButton
+          Tag = 6
+          Left = 1096
+          Top = 132
+          Width = 97
+          Height = 30
+          Caption = #52964#53948' OFF'
+          TabOrder = 19
+          OnClick = btnCurtainClick
+        end
+        object btnCurtain5: TButton
+          Tag = 5
+          Left = 993
+          Top = 132
+          Width = 97
+          Height = 30
+          Caption = #52964#53948' OFF'
+          TabOrder = 20
+          OnClick = btnCurtainClick
+        end
+        object btnCurtain1: TButton
+          Tag = 1
+          Left = 393
+          Top = 132
+          Width = 97
+          Height = 30
+          Caption = #52964#53948' OFF'
+          TabOrder = 21
+          OnClick = btnCurtainClick
+        end
+        object btnCurtain2: TButton
+          Tag = 2
+          Left = 496
+          Top = 132
+          Width = 97
+          Height = 30
+          Caption = #52964#53948' OFF'
+          TabOrder = 22
+          OnClick = btnCurtainClick
+        end
+        object btnCurtain3: TButton
+          Tag = 3
+          Left = 696
+          Top = 132
+          Width = 97
+          Height = 30
+          Caption = #52964#53948' OFF'
+          TabOrder = 23
+          OnClick = btnCurtainClick
+        end
+        object btnCurtain4: TButton
+          Tag = 4
+          Left = 796
+          Top = 132
+          Width = 97
+          Height = 30
+          Caption = #52964#53948' OFF'
+          TabOrder = 24
+          OnClick = btnCurtainClick
         end
       end
       object Panel1: TPanel
@@ -4550,6 +7596,12 @@
     Enabled = False
     OnTimer = tmrQryTimer
     Left = 913
+    Top = 6
+  end
+  object tmrRFID: TTimer
+    Enabled = False
+    OnTimer = tmrRFIDTimer
+    Left = 945
     Top = 6
   end
 end

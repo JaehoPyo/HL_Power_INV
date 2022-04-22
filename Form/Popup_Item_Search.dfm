@@ -17,7 +17,7 @@ object frmPopup_Item_Search: TfrmPopup_Item_Search
   OnClose = FormClose
   OnDeactivate = FormDeactivate
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 11
   object Pnl_Main: TPanel
     Left = 0
     Top = 0
@@ -27,8 +27,6 @@ object frmPopup_Item_Search: TfrmPopup_Item_Search
     BevelInner = bvRaised
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 483
-    ExplicitHeight = 328
     object Pnl_Top: TPanel
       Left = 2
       Top = 2
@@ -39,7 +37,6 @@ object frmPopup_Item_Search: TfrmPopup_Item_Search
       BevelOuter = bvLowered
       ParentBackground = False
       TabOrder = 0
-      ExplicitWidth = 479
       object Pnl_BTN: TPanel
         Left = 353
         Top = 2
@@ -49,7 +46,6 @@ object frmPopup_Item_Search: TfrmPopup_Item_Search
         BevelOuter = bvNone
         Color = clWhite
         TabOrder = 0
-        ExplicitLeft = 355
         object Pnl_Btn5: TPanel
           Left = 61
           Top = 0
@@ -569,7 +565,6 @@ object frmPopup_Item_Search: TfrmPopup_Item_Search
         ParentBackground = False
         ParentFont = False
         TabOrder = 1
-        ExplicitWidth = 353
         object Shape3: TShape
           Left = 2
           Top = 2
@@ -596,9 +591,6 @@ object frmPopup_Item_Search: TfrmPopup_Item_Search
       Color = 14211288
       ParentBackground = False
       TabOrder = 1
-      ExplicitLeft = 479
-      ExplicitTop = 67
-      ExplicitHeight = 257
     end
     object Panel13: TPanel
       Left = 2
@@ -610,8 +602,6 @@ object frmPopup_Item_Search: TfrmPopup_Item_Search
       Color = 14211288
       ParentBackground = False
       TabOrder = 2
-      ExplicitTop = 67
-      ExplicitHeight = 257
     end
     object Panel14: TPanel
       Left = 2
@@ -623,8 +613,6 @@ object frmPopup_Item_Search: TfrmPopup_Item_Search
       Color = 14211288
       ParentBackground = False
       TabOrder = 3
-      ExplicitTop = 324
-      ExplicitWidth = 479
     end
     object Pnl_Sub: TPanel
       Left = 4
@@ -651,9 +639,6 @@ object frmPopup_Item_Search: TfrmPopup_Item_Search
       ParentShowHint = False
       ShowHint = False
       TabOrder = 4
-      ExplicitTop = 67
-      ExplicitWidth = 418
-      ExplicitHeight = 178
       object Label1: TLabel
         Left = 841
         Top = 77
@@ -705,8 +690,6 @@ object frmPopup_Item_Search: TfrmPopup_Item_Search
         BevelOuter = bvNone
         ParentBackground = False
         TabOrder = 0
-        ExplicitWidth = 471
-        ExplicitHeight = 253
         object dgInfo: TDBGridEh
           Left = 0
           Top = 0
@@ -802,13 +785,11 @@ object frmPopup_Item_Search: TfrmPopup_Item_Search
       BevelInner = bvRaised
       BevelOuter = bvNone
       TabOrder = 5
-      ExplicitTop = 98
-      ExplicitWidth = 479
       object lbl_CODE: TLabel
         Left = 208
         Top = 32
-        Width = 48
-        Height = 13
+        Width = 44
+        Height = 11
         Caption = #49440#53469#53076#46300
         Visible = False
       end

@@ -97,7 +97,6 @@ type
     procedure sbtClick(Sender: TObject);
   private
     { Private declarations }
-    function fnJobCheck(JobNo: String): Boolean; //작업진행 체크
   public
     { Public declarations }
     procedure fnCommandStart;
@@ -110,7 +109,20 @@ type
     procedure fnCommandQuery;
     procedure fnCommandClose;
     procedure fnCommandLang;
+    procedure fnAutoQuery(IO : String);
     procedure fnWmMsgRecv (var MSG : TMessage) ; message WM_USER ;
+    procedure fnRFIDDataUpdate;
+
+    procedure OrderDataClear(OrderData: TJobOrder);
+
+    function fnJobCheck(JobNo: String): Boolean; //작업진행 체크
+    function fnOrderCancelAndComplet(IO, JobNo, Order: String): Boolean; //작업완료,삭제
+    function fnOrderDataSet(JobNo : String): Boolean; // TT_ORDER 데이터 저장
+    function fnITEM_Value(FName, FValue : String): String;
+
+    procedure fnUpdateSCSetInfo(FieldName: String); // TC_SCSETINFO UPDATE
+    procedure fnIns_History(JobNo: String);
+    
   end;
   procedure U210Create();
 
@@ -119,6 +131,8 @@ const
 var
   frmU210: TfrmU210;
   SrtFlag : integer = 0 ;
+
+  OrderData  : TJobOrder;
 
 implementation
 
@@ -358,7 +372,7 @@ begin
       begin
         Close;
         SQL.Clear;
-        SQL.Text := ' Select REG_TIME, LUGG, JOBD,                                                                                ' +
+        SQL.Text := ' Select REG_TIME, LUGG, JOBD, LINE_NO,                                                                       ' +
                     '        SRCSITE, SRCAISLE, SRCBAY, SRCLEVEL                                                                  ' +
                     '        DSTSITE, DSTAISLE, DSTBAY, DSTLEVEL                                                                  ' +
                     '        NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS                                                              ' +
@@ -398,7 +412,7 @@ begin
       begin
         Close;
         SQL.Clear;
-        SQL.Text := ' Select REG_TIME, LUGG, JOBD,                      ' +  #13#10+
+        SQL.Text := ' Select REG_TIME, LUGG, JOBD, LINE_NO,             ' +  #13#10+
                     '        SRCSITE, SRCAISLE, SRCBAY, SRCLEVEL        ' +  #13#10+
                     '        DSTSITE, DSTAISLE, DSTBAY, DSTLEVEL        ' +  #13#10+
                     '        NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS    ' +  #13#10+
@@ -439,7 +453,7 @@ begin
       begin
         Close;
         SQL.Clear;
-        SQL.Text := ' Select REG_TIME, LUGG, JOBD,                      ' +  #13#10+
+        SQL.Text := ' Select REG_TIME, LUGG, JOBD, LINE_NO,             ' +  #13#10+
                     '        SRCSITE, SRCAISLE, SRCBAY, SRCLEVEL        ' +  #13#10+
                     '        DSTSITE, DSTAISLE, DSTBAY, DSTLEVEL        ' +  #13#10+
                     '        NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS    ' +  #13#10+
@@ -808,9 +822,10 @@ end;
 //==============================================================================
 procedure TfrmU210.sbtClick(Sender: TObject);
 var
-  JobNo : String;
+  IO,JobNo : String;
+
 begin
-  if (((Sender as TSpeedButton).Tag = 1) or ((Sender as TSpeedButton).Tag = 2)) and 
+  if (((Sender as TSpeedButton).Tag = 1) or ((Sender as TSpeedButton).Tag = 2)) and
      ((Trim(edtJOB_NO_SEL1.Text) = '') or
       (not qryInfo_In.Active) or
       (qryInfo_In.RecordCount < 1) or
@@ -845,23 +860,42 @@ begin
       dgInfo_In.SetFocus;
       Exit;  
   end;
-
+  
   Case (Sender as TSpeedButton).Tag of
-    1,2 : JobNo := edtJOB_NO_SEL1.Text;
-    3,4 : JobNo := edtJOB_NO_SEL2.Text;    
-    5,6 : JobNo := edtJOB_NO_SEL3.Text;  
+    1,2 : begin JobNo := edtJOB_NO_SEL1.Text; IO := '입고'; end;
+    3,4 : begin JobNo := edtJOB_NO_SEL2.Text; IO := '출고'; end;
+    5,6 : begin JobNo := edtJOB_NO_SEL3.Text; IO := '랙이동'; end;
   End;
 
-  if fnJobCheck(JobNo) then
+  if MessageDlg('  [ '+JobNo+' ] 번 작업 처리 하시겠습니까?', mtConfirmation, [mbYes, mbNo], 0) <> mrYes then Exit ;
+
+  if not fnOrderDataSet(JobNo) then Exit;
+
+  if (OrderData.JOBERRORC = '1') and (OrderData.JOBERRORD = 'RFID 불일치') then fnRFIDDataUpdate; // 알람 OFF
+
+  if fnJobCheck(JobNo) then //작업중
+  begin 
+    if (Sender as tSpeedButton).Tag mod 2 = 1 then
+    begin
+      fnUpdateSCSetInfo('JOB_CANCLE');//취소  
+    end else
+    begin
+      fnUpdateSCSetInfo('JOB_COMPLETE');//완료   
+    end;
+  end else //대기중
   begin
-    MessageDlg('작업중', mtConfirmation, [mbYes], 0);
-  end else
-  begin
-    MessageDlg('작업중 아님', mtConfirmation, [mbYes], 0);
+    if (Sender as tSpeedButton).Tag mod 2 = 1 then //취소
+    begin
+      fnOrderCancelAndComplet(IO,JobNo,'취소');
+    end else                                       //완료
+    begin
+      fnOrderCancelAndComplet(IO,JobNo,'완료');
+    end;
   end;
-
+  fnAutoQuery(IO);
+  fnCommandQuery;
 end;
-
+                     
 //==============================================================================
 // fnJobCheck 작업중 체크
 //==============================================================================
@@ -880,7 +914,7 @@ begin
       
       if RecordCount < 1 then
       begin
-        Result := False;
+        Result := False;                        
       end;
       Close;
     end;
@@ -894,6 +928,509 @@ begin
     end;
   end;
 end;
+//==============================================================================
+// fnUpdateSCSetInfo TC_SCSETINFO 업데이트
+//==============================================================================
+procedure TfrmU210.fnUpdateSCSetInfo(FieldName: String);
+var
+  StrSQL : String;
+begin
+  try
+    strSQL := 'UPDATE TC_SCSETINFO SET '+ FieldName + ' = 1';
+    with qryTemp do
+    begin  
+      Close;
+      SQL.Clear;
+      SQL.Text := strSQL;
+      ExecSQL;     
+    end;
+  except
+    on E : Exception do
+    begin
+      InsertPGMHist('['+FormNo+']', 'E', 'fnUpdateSCSetInfo', '', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnUpdateSCSetInfo Fail || ERR['+E.Message+']');
+      qryTemp.Close;
+    end;
+  end;
+end;
+
+//==============================================================================
+// fnOrderCancelAndComplet 작업 완료 삭제
+//==============================================================================
+function TfrmU210.fnOrderCancelAndComplet(IO, JobNo, Order: String): Boolean;
+var
+  StrSQL, StrSQL2, StrSQL3, CellStatus, ITM_NAME, ITM_SPEC  : String;
+  ExecNo : Integer;
+begin
+  if   UpperCase(OrderData.ITM_CD)='EPLT' then
+  begin
+    CellStatus := '1';
+    ITM_NAME := '공팔레트';
+    ITM_SPEC := '공팔레트';
+  end else
+  begin
+    CellStatus := '2';
+    ITM_NAME := '실팔레트';
+    ITM_SPEC := '실팔레트';
+  end;
+
+  try
+    if Order = '완료' then //완료
+    begin
+      if IO = '입고' then
+      begin
+        strSQL := ' UPDATE TT_ORDER ' +
+                  '    SET NOWMC     = ''2'' ' +
+                  '      , NOWSTATUS = ''4'' ' +
+                  '      , JOBSTATUS = ''4'' ' +
+                  '      , JOB_END   = ''1'' ' +
+                  '      , ETC       = ''강제완료'' ' +
+                  '  WHERE LUGG      = ''' + JobNo + ''' ' ;
+
+        strSQL2 := ' Update TT_STOCK ' +
+                   '    Set ITM_CD       = ' + QuotedStr(UpperCase(OrderData.ITM_CD)) +
+                   '      , ITM_NAME     = ' + QuotedStr(fnITEM_Value('ITM_NAME', UpperCase(OrderData.ITM_CD))) +
+                   '      , ITM_SPEC     = ' + QuotedStr(fnITEM_Value('ITM_SPEC', UpperCase(OrderData.ITM_CD))) +
+                   '      , ITM_QTY      = 1' +
+                   '      , ID_STATUS    = ' + QuotedStr(CellStatus) +
+                   '      , STOCK_IN_DT  = GETDATE()   ' +
+                   '      , ID_MEMO      = ' + QuotedStr(OrderData.ETC) +
+                   '  Where ID_HOGI   = ''' + Copy(OrderData.DSTSITE,  4, 1)  + ''' ' +
+                   '    AND ID_BANK   = ''' + Copy(OrderData.DSTAISLE, 4, 1)  + ''' ' + // 하역 열
+                   '    AND ID_BAY    = ''' + Copy(OrderData.DSTBAY,   3, 2)  + ''' ' + // 하역 연
+                   '    AND ID_LEVEL  = ''' + Copy(OrderData.DSTLEVEL, 3, 2)  + ''' ' ; // 하역 단
+      end else
+      if IO = '출고' then
+      begin
+        strSQL := ' UPDATE TT_ORDER ' +
+                  '    SET NOWMC     = ''3'' ' +
+                  '      , NOWSTATUS = ''4'' ' +
+                  '      , JOBSTATUS = ''4'' ' +
+                  '      , JOB_END   = ''1'' ' +
+                  '      , ETC       = ''강제완료'' ' +                  
+                  '  WHERE LUGG      = ''' + JobNo + ''' ' ;
+
+        strSQL2 := ' Update TT_STOCK ' +
+                   '    Set ITM_CD       = ''''  ' +
+                   '      , ITM_NAME     = ''''  ' +
+                   '      , ITM_SPEC     = ''''  ' +
+                   '      , ITM_QTY      = 0     ' +
+                   '      , ID_STATUS    = ''0'' ' +
+                   '      , ID_MEMO      = ''''  ' +
+                   '  Where ID_HOGI   = ''' + Copy(OrderData.SRCSITE,  4, 1)  + ''' ' +
+                   '    AND ID_BANK   = ''' + Copy(OrderData.SRCAISLE, 4, 1)  + ''' ' + // 적재 열
+                   '    AND ID_BAY    = ''' + Copy(OrderData.SRCBAY,   3, 2)  + ''' ' + // 적재 연
+                   '    AND ID_LEVEL  = ''' + Copy(OrderData.SRCLEVEL, 3, 2)  + ''' ' ; // 적재 단
+      end else
+      begin
+        strSQL := ' UPDATE TT_ORDER ' +
+                  '    SET NOWMC     = ''2'' ' +
+                  '      , NOWSTATUS = ''4'' ' +
+                  '      , JOBSTATUS = ''4'' ' +
+                  '      , JOB_END   = ''1'' ' +
+                  '      , ETC       = ''강제완료'' ' +
+                  '  WHERE LUGG      = ''' + JobNo + ''' ' ;
+
+        strSQL2 := ' Update TT_STOCK ' +
+                   '    Set ITM_CD       = ' + QuotedStr(UpperCase(OrderData.ITM_CD)) +
+                   '      , ITM_NAME     = ' + QuotedStr(fnITEM_Value('ITM_NAME', UpperCase(OrderData.ITM_CD))) +
+                   '      , ITM_SPEC     = ' + QuotedStr(fnITEM_Value('ITM_SPEC', UpperCase(OrderData.ITM_CD))) +
+                   '      , ITM_QTY      = 1' +
+                   '      , ID_STATUS    = ' + QuotedStr(CellStatus) +
+                   '      , STOCK_IN_DT  = GETDATE()   ' +
+                   '      , ID_MEMO      = ' + QuotedStr(OrderData.ETC) +
+                   '  Where ID_HOGI   = ''' + Copy(OrderData.DSTSITE,  4, 1)  + ''' ' +
+                   '    AND ID_BANK   = ''' + Copy(OrderData.DSTAISLE, 4, 1)  + ''' ' + // 하역 열
+                   '    AND ID_BAY    = ''' + Copy(OrderData.DSTBAY,   3, 2)  + ''' ' + // 하역 연
+                   '    AND ID_LEVEL  = ''' + Copy(OrderData.DSTLEVEL, 3, 2)  + ''' ' ; // 하역 단
+
+        strSQL3 := ' Update TT_STOCK ' +
+                   '    Set ITM_CD       = ''''  ' +
+                   '      , ITM_NAME     = ''''  ' +
+                   '      , ITM_SPEC     = ''''  ' +
+                   '      , ITM_QTY      = 0     ' +
+                   '      , ID_STATUS    = ''0'' ' +
+                   '      , ID_MEMO      = ''''  ' +
+                   '  Where ID_HOGI   = ''' + Copy(OrderData.SRCSITE,  4, 1)  + ''' ' +
+                   '    AND ID_BANK   = ''' + Copy(OrderData.SRCAISLE, 4, 1)  + ''' ' + // 적재 열
+                   '    AND ID_BAY    = ''' + Copy(OrderData.SRCBAY,   3, 2)  + ''' ' + // 적재 연
+                   '    AND ID_LEVEL  = ''' + Copy(OrderData.SRCLEVEL, 3, 2)  + ''' ' ; // 적재 단
+      end;
+    end else               //취소
+    begin
+      strSQL := ' UPDATE TT_ORDER ' +
+                '    SET JOB_END   = ''1'' ' +
+                '      , ETC       = ''작업취소'' ' +
+                '  WHERE LUGG      = ''' + JobNo + ''' ' ;
+      if IO = '입고' then
+      begin
+        strSQL2 := ' Update TT_STOCK ' +
+                   '    Set ID_STATUS    = ''0'' ' +
+                   '  Where ID_HOGI   = ''' + Copy(OrderData.DSTSITE,  4, 1)  + ''' ' +
+                   '    AND ID_BANK   = ''' + Copy(OrderData.DSTAISLE, 4, 1)  + ''' ' + // 적재 열
+                   '    AND ID_BAY    = ''' + Copy(OrderData.DSTBAY,   3, 2)  + ''' ' + // 적재 연
+                   '    AND ID_LEVEL  = ''' + Copy(OrderData.DSTLEVEL, 3, 2)  + ''' ' ; // 적재 단
+      end else
+      if IO = '출고' then
+      begin
+        strSQL2 := ' Update TT_STOCK ' +
+                   '    Set ITM_CD       = ' + QuotedStr(OrderData.ITM_CD) +
+                   '      , ITM_NAME     = ' + QuotedStr(ITM_NAME) +
+                   '      , ITM_SPEC     = ' + QuotedStr(ITM_SPEC) +
+                   '      , ITM_QTY      = ' + QuotedStr(OrderData.RF_BMA_NO) +
+                   '      , ID_STATUS    = ' + QuotedStr(CellStatus) +
+                   '      , ID_MEMO      = ' + QuotedStr(OrderData.ETC) +
+                   '      , RF_LINE_NAME1  = ' + QuotedStr(OrderData.RF_LINE_NAME1) +
+                   '      , RF_LINE_NAME2  = ' + QuotedStr(OrderData.RF_LINE_NAME2) +
+                   '      , RF_PALLET_NO1  = ' + QuotedStr(OrderData.RF_PALLET_NO1) +
+                   '      , RF_PALLET_NO2  = ' + QuotedStr(OrderData.RF_PALLET_NO2) +
+                   '      , RF_MODEL_NO1   = ' + QuotedStr(OrderData.RF_MODEL_NO1) +
+                   '      , RF_MODEL_NO2   = ' + QuotedStr(OrderData.RF_MODEL_NO2) +
+                   '      , RF_BMA_NO      = ' + QuotedStr(OrderData.RF_BMA_NO) +
+                   '      , RF_PALLET_BMA1 = ' + QuotedStr(OrderData.RF_PALLET_BMA1) +
+                   '      , RF_PALLET_BMA2 = ' + QuotedStr(OrderData.RF_PALLET_BMA2) +
+                   '      , RF_PALLET_BMA3 = ' + QuotedStr(OrderData.RF_PALLET_BMA3) +
+                   '  Where ID_HOGI   = ''' + Copy(OrderData.SRCSITE,  4, 1)  + ''' ' +
+                   '    AND ID_BANK   = ''' + Copy(OrderData.SRCAISLE, 4, 1)  + ''' ' + // 적재 열
+                   '    AND ID_BAY    = ''' + Copy(OrderData.SRCBAY,   3, 2)  + ''' ' + // 적재 연
+                   '    AND ID_LEVEL  = ''' + Copy(OrderData.SRCLEVEL, 3, 2)  + ''' ' ; // 적재 단
+
+      end else
+      begin
+        strSQL2 := ' Update TT_STOCK ' +
+                   '    Set ID_STATUS    = ''0'' ' +
+                   '  Where ID_HOGI   = ''' + Copy(OrderData.DSTSITE,  4, 1)  + ''' ' +
+                   '    AND ID_BANK   = ''' + Copy(OrderData.DSTAISLE, 4, 1)  + ''' ' + // 적재 열
+                   '    AND ID_BAY    = ''' + Copy(OrderData.DSTBAY,   3, 2)  + ''' ' + // 적재 연
+                   '    AND ID_LEVEL  = ''' + Copy(OrderData.DSTLEVEL, 3, 2)  + ''' ' ; // 적재 단
+
+        strSQL3 := ' Update TT_STOCK ' +
+                   '    Set ID_STATUS = ' + QuotedStr(CellStatus) +
+                   '  Where ID_HOGI   = ''' + Copy(OrderData.SRCSITE,  4, 1)  + ''' ' +
+                   '    AND ID_BANK   = ''' + Copy(OrderData.SRCAISLE, 4, 1)  + ''' ' + // 적재 열
+                   '    AND ID_BAY    = ''' + Copy(OrderData.SRCBAY,   3, 2)  + ''' ' + // 적재 연
+                   '    AND ID_LEVEL  = ''' + Copy(OrderData.SRCLEVEL, 3, 2)  + ''' ' ; // 적재 단
+      end;
+    end;
+    with qryTemp do
+    begin
+      Close;
+      SQL.Clear;
+
+      if not MainDM.MainDB.InTransaction then
+             MainDM.MainDB.BeginTrans ;
+
+      SQL.Text := strSQL;
+      ExecNo := ExecSQL;
+
+      if ExecNo > 0 then
+      begin
+        SQL.Text := strSQL2;
+        ExecNo := ExecSQL;
+
+        if (ExecNo > 0) And
+           (IO = '랙이동') then
+        begin
+          SQL.Text := strSQL3;
+          ExecNo := ExecSQL;
+        end;
+      end;
+
+      InsertPGMHist('['+FormNo+']', 'N', 'fnOrderCancelAndComplet', Order,Order+'-'+IO+'-'+JobNo,'SQL', StrSQL, '', '');
+      MainDM.MainDB.CommitTrans;
+      fnIns_History(JobNo);
+      qryTemp.Close;
+    end;
+  except
+    on E : Exception do
+    begin
+      MainDM.MainDB.RollbackTrans;
+      InsertPGMHist('['+FormNo+']', 'E', 'fnOrderCancelAndComplet', '', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnOrderCancelAndComplet Fail || ERR['+E.Message+']');
+      qryTemp.Close;
+    end;
+  end;
+end;
+
+//==============================================================================
+// fnUpdateSCSetInfo TC_SCSETINFO 업데이트
+//==============================================================================
+function TfrmU210.fnOrderDataSet(JobNo : String): Boolean;
+var
+  StrSQL : String;
+begin
+
+  try
+    StrSQL := ' SELECT * FROM TT_ORDER ' +
+              '  WHERE LUGG = ''' + JobNo + ''' ';
+    with qryTemp do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Text := strSQL;
+      Open;
+    end;
+    OrderData.REG_TIME       := '';
+    OrderData.LUGG           := qryTemp.FieldByName('LUGG').AsString;
+    OrderData.JOBD           := '';
+    OrderData.IS_AUTO        := '';
+    OrderData.LINE_NO        := '';
+    OrderData.SRCSITE        := qryTemp.FieldByName('SRCSITE' ).AsString;
+    OrderData.SRCAISLE       := qryTemp.FieldByName('SRCAISLE').AsString;
+    OrderData.SRCBAY         := qryTemp.FieldByName('SRCBAY'  ).AsString;
+    OrderData.SRCLEVEL       := qryTemp.FieldByName('SRCLEVEL').AsString;
+    OrderData.DSTSITE        := qryTemp.FieldByName('DSTSITE' ).AsString;
+    OrderData.DSTAISLE       := qryTemp.FieldByName('DSTAISLE').AsString;
+    OrderData.DSTBAY         := qryTemp.FieldByName('DSTBAY'  ).AsString;
+    OrderData.DSTLEVEL       := qryTemp.FieldByName('DSTLEVEL').AsString;
+    OrderData.NOWMC          := qryTemp.FieldByName('NOWMC'   ).AsString;
+    OrderData.JOBSTATUS      := '';
+    OrderData.NOWSTATUS      := '';
+    OrderData.BUFFSTATUS     := '';
+    OrderData.JOBREWORK      := '';
+    OrderData.JOBERRORT      := '';
+    OrderData.JOBERRORC      := qryTemp.FieldByName('JOBERRORC').AsString;
+    OrderData.JOBERRORD      := qryTemp.FieldByName('JOBERRORD').AsString;
+    OrderData.JOB_END        := '';
+    OrderData.CVFR           := '';
+    OrderData.CVTO           := '';
+    OrderData.CVCURR         := '';
+    OrderData.ETC            := qryTemp.FieldByName('ETC').AsString;
+    OrderData.EMG            := '';
+    OrderData.ITM_CD         := qryTemp.FieldByName('ITM_CD').AsString;
+    OrderData.UP_TIME        := '';
+    OrderData.ID_CODE        := '';
+    OrderData.RF_LINE_NAME1  := qryTemp.FieldByName('RF_LINE_NAME1' ).AsString;
+    OrderData.RF_LINE_NAME2  := qryTemp.FieldByName('RF_LINE_NAME2' ).AsString;
+    OrderData.RF_PALLET_NO1  := qryTemp.FieldByName('RF_PALLET_NO1' ).AsString;
+    OrderData.RF_PALLET_NO2  := qryTemp.FieldByName('RF_PALLET_NO2' ).AsString;
+    OrderData.RF_MODEL_NO1   := qryTemp.FieldByName('RF_MODEL_NO1'  ).AsString;
+    OrderData.RF_MODEL_NO2   := qryTemp.FieldByName('RF_MODEL_NO2'  ).AsString;
+    OrderData.RF_BMA_NO      := qryTemp.FieldByName('RF_BMA_NO'     ).AsString;
+    OrderData.RF_PALLET_BMA1 := qryTemp.FieldByName('RF_PALLET_BMA1').AsString;
+    OrderData.RF_PALLET_BMA2 := qryTemp.FieldByName('RF_PALLET_BMA2').AsString;
+    OrderData.RF_PALLET_BMA3 := qryTemp.FieldByName('RF_PALLET_BMA3').AsString;
+    OrderData.RF_AREA        := qryTemp.FieldByName('RF_AREA'       ).AsString;
+    Result := True;
+  except
+    on E : Exception do
+    begin
+      InsertPGMHist('['+FormNo+']', 'E', 'fnOrderDataSet', '', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnOrderDataSet Fail || ERR['+E.Message+']');
+      qryTemp.Close;
+      Result := False;
+    end;
+  end;
+end;
+
+//==============================================================================
+// OrderDataClear [구조체 초기화]
+//==============================================================================
+procedure TfrmU210.OrderDataClear(OrderData: TJobOrder);
+begin
+  OrderData.REG_TIME       := '';
+  OrderData.LUGG           := '';
+  OrderData.JOBD           := '';
+  OrderData.IS_AUTO        := '';
+  OrderData.LINE_NO        := '';
+  OrderData.SRCSITE        := '';
+  OrderData.SRCAISLE       := '';
+  OrderData.SRCBAY         := '';
+  OrderData.SRCLEVEL       := '';
+  OrderData.DSTSITE        := '';
+  OrderData.DSTAISLE       := '';
+  OrderData.DSTBAY         := '';
+  OrderData.DSTLEVEL       := '';
+  OrderData.NOWMC          := '';
+  OrderData.JOBSTATUS      := '';
+  OrderData.NOWSTATUS      := '';
+  OrderData.BUFFSTATUS     := '';
+  OrderData.JOBREWORK      := '';
+  OrderData.JOBERRORT      := '';
+  OrderData.JOBERRORC      := '';
+  OrderData.JOBERRORD      := '';
+  OrderData.JOB_END        := '';
+  OrderData.CVFR           := '';
+  OrderData.CVTO           := '';
+  OrderData.CVCURR         := '';
+  OrderData.ETC            := '';
+  OrderData.EMG            := '';
+  OrderData.ITM_CD         := '';
+  OrderData.UP_TIME        := '';
+  OrderData.ID_CODE        := '';
+  OrderData.RF_LINE_NAME1  := '';
+  OrderData.RF_LINE_NAME2  := '';
+  OrderData.RF_PALLET_NO1  := '';
+  OrderData.RF_PALLET_NO2  := '';
+  OrderData.RF_MODEL_NO1   := '';
+  OrderData.RF_MODEL_NO2   := '';
+  OrderData.RF_BMA_NO      := '';
+  OrderData.RF_PALLET_BMA1 := '';
+  OrderData.RF_PALLET_BMA2 := '';
+  OrderData.RF_PALLET_BMA3 := '';
+  OrderData.RF_AREA        := '';
+end;
+
+//==============================================================================
+// fnITEM_Value : TM_ITEM 데이터 반환
+//==============================================================================
+function TfrmU210.fnITEM_Value(FName, FValue : String): String;
+var
+  StrSQL : string;
+begin
+  Result := '' ;
+  StrSQL := ' SELECT ' + Fname + ' as DATA ' +
+            '   FROM TM_ITEM    ' +
+            '  WHERE ITM_CD = ''' + FValue + ''' ' ;
+
+
+  try
+    with qryTemp do
+    begin
+      Close;
+      SQL.Clear ;
+      SQL.Text := StrSQL ;
+      Open ;
+      if not (Bof and Eof) then
+      begin
+        Result := FieldByName('Data').AsString ;
+      end;
+      Close ;
+    end;
+  except
+    on E: Exception do
+    begin
+      InsertPGMHist('['+FormNo+']', 'E', 'fnITEM_Value', '', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnITEM_Value Fail || ERR['+E.Message+']');
+      qryTemp.Close;
+    end;
+  end;
+end;
+
+//==============================================================================
+// fnIns_History : TT_ORDER를 History에 넣고 삭제
+//==============================================================================
+procedure TfrmU210.fnIns_History(JobNo: String);
+var
+  StrSQL : string;
+  ExecNo : Integer;
+begin
+  StrSQL := '';
+  try
+    with qryTemp do
+    begin
+      Close;
+      SQL.Clear;
+      StrSQL := ' INSERT INTO TT_HISTORY (REG_TIME, LUGG, JOBD, IS_AUTO, LINE_NO, ' +
+                                        ' SRCSITE, SRCAISLE, SRCBAY, SRCLEVEL, ' +
+                            					  ' DSTSITE, DSTAISLE, DSTBAY, DSTLEVEL, ' +
+					                              '	NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS, ' +
+					                              '	JOBREWORK, JOBERRORT, JOBERRORC, JOBERRORD, ' +
+					                              ' JOB_END, CVFR, CVTO, CVCURR, ' +
+					                              '	ETC, EMG, ITM_CD, UP_TIME, HIS_TIME, ' +
+					                              '	RF_LINE_NAME1, RF_LINE_NAME2, RF_PALLET_NO1, ' +
+                                        ' RF_PALLET_NO2, RF_MODEL_NO1, RF_MODEL_NO2, ' +
+                                        ' RF_BMA_NO, RF_PALLET_BMA1,RF_PALLET_BMA2, ' +
+                                        ' RF_PALLET_BMA3, RF_AREA) ' +
+                      ' SELECT REG_TIME, LUGG, JOBD, IS_AUTO, LINE_NO, ' +
+                             ' SRCSITE, SRCAISLE, SRCBAY, SRCLEVEL, ' +
+		                         ' DSTSITE, DSTAISLE, DSTBAY, DSTLEVEL, ' +
+		                         ' NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS, ' +
+		                         ' JOBREWORK, JOBERRORT, JOBERRORC, JOBERRORD, ' +
+		                         ' JOB_END, CVFR, CVTO, CVCURR, ' +
+		                         ' ETC, EMG, ITM_CD, UP_TIME, GETDATE(), ' +
+                             ' RF_LINE_NAME1, RF_LINE_NAME2, RF_PALLET_NO1, ' +
+                             ' RF_PALLET_NO2, RF_MODEL_NO1, RF_MODEL_NO2, ' +
+                             ' RF_BMA_NO, RF_PALLET_BMA1,RF_PALLET_BMA2, ' +
+                             ' RF_PALLET_BMA3, RF_AREA ' +
+                        ' FROM TT_ORDER ' +
+                       ' WHERE LUGG = '  + QuotedStr(JobNo) ;
+      SQL.Text := StrSQL ;
+      ExecNo := ExecSql ;
+
+      if (ExecNo > 0) then
+      begin
+        Close;
+        SQL.Clear;
+        StrSQL := ' DELETE FROM TT_ORDER ' +
+                  '  WHERE LUGG = '  + QuotedStr(JobNo) ;
+        SQL.Text := StrSQL;
+        ExecSql;
+      end;
+
+      Close ;
+    end;
+  except
+    on E: Exception do
+    begin
+      qryTemp.Close ;
+      InsertPGMHist('['+FormNo+']', 'E', 'fnIns_History', '', 'Exception Error', 'PGM', '', '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnIns_History Fail || ERR['+E.Message+']');
+    end;
+  end;
+end;
+
+//==============================================================================
+// fnAutoQuery
+//==============================================================================
+procedure TfrmU210.fnAutoQuery(IO : String);
+begin
+  if IO = '입고' then
+  Begin
+    Pnl_AutoQry_In.Tag := 1;
+    Pnl_AutoQry_In.BevelInner := bvRaised ;
+    ImgIn.Tag := 1;
+    ImgIn.Picture.Bitmap := imgOK.Picture.Bitmap;
+    PnlSelInfo1.Visible := False;
+    edtJOB_NO_SEL1.Text := '';
+  End else
+  if IO = '출고' then
+  begin
+    Pnl_AutoQry_Ot.Tag := 1;
+    Pnl_AutoQry_Ot.BevelInner := bvRaised ;
+    ImgOt.Tag := 1;
+    ImgOt.Picture.Bitmap := imgOK.Picture.Bitmap;
+    PnlSelInfo2.Visible := False;
+    edtJOB_NO_SEL2.Text := '';
+  end else
+  begin
+    Pnl_AutoQry_Rack.Tag := 1;
+    Pnl_AutoQry_Rack.BevelInner := bvRaised ;
+    ImgRack.Tag := 1;
+    ImgRack.Picture.Bitmap := imgOK.Picture.Bitmap;
+    PnlSelInfo3.Visible := False;
+    edtJOB_NO_SEL3.Text := '';
+  end;
+end;
+
+//==============================================================================
+// fnCurtainMsg   clRed  clFuchsia
+//==============================================================================
+procedure TfrmU210.fnRFIDDataUpdate;
+var
+  StrSQL : String ;
+begin
+  StrSQL := ' UPDATE TC_CURRENT ' +
+            '    SET OPTION1 = ''1'''+
+            '  WHERE CURRENT_NAME = ''ALRAM_OFF'' ';
+  try
+    with qryTemp do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Text := StrSQL ;
+      ExecSQL;
+    end;
+  except
+    on E : Exception do
+    begin
+      qryTemp.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'fnRFIDDataUpdate', '', 'Exception Error', 'SQL', StrSQL, '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnRFIDDataUpdate Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
+    end;
+  end;
+end;
+
 
 end.
 

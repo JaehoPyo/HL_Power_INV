@@ -137,11 +137,6 @@ type
     Panel159: TPanel;
     Panel161: TPanel;
     Panel162: TPanel;
-    Panel65: TPanel;
-    PnlOtRdy2: TPanel;
-    PnlInRdy2: TPanel;
-    shpInRdy2: TShape;
-    shpOtRdy2: TShape;
     SC: TPanel;
     SCStatus: TPanel;
     SCRFork: TPanel;
@@ -182,8 +177,6 @@ type
     imgRFork_Right: TImage;
     Label4: TLabel;
     Label5: TLabel;
-    Panel82: TPanel;
-    Panel83: TPanel;
     btnReset: TButton;
     btnRetry: TButton;
     Panel18: TPanel;
@@ -202,32 +195,219 @@ type
     edt_InReady3: TEdit;
     Panel23: TPanel;
     edt_OutReady3: TEdit;
+    pnlCurtain1: TPanel;
+    pnlCurtain2: TPanel;
+    pnlCurtain3: TPanel;
+    pnlCurtain4: TPanel;
+    pnlCurtain5: TPanel;
+    pnlCurtain6: TPanel;
+    ImgCV_Cago1: TImage;
+    ImgCV_Cago2: TImage;
+    ImgCV_Cago3: TImage;
+    ImgCV_Cago4: TImage;
+    ImgCV_Cago5: TImage;
+    ImgCV_Cago6: TImage;
+    Panel104: TPanel;
+    Label8: TLabel;
+    Label9: TLabel;
+    lblLineName1_RF01: TLabel;
+    Label7: TLabel;
+    lblLineName2_RF01: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    Label15: TLabel;
+    Label16: TLabel;
+    Label19: TLabel;
+    Label20: TLabel;
+    Label21: TLabel;
+    Label22: TLabel;
+    lblPalletBma3_RF01: TLabel;
+    lblPalletNo1_RF01: TLabel;
+    lblPalletNo2_RF01: TLabel;
+    lblModelNo1_RF01: TLabel;
+    lblModelNo2_RF01: TLabel;
+    lblBmaNo_RF01: TLabel;
+    lblArea_RF01: TLabel;
+    lblPalletBma1_RF01: TLabel;
+    lblPalletBma2_RF01: TLabel;
+    Panel65: TPanel;
+    Label36: TLabel;
+    Label37: TLabel;
+    lblLineName1_RF02: TLabel;
+    Label39: TLabel;
+    lblLineName2_RF02: TLabel;
+    Label41: TLabel;
+    Label42: TLabel;
+    Label43: TLabel;
+    Label44: TLabel;
+    Label45: TLabel;
+    Label46: TLabel;
+    Label47: TLabel;
+    Label48: TLabel;
+    Label49: TLabel;
+    lblPalletBma3_RF02: TLabel;
+    lblPalletNo1_RF02: TLabel;
+    lblPalletNo2_RF02: TLabel;
+    lblModelNo1_RF02: TLabel;
+    lblModelNo2_RF02: TLabel;
+    lblBmaNo_RF02: TLabel;
+    lblArea_RF02: TLabel;
+    lblPalletBma1_RF02: TLabel;
+    lblPalletBma2_RF02: TLabel;
+    Panel83: TPanel;
+    Label59: TLabel;
+    Label60: TLabel;
+    lblLineName1_RF03: TLabel;
+    Label62: TLabel;
+    lblLineName2_RF03: TLabel;
+    Label67: TLabel;
+    Label68: TLabel;
+    Label69: TLabel;
+    Label70: TLabel;
+    Label71: TLabel;
+    Label72: TLabel;
+    Label73: TLabel;
+    Label74: TLabel;
+    Label75: TLabel;
+    lblPalletBma3_RF03: TLabel;
+    lblPalletNo1_RF03: TLabel;
+    lblPalletNo2_RF03: TLabel;
+    lblModelNo1_RF03: TLabel;
+    lblModelNo2_RF03: TLabel;
+    lblBmaNo_RF03: TLabel;
+    lblArea_RF03: TLabel;
+    lblPalletBma1_RF03: TLabel;
+    lblPalletBma2_RF03: TLabel;
     Panel61: TPanel;
-    PnlOtRdy1: TPanel;
-    shpOtRdy1: TShape;
+    Label6: TLabel;
+    Label85: TLabel;
+    lblLineName1_RF04: TLabel;
+    Label87: TLabel;
+    lblLineName2_RF04: TLabel;
+    Label89: TLabel;
+    Label90: TLabel;
+    Label91: TLabel;
+    Label92: TLabel;
+    Label93: TLabel;
+    Label94: TLabel;
+    Label95: TLabel;
+    Label96: TLabel;
+    Label97: TLabel;
+    lblPalletBma3_RF04: TLabel;
+    lblPalletNo1_RF04: TLabel;
+    lblPalletNo2_RF04: TLabel;
+    lblModelNo1_RF04: TLabel;
+    lblModelNo2_RF04: TLabel;
+    lblBmaNo_RF04: TLabel;
+    lblArea_RF04: TLabel;
+    lblPalletBma1_RF04: TLabel;
+    lblPalletBma2_RF04: TLabel;
+    Panel82: TPanel;
+    Label107: TLabel;
+    Label108: TLabel;
+    lblLineName1_RF05: TLabel;
+    Label110: TLabel;
+    lblLineName2_RF05: TLabel;
+    Label112: TLabel;
+    Label113: TLabel;
+    Label114: TLabel;
+    Label115: TLabel;
+    Label116: TLabel;
+    Label117: TLabel;
+    Label118: TLabel;
+    Label119: TLabel;
+    Label120: TLabel;
+    lblPalletBma3_RF05: TLabel;
+    lblPalletNo1_RF05: TLabel;
+    lblPalletNo2_RF05: TLabel;
+    lblModelNo1_RF05: TLabel;
+    lblModelNo2_RF05: TLabel;
+    lblBmaNo_RF05: TLabel;
+    lblArea_RF05: TLabel;
+    lblPalletBma1_RF05: TLabel;
+    lblPalletBma2_RF05: TLabel;
+    Panel84: TPanel;
+    Label130: TLabel;
+    Label131: TLabel;
+    lblLineName1_RF06: TLabel;
+    Label133: TLabel;
+    lblLineName2_RF06: TLabel;
+    Label135: TLabel;
+    Label136: TLabel;
+    Label137: TLabel;
+    Label138: TLabel;
+    Label139: TLabel;
+    Label140: TLabel;
+    Label141: TLabel;
+    Label142: TLabel;
+    Label143: TLabel;
+    lblPalletBma3_RF06: TLabel;
+    lblPalletNo1_RF06: TLabel;
+    lblPalletNo2_RF06: TLabel;
+    lblModelNo1_RF06: TLabel;
+    lblModelNo2_RF06: TLabel;
+    lblBmaNo_RF06: TLabel;
+    lblArea_RF06: TLabel;
+    lblPalletBma1_RF06: TLabel;
+    lblPalletBma2_RF06: TLabel;
+    Panel85: TPanel;
     Panel86: TPanel;
-    PnlInRdy1: TPanel;
-    shpInRdy1: TShape;
+    Panel87: TPanel;
     Panel88: TPanel;
     Panel89: TPanel;
-    PnlOtRdy3: TPanel;
-    shpOtRdy3: TShape;
+    Panel90: TPanel;
     Panel91: TPanel;
-    PnlInRdy3: TPanel;
-    shpInRdy3: TShape;
+    Panel92: TPanel;
     Panel93: TPanel;
-    Panel84: TPanel;
-    lbl_JobType: TLabel;
     Panel94: TPanel;
     Panel95: TPanel;
     Panel96: TPanel;
+    edt_Curtain1: TEdit;
+    edt_Curtain3: TEdit;
+    edt_Curtain5: TEdit;
+    edt_Fire1: TEdit;
+    edt_Fire3: TEdit;
+    edt_Fire5: TEdit;
+    edt_Curtain2: TEdit;
+    edt_Curtain4: TEdit;
+    edt_Curtain6: TEdit;
+    edt_Fire2: TEdit;
+    edt_Fire4: TEdit;
+    edt_Fire6: TEdit;
+    tmrRFID: TTimer;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label23: TLabel;
+    Label24: TLabel;
+    Label25: TLabel;
+    Label26: TLabel;
+    btnCurtain6: TButton;
+    btnCurtain5: TButton;
+    btnCurtain1: TButton;
+    btnCurtain2: TButton;
+    btnCurtain3: TButton;
+    btnCurtain4: TButton;
     Panel97: TPanel;
+    Panel98: TPanel;
+    Panel99: TPanel;
+    edt_Docking5: TEdit;
+    edt_Docking3: TEdit;
+    edt_Docking1: TEdit;
+    Panel100: TPanel;
+    Panel101: TPanel;
+    Panel102: TPanel;
+    edt_Docking6: TEdit;
+    edt_Docking4: TEdit;
+    edt_Docking2: TEdit;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Pnl_MainResize(Sender: TObject);
     procedure tmrQryTimer(Sender: TObject);
     procedure btnClick(Sender: TObject);
+    procedure tmrRFIDTimer(Sender: TObject);
+    procedure btnCurtainClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -246,9 +426,13 @@ type
 
     procedure SCTREAD(SC_NO: Integer);
     procedure SC_StatusDisplay(SC_NO: Integer);
+    procedure fnRFIDUpdate(Number, Flag: string);
 
     function fnSignalMsg(Signal: string): String;
     function fnModeMsg(Signal: string): String;
+    function fnCagoMsg(Signal: string): Boolean;
+    function fnCurMsg(FName : string): Boolean;
+    function fnCurtainMsg(Signal: string): String;
     function fnSignalEditColor(Signal,Flag: string): TColor;
     function fnSignalFontColor(Signal,Flag: string): TColor;
     function fnGetErrMsg(SC_NO: integer; GetField,ErrCode: String): String;
@@ -271,7 +455,7 @@ var
 
 
   SC_JOB    : Array [START_SCNO..END_SCNO] of TSC_JOB ; // SC 작업
-  SC_STATUS : Array [START_SCNO..End_SCNO] of TSC_STATUS ;    // SC 상태
+//  SC_STATUS : Array [START_SCNO..End_SCNO] of TSC_STATUS ;    // SC 상태
 
 
 
@@ -323,10 +507,11 @@ begin
   MainDm.M_Info.ActiveFormID := '510';
   frmMain.LblMenu000.Caption := MainDm.M_Info.ActiveFormID + '. ' + getLangMenuString(MainDm.M_Info.ActiveFormID, frmMain.LblMenu000.Caption, MainDm.M_Info.LANG_TYPE, 'N');
   frmU510.Caption := MainDm.M_Info.ActiveFormName;
-  fnWmMsgSend( 22221,11111 );
+  fnWmMsgSend( 22222,22111 );
 
   fnCommandQuery ;
   if not tmrQry.Enabled then tmrQry.Enabled := True ;
+  if not tmrRFID.Enabled then tmrRFID.Enabled := True ;
 end;
 
 //==============================================================================
@@ -336,12 +521,14 @@ procedure TfrmU510.FormDeactivate(Sender: TObject);
 var
   i : integer ;
 begin
+{
   for i := 0 to Self.ComponentCount-1 do
   begin
     if (Self.Components[i] is TTimer) then
        (Self.Components[i] as TTimer).Enabled := False ;
   end;
-
+ }
+  tmrQry.Enabled := False;
   for i := 0 to Self.ComponentCount-1 Do
   begin
     if (Self.Components[i] is TADOQuery) then
@@ -439,7 +626,7 @@ begin
   try
     for i := START_SCNO to END_SCNO do
     begin
-      SCTREAD(i);          // SC 상태 Get
+//      SCTREAD(i);          // SC 상태 Get  메인에서 실행
       SC_StatusDisplay(i); // SC상태 Display
     end;
   except
@@ -494,12 +681,121 @@ begin
 end;
 
 //==============================================================================
+// tmrRFIDTimer
+//==============================================================================
+procedure TfrmU510.tmrRFIDTimer(Sender: TObject);
+var
+  i : Integer;
+  Number : string;
+begin
+  try
+    for i := START_SCNO to END_SCNO do
+    begin
+
+      if SC_STATUS[i].D211[08] = '0' then  //화물감지
+      begin
+        fnRFIDUpdate('1', '0');
+      end else
+      if SC_STATUS[i].D213[00] = '1' then  ///RFID READ 신호
+      begin
+        fnRFIDUpdate('1', '1');
+      end else
+      if SC_STATUS[i].D213[00] = '0' then  ///RFID READ 신호
+      begin
+        fnRFIDUpdate('1', '2');
+      end;
+
+      if SC_STATUS[i].D211[09] = '0' then
+      begin
+        fnRFIDUpdate('2', '0');
+      end else
+      if SC_STATUS[i].D213[01] = '1' then
+      begin
+        fnRFIDUpdate('2', '1');
+      end else
+      if SC_STATUS[i].D213[01] = '0' then
+      begin
+        fnRFIDUpdate('2', '2');
+      end;
+
+      if SC_STATUS[i].D211[10] = '0' then
+      begin
+        fnRFIDUpdate('3', '0');
+      end else
+      if SC_STATUS[i].D213[02] = '1' then
+      begin
+        fnRFIDUpdate('3', '1');
+      end else
+      if SC_STATUS[i].D213[02] = '0' then
+      begin
+        fnRFIDUpdate('3', '2');
+      end;
+
+      if SC_STATUS[i].D211[11] = '0' then
+      begin
+        fnRFIDUpdate('4', '0');
+      end else
+      if SC_STATUS[i].D213[03] = '1' then
+      begin
+        fnRFIDUpdate('4', '1');
+      end else
+      if SC_STATUS[i].D213[03] = '0' then
+      begin
+        fnRFIDUpdate('4', '2');
+      end;
+
+      if SC_STATUS[i].D211[12] = '0' then
+      begin
+        fnRFIDUpdate('5', '0');
+      end else
+      if SC_STATUS[i].D213[04] = '1' then
+      begin
+        fnRFIDUpdate('5', '1');
+      end else
+      if SC_STATUS[i].D213[04] = '0' then
+      begin
+        fnRFIDUpdate('5', '2');
+      end;
+
+      if SC_STATUS[i].D211[13] = '0' then
+      begin
+        fnRFIDUpdate('6', '0');
+      end else
+      if SC_STATUS[i].D213[05] = '1' then
+      begin
+        fnRFIDUpdate('6', '1');
+      end else
+      if SC_STATUS[i].D213[05] = '0' then
+      begin
+        fnRFIDUpdate('6', '2');
+      end;
+    end;
+
+{
+  TEdit(Self.FindComponent('edt_InReady1'     )).Text := fnSignalMsg(SC_STATUS[SC_NO].D211[08]); // 입고레디1
+  TEdit(Self.FindComponent('edt_OutReady1'    )).Text := fnSignalMsg(SC_STATUS[SC_NO].D211[09]); // 출고레디1
+  TEdit(Self.FindComponent('edt_InReady2'     )).Text := fnSignalMsg(SC_STATUS[SC_NO].D211[10]); // 입고레디2
+  TEdit(Self.FindComponent('edt_OutReady2'    )).Text := fnSignalMsg(SC_STATUS[SC_NO].D211[11]); // 출고레디2
+  TEdit(Self.FindComponent('edt_InReady3'     )).Text := fnSignalMsg(SC_STATUS[SC_NO].D211[12]); // 입고레디3
+  TEdit(Self.FindComponent('edt_OutReady3'    )).Text := fnSignalMsg(SC_STATUS[SC_NO].D211[13]); // 출고레디3
+}
+    tmrRFID.Enabled := True ;
+  except
+    on E : Exception do
+    begin
+      tmrQry.Enabled := False ;
+      ErrorLogWrite('Procedure tmrQryTimer, ' + 'Error[' + E.Message + ']');
+    end;
+  end;
+end;
+
+//==============================================================================
 // SCTREAD
 //==============================================================================
 procedure TfrmU510.SCTREAD(SC_NO: Integer);
 var
   j, k : integer ;
-  StrSql, TmpCol, StrLog, D210, D211 : String ;
+  StrSql, TmpCol, StrLog, D210, D211, D212 : String ;
 begin
   D210:=''; D211:='';
 
@@ -537,6 +833,9 @@ begin
           TmpCol := 'D211_' + FormatFloat('00',j) ;
           SC_STATUS[SC_NO].D211[j] := FieldByName(TmpCol).AsString ;
           D211 := D211 + SC_STATUS[SC_NO].D211[j] ;
+          TmpCol := 'D212_' + FormatFloat('00',j) ;
+          SC_STATUS[SC_NO].D212[j] := FieldByName(TmpCol).AsString ;
+          D212 := D212 + SC_STATUS[SC_NO].D212[j] ;
         end;
       end;
       Close;
@@ -566,6 +865,15 @@ begin
   end else btnRetry.Enabled := False ;
 
 
+  //++++++++++++++++++++++++++++++++++++++++++++
+  // 커튼 버튼 변경
+  //++++++++++++++++++++++++++++++++++++++++++++
+  TButton(Self.FindComponent('btnCurtain1')).Enabled := fnCurMsg('OPTION1');
+  TButton(Self.FindComponent('btnCurtain2')).Enabled := fnCurMsg('OPTION2');
+  TButton(Self.FindComponent('btnCurtain3')).Enabled := fnCurMsg('OPTION3');
+  TButton(Self.FindComponent('btnCurtain4')).Enabled := fnCurMsg('OPTION4');
+  TButton(Self.FindComponent('btnCurtain5')).Enabled := fnCurMsg('OPTION5');
+  TButton(Self.FindComponent('btnCurtain6')).Enabled := fnCurMsg('OPTION6');
 
   //++++++++++++++++++++++++++++++++++++++++++++
   // 상태값 표시 (D210.00 ~ D210.15)
@@ -595,6 +903,57 @@ begin
   TEdit(Self.FindComponent('edt_OutReady2'    )).Text := fnSignalMsg(SC_STATUS[SC_NO].D211[11]); // 출고레디2
   TEdit(Self.FindComponent('edt_InReady3'     )).Text := fnSignalMsg(SC_STATUS[SC_NO].D211[12]); // 입고레디3
   TEdit(Self.FindComponent('edt_OutReady3'    )).Text := fnSignalMsg(SC_STATUS[SC_NO].D211[13]); // 출고레디3
+  // D212.00 ~ D212.15
+  TEdit(Self.FindComponent('edt_Curtain1'    )).Text := fnSignalMsg(SC_STATUS[SC_NO].D212[00]); // 라이트커튼1
+  TEdit(Self.FindComponent('edt_Curtain2'    )).Text := fnSignalMsg(SC_STATUS[SC_NO].D212[01]); // 라이트커튼2
+  TEdit(Self.FindComponent('edt_Curtain3'    )).Text := fnSignalMsg(SC_STATUS[SC_NO].D212[02]); // 라이트커튼3
+  TEdit(Self.FindComponent('edt_Curtain4'    )).Text := fnSignalMsg(SC_STATUS[SC_NO].D212[03]); // 라이트커튼4
+  TEdit(Self.FindComponent('edt_Curtain5'    )).Text := fnSignalMsg(SC_STATUS[SC_NO].D212[04]); // 라이트커튼5
+  TEdit(Self.FindComponent('edt_Curtain6'    )).Text := fnSignalMsg(SC_STATUS[SC_NO].D212[05]); // 라이트커튼6
+  TEdit(Self.FindComponent('edt_Fire1'       )).Text := fnSignalMsg(SC_STATUS[SC_NO].D212[10]); // 화재경보기1
+  TEdit(Self.FindComponent('edt_Fire2'       )).Text := fnSignalMsg(SC_STATUS[SC_NO].D212[11]); // 화재경보기2
+  TEdit(Self.FindComponent('edt_Fire3'       )).Text := fnSignalMsg(SC_STATUS[SC_NO].D212[12]); // 화재경보기3
+  TEdit(Self.FindComponent('edt_Fire4'       )).Text := fnSignalMsg(SC_STATUS[SC_NO].D212[13]); // 화재경보기4
+  TEdit(Self.FindComponent('edt_Fire5'       )).Text := fnSignalMsg(SC_STATUS[SC_NO].D212[14]); // 화재경보기5
+  TEdit(Self.FindComponent('edt_Fire6'       )).Text := fnSignalMsg(SC_STATUS[SC_NO].D212[15]); // 화재경보기6
+  // D213.00 ~ D213.15
+  TEdit(Self.FindComponent('edt_Docking1'       )).Text := fnSignalMsg(SC_STATUS[SC_NO].D213[10]); // 도킹1
+  TEdit(Self.FindComponent('edt_Docking2'       )).Text := fnSignalMsg(SC_STATUS[SC_NO].D213[11]); // 도킹2
+  TEdit(Self.FindComponent('edt_Docking3'       )).Text := fnSignalMsg(SC_STATUS[SC_NO].D213[12]); // 도킹3
+  TEdit(Self.FindComponent('edt_Docking4'       )).Text := fnSignalMsg(SC_STATUS[SC_NO].D213[13]); // 도킹4
+  TEdit(Self.FindComponent('edt_Docking5'       )).Text := fnSignalMsg(SC_STATUS[SC_NO].D213[14]); // 도킹5
+  TEdit(Self.FindComponent('edt_Docking6'       )).Text := fnSignalMsg(SC_STATUS[SC_NO].D213[15]); // 도킹6
+
+
+
+  //입출고대 화물표시
+  TImage(Self.FindComponent('ImgCV_Cago1')).Visible := fnCagoMsg(SC_STATUS[SC_NO].D211[08]);
+  TImage(Self.FindComponent('ImgCV_Cago2')).Visible := fnCagoMsg(SC_STATUS[SC_NO].D211[09]);
+  TImage(Self.FindComponent('ImgCV_Cago3')).Visible := fnCagoMsg(SC_STATUS[SC_NO].D211[10]);
+  TImage(Self.FindComponent('ImgCV_Cago4')).Visible := fnCagoMsg(SC_STATUS[SC_NO].D211[11]);
+  TImage(Self.FindComponent('ImgCV_Cago5')).Visible := fnCagoMsg(SC_STATUS[SC_NO].D211[12]);
+  TImage(Self.FindComponent('ImgCV_Cago6')).Visible := fnCagoMsg(SC_STATUS[SC_NO].D211[13]);
+
+  //커튼 ON/OFF
+  TPanel(Self.FindComponent('pnlCurtain1'    )).Caption := fnCurtainMsg(SC_STATUS[SC_NO].D212[00]); // 라이트커튼1
+  TPanel(Self.FindComponent('pnlCurtain2'    )).Caption := fnCurtainMsg(SC_STATUS[SC_NO].D212[01]); // 라이트커튼1
+  TPanel(Self.FindComponent('pnlCurtain3'    )).Caption := fnCurtainMsg(SC_STATUS[SC_NO].D212[02]); // 라이트커튼1
+  TPanel(Self.FindComponent('pnlCurtain4'    )).Caption := fnCurtainMsg(SC_STATUS[SC_NO].D212[03]); // 라이트커튼1
+  TPanel(Self.FindComponent('pnlCurtain5'    )).Caption := fnCurtainMsg(SC_STATUS[SC_NO].D212[04]); // 라이트커튼1
+  TPanel(Self.FindComponent('pnlCurtain6'    )).Caption := fnCurtainMsg(SC_STATUS[SC_NO].D212[05]); // 라이트커튼1
+
+  if SC_STATUS[SC_NO].D212[00] = '1' then TButton(Self.FindComponent('btnCurtain1')).Caption := fnCurtainMsg('0')
+  else                                    TButton(Self.FindComponent('btnCurtain1')).Caption := fnCurtainMsg('1');
+  if SC_STATUS[SC_NO].D212[01] = '1' then TButton(Self.FindComponent('btnCurtain2')).Caption := fnCurtainMsg('0')
+  else                                    TButton(Self.FindComponent('btnCurtain2')).Caption := fnCurtainMsg('1');
+  if SC_STATUS[SC_NO].D212[02] = '1' then TButton(Self.FindComponent('btnCurtain3')).Caption := fnCurtainMsg('0')
+  else                                    TButton(Self.FindComponent('btnCurtain3')).Caption := fnCurtainMsg('1');
+  if SC_STATUS[SC_NO].D212[03] = '1' then TButton(Self.FindComponent('btnCurtain4')).Caption := fnCurtainMsg('0')
+  else                                    TButton(Self.FindComponent('btnCurtain4')).Caption := fnCurtainMsg('1');
+  if SC_STATUS[SC_NO].D212[04] = '1' then TButton(Self.FindComponent('btnCurtain5')).Caption := fnCurtainMsg('0')
+  else                                    TButton(Self.FindComponent('btnCurtain5')).Caption := fnCurtainMsg('1');
+  if SC_STATUS[SC_NO].D212[05] = '1' then TButton(Self.FindComponent('btnCurtain6')).Caption := fnCurtainMsg('0')
+  else                                    TButton(Self.FindComponent('btnCurtain6')).Caption := fnCurtainMsg('1');
 
   //++++++++++++++++++++++++++++++++++++++++++++
   // 에디트 색상 변경 (D210.00 ~ D210.15)
@@ -624,6 +983,41 @@ begin
   TEdit(Self.FindComponent('edt_OutReady2'    )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D211[11],'2'); // 출고레디2
   TEdit(Self.FindComponent('edt_InReady3'     )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D211[12],'2'); // 입고레디3
   TEdit(Self.FindComponent('edt_OutReady3'    )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D211[13],'2'); // 출고레디3
+  // D212.00 ~ D212.15
+  TEdit(Self.FindComponent('edt_Curtain1'    )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D212[00],'2'); // 라이트커튼1
+  TEdit(Self.FindComponent('edt_Curtain2'    )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D212[01],'2'); // 라이트커튼2
+  TEdit(Self.FindComponent('edt_Curtain3'    )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D212[02],'2'); // 라이트커튼3
+  TEdit(Self.FindComponent('edt_Curtain4'    )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D212[03],'2'); // 라이트커튼4
+  TEdit(Self.FindComponent('edt_Curtain5'    )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D212[04],'2'); // 라이트커튼5
+  TEdit(Self.FindComponent('edt_Curtain6'    )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D212[05],'2'); // 라이트커튼6
+  TEdit(Self.FindComponent('edt_Fire1'       )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D212[10],'1'); // 화재경보기1
+  TEdit(Self.FindComponent('edt_Fire2'       )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D212[11],'1'); // 화재경보기2
+  TEdit(Self.FindComponent('edt_Fire3'       )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D212[12],'1'); // 화재경보기3
+  TEdit(Self.FindComponent('edt_Fire4'       )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D212[13],'1'); // 화재경보기4
+  TEdit(Self.FindComponent('edt_Fire5'       )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D212[14],'1'); // 화재경보기5
+  TEdit(Self.FindComponent('edt_Fire6'       )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D212[15],'1'); // 화재경보기6
+  // D213.00 ~ D213.15
+  TEdit(Self.FindComponent('edt_Docking1'    )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D213[10],'2');  // 도킹1
+  TEdit(Self.FindComponent('edt_Docking2'    )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D213[11],'2');  // 도킹2
+  TEdit(Self.FindComponent('edt_Docking3'    )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D213[12],'2');  // 도킹3
+  TEdit(Self.FindComponent('edt_Docking4'    )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D213[13],'2');  // 도킹4
+  TEdit(Self.FindComponent('edt_Docking5'    )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D213[14],'2');  // 도킹5
+  TEdit(Self.FindComponent('edt_Docking6'    )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D213[15],'2');  // 도킹6
+
+  TPanel(Self.FindComponent('RackBay08'      )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D213[10],'2');  // 도킹1
+  TPanel(Self.FindComponent('RackBay07'      )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D213[11],'2');  // 도킹2
+  TPanel(Self.FindComponent('RackBay05'      )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D213[12],'2');  // 도킹3
+  TPanel(Self.FindComponent('RackBay04'      )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D213[13],'2');  // 도킹4
+  TPanel(Self.FindComponent('RackBay02'      )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D213[14],'2');  // 도킹5
+  TPanel(Self.FindComponent('RackBay01'      )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D213[15],'2');  // 도킹6
+
+  //커튼 ON/OFF
+  TPanel(Self.FindComponent('pnlCurtain1'    )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D212[00],'5'); // 라이트커튼1
+  TPanel(Self.FindComponent('pnlCurtain2'    )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D212[01],'5'); // 라이트커튼1
+  TPanel(Self.FindComponent('pnlCurtain3'    )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D212[02],'5'); // 라이트커튼1
+  TPanel(Self.FindComponent('pnlCurtain4'    )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D212[03],'5'); // 라이트커튼1
+  TPanel(Self.FindComponent('pnlCurtain5'    )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D212[04],'5'); // 라이트커튼1
+  TPanel(Self.FindComponent('pnlCurtain6'    )).Color := fnSignalEditColor(SC_STATUS[SC_NO].D212[05],'5'); // 라이트커튼1
 
   //++++++++++++++++++++++++++++++++++++++++++++
   // 에디트 폰트 색상 변경 (D210.00 ~ D210.15)
@@ -653,71 +1047,26 @@ begin
   TEdit(Self.FindComponent('edt_OutReady2'    )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D211[11],'2'); // 출고레디2
   TEdit(Self.FindComponent('edt_InReady3'     )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D211[12],'2'); // 입고레디3
   TEdit(Self.FindComponent('edt_OutReady3'    )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D211[13],'2'); // 출고레디3
-
-  //++++++++++++++++++++++++++++++++++++++++++++
-  // 입&출고 레디
-  //++++++++++++++++++++++++++++++++++++++++++++
-  if SC_STATUS[SC_NO].D211[08]='1' then
-  begin
-    shpInRdy1.Brush.Color := clLime;
-    PnlInRdy1.Caption := '   입고가능';
-  end else
-  begin
-    shpInRdy1.Brush.Color := clYellow;
-    PnlInRdy1.Caption := '    입고 불가능';
-  end;
-
-  if SC_STATUS[SC_NO].D211[09]='1' then
-  begin
-    shpOtRdy1.Brush.Color := clLime;
-    PnlOtRdy1.Caption := '   출고가능';
-  end else
-  begin
-    shpOtRdy1.Brush.Color := clYellow;
-    PnlOtRdy1.Caption := '    출고 불가능';
-  end;
-
-    if SC_STATUS[SC_NO].D211[10]='1' then
-  begin
-    shpInRdy2.Brush.Color := clLime;
-    PnlInRdy2.Caption := '   입고가능';
-  end else
-  begin
-    shpInRdy2.Brush.Color := clYellow;
-    PnlInRdy2.Caption := '    입고 불가능';
-  end;
-
-  if SC_STATUS[SC_NO].D211[11]='1' then
-  begin
-    shpOtRdy2.Brush.Color := clLime;
-    PnlOtRdy2.Caption := '   출고가능';
-  end else
-  begin
-    shpOtRdy2.Brush.Color := clYellow;
-    PnlOtRdy2.Caption := '    출고 불가능';
-  end;
-
-    if SC_STATUS[SC_NO].D211[12]='1' then
-  begin
-    shpInRdy3.Brush.Color := clLime;
-    PnlInRdy3.Caption := '   입고가능';
-  end else
-  begin
-    shpInRdy3.Brush.Color := clYellow;
-    PnlInRdy3.Caption := '    입고 불가능';
-  end;
-
-  if SC_STATUS[SC_NO].D211[13]='1' then
-  begin
-    shpOtRdy3.Brush.Color := clLime;
-    PnlOtRdy3.Caption := '   출고가능';
-  end else
-  begin
-    shpOtRdy3.Brush.Color := clYellow;
-    PnlOtRdy3.Caption := '    출고 불가능';
-  end;
-
-
+  // D212.00 ~ D212.15
+  TEdit(Self.FindComponent('edt_Curtain1'    )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D212[00],'2'); // 라이트커튼1
+  TEdit(Self.FindComponent('edt_Curtain2'    )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D212[01],'2'); // 라이트커튼2
+  TEdit(Self.FindComponent('edt_Curtain3'    )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D212[02],'2'); // 라이트커튼3
+  TEdit(Self.FindComponent('edt_Curtain4'    )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D212[03],'2'); // 라이트커튼4
+  TEdit(Self.FindComponent('edt_Curtain5'    )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D212[04],'2'); // 라이트커튼5
+  TEdit(Self.FindComponent('edt_Curtain6'    )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D212[05],'2'); // 라이트커튼6
+  TEdit(Self.FindComponent('edt_Fire1'       )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D212[10],'2'); // 화재경보기1
+  TEdit(Self.FindComponent('edt_Fire2'       )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D212[11],'2'); // 화재경보기2
+  TEdit(Self.FindComponent('edt_Fire3'       )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D212[12],'2'); // 화재경보기3
+  TEdit(Self.FindComponent('edt_Fire4'       )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D212[13],'2'); // 화재경보기4
+  TEdit(Self.FindComponent('edt_Fire5'       )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D212[14],'2'); // 화재경보기5
+  TEdit(Self.FindComponent('edt_Fire6'       )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D212[15],'2'); // 화재경보기6
+  // D213.00 ~ D213.15
+  TEdit(Self.FindComponent('edt_Docking1'    )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D213[10],'2');  // 도킹1
+  TEdit(Self.FindComponent('edt_Docking2'    )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D213[11],'2');  // 도킹2
+  TEdit(Self.FindComponent('edt_Docking3'    )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D213[12],'2');  // 도킹3
+  TEdit(Self.FindComponent('edt_Docking4'    )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D213[13],'2');  // 도킹4
+  TEdit(Self.FindComponent('edt_Docking5'    )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D213[14],'2');  // 도킹5
+  TEdit(Self.FindComponent('edt_Docking6'    )).Font.Color := fnSignalFontColor(SC_STATUS[SC_NO].D213[15],'2');  // 도킹6
 
   //++++++++++++++++++++++++++++++++++++++++++++
   // SC상태
@@ -805,8 +1154,8 @@ begin
       begin
         if (SC_STATUS[SC_NO].D210[08]='0') and (SC_STATUS[SC_NO].D210[10]='1') then
         begin
-          imgRFork_Left.Visible  := True;
-          imgRFork_Right.Visible := False;
+          imgRFork_Left.Visible  := False;
+          imgRFork_Right.Visible := True;
         end else
         if (SC_STATUS[SC_NO].D210[08]='0') and (SC_STATUS[SC_NO].D210[11]='1') and (SC_JOB[SC_NO].UNLOAD_BANK='0001')  then
         begin
@@ -827,8 +1176,8 @@ begin
       begin
         if (SC_STATUS[SC_NO].D210[08]='0') and (SC_STATUS[SC_NO].D210[11]='1') then
         begin
-          imgRFork_Left.Visible  := True;
-          imgRFork_Right.Visible := False;
+          imgRFork_Left.Visible  := False;
+          imgRFork_Right.Visible := True;
         end else
         if (SC_STATUS[SC_NO].D210[08]='0') and (SC_STATUS[SC_NO].D210[10]='1') and (SC_JOB[SC_NO].LOAD_BANK='0001')  then
         begin
@@ -838,11 +1187,11 @@ begin
         if (SC_STATUS[SC_NO].D210[08]='0') and (SC_STATUS[SC_NO].D210[10]='1') and (SC_JOB[SC_NO].LOAD_BANK='0002')  then
         begin
           imgRFork_Left.Visible  := False;
-          imgRFork_Right.Visible := True;
+          imgRFork_Right.Visible := False;
         end else
         begin
           imgRFork_Left.Visible  := False;
-          imgRFork_Right.Visible := False;
+          imgRFork_Right.Visible := True;
         end;
       end else
       begin
@@ -909,6 +1258,63 @@ begin
 end;
 
 //==============================================================================
+// fnCagoMsg                                                                            Curtain
+//==============================================================================
+function TfrmU510.fnCagoMsg(Signal: string): Boolean;
+begin
+  Result := False;
+  if      Signal='0'    then Result := False
+  else if Signal='1'    then Result := True
+  else                       Result := False;
+end;
+
+//==============================================================================
+// fnCurMsg                                                                            Curtain
+//==============================================================================
+function TfrmU510.fnCurMsg(FName : string): Boolean;
+var
+  StrSQL, Param : String ;
+  ExecNo : Integer;
+begin
+  try
+    StrSQL := ' SELECT * FROM TC_CURRENT WHERE CURRENT_NAME = ''CUR_PARAM'' ';
+
+    with qryTemp do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Text := StrSQL ;
+      Open;
+      if not (Bof and Eof ) then
+      begin
+        Param := FieldByName(FName).AsString;
+        if Param = '2' then Result := False
+        else                Result := True;
+      end;
+      Close;
+    end;
+  except
+    on E : Exception do
+    begin
+      qryTemp.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'fnCurMsg', '', 'Exception Error', 'SQL', StrSQL, '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnCurMsg Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
+    end;
+  end;
+end;
+
+//==============================================================================
+// fnCurtainMsg
+//==============================================================================
+function TfrmU510.fnCurtainMsg(Signal: string): String;
+begin
+  Result := '';
+  if      Signal='1'    then Result := '커튼 OFF'
+  else if Signal='0'    then Result := '커튼 ON'
+  else                       Result := '';
+end;
+
+//==============================================================================
 // fnModeMsg
 //==============================================================================
 function TfrmU510.fnModeMsg(Signal: string): String;
@@ -951,6 +1357,12 @@ begin
   begin // 모드
     if      Signal='0'    then Result := clYellow
     else if Signal='1'    then Result := clLime
+    else                       Result := clWhite;
+  end else
+  if Flag='5' then
+  begin // 커튼
+    if      Signal='1'    then Result := clYellow
+    else if Signal='0'    then Result := clLime
     else                       Result := clWhite;
   end else
 end;
@@ -1015,7 +1427,12 @@ begin
       Close ;
     end;
   except
-    qryTemp.Close;
+    on E : Exception do
+    begin
+      qryTemp.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'fnGetErrMsg', '', 'Exception Error', 'SQL', StrSQL, '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnGetErrMsg Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
+    end;
   end;
 end;
 
@@ -1047,7 +1464,12 @@ begin
       Close ;
     end;
   except
-    if qryTemp.Active then qryTemp.Close;
+    on E : Exception do
+    begin
+      qryTemp.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'fnSCIO_Exist', '', 'Exception Error', 'SQL', StrSQL, '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnSCIO_Exist Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
+    end;
   end;
 end;
 
@@ -1097,7 +1519,12 @@ begin
       Close ;
     end;
   except
-    if qryTemp.Active then qryTemp.Close;
+    on E : Exception do
+    begin
+      qryTemp.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'fnSCIO_Load', '', 'Exception Error', 'SQL', StrSQL, '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnSCIO_Load Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
+    end;
   end;
 end;
 
@@ -1147,7 +1574,12 @@ begin
       Close ;
     end;
   except
-    if qryTemp.Active then qryTemp.Close;
+    on E : Exception do
+    begin
+      qryTemp.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'fnGetSCSetInfo', '', 'Exception Error', 'SQL', StrSQL, '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnGetSCSetInfo Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
+    end;
   end;
 end;
 
@@ -1197,11 +1629,134 @@ begin
       Close ;
     end;
   except
-    if qryTemp.Active then qryTemp.Close;
+    on E : Exception do
+    begin
+      qryTemp.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'fnSetSCSetInfo', '', 'Exception Error', 'SQL', StrSQL, '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnSetSCSetInfo Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
+    end;
   end;
 end;
 
+//==============================================================================
+// fnRFIDUpdate
+//==============================================================================
+procedure TfrmU510.fnRFIDUpdate(Number, Flag: string);
+var
+  StrSQL : String ;
+  ExecNo : Integer;
+begin
+  try
+    if Flag = '0' then
+    begin
+      TLabel(Self.FindComponent('lblLineName1_RF0'  + Number)).Caption := '-';
+      TLabel(Self.FindComponent('lblLineName2_RF0'  + Number)).Caption := '-';
+      TLabel(Self.FindComponent('lblPalletNo1_RF0'  + Number)).Caption := '-';
+      TLabel(Self.FindComponent('lblPalletNo2_RF0'  + Number)).Caption := '-';
+      TLabel(Self.FindComponent('lblModelNo1_RF0'   + Number)).Caption := '-';
+      TLabel(Self.FindComponent('lblModelNo2_RF0'   + Number)).Caption := '-';
+      TLabel(Self.FindComponent('lblBmaNo_RF0'      + Number)).Caption := '-';
+      TLabel(Self.FindComponent('lblArea_RF0'       + Number)).Caption := '-';
+      TLabel(Self.FindComponent('lblPalletBma1_RF0' + Number)).Caption := '-';
+      TLabel(Self.FindComponent('lblPalletBma2_RF0' + Number)).Caption := '-';
+      TLabel(Self.FindComponent('lblPalletBma3_RF0' + Number)).Caption := '-';
+      Exit;
+    end;
 
+    if Flag = '1' then StrSQL := ' SELECT TOP(1) * FROM TC_RFID_HIST WHERE PORT_NO = ' + ' '''+Number+''' ORDER BY CRT_DT DESC '
+    else               StrSQL := ' SELECT * FROM TC_RFID WHERE PORT_NO = ' + ' '''+Number+''' ';
+
+    with qryTemp do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Text := StrSQL ;
+      Open;
+
+      TLabel(Self.FindComponent('lblLineName1_RF0'  + Number)).Caption := FieldByName('H00').AsString ;
+      TLabel(Self.FindComponent('lblLineName2_RF0'  + Number)).Caption := FieldByName('H01').AsString ;
+      TLabel(Self.FindComponent('lblPalletNo1_RF0'  + Number)).Caption := FieldByName('H02').AsString ;
+      TLabel(Self.FindComponent('lblPalletNo2_RF0'  + Number)).Caption := FieldByName('H03').AsString ;
+      TLabel(Self.FindComponent('lblModelNo1_RF0'   + Number)).Caption := FieldByName('H16').AsString ;
+      TLabel(Self.FindComponent('lblModelNo2_RF0'   + Number)).Caption := FieldByName('H17').AsString ;
+      TLabel(Self.FindComponent('lblBmaNo_RF0'      + Number)).Caption := FieldByName('H18').AsString ;
+      TLabel(Self.FindComponent('lblArea_RF0'       + Number)).Caption := FieldByName('H19').AsString ;
+      TLabel(Self.FindComponent('lblPalletBma1_RF0' + Number)).Caption := FieldByName('H20').AsString ;
+      TLabel(Self.FindComponent('lblPalletBma2_RF0' + Number)).Caption := FieldByName('H21').AsString ;
+      TLabel(Self.FindComponent('lblPalletBma3_RF0' + Number)).Caption := FieldByName('H22' ).AsString ;
+
+      Close;
+    end;
+  except
+    on E : Exception do
+    begin
+      qryTemp.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'fnRFIDUpdate', '', 'Exception Error', 'SQL', StrSQL, '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnRFIDUpdate Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
+    end;
+  end;
+end;
+
+//==============================================================================
+// btnCurtainClick
+//==============================================================================
+procedure TfrmU510.btnCurtainClick(Sender: TObject);
+var
+  StrSQL, StrSQL2, CurtainNo : String ;
+  ExecNo : Integer;
+begin
+  CurtainNo := IntToStr((Sender as TButton).Tag);
+
+  if (Sender as TButton).Caption = '커튼 OFF' then
+  begin
+    if ((CurtainNo = '2') and (SC_STATUS[1].D211[09] = '0')) or
+       ((CurtainNo = '4') and (SC_STATUS[1].D211[11] = '0')) or
+       ((CurtainNo = '6') and (SC_STATUS[1].D211[13] = '0')) then
+    begin
+      MessageDlg('출고스테이션에 경우 화물이 있어야 커튼 OFF 가능합니다.', mtConfirmation, [mbYes], 0) ;
+      Exit;
+    end;
+
+    StrSQL := ' UPDATE TC_CURRENT ' +
+              '    SET OPTION1 = ''' + CurtainNo + ''' ' +
+              '  WHERE CURRENT_NAME = ''CURTAIN'' ';
+    StrSQL2 := ' UPDATE TC_CURRENT ' +
+               '    SET OPTION'+CurtainNo+' = ''1''' +
+               '  WHERE CURRENT_NAME = ''CUR_PARAM'' ';
+  end else
+  begin
+    StrSQL := ' UPDATE TC_CURRENT ' +
+              '    SET OPTION2 = ''' + CurtainNo + ''' ' +
+              '  WHERE CURRENT_NAME = ''CURTAIN'' ';
+    StrSQL2 := ' UPDATE TC_CURRENT ' +
+               '    SET OPTION'+CurtainNo+' = ''0''' +
+               '  WHERE CURRENT_NAME = ''CUR_PARAM'' ';
+  end;
+
+  try
+    with qryTemp do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Text := StrSQL ;
+      ExecNo := ExecSQL ;
+      if ExecNo > 0 then
+      begin
+        Close;
+        SQL.Clear;
+        SQL.Text := StrSQL2;
+        ExecSQL;
+      end;
+    end;
+  except
+    on E : Exception do
+    begin
+      qryTemp.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'btnCurtainClick', '', 'Exception Error', 'SQL', StrSQL, '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure btnCurtainClick Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
+    end;
+  end;
+end;
 end.
 
 

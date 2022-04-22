@@ -164,7 +164,6 @@ object frmU110: TfrmU110
     BevelInner = bvRaised
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 1904
     object rgITM_YN: TRadioGroup
       Left = 217
       Top = 1
@@ -236,8 +235,6 @@ object frmU110: TfrmU110
     BevelInner = bvRaised
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 1904
-    ExplicitHeight = 921
     object dgInfo: TDBGridEh
       Left = 1
       Top = 1
