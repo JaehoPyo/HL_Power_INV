@@ -258,6 +258,8 @@ type
     D209  : String ;
     D210  : Array [0..15] of String ;
     D211  : Array [0..15] of String ;
+    D212  : Array [0..15] of String ;
+    D213  : Array [0..15] of String ;
   end;
 
   TUSR_INFO = Record
@@ -689,6 +691,24 @@ type
 	  ITM_BYPASS_YN,
 	  ITM_MEMO     : String ;
   end;
+
+  TSTOCK = Record
+    ID_STATUS,
+    ITM_CD,
+    ITM_NAME,
+    ITM_SPEC,
+    ITM_QTY,
+    OT_USED,
+    IN_USED,
+    RF_LINE_NAME1,
+    RF_LINE_NAME2,
+    RF_PALLET_NO1,
+    RF_PALLET_NO2,
+    RF_MODEL_NO1,
+    RF_MODEL_NO2,
+    RF_BMA_NO,
+    RF_AREA : String;
+  End;
 
 implementation
 

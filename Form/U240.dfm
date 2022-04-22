@@ -65,7 +65,7 @@ object frmU240: TfrmU240
       end
       object Panel4: TPanel
         Left = 60
-        Top = 210
+        Top = 206
         Width = 1800
         Height = 570
         BevelInner = bvLowered
@@ -91,7 +91,7 @@ object frmU240: TfrmU240
           EditActions = [geaCopyEh]
           Font.Charset = GB2312_CHARSET
           Font.Color = clWindowText
-          Font.Height = 20
+          Font.Height = -20
           Font.Name = #46027#50880
           Font.Style = []
           FooterRowCount = 1
@@ -111,7 +111,7 @@ object frmU240: TfrmU240
           TitleParams.FillStyle = cfstSolidEh
           TitleParams.Font.Charset = GB2312_CHARSET
           TitleParams.Font.Color = clWindowText
-          TitleParams.Font.Height = 20
+          TitleParams.Font.Height = -20
           TitleParams.Font.Name = #46027#50880
           TitleParams.Font.Style = []
           TitleParams.HorzLineColor = 5592405
@@ -180,7 +180,7 @@ object frmU240: TfrmU240
               FieldName = 'STOCK_IN_DT'
               Footers = <>
               Title.Caption = #51077#44256#51068#51088
-              Width = 250
+              Width = 320
             end
             item
               Alignment = taCenter
@@ -190,27 +190,105 @@ object frmU240: TfrmU240
               FieldName = 'ID_MEMO'
               Footers = <>
               Title.Caption = #52280#44256#49324#54637
-              Width = 490
+              Width = 200
             end
             item
               Alignment = taCenter
               AutoFitColWidth = False
               DynProps = <>
               EditButtons = <>
+              FieldName = 'RF_LINE_NAME1'
               Footers = <>
-              Title.Caption = '-'
-              Visible = False
-              Width = 100
+              Title.Caption = #49885#48324#51088#51060#47492'1'
+              Width = 150
             end
             item
               Alignment = taCenter
               AutoFitColWidth = False
               DynProps = <>
               EditButtons = <>
+              FieldName = 'RF_LINE_NAME2'
               Footers = <>
-              Title.Caption = '-'
+              Title.Caption = #49885#48324#51088#51060#47492'2'
+              Width = 150
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'RF_PALLET_NO1'
+              Footers = <>
+              Title.Caption = #49885#48324#48264#54840'1'
+              Width = 150
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'RF_PALLET_NO2'
+              Footers = <>
+              Title.Caption = #49885#48324#48264#54840'2'
+              Width = 150
+            end
+            item
+              Alignment = taCenter
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'RF_MODEL_NO1'
+              Footers = <>
+              Title.Caption = #52264#51333'#1'
+              Width = 150
+            end
+            item
+              Alignment = taCenter
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'RF_MODEL_NO2'
+              Footers = <>
+              Title.Caption = #52264#51333'#2'
+              Width = 150
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'RF_BMA_NO'
+              Footers = <>
+              Title.Caption = 'BMA'#49688#47049
+              Width = 150
+            end
+            item
+              Alignment = taCenter
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'RF_PALLET_BMA1'
+              Footers = <>
               Visible = False
-              Width = 100
+              Width = 150
+            end
+            item
+              Alignment = taCenter
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'RF_PALLET_BMA2'
+              Footers = <>
+              Visible = False
+              Width = 150
+            end
+            item
+              Alignment = taCenter
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'RF_PALLET_BMA3'
+              Footers = <>
+              Visible = False
+              Width = 150
+            end
+            item
+              Alignment = taCenter
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'RF_AREA'
+              Footers = <>
+              Title.Caption = #49373#49328#51648
+              Width = 150
             end>
           object RowDetailData: TRowDetailPanelControlEh
           end

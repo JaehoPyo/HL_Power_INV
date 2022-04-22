@@ -23,6 +23,7 @@ type
    REG_TIME,
    LUGG,
    JOBD,
+   IS_AUTO,
    LINE_NO,
    SRCSITE,
    SRCAISLE,
@@ -48,8 +49,21 @@ type
    EMG,
    ITM_CD,
    UP_TIME,
-   ID_CODE : String;
+   ID_CODE,
+   RF_LINE_NAME1,
+   RF_LINE_NAME2,
+   RF_PALLET_NO1,
+   RF_PALLET_NO2,
+   RF_MODEL_NO1,
+   RF_MODEL_NO2,
+   RF_BMA_NO,
+   RF_PALLET_BMA1,
+   RF_PALLET_BMA2,
+   RF_PALLET_BMA3,
+   RF_AREA : String;
   end;
+
+
 
 
   TPlanInfor = Record

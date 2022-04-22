@@ -1,4 +1,4 @@
-unit U320;
+unit U430;
 
 interface
 
@@ -11,22 +11,19 @@ uses
   Vcl.ComCtrls ;
 
 type
-  TfrmU320 = class(TForm)
-    qryTemp: TADOQuery;
-    qryInfo: TADOQuery;
-    dsInfo: TDataSource;
-    EhPrint: TPrintDBGridEh;
-    Pnl_Top1: TPanel;
+  TfrmU430 = class(TForm)
+    Pnl_Top: TPanel;
     Pnl_Main: TPanel;
-    dgInfo: TDBGridEh;
     GroupBox1: TGroupBox;
+    Label31: TLabel;
     dtDateFr: TDateTimePicker;
     dtTimeFr: TDateTimePicker;
     dtDateTo: TDateTimePicker;
     dtTimeTo: TDateTimePicker;
-    Label31: TLabel;
     cbDateUse: TCheckBox;
-    Pnl_Top2: TPanel;
+    gbCode: TGroupBox;
+    cbCode: TComboBox;
+    dgInfo: TDBGridEh;
     gbCell: TGroupBox;
     Label1: TLabel;
     Label2: TLabel;
@@ -34,20 +31,16 @@ type
     ComboBoxBank: TComboBox;
     ComboBoxBay: TComboBox;
     ComboBoxLevel: TComboBox;
-    gbCode: TGroupBox;
-    cbCode: TComboBox;
-    GroupBox2: TGroupBox;
-    cbStatus: TComboBox;
+    dsInfo: TDataSource;
+    qryInfo: TADOQuery;
+    qryTemp: TADOQuery;
+    EhPrint: TPrintDBGridEh;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure ComboBoxChange(Sender: TObject);
     procedure dtDateTimeChange(Sender: TObject);
-    procedure ComboBoxKeyPress(Sender: TObject; var Key: Char);
-    procedure dtDateTimeKeyPress(Sender: TObject; var Key: Char);
-    procedure cbDateUseClick(Sender: TObject);
-    procedure dgInfoDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure cbCodeChange(Sender: TObject);
+    procedure ComboBoxChange(Sender: TObject);
     procedure dgInfoTitleClick(Column: TColumnEh);
   private
     { Private declarations }
@@ -67,40 +60,40 @@ type
 
     procedure SetComboBox;
   end;
-  procedure U320Create();
+  procedure U430Create();
 
 const
-  FormNo ='320';
+  FormNo ='430';
 var
-  frmU320: TfrmU320;
+  frmU430: TfrmU430;
   SrtFlag : integer = 0 ;
 
 implementation
 
-uses Main, Popup_Update ;
+uses Main ;
 
 {$R *.dfm}
 
 //==============================================================================
-// U320Create
+// U230Create
 //==============================================================================
-procedure U320Create();
+procedure U430Create();
 begin
-  if not Assigned( frmU320 ) then
+  if not Assigned( frmU430 ) then
   begin
-    frmU320 := TfrmU320.Create(Application);
-    with frmU320 do
+    frmU430 := TfrmU430.Create(Application);
+    with frmU430 do
     begin
       fnCommandStart;
     end;
   end;
-  frmU320.Show;
+  frmU430.Show;
 end;
 
 //==============================================================================
 // fnWmMsgRecv
 //==============================================================================
-procedure TfrmU320.fnWmMsgRecv(var MSG: TMessage);
+procedure TfrmU430.fnWmMsgRecv(var MSG: TMessage);
 begin
   case MSG.WParam of
     MSG_MDI_WIN_ORDER   : begin fnCommandOrder   ; end;           // MSG_MDI_WIN_ORDER   = 11 ; // 지시
@@ -118,13 +111,12 @@ end;
 //==============================================================================
 // FormActivate
 //==============================================================================
-procedure TfrmU320.FormActivate(Sender: TObject);
+procedure TfrmU430.FormActivate(Sender: TObject);
 begin
-
-  MainDm.M_Info.ActiveFormID := '320';
+  MainDm.M_Info.ActiveFormID := '430';
   frmMain.LblMenu000.Caption := MainDm.M_Info.ActiveFormID + '. ' + getLangMenuString(MainDm.M_Info.ActiveFormID, frmMain.LblMenu000.Caption, MainDm.M_Info.LANG_TYPE, 'N');
-  frmU320.Caption := MainDm.M_Info.ActiveFormName;
-  fnWmMsgSend( 22211,11111 );
+  frmU430.Caption := MainDm.M_Info.ActiveFormName;
+  fnWmMsgSend( 22221,11111 );
 
   dtDateFr.Date := StrToDate(FormatDateTime('YYYY-MM-DD',Now));
   dtTimeFr.Time := StrToTime('00:00:00');
@@ -139,7 +131,7 @@ end;
 //==============================================================================
 // FormDeactivate
 //==============================================================================
-procedure TfrmU320.FormDeactivate(Sender: TObject);
+procedure TfrmU430.FormDeactivate(Sender: TObject);
 var
   i : integer ;
 begin
@@ -153,7 +145,7 @@ end;
 //==============================================================================
 // FormClose
 //==============================================================================
-procedure TfrmU320.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TfrmU430.FormClose(Sender: TObject; var Action: TCloseAction);
 var
   i : integer ;
 begin
@@ -170,14 +162,14 @@ begin
   end;
 
   Action := Cafree;
-  try frmU320 := Nil ;
+  try frmU430 := Nil ;
   except end;
 end;
 
 //==============================================================================
 // fnCommandStart
 //==============================================================================
-procedure TfrmU320.fnCommandStart;
+procedure TfrmU430.fnCommandStart;
 begin
 //
 end;
@@ -185,7 +177,7 @@ end;
 //==============================================================================
 // fnCommandOrder [지시]
 //==============================================================================
-procedure TfrmU320.fnCommandOrder  ;
+procedure TfrmU430.fnCommandOrder  ;
 begin
 //
 end;
@@ -193,7 +185,7 @@ end;
 //==============================================================================
 // fnCommandExcel [엑셀]
 //==============================================================================
-procedure TfrmU320.fnCommandExcel;
+procedure TfrmU430.fnCommandExcel;
 begin
   try
     if hlbEhgridListExcel(dgInfo, frmMain.LblMenu000.Caption + '_' + FormatDatetime('YYYYMMDD', Now)) then
@@ -215,7 +207,7 @@ end;
 //==============================================================================
 // fnCommandAdd [신규]                                                        //
 //==============================================================================
-procedure TfrmU320.fnCommandAdd  ;
+procedure TfrmU430.fnCommandAdd  ;
 begin
 //
 end;
@@ -223,7 +215,7 @@ end;
 //==============================================================================
 // fnCommandDelete [삭제]
 //==============================================================================
-procedure TfrmU320.fnCommandDelete;
+procedure TfrmU430.fnCommandDelete;
 begin
 //
 end;
@@ -231,70 +223,15 @@ end;
 //==============================================================================
 // fnCommandUpdate [수정]                                                     //
 //==============================================================================
-procedure TfrmU320.fnCommandUpdate;
-var
-  ID_HOGI, ID_BANK, ID_BAY, ID_LEVEL, ID_CODE : String ;
+procedure TfrmU430.fnCommandUpdate;
 begin
-  try
-
-    if (qryInfo.FieldByName('ID_STATUS').AsInteger = 8) or
-       (qryInfo.FieldByName('ID_STATUS').AsInteger = 9) then
-    begin
-      MessageDlg('입출고대 및 비상렉은 수정할수 없습니다.', mtConfirmation, [mbYes], 0) ;
-      Exit;
-    end;
-
-
-    frmPopup_Update := TfrmPopup_Update.Create(Application);
-
-    ID_HOGI  := '1' ;
-    ID_CODE  := qryInfo.FieldByName('ID_CODE'  ).AsString;
-    ID_BANK  := Copy(ID_CODE,1,1) ;
-    ID_BAY   := Copy(ID_CODE,2,2) ;
-    ID_LEVEL := Copy(ID_CODE,4,2) ;
-
-    frmPopup_Update.ComboBoxHogi.Text  := ID_HOGI;
-    frmPopup_Update.ComboBoxBank.Text  := ID_BANK;
-    frmPopup_Update.ComboBoxBay.Text   := ID_BAY;
-    frmPopup_Update.ComboBoxLevel.Text := ID_LEVEL;
-    frmPopup_Update.CB_ID_STATUS.ItemIndex  := qryInfo.FieldByName('ID_STATUS').AsInteger;
-
-    frmPopup_Update.edtITM_CD.Text   := qryInfo.FieldByName('ITM_CD'  ).AsString;
-    frmPopup_Update.edtITM_NAME.Text := qryInfo.FieldByName('ITM_NAME').AsString;
-    frmPopup_Update.edtITM_SPEC.Text := qryInfo.FieldByName('ITM_SPEC').AsString;
-    frmPopup_Update.edtITM_QTY.Text  := qryInfo.FieldByName('RF_BMA_NO').AsString;
-    frmPopup_Update.edtID_MEMO.Text  := qryInfo.FieldByName('ID_MEMO'  ).AsString;
-
-    frmPopup_Update.dtDate.Date := qryInfo.FieldByName('STOCK_IN_DT').AsDateTime;
-    frmPopup_Update.dtTime.Time := qryInfo.FieldByName('STOCK_IN_DT').AsDateTime;
-
-    if qryInfo.FieldByName('IN_USED').AsString = '0' then  frmPopup_Update.cbInUSED.Checked := True
-    else frmPopup_Update.cbInUSED.Checked := False;
-    if qryInfo.FieldByName('OT_USED').AsString = '0' then  frmPopup_Update.cbOtUSED.Checked := True
-    else frmPopup_Update.cbOtUSED.Checked := False;
-
-    frmPopup_Update.edtLineName1.Text := qryInfo.FieldByName('RF_LINE_NAME1').AsString;
-    frmPopup_Update.edtLineName2.Text := qryInfo.FieldByName('RF_LINE_NAME2').AsString;
-    frmPopup_Update.edtPalletNo1.Text := qryInfo.FieldByName('RF_PALLET_NO1').AsString;
-    frmPopup_Update.edtPalletNo2.Text := qryInfo.FieldByName('RF_PALLET_NO2').AsString;
-    frmPopup_Update.edtModelNo1.Text  := qryInfo.FieldByName('RF_MODEL_NO1' ).AsString;;
-    frmPopup_Update.edtModelNo2.Text  := qryInfo.FieldByName('RF_MODEL_NO2' ).AsString;
-    frmPopup_Update.edtArea.Text      := qryInfo.FieldByName('RF_AREA'      ).AsString;
-    frmPopup_Update.ShowModal ;
-    fnCommandQuery;
-  except
-    on E : Exception do
-    begin
-      InsertPGMHist('['+FormNo+']', 'E', 'fnCommandUpdate', '수정', 'Exception Error', 'PGM', '', '', E.Message);
-      TraceLogWrite('['+FormNo+'] procedure fnCommandUpdate Fail || ERR['+E.Message+']');
-    end;
-  end;
+//
 end;
 
 //==============================================================================
 // fnCommandPrint [인쇄]
 //==============================================================================
-procedure TfrmU320.fnCommandPrint;
+procedure TfrmU430.fnCommandPrint;
 begin
   try
     if not qryInfo.Active then Exit;
@@ -324,7 +261,7 @@ end;
 //==============================================================================
 // fnCommandQuery
 //==============================================================================
-procedure TfrmU320.fnCommandQuery;
+procedure TfrmU430.fnCommandQuery;
 var
   StrSQL : String;
 begin
@@ -333,62 +270,74 @@ begin
     begin
       Close;
       SQL.Clear;
-      StrSQL := ' Select ID_CODE, ID_BANK, ID_BAY, ID_LEVEL, ' +
-                '        STOCK_REG_DT, STOCK_IN_DT, ' +
-                '        ITM_CD, ITM_NAME, ITM_SPEC, ITM_QTY, ' +
-                '        ID_ZONE, ID_STATUS, ID_MEMO, OT_USED, IN_USED, ' +
-                '       (Case ID_STATUS when ''0'' then ''공셀''     ' +
-                '                       when ''1'' then ''공파레트'' ' +
-                '                       when ''2'' then ''실셀''     ' +
-                '                       when ''3'' then ''금지셀''   ' +
-                '                       when ''4'' then ''입고예약'' ' +
-                '                       when ''5'' then ''출고예약'' ' +
-                '                       when ''6'' then ''이중입고'' ' +
-                '                       when ''7'' then ''공출고''   ' +
-                '                       when ''8'' then ''입출고대''   ' +
-                '                       when ''9'' then ''비상렉'' end) as ID_STATUS_DESC, ' +
-                '       (SUBSTRING(ID_CODE,1,1)+''-''+SUBSTRING(ID_CODE,2,2)+''-''+SUBSTRING(ID_CODE,4,2)) as ID_CODE_DESC, ' +
-                '        RF_LINE_NAME1, RF_LINE_NAME2, RF_PALLET_NO1, RF_PALLET_NO2, RF_MODEL_NO1, ' +
-                '        RF_MODEL_NO2, RF_BMA_NO, RF_PALLET_BMA1, RF_PALLET_BMA2, RF_PALLET_BMA3,  ' +
-                '        RF_AREA  ' +
-                '   From TT_STOCK ' +
-                '  Where 1=1 ' ;
+      StrSQL   := ' Select REG_TIME, LUGG, JOBD,                      ' +  #13#10+
+                  '        SRCSITE, SRCAISLE, SRCBAY, SRCLEVEL        ' +  #13#10+
+                  '        DSTSITE, DSTAISLE, DSTBAY, DSTLEVEL        ' +  #13#10+
+                  '        NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS    ' +  #13#10+
+                  '        JOBREWORK, JOBERRORT, JOBERRORC, JOBERRORD ' +  #13#10+
+                  '        CVFR, CVTO, CVCURR, ETC, EMG, ITM_CD,      ' +  #13#10+
+                  '       (Case when (JOBD=''1'') then ''입고'' ' +  #13#10+
+                  '             when (JOBD=''2'') and (EMG=''0'') then ''출고'' ' +  #13#10+
+                  '             when (JOBD=''2'') and (EMG=''1'') then ''긴급출고'' end) as JOBD_DESC, ' +  #13#10+
+                  '       (Case NOWMC when ''1'' then ''컨베어 작업'' ' +  #13#10+
+                  '                   when ''2'' then ''스태커 적재'' ' +  #13#10+
+                  '                   when ''3'' then ''스태커 하역'' end) as NOWMC_DESC, ' +  #13#10+
+                  '       (Case NOWSTATUS when ''1'' then ''등록'' ' +  #13#10+
+                  '                       when ''2'' then ''지시'' ' +  #13#10+
+                  '                       when ''3'' then ''진행'' ' +  #13#10+
+                  '                       when ''4'' then ''완료'' end) as NOWSTATUS_DESC, ' +  #13#10+
+                  '       (Case JOBERRORC when ''''  then ''정상'' ' +  #13#10+
+                  '                       when ''0'' then ''정상'' ' +  #13#10+
+                  '                       when NULL  then ''정상'' ' +  #13#10+
+                  '                       when ''1'' then ''에러'' ' +  #13#10+
+                  '                       else ''정상'' end) as JOBERRORC_DESC, ' +  #13#10+
+                  '       (Case JOBERRORD when ''0000'' then ''정상'' ' +  #13#10+
+                  '                       else JOBERRORD end) as JOBERRORD_DESC, ' +  #13#10+
+                  '       (Case BUFFSTATUS when ''0'' then ''대기'' ' +  #13#10+
+                  '                        when ''1'' then ''입고가능'' end) as BUFFSTATUS_DESC, ' +  #13#10+
+                  '       (SUBSTRING(SRCAISLE,4,1)+''-''+SUBSTRING(SRCBAY,3,2)+''-''+SUBSTRING(SRCLEVEL,3,2)) as ID_CODE, ' +  #13#10+
+                  '       (SUBSTRING(REG_TIME,1,4)+''-''+SUBSTRING(REG_TIME,5,2)+''-''+SUBSTRING(REG_TIME,7,2)+''  ''+ ' +  #13#10+
+                  '        SUBSTRING(REG_TIME,9,2)+'':''+SUBSTRING(REG_TIME,11,2)+'':''+SUBSTRING(REG_TIME,13,2)) as REF_TIME_CONV, ' +  #13#10+
+                  '       CONVERT(VARCHAR, REG_TIME, 120) as REG_TIME_DESC ' +
+                  '   From TT_HISTORY ' +  #13#10+
+                  '  Where JOBD    = ''2'' ' +  #13#10+
+                  '    And JOB_END = ''1'' ' ;
 
+                  if (Trim(cbCode.Text)<>'') and (Trim(cbCode.Text)<>'전체') then
+                    StrSQL := StrSQL + ' And ITM_CD= ' + QuotedStr(Trim(cbCode.Text)) ;
 
-      if (Trim(ComboBoxBank.Text)<>'') and (Trim(ComboBoxBank.Text)<>'전체') then
-        StrSQL := StrSQL + ' And ID_BANK= ' + QuotedStr(Trim(ComboBoxBank.Text)) ;
+                  if (Trim(ComboBoxBank.Text)<>'') and (Trim(ComboBoxBank.Text)<>'전체') then
+                    StrSQL := StrSQL + ' And SRCAISLE= ' + QuotedStr(FormatFloat('0000',StrToInt(Trim(ComboBoxBank.Text)))) ;
 
-      if (Trim(ComboBoxBay.Text)<>'') and (Trim(ComboBoxBay.Text)<>'전체') then
-        StrSQL := StrSQL + ' And ID_BAY= ' + QuotedStr(Trim(ComboBoxBay.Text)) ;
+                  if (Trim(ComboBoxBay.Text)<>'') and (Trim(ComboBoxBay.Text)<>'전체') then
+                    StrSQL := StrSQL + ' And SRCBAY= ' + QuotedStr(FormatFloat('0000',StrToInt(Trim(ComboBoxBay.Text)))) ;
 
-      if (Trim(ComboBoxLevel.Text)<>'') and (Trim(ComboBoxLevel.Text)<>'전체') then
-        StrSQL := StrSQL + ' And ID_LEVEL= ' + QuotedStr(Trim(ComboBoxLevel.Text)) ;
+                  if (Trim(ComboBoxLevel.Text)<>'') and (Trim(ComboBoxLevel.Text)<>'전체') then
+                    StrSQL := StrSQL + ' And SRCLEVEL= ' + QuotedStr(FormatFloat('0000',StrToInt(Trim(ComboBoxLevel.Text)))) ;
 
-      if (Trim(cbStatus.Text)<>'') and (Trim(cbStatus.Text)<>'전체') then
-        StrSQL := StrSQL + ' And ID_STATUS= ' + QuotedStr(IntToStr(cbStatus.ItemIndex-1)) ;
+                  if cbDateUse.Checked then
+                    StrSQL := StrSQL + ' And REG_TIME BetWeen ' +
+                                       '      '''+FormatDateTime('YYYYMMDD', dtDateFr.Date)+''+FormatDateTime('HHNNSS', dtTimeFr.Time)+''' '+
+                                       '  And '''+FormatDateTime('YYYYMMDD', dtDateTo.Date)+''+FormatDateTime('HHNNSS', dtTimeTo.Time)+''' ';
 
-      if (Trim(cbCode.Text)<>'') and (Trim(cbCode.Text)<>'전체') then
-        StrSQL := StrSQL + ' And ITM_CD= ' + QuotedStr(Trim(cbCode.Text)) ;
-
-      if cbDateUse.Checked then
-        StrSQL := StrSQL + ' And STOCK_IN_DT BetWeen ' +
-                           '      '''+FormatDateTime('YYYY/MM/DD', dtDateFr.Date)+''+FormatDateTime('HH:NN:SS', dtTimeFr.Time)+''' '+
-                           '  And '''+FormatDateTime('YYYY/MM/DD', dtDateTo.Date)+''+FormatDateTime('HH:NN:SS', dtTimeTo.Time)+''' ';
-
-      StrSQL := StrSQL + ' Order By ID_CODE ' ;
-
+                  StrSQL := StrSQL + '  Order By REG_TIME, LUGG ' ;
       SQL.Text := StrSQL;
       Open;
     end;
   except
-    if qryInfo.Active then qryInfo.Close;
+    on E : Exception do
+    begin
+      qryInfo.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'fnCommandQuery', '조회', 'Exception Error', 'SQL', StrSQL, '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnCommandQuery Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
+    end;
   end;
 end;
 
 //==============================================================================
 // fnCommandClose
 //==============================================================================
-procedure TfrmU320.fnCommandClose;
+procedure TfrmU430.fnCommandClose;
 begin
   Close;
 end;
@@ -396,7 +345,7 @@ end;
 //==============================================================================
 // fnCommandLang [언어]                                                       //
 //==============================================================================
-procedure TfrmU320.fnCommandLang;
+procedure TfrmU430.fnCommandLang;
 begin
 //
 end;
@@ -404,7 +353,7 @@ end;
 //==============================================================================
 // SetComboBox [콤보박스 데이터 추가]
 //==============================================================================
-procedure TfrmU320.SetComboBox;
+procedure TfrmU430.SetComboBox;
 var
   StrSQL : String;
 begin
@@ -434,7 +383,7 @@ begin
   except
     on E : Exception do
     begin
-      qryInfo.Close;
+      qryTemp.Close;
       InsertPGMHist('['+FormNo+']', 'E', 'SetComboBox', '', 'Exception Error', 'PGM', '', '', E.Message);
       TraceLogWrite('['+FormNo+'] procedure SetComboBox Fail || ERR['+E.Message+']');
     end;
@@ -442,91 +391,33 @@ begin
 end;
 
 //==============================================================================
-// ComboBoxChange [콤보박스 이벤트 ]
+// dtDateTimeChange
 //==============================================================================
-procedure TfrmU320.ComboBoxChange(Sender: TObject);
+procedure TfrmU430.dtDateTimeChange(Sender: TObject);
 begin
   fnCommandQuery;
 end;
 
 //==============================================================================
-// dtDateFrChange
+// cbCodeChange
 //==============================================================================
-procedure TfrmU320.dtDateTimeChange(Sender: TObject);
+procedure TfrmU430.cbCodeChange(Sender: TObject);
 begin
   fnCommandQuery;
 end;
 
 //==============================================================================
-// dtDateTimeKeyPress
+// ComboBoxChange
 //==============================================================================
-procedure TfrmU320.dtDateTimeKeyPress(Sender: TObject; var Key: Char);
-begin
-  if key = #13 then
-  begin
-    fnCommandQuery;
-  end;
-end;
-
-//==============================================================================
-// ComboBoxKeyPress
-//==============================================================================
-procedure TfrmU320.ComboBoxKeyPress(Sender: TObject; var Key: Char);
-begin
-  if key = #13 then
-  begin
-    fnCommandQuery;
-  end;
-end;
-
-//==============================================================================
-// cbDateUseClick
-//==============================================================================
-procedure TfrmU320.cbDateUseClick(Sender: TObject);
+procedure TfrmU430.ComboBoxChange(Sender: TObject);
 begin
   fnCommandQuery;
 end;
 
 //==============================================================================
-// dgInfoDrawColumnCell
+// dgInfoTitleClick
 //==============================================================================
-procedure TfrmU320.dgInfoDrawColumnCell(Sender: TObject; const Rect: TRect;
-  DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
-begin
-  with Sender as TDBGridEh do
-  begin
-    try
-      if DataSource.DataSet.Active and not DataSource.DataSet.IsEmpty then
-      begin
-        with DataSource.DataSet do
-        begin
-          if DataCol=1 then
-          begin
-            if (FieldByName('ID_STATUS').AsString = '3') or
-               (FieldByName('ID_STATUS').AsString = '6') or
-               (FieldByName('ID_STATUS').AsString = '7') then
-            begin
-              Canvas.Font.Color := clRed;
-              Canvas.Font.Style := [fsBold];
-            end else
-            begin
-              Canvas.Font.Color := clBlack;
-              Canvas.Font.Style := [];
-            end;
-          end;
-        end;
-        DefaultDrawColumnCell( Rect, DataCol, Column , State );
-      end;
-    except
-      DataSource.DataSet.Close;
-    end;
-  end;
-end;
-
-//==============================================================================
-// dgInfoTitleClick [그리드 정렬]
-//==============================================================================
-procedure TfrmU320.dgInfoTitleClick(Column: TColumnEh);
+procedure TfrmU430.dgInfoTitleClick(Column: TColumnEh);
 begin
   if Column.Field.DataSet is TADOQuery then
   begin
@@ -543,9 +434,4 @@ begin
     end;
   end;
 end;
-
 end.
-
-
-
-

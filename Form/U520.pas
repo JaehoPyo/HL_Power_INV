@@ -286,7 +286,7 @@ begin
                     StrSQL := StrSQL + ' AND ERR_START BETWEEN ''' + TmpDate1 + TmpTime1 + ''' ' +
                                        '                   AND ''' + TmpDate2 + TmpTime2 + ''' ' ;
 
-                  StrSQL := StrSQL + '  Order By ERR_START ' ;
+                  StrSQL := StrSQL + '  Order By ERR_START DESC ' ;
       SQL.Text := StrSQL ;
       Open;
     end;

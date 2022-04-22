@@ -75,6 +75,12 @@ type
     M2400: TMenuItem;
     qryTemp: TADOQuery;
     M5300: TMenuItem;
+    M4300: TMenuItem;
+    Lbl_error: TLabel;
+    qryInfo: TADOQuery;
+    tmrQry: TTimer;
+    tmrErrorColor: TTimer;
+    ShpMFCInterfaceConn3: TShape;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -85,6 +91,8 @@ type
     procedure tmrConnectCheckTimer(Sender: TObject);
     procedure tmrLogFileCheckTimer(Sender: TObject);
     procedure staLoginInfoDrawPanel(StatusBar: TStatusBar; Panel: TStatusPanel; const Rect: TRect);
+    procedure tmrQryTimer(Sender: TObject);
+    procedure tmrErrorColorTimer(Sender: TObject);
   private
     { Private declarations }
     procedure execMenuActive( Menu_Number : Integer );
@@ -93,7 +101,15 @@ type
     procedure fnCloseSet;
     procedure CloseChkMsg(Sender: TObject);
     procedure WmMsgRecv( var Message : TMessage); message WM_USER;
-    function  fnDBConChk: Boolean;
+    function fnDBConChk: Boolean;
+    function fnErrorMsg(Signal: string): Boolean;
+    function fnCaptionMsg(Signal, Number: string): String;
+    function fnCaptionErrorMsg(Signal: string): String;
+    function fnJobErrorChk(Signal: string): String;
+    procedure fnRFIDDataUpdate;
+
+    procedure SCTREAD(SC_NO: Integer);
+    procedure SC_StatusDisplay(SC_NO: Integer);
 
     // 로그자동삭제 관련
     procedure LogFileDelete;
@@ -111,13 +127,16 @@ const
 var
   frmMain: TfrmMain;
   DeleteOption : integer ;
+  SC_STATUS : Array [START_SCNO..End_SCNO] of TSC_STATUS ;    // SC 상태
 
   CloseChk : Boolean ;
+  ErrorChk_Visibel : Boolean ;
+  ErrorChk_Caption : Boolean ;
   SC_COMM  : Boolean ;
 
 implementation
 
-uses U110, U210, U220, U230, U240, U310, U320, U410, U420, U510, U520, U530 ;
+uses U110, U210, U220, U230, U240, U310, U320, U410, U420, U430, U510, U520, U530 ;
 
 {$R *.dfm}
 
@@ -178,6 +197,8 @@ end;
 procedure TfrmMain.FormActivate(Sender: TObject);
 begin
   if not tmrConnectCheck.Enabled then tmrConnectCheck.Enabled := True ;
+  if not tmrQry.Enabled then tmrQry.Enabled := True ;
+  if not tmrErrorColor.Enabled then tmrErrorColor.Enabled := True ;
 end;
 
 //==============================================================================
@@ -400,6 +421,7 @@ begin
     // 실적관리------------------------------------------
     4100 : U410Create();           // 출고검사
     4200 : U420Create();           // 지정출고
+    4300 : U430Create();           // 지정출고
     // 모니터링------------------------------------------
     5100 : U510Create();           // 설비 모니터링
     5200 : U520Create();           // 설비 에러 이력 조회
@@ -473,8 +495,9 @@ begin
           frmMain.ShpMFCInterfaceConn2.Brush.Color := CONN_STATUS_COLOR[0];
         end;
         SQL.Clear;
-        StrSQL := ' SELECT (CASE WHEN BACKUP_UPTIME > DATEADD(SECOND, -5, GETDATE()) THEN 1 ELSE 0 END) STATUS ' +
-                  '   FROM TC_CURRENT WITH (NOLOCK) ' ;
+        StrSQL := ' SELECT (CASE WHEN OPTION1 = ''1'' THEN 1 ELSE 0 END) STATUS ' +
+                  '   FROM TC_CURRENT WITH (NOLOCK) ' +
+                  '  WHERE CURRENT_NAME = ''ACS_INT'' ';
         SQL.Text := StrSQL;
         Open;
         if not (Bof and Eof) then
@@ -488,11 +511,29 @@ begin
         begin
           frmMain.ShpMFCInterfaceConn2.Brush.Color := CONN_STATUS_COLOR[0];
         end;
+        SQL.Clear;
+        StrSQL := ' SELECT (CASE WHEN OPTION1 = ''1'' THEN 1 ELSE 0 END) STATUS ' +
+                  '   FROM TC_CURRENT WITH (NOLOCK) ' +
+                  '  WHERE CURRENT_NAME = ''RCP'' ';
+        SQL.Text := StrSQL;
+        Open;
+        if not (Bof and Eof) then
+        begin
+          while not (Eof) do
+          begin
+            TShape(Self.FindComponent('ShpMFCInterfaceConn3')).Brush.Color := CONN_STATUS_COLOR[FieldByName('STATUS').AsInteger];
+            Next;
+          end;
+        end else
+        begin
+          frmMain.ShpMFCInterfaceConn3.Brush.Color := CONN_STATUS_COLOR[0];
+        end;
       end else
       begin
         frmMain.ShpDatabaseConn.Brush.Color      := CONN_STATUS_COLOR[0];
         frmMain.ShpMFCInterfaceConn1.Brush.Color := CONN_STATUS_COLOR[0];
         frmMain.ShpMFCInterfaceConn2.Brush.Color := CONN_STATUS_COLOR[0];
+        frmMain.ShpMFCInterfaceConn3.Brush.Color := CONN_STATUS_COLOR[0];
       end;
       Close;
     end;
@@ -688,6 +729,355 @@ begin
       qryTemp.Close;
       InsertPGMHist('[000]', 'E', 'HistoryDelete', '', 'Exception Error', 'SQL', StrSQL, '', E.Message);
       TraceLogWrite('[000] procedure HistoryDelete Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
+    end;
+  end;
+end;
+
+//==============================================================================
+// SCTREAD
+//==============================================================================
+procedure TfrmMain.SCTREAD(SC_NO: Integer);
+var
+  j, k : integer ;
+  StrSql, TmpCol, StrLog, D210, D211, D212, D213 : String ;
+begin
+  D210:=''; D211:='';
+
+  StrSql := ' SELECT * FROM VW_SC_STAUS ' +
+            '  WHERE SC_NO =''' + IntToStr(SC_NO) + ''' ';
+
+  try
+    with qryInfo do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Text := StrSql;
+      Open;
+      if not (Bof and Eof ) then
+      begin
+        // Word Data -> 10 Word
+        SC_STATUS[SC_NO].D200 := FormatFloat('0000',StrToInt('$' + FieldByName('D200').AsString)) ; // Hex -> Dec
+        SC_STATUS[SC_NO].D201 := FormatFloat('0000',StrToInt('$' + FieldByName('D201').AsString)) ; // Hex -> Dec
+        SC_STATUS[SC_NO].D202 := FieldByName('D202').AsString ;
+        SC_STATUS[SC_NO].D203 := FieldByName('D203').AsString ;
+        SC_STATUS[SC_NO].D204 := FieldByName('D204').AsString ;
+        SC_STATUS[SC_NO].D205 := FormatFloat('0000',StrToInt('$' + FieldByName('D205').AsString)) ; // Hex -> Dec
+        SC_STATUS[SC_NO].D206 := FieldByName('D206').AsString ;
+        SC_STATUS[SC_NO].D207 := FieldByName('D207').AsString ;
+        SC_STATUS[SC_NO].D208 := FieldByName('D208').AsString ;
+        SC_STATUS[SC_NO].D209 := FieldByName('D209').AsString ;
+
+
+        // Bit Data -> 2 Word
+        for j := 0 to 15 do
+        begin
+          TmpCol := 'D210_' + FormatFloat('00',j) ;
+          SC_STATUS[SC_NO].D210[j] := FieldByName(TmpCol).AsString ;
+          D210 := D210 + SC_STATUS[SC_NO].D210[j] ;
+          TmpCol := 'D211_' + FormatFloat('00',j) ;
+          SC_STATUS[SC_NO].D211[j] := FieldByName(TmpCol).AsString ;
+          D211 := D211 + SC_STATUS[SC_NO].D211[j] ;
+          TmpCol := 'D212_' + FormatFloat('00',j) ;
+          SC_STATUS[SC_NO].D212[j] := FieldByName(TmpCol).AsString ;
+          D212 := D212 + SC_STATUS[SC_NO].D212[j] ;
+          TmpCol := 'D213_' + FormatFloat('00',j) ;
+          SC_STATUS[SC_NO].D213[j] := FieldByName(TmpCol).AsString ;
+          D212 := D213 + SC_STATUS[SC_NO].D213[j] ;
+        end;
+      end;
+      Close;
+    end;
+  except
+    if qryInfo.Active then qryInfo.Close;
+  end;
+end;
+//==============================================================================
+// tmrQryTimer
+//==============================================================================
+procedure TfrmMain.tmrQryTimer(Sender: TObject);
+var
+  i : integer ;
+begin
+  try
+    tmrQry.Enabled := False ;
+    if m.ConChk then
+    begin
+      for i := START_SCNO to END_SCNO do
+      begin
+        SCTREAD(i);          // SC 상태 Get  메인에서 실행
+        SC_StatusDisplay(i);
+      end;
+    end;
+    tmrQry.Enabled := True ;
+  except
+    on E : Exception do
+    begin
+      tmrQry.Enabled := False ;
+      ErrorLogWrite('Procedure tmrQryTimer, ' + 'Error[' + E.Message + ']');
+    end;
+  end;
+end;
+
+//==============================================================================
+// tmrErrorColorTimer
+//==============================================================================
+procedure TfrmMain.tmrErrorColorTimer(Sender: TObject);
+begin
+  try
+    tmrErrorColor.Enabled := False ;
+    if m.ConChk then
+    begin
+      if ErrorChk_Visibel or
+         ErrorChk_Caption then
+      begin
+        if TLabel(Self.FindComponent('Lbl_error')).Font.Color = clFuchsia then
+        begin
+          TLabel(Self.FindComponent('Lbl_error')).Font.Color := clRed;
+        end else
+        begin
+          TLabel(Self.FindComponent('Lbl_error')).Font.Color := clFuchsia;
+        end;
+      end
+    end;
+    tmrErrorColor.Enabled := True ;
+  except
+    on E : Exception do
+    begin
+      tmrErrorColor.Enabled := False ;
+      ErrorLogWrite('Procedure tmrErrorColorTimer, ' + 'Error[' + E.Message + ']');
+    end;
+  end;
+end;
+
+//==============================================================================
+// SC_StatusDisplay
+//==============================================================================
+procedure TfrmMain.SC_StatusDisplay(SC_NO: Integer);
+var
+  jobError : String;
+begin
+  jobError := '1';
+
+  //RFID
+  jobError := fnJobErrorChk('');
+  //에러발생
+  TLabel(Self.FindComponent('Lbl_error')).Caption := fnCaptionErrorMsg(SC_STATUS[SC_NO].D205);
+
+
+{
+  TLabel(Self.FindComponent('Lbl_error')).Caption := fnCaptionMsg(SC_STATUS[SC_NO].D210[15],'10'); // 이상발생
+  TLabel(Self.FindComponent('Lbl_error')).Caption := fnCaptionMsg(SC_STATUS[SC_NO].D211[03],'11'); //이중입고
+  TLabel(Self.FindComponent('Lbl_error')).Caption := fnCaptionMsg(SC_STATUS[SC_NO].D211[04],'12'); //공출고
+}
+
+
+
+  //에러 글자 변경 화재
+  TLabel(Self.FindComponent('Lbl_error')).Caption := fnCaptionMsg(SC_STATUS[SC_NO].D212[10],'13'); // 화재경보기1
+  TLabel(Self.FindComponent('Lbl_error')).Caption := fnCaptionMsg(SC_STATUS[SC_NO].D212[11],'13'); // 화재경보기2
+  TLabel(Self.FindComponent('Lbl_error')).Caption := fnCaptionMsg(SC_STATUS[SC_NO].D212[12],'13'); // 화재경보기3
+  TLabel(Self.FindComponent('Lbl_error')).Caption := fnCaptionMsg(SC_STATUS[SC_NO].D212[13],'13'); // 화재경보기4
+  TLabel(Self.FindComponent('Lbl_error')).Caption := fnCaptionMsg(SC_STATUS[SC_NO].D212[14],'13'); // 화재경보기5
+  TLabel(Self.FindComponent('Lbl_error')).Caption := fnCaptionMsg(SC_STATUS[SC_NO].D212[15],'13'); // 화재경보기6
+
+  //에러 표시
+  TLabel(Self.FindComponent('Lbl_error')).Visible := fnErrorMsg(SC_STATUS[SC_NO].D210[15]); // 이상발생
+  TLabel(Self.FindComponent('Lbl_error')).Visible := fnErrorMsg(SC_STATUS[SC_NO].D211[03]); // 이중입고
+  TLabel(Self.FindComponent('Lbl_error')).Visible := fnErrorMsg(SC_STATUS[SC_NO].D211[04]); // 공출고
+  TLabel(Self.FindComponent('Lbl_error')).Visible := fnErrorMsg(SC_STATUS[SC_NO].D212[10]); // 화재경보기1
+  TLabel(Self.FindComponent('Lbl_error')).Visible := fnErrorMsg(SC_STATUS[SC_NO].D212[11]); // 화재경보기2
+  TLabel(Self.FindComponent('Lbl_error')).Visible := fnErrorMsg(SC_STATUS[SC_NO].D212[12]); // 화재경보기3
+  TLabel(Self.FindComponent('Lbl_error')).Visible := fnErrorMsg(SC_STATUS[SC_NO].D212[13]); // 화재경보기4
+  TLabel(Self.FindComponent('Lbl_error')).Visible := fnErrorMsg(SC_STATUS[SC_NO].D212[14]); // 화재경보기5
+  TLabel(Self.FindComponent('Lbl_error')).Visible := fnErrorMsg(SC_STATUS[SC_NO].D212[15]); // 화재경보기6
+
+
+  if (jobError = '') then fnRFIDDataUpdate; //알람OFF
+
+
+
+  if (SC_STATUS[SC_NO].D210[15] = '0') And
+     (SC_STATUS[SC_NO].D212[10] = '0') And
+     (SC_STATUS[SC_NO].D212[11] = '0') And
+     (SC_STATUS[SC_NO].D212[12] = '0') And
+     (SC_STATUS[SC_NO].D212[13] = '0') And
+     (SC_STATUS[SC_NO].D212[14] = '0') And
+     (SC_STATUS[SC_NO].D212[15] = '0') And
+     (jobError = '') then
+  begin
+    ErrorChk_Caption := False;
+    ErrorChk_Visibel := False;
+  end;
+
+
+end;
+
+//==============================================================================
+// fnCurtainMsg   clRed  clFuchsia
+//==============================================================================
+function TfrmMain.fnErrorMsg(Signal: string): Boolean;
+begin
+  Result := TLabel(Self.FindComponent('Lbl_error')).Visible;
+  if ErrorChk_Visibel then Exit;
+
+  if Signal='0'    then
+  begin
+    Result := False;
+  end else
+  if Signal='1'    then
+  begin
+    ErrorChk_Visibel := True;
+    Result := True;
+  end else
+  begin
+    Result := False;
+  end;
+end;
+
+//==============================================================================
+// fnModeMsg
+//==============================================================================
+function TfrmMain.fnCaptionMsg(Signal, Number: string): String;
+begin
+  Result := TLabel(Self.FindComponent('Lbl_error')).Caption;
+{
+  if ErrorChk_Caption then
+  begin
+    Exit;
+  end;
+}
+  if Signal='0'    then
+  begin
+    Result := TLabel(Self.FindComponent('Lbl_error')).Caption;
+  end else
+  if Signal='1'    then
+  begin
+    if Number = '10' then
+    begin
+      Result := '#에러 경보 - SC이상발생';
+    end else
+    if Number = '11' then
+    begin
+      Result := '#에러 경보 - SC이중입고';
+    end else
+    if Number = '12' then
+    begin
+      Result := '#에러 경보 - SC공출고';
+    end else
+    begin
+      Result := '#화재 경보 - 화재감지';
+    end;
+    ErrorChk_Caption := True;
+  end else
+  begin
+    Result := Signal;
+  end;
+end;
+
+//==============================================================================
+// fnModeMsg
+//==============================================================================
+function TfrmMain.fnCaptionErrorMsg(Signal : string): String;
+var
+  StrSQL : String;
+begin
+  try
+    Result := TLabel(Self.FindComponent('Lbl_error')).Caption;
+
+    if Signal = '0000' then Exit;
+
+    with qryTemp do
+    begin
+      Close;
+      SQL.Clear;
+      StrSQL := ' SELECT *      ' +
+                '   FROM TM_ERROR      ' +
+                '  WHERE ERR_CODE = '''  + Signal + ''' ';
+      SQL.Text := StrSQL;
+      Open;
+
+      if not (Bof and Eof ) then
+      begin
+        Result := '#ER - ' + FieldByName('ERR_NAME').AsString;
+        ErrorChk_Caption := True;
+      end;
+      Close;
+    end;
+  except
+    on E : Exception do
+    begin
+      qryTemp.Close;
+      InsertPGMHist('[000]', 'E', 'fnJobErrorChk', '', 'Exception Error', 'SQL', StrSQL, '', E.Message);
+      TraceLogWrite('[000] function fnJobErrorChk Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
+    end;
+  end;
+end;
+
+//==============================================================================
+// fnCurtainMsg   clRed  clFuchsia
+//==============================================================================
+function TfrmMain.fnJobErrorChk(Signal: string): String;
+var
+  StrSQL : String;
+begin
+  try
+    Result := '';
+    with qryTemp do
+    begin
+      Close;
+      SQL.Clear;
+      StrSQL := ' SELECT TOP(1) *      ' +
+                '   FROM TT_ORDER      ' +
+                '  WHERE JOBERRORC = 1 ' +
+                '  ORDER BY REG_TIME   ' ;
+      SQL.Text := StrSQL;
+      Open;
+
+      if not (Bof and Eof ) then
+      begin
+        Result := '#요청불일치 - ' + FieldByName('LUGG').AsString;
+        TLabel(Self.FindComponent('Lbl_error')).Caption := '#'+ FieldByName('JOBERRORD').AsString +
+                                                        ' - ' + FieldByName('LUGG').AsString;
+        TLabel(Self.FindComponent('Lbl_error')).Visible := True;
+        ErrorChk_Caption := True;
+        ErrorChk_Visibel := True;
+      end;
+      Close;
+    end;
+  except
+    on E : Exception do
+    begin
+      qryTemp.Close;
+      InsertPGMHist('[000]', 'E', 'fnJobErrorChk', '', 'Exception Error', 'SQL', StrSQL, '', E.Message);
+      TraceLogWrite('[000] function fnJobErrorChk Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
+    end;
+  end;
+end;
+
+//==============================================================================
+// fnCurtainMsg   clRed  clFuchsia
+//==============================================================================
+procedure TfrmMain.fnRFIDDataUpdate;
+var
+  StrSQL : String ;
+begin
+  StrSQL := ' UPDATE TC_CURRENT ' +
+            '    SET OPTION1 = ''0'''+
+            '  WHERE CURRENT_NAME = ''ALRAM_OFF'' ';
+  try
+    with qryTemp do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Text := StrSQL ;
+      ExecSQL;
+    end;
+  except
+    on E : Exception do
+    begin
+      qryTemp.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'fnRFIDDataUpdate', '', 'Exception Error', 'SQL', StrSQL, '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnRFIDDataUpdate Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
     end;
   end;
 end;

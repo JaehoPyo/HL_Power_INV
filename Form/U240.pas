@@ -21,7 +21,6 @@ type
     Shape2: TShape;
     btnOrder: TButton;
     Panel4: TPanel;
-    dgInfo: TDBGridEh;
     Panel1: TPanel;
     Pnl_Top: TPanel;
     sbtReset: TSpeedButton;
@@ -52,6 +51,7 @@ type
     cbMoveBay: TComboBox;
     cbMoveLevel: TComboBox;
     qryRackCheck: TADOQuery;
+    dgInfo: TDBGridEh;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -307,7 +307,10 @@ begin
                 '                       when ''5'' then ''출고예약'' ' +
                 '                       when ''6'' then ''이중입고'' ' +
                 '                       when ''7'' then ''공출고'' end) as ID_STATUS_DESC, ' +
-                '       (SUBSTRING(ID_CODE,1,1)+''-''+SUBSTRING(ID_CODE,2,2)+''-''+SUBSTRING(ID_CODE,4,2)) as ID_CODE_DESC ' +
+                '       (SUBSTRING(ID_CODE,1,1)+''-''+SUBSTRING(ID_CODE,2,2)+''-''+SUBSTRING(ID_CODE,4,2)) as ID_CODE_DESC, ' +
+                '        RF_LINE_NAME1, RF_LINE_NAME2, RF_PALLET_NO1, RF_PALLET_NO2, RF_MODEL_NO1, ' +
+                '        RF_MODEL_NO2, RF_BMA_NO, RF_PALLET_BMA1, RF_PALLET_BMA2, RF_PALLET_BMA3,  ' +
+                '        RF_AREA  ' +
                 '   From TT_STOCK ' +
                 '  Where 1=1 ' ;
 
@@ -479,6 +482,7 @@ begin
     OrderData.LUGG       := Format('%.4d', [GetJobNo]) ; // 작업번호
 
     OrderData.JOBD       := '7'; // 렉 투 렉 이동지시
+    OrderData.IS_AUTO    := 'N';
     OrderData.LINE_NO    := '0';
 
     OrderData.SRCSITE    := Format('%.4d', [StrToInt('1')]) ;                                      // 적재 호기
@@ -507,7 +511,12 @@ begin
     OrderData.CVTO       := '1';
     OrderData.CVCURR     := '1';
     OrderData.ETC        := qryInfo.FieldByName('ID_MEMO').AsString ;
-    OrderData.EMG        := IntToStr(rgEMG.ItemIndex);
+    if (cbMoveBank.Text + cbMoveBay.Text + cbMoveLevel.Text = '20301') or
+       (cbMoveBank.Text + cbMoveBay.Text + cbMoveLevel.Text = '20601') then
+    begin
+      OrderData.EMG        := '2'
+    end else OrderData.EMG        := IntToStr(rgEMG.ItemIndex);
+
     OrderData.ITM_CD     := qryInfo.FieldByName('ITM_CD').AsString ;
     OrderData.UP_TIME    := '';
 
@@ -548,7 +557,7 @@ begin
       SQL.Clear;
       SQL.Text :=
       ' INSERT INTO TT_ORDER (                             ' + #13#10+
-      '    REG_TIME, LUGG, JOBD, LINE_NO,             ' + #13#10 +
+      '    REG_TIME, LUGG, JOBD, IS_AUTO, LINE_NO,         ' + #13#10 +
       '    SRCSITE, SRCAISLE, SRCBAY, SRCLEVEL,            ' + #13#10 +
       '    DSTSITE, DSTAISLE, DSTBAY, DSTLEVEL,            ' + #13#10 +
       '    NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS,        ' + #13#10 +
@@ -556,7 +565,7 @@ begin
       '    JOB_END, CVFR, CVTO, CVCURR,                    ' + #13#10 +
       '    ETC, EMG, ITM_CD                                ' + #13#10 +
       '  ) VALUES (                                        ' + #13#10 +
-      '    :REG_TIME, :LUGG, :JOBD, :LINE_NO,       ' + #13#10 +
+      '    :REG_TIME, :LUGG, :JOBD, :IS_AUTO, :LINE_NO,    ' + #13#10 +
       '    :SRCSITE, :SRCAISLE, :SRCBAY, :SRCLEVEL,        ' + #13#10 +
       '    :DSTSITE, :DSTAISLE, :DSTBAY, :DSTLEVEL,        ' + #13#10 +
       '    :NOWMC, :JOBSTATUS, :NOWSTATUS, :BUFFSTATUS,    ' + #13#10 +
@@ -569,6 +578,7 @@ begin
       Parameters[i].Value := OrderData.REG_TIME;    Inc(i);
       Parameters[i].Value := OrderData.LUGG;        Inc(i);
       Parameters[i].Value := OrderData.JOBD;        Inc(i);
+      Parameters[i].Value := OrderData.IS_AUTO;     Inc(i);
       Parameters[i].Value := OrderData.LINE_NO;     Inc(i);
       Parameters[i].Value := OrderData.SRCSITE;     Inc(i);
       Parameters[i].Value := OrderData.SRCAISLE;    Inc(i);
@@ -614,19 +624,25 @@ begin
       //+++++++++++++++++++++++++++++++++++++
       // 셀상태 변경  ( 공셀(0) -> 공셀(4) )
       //+++++++++++++++++++++++++++++++++++++
-      Close;
-      SQL.Clear;
-      SQL.Text :=
-      ' UPDATE TT_STOCK               ' + #13#10 +
-      '    SET ID_STATUS = :ID_STATUS ' + #13#10 +
-      '  WHERE ID_HOGI = :ID_HOGI     ' + #13#10+
-      '    AND ID_CODE = :ID_CODE ' ;
-      Parameters[0].Value := '4';                         // 입고예약
-      Parameters[1].Value := Copy(OrderData.SRCSITE,4,1); // 호기
-      Parameters[2].Value := cbMoveBank.Text + cbMoveBay.Text + cbMoveLevel.Text;           // 셀위치
-      ExecSql;
-      Close;
-
+      if (cbMoveBank.Text + cbMoveBay.Text + cbMoveLevel.Text = '20301') or
+         (cbMoveBank.Text + cbMoveBay.Text + cbMoveLevel.Text = '20601') then
+      begin
+        Close;
+      end else
+      begin
+        Close;
+        SQL.Clear;
+        SQL.Text :=
+        ' UPDATE TT_STOCK               ' + #13#10 +
+        '    SET ID_STATUS = :ID_STATUS ' + #13#10 +
+        '  WHERE ID_HOGI = :ID_HOGI     ' + #13#10+
+        '    AND ID_CODE = :ID_CODE ' ;
+        Parameters[0].Value := '4';                         // 입고예약
+        Parameters[1].Value := Copy(OrderData.SRCSITE,4,1); // 호기
+        Parameters[2].Value := cbMoveBank.Text + cbMoveBay.Text + cbMoveLevel.Text;           // 셀위치
+        ExecSql;
+        Close;
+      end;
     end;
     Result := True;
 
@@ -813,6 +829,8 @@ begin
   OrderData.REG_TIME   := '';
   OrderData.LUGG       := '';
   OrderData.JOBD       := '';
+  OrderData.IS_AUTO    := '';
+  OrderData.LINE_NO    := '';
   OrderData.SRCSITE    := '';
   OrderData.SRCAISLE   := '';
   OrderData.SRCBAY     := '';

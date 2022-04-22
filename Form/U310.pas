@@ -74,6 +74,20 @@ type
     Panel9: TPanel;
     CellStatus9: TPanel;
     Panel17: TPanel;
+    Panel2: TPanel;
+    Panel11: TPanel;
+    Panel20: TPanel;
+    Panel21: TPanel;
+    Panel22: TPanel;
+    Panel25: TPanel;
+    Panel28: TPanel;
+    edtLineName1: TEdit;
+    edtLineName2: TEdit;
+    edtPalletNo1: TEdit;
+    edtPalletNo2: TEdit;
+    edtModelNo1: TEdit;
+    edtModelNo2: TEdit;
+    edtArea: TEdit;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -117,6 +131,8 @@ var
   BankPanel  : array [1..vHogi, 1..vBank] of TPanel;
   BankTitle  : array [1..vHogi, 1..vBank] of TPanel;
   CellPanel  : array [1..vBank, 0..vBay, 0..vLevel] of TPanel;
+
+  BeforeRACK_INFO, AfterRACK_INFO : TSTOCK;
 
 implementation
 
@@ -440,9 +456,18 @@ function TfrmU310.fnCellCreate(Wdt,Hgt : Integer) : Boolean ;
             else
               Width     := ((BankPanel[1][1].Width Div (vBay  +1))+0) ;
 
-            Left        := ((BankPanel[1][1].Width Div (vBay  +1))+0) * (vBay-i) ;
-
             Height      := (BankPanel[1][1].Height Div (vLevel+1))+1 ;
+
+//            Left        := ((BankPanel[1][1].Width Div (vBay  +1))+0) * (vBay-i) ;
+
+            if i = 0 then
+            begin
+              Left        := 8
+            end else
+            begin
+              Left        := CellPanel[Bank][i-1][j].Left + CellPanel[Bank][i-1][j].Width + 1 ;
+            end;
+
             Top         := (BankPanel[1][1].Height) - ((BankPanel[1][1].Height Div (vLevel+1))+1) * (j+1);
 
             Font.Charset := DEFAULT_CHARSET ;
@@ -463,12 +488,14 @@ function TfrmU310.fnCellCreate(Wdt,Hgt : Integer) : Boolean ;
               end;
             end else
             begin
-              if ((Bank=1) and (i=1) and (j=1)) or
-                 ((Bank=1) and (i=2) and (j=1)) or
-                 ((Bank=1) and (i=4) and (j=1)) or
-                 ((Bank=1) and (i=5) and (j=1)) or
-                 ((Bank=1) and (i=7) and (j=1)) or
-                 ((Bank=1) and (i=8) and (j=1)) then
+              if ((Bank=2) and (i=1) and (j=1)) or
+                 ((Bank=2) and (i=2) and (j=1)) or
+                 ((Bank=2) and (i=3) and (j=1)) or
+                 ((Bank=2) and (i=4) and (j=1)) or
+                 ((Bank=2) and (i=5) and (j=1)) or
+                 ((Bank=2) and (i=6) and (j=1)) or
+                 ((Bank=2) and (i=7) and (j=1)) or
+                 ((Bank=2) and (i=8) and (j=1)) then
               begin
                 Color := clWhite;
                 Font.Size  := 14 ;
@@ -499,8 +526,15 @@ function TfrmU310.fnCellCreate(Wdt,Hgt : Integer) : Boolean ;
       with BankPanel[Hogi][i] do
       begin
         Parent      := TPanel(Self.FindComponent('CanvasPanel'+IntToStr(Hogi))) ;
-        Align       := AlTop;
-        Align       := AlBottom;
+
+        if Hogi = 1 then
+        begin
+          Align       := AlTop;
+        end else
+        begin
+          Align       := AlBottom;
+        end;
+
         AutoSize    := False ;
         BevelInner  := bvRaised;
         BevelOuter  := bvNone;
@@ -582,13 +616,19 @@ end;
 //==============================================================================
 procedure TfrmU310.btnSaveClick(Sender: TObject);
 var
-  StrSQL, ID_HOGI, ID_CODE, IN_USE, OT_USE, INdt : String;
+  StrSQL, ID_HOGI, ID_CODE, IN_USE, OT_USE, INdt, tmpLogStr, IN_TIME : String;
 begin
   try
-    if  (CB_ID_STATUS.ItemIndex <> 0)        //공셀
-    and (CB_ID_STATUS.ItemIndex <> 3)        //금지셀
-    and (CB_ID_STATUS.ItemIndex <> 7) then   //공출고
+    if  (CB_ID_STATUS.ItemIndex <> 0) and       //공셀
+        (CB_ID_STATUS.ItemIndex <> 3) and       //금지셀
+        (CB_ID_STATUS.ItemIndex <> 7) then      //공출고
     begin
+      if StrToInt(Trim(edtITM_QTY.Text)) > 36 then
+      begin
+        MessageDlg('36개가 최대 추량입니다.', mtConfirmation, [mbYes], 0) ;
+        Exit;
+      end;
+
       if edtITM_CD.Text = '' then
       begin
         MessageDlg('기종코드를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
@@ -603,11 +643,52 @@ begin
       begin
         MessageDlg('기종사양을 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
         Exit;
-      end else
-      if edtITM_QTY.Text = '0' then
+      end;
+
+      if CB_ID_STATUS.ItemIndex <> 1 then
       begin
-        MessageDlg('수량을 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
-        Exit;
+        if edtITM_QTY.Text = '0' then
+        begin
+          MessageDlg('수량을 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+          Exit;
+        end;
+{
+        if edtLineName1.Text = '' then
+        begin
+          MessageDlg('식별자이름1을 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+          Exit;
+        end else
+        if edtLineName2.Text = '' then
+        begin
+          MessageDlg('식별자이름2를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+          Exit;
+        end else
+        if edtPalletNo1.Text = '' then
+        begin
+          MessageDlg('식별번호1을 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+          Exit;
+        end else
+        if edtPalletNo2.Text = '' then
+        begin
+          MessageDlg('실별번호2를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+          Exit;
+        end else
+        if edtModelNo1.Text = '' then
+        begin
+          MessageDlg('차종#1을 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+          Exit;
+        end else
+        if edtModelNo2.Text = '' then
+        begin
+          MessageDlg('차종#2를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+          Exit;
+        end else
+        if edtArea.Text = '' then
+        begin
+          MessageDlg('생산지를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+          Exit;
+        end;
+}
       end;
     end;
 
@@ -615,6 +696,7 @@ begin
 
     ID_HOGI := ComboBoxHogi.Text;
     ID_CODE := ComboBoxBank.Text + ComboBoxBay.Text + ComboBoxLevel.Text;
+    IN_TIME := FormatDateTime('YYYY-MM-DD', dtDate.Date) + FormatDateTime(' HH:NN:SS.ZZZ', dtTime.Time);
 
     if cbInUSED.Checked then IN_USE := '0' else IN_USE := '1';
     if cbOtUSED.Checked then OT_USE := '0' else OT_USE := '1';
@@ -631,12 +713,20 @@ begin
                 '      , OT_USED      = ' + QuotedStr(OT_USE) +
                 '      , IN_USED      = ' + QuotedStr(IN_USE) +
                 '      , ID_MEMO      = ' + QuotedStr(edtID_MEMO.Text) +
+                '      , RF_LINE_NAME1 = ''''  ' +
+                '      , RF_LINE_NAME2 = ''''  ' +
+                '      , RF_PALLET_NO1 = ''''  ' +
+                '      , RF_PALLET_NO2 = ''''  ' +
+                '      , RF_MODEL_NO1 = ''''  ' +
+                '      , RF_MODEL_NO2 = ''''  ' +
+                '      , RF_BMA_NO = ''''  ' +
+                '      , RF_AREA = ''''  ' +
                 '      , STOCK_REG_DT = GETDATE()   ' +
                 '  Where ID_HOGI = ' + QuotedStr(ID_HOGI) +
                 '    And ID_CODE = ' + QuotedStr(ID_CODE) ;
     end else
     begin
-      if CB_ID_STATUS.ItemIndex in [1,2] then INdt := ' , STOCK_IN_DT = GETDATE() '
+      if CB_ID_STATUS.ItemIndex in [1,2] then INdt := ' , STOCK_IN_DT = ' + QuotedStr(IN_TIME)
       else                                    INdt := '';
 
       StrSQL := ' Update TT_STOCK ' +
@@ -650,16 +740,83 @@ begin
                 '      , IN_USED      = ' + QuotedStr(IN_USE) +
                 '      , ID_MEMO      = ' + QuotedStr(edtID_MEMO.Text) + INdt +
                 '      , STOCK_REG_DT = GETDATE() ' +
+                '      , RF_LINE_NAME1 = ' + QuotedStr(edtLineName1.Text) +
+                '      , RF_LINE_NAME2 = ' + QuotedStr(edtLineName2.Text) +
+                '      , RF_PALLET_NO1 = ' + QuotedStr(edtPalletNo1.Text) +
+                '      , RF_PALLET_NO2 = ' + QuotedStr(edtPalletNo2.Text) +
+                '      , RF_MODEL_NO1 = '  + QuotedStr(edtModelNo1.Text)  +
+                '      , RF_MODEL_NO2 = '  + QuotedStr(edtModelNo2.Text)  +
+                '      , RF_BMA_NO = '     + QuotedStr(edtITM_QTY.Text)   +
+                '      , RF_AREA = '       + QuotedStr(edtArea.Text)      +
                 '  Where ID_HOGI = ' + QuotedStr(ID_HOGI) +
                 '    And ID_CODE = ' + QuotedStr(ID_CODE) ;
     end;
+
+    AfterRACK_INFO.ID_STATUS := CB_ID_STATUS.Text;
+    AfterRACK_INFO.ITM_CD    := edtITM_CD.Text;
+    AfterRACK_INFO.ITM_NAME  := edtITM_NAME.Text;
+    AfterRACK_INFO.ITM_SPEC  := edtITM_SPEC.Text;
+    AfterRACK_INFO.ITM_QTY   := edtITM_QTY.Text;
+
+    if cbInUSED.Checked = True then AfterRACK_INFO.IN_USED   := '0'
+    else AfterRACK_INFO.IN_USED   := '1';
+    if cbOtUSED.Checked = True then AfterRACK_INFO.OT_USED   := '0'
+    else AfterRACK_INFO.OT_USED   := '1';
+
+    AfterRACK_INFO.RF_LINE_NAME1 := edtLineName1.Text;
+    AfterRACK_INFO.RF_LINE_NAME2 := edtLineName2.Text;
+    AfterRACK_INFO.RF_PALLET_NO1 := edtPalletNo1.Text;
+    AfterRACK_INFO.RF_PALLET_NO2 := edtPalletNo2.Text;
+    AfterRACK_INFO.RF_MODEL_NO1  := edtModelNo1.Text;
+    AfterRACK_INFO.RF_MODEL_NO2  := edtModelNo2.Text;
+    AfterRACK_INFO.RF_BMA_NO     := edtITM_QTY.Text;
+    AfterRACK_INFO.RF_AREA       := edtArea.Text;
 
     with qryTemp do
     begin
       Close;
       SQL.Clear;
       SQL.Text := StrSQL;
-      if ExecSQL > 0 then ShowMessage('적재 정보 수정');
+      if ExecSQL > 0 then
+      begin
+        ShowMessage('적재 정보 수정');
+
+        tmpLogStr := ' - ' +
+                     '적재위치['    + ID_CODE + '], ' +
+                     '셀상태['      + BeforeRACK_INFO.ID_STATUS + '], ' +
+                     '기종코드['    + BeforeRACK_INFO.ITM_CD    + '], ' +
+                     '기종명['      + BeforeRACK_INFO.ITM_NAME  + '], ' +
+                     '기종사양['    + BeforeRACK_INFO.ITM_SPEC  + '], ' +
+                     '수량['        + BeforeRACK_INFO.ITM_QTY   + '], ' +
+                     '입고금지['    + BeforeRACK_INFO.IN_USED   + '], ' +
+                     '출고금지['    + BeforeRACK_INFO.OT_USED   + '],' +
+                     '식별자이름1[' + BeforeRACK_INFO.RF_LINE_NAME1 + '] ' +
+                     '식별자이름2[' + BeforeRACK_INFO.RF_LINE_NAME2 + '] ' +
+                     '식별번호1['   + BeforeRACK_INFO.RF_PALLET_NO1 + '] ' +
+                     '식별번호2['   + BeforeRACK_INFO.RF_PALLET_NO2 + '] ' +
+                     '차종#1['      + BeforeRACK_INFO.RF_MODEL_NO1  + '] ' +
+                     '차종#2['      + BeforeRACK_INFO.RF_MODEL_NO2  + '] ' +
+                     '생산지['      + BeforeRACK_INFO.RF_AREA       + '] => ' +
+
+                     '적재위치['    + ID_CODE + '], ' +
+                     '셀상태['      + AfterRACK_INFO.ID_STATUS + '], ' +
+                     '기종코드['    + AfterRACK_INFO.ITM_CD    + '], ' +
+                     '기종명['      + AfterRACK_INFO.ITM_NAME  + '], ' +
+                     '기종사양['    + AfterRACK_INFO.ITM_SPEC  + '], ' +
+                     '수량['        + AfterRACK_INFO.ITM_QTY   + '], ' +
+                     '입고금지['    + AfterRACK_INFO.IN_USED   + '], ' +
+                     '출고금지['    + AfterRACK_INFO.OT_USED   + '],' +
+                     '식별자이름1[' + AfterRACK_INFO.RF_LINE_NAME1 + '] ' +
+                     '식별자이름2[' + AfterRACK_INFO.RF_LINE_NAME2 + '] ' +
+                     '식별번호1['   + AfterRACK_INFO.RF_PALLET_NO1 + '] ' +
+                     '식별번호2['   + AfterRACK_INFO.RF_PALLET_NO2 + '] ' +
+                     '차종#1['      + AfterRACK_INFO.RF_MODEL_NO1  + '] ' +
+                     '차종#2['      + AfterRACK_INFO.RF_MODEL_NO2  + '] ' +
+                     '생산지['      + AfterRACK_INFO.RF_AREA       + '] ' ;
+
+        InsertPGMHist('['+FormNo+']', 'N', 'btnSaveClick', '수정','수정 - ' + tmpLogStr,'SQL', StrSQL, '', '');
+
+      end;
     end;
   except
     on E : Exception do
@@ -704,6 +861,14 @@ begin
 
   CB_ID_STATUS.ItemIndex := 0 ;
 
+  edtLineName1.Text := '';
+  edtLineName2.Text := '';
+  edtPalletNo1.Text := '';
+  edtPalletNo2.Text := '';
+  edtModelNo1.Text  := '';
+  edtModelNo2.Text  := '';
+  edtArea.Text      := '';
+
   try
     with qryTemp do
     begin
@@ -726,11 +891,19 @@ begin
         edtITM_CD.Text   := FieldByName('ITM_CD'  ).AsString;
         edtITM_NAME.Text := FieldByName('ITM_NAME').AsString;
         edtITM_SPEC.Text := FieldByName('ITM_SPEC').AsString;
-        edtITM_QTY.Text  := IntToStr(FieldByName('ITM_QTY' ).AsInteger);
+        edtITM_QTY.Text  := FieldByName('RF_BMA_NO' ).AsString;
         edtID_MEMO.Text  := FieldByName('ID_MEMO'  ).AsString;
 
         dtDate.Date := FieldByName('STOCK_IN_DT').AsDateTime;
         dtTime.Time := FieldByName('STOCK_IN_DT').AsDateTime;
+
+        edtLineName1.Text := FieldByName('RF_LINE_NAME1').AsString;
+        edtLineName2.Text := FieldByName('RF_LINE_NAME2').AsString;
+        edtPalletNo1.Text := FieldByName('RF_PALLET_NO1').AsString;
+        edtPalletNo2.Text := FieldByName('RF_PALLET_NO2').AsString;
+        edtModelNo1.Text  := FieldByName('RF_MODEL_NO1' ).AsString;;
+        edtModelNo2.Text  := FieldByName('RF_MODEL_NO2' ).AsString;
+        edtArea.Text      := FieldByName('RF_AREA'      ).AsString;
 
 
         if FieldByName('IN_USED').AsString = '1' then cbInUSED.Checked := False
@@ -761,6 +934,27 @@ begin
 
         CB_ID_STATUS.ItemIndex := 0 ;
       end;
+
+      BeforeRACK_INFO.ID_STATUS := CB_ID_STATUS.Text;
+      BeforeRACK_INFO.ITM_CD    := edtITM_CD.Text;
+      BeforeRACK_INFO.ITM_NAME  := edtITM_NAME.Text;
+      BeforeRACK_INFO.ITM_SPEC  := edtITM_SPEC.Text;
+      BeforeRACK_INFO.ITM_QTY   := edtITM_QTY.Text;
+
+      if cbInUSED.Checked = True then BeforeRACK_INFO.IN_USED   := '0'
+      else BeforeRACK_INFO.IN_USED   := '1';
+      if cbOtUSED.Checked = True then BeforeRACK_INFO.OT_USED   := '0'
+      else BeforeRACK_INFO.OT_USED   := '1';
+
+      BeforeRACK_INFO.RF_LINE_NAME1 := edtLineName1.Text;
+      BeforeRACK_INFO.RF_LINE_NAME2 := edtLineName2.Text;
+      BeforeRACK_INFO.RF_PALLET_NO1 := edtPalletNo1.Text;
+      BeforeRACK_INFO.RF_PALLET_NO2 := edtPalletNo2.Text;
+      BeforeRACK_INFO.RF_MODEL_NO1  := edtModelNo1.Text;
+      BeforeRACK_INFO.RF_MODEL_NO2  := edtModelNo2.Text;
+      BeforeRACK_INFO.RF_BMA_NO     := edtITM_QTY.Text;
+      BeforeRACK_INFO.RF_AREA       := edtArea.Text;
+
     end;
   except
     on E : Exception do
@@ -842,13 +1036,20 @@ begin
     edtITM_SPEC.Text := '';
     edtITM_QTY.Text  := '0';
     edtID_MEMO.Text  := '';
+    edtLineName1.Text := '';
+    edtLineName2.Text := '';
+    edtPalletNo1.Text := '';
+    edtPalletNo2.Text := '';
+    edtModelNo1.Text  := '';
+    edtModelNo2.Text  := '';
+    edtArea.Text      := '';
   end else
   if (Sender as TComboBox).ItemIndex=1 then
   begin
     edtITM_CD.Text   := 'EPLT';
     edtITM_NAME.Text := '공파레트';
     edtITM_SPEC.Text := '공파레트';
-    edtITM_QTY.Text  := '1';
+    edtITM_QTY.Text  := '0';
   end;
 
 end;

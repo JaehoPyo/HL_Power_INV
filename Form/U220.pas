@@ -18,37 +18,53 @@ type
     EhPrint: TPrintDBGridEh;
     Pnl_Main: TPanel;
     Pnl_Sub: TPanel;
-    Panel2: TPanel;
-    Pnl_ITM1: TPanel;
     Panel1: TPanel;
     Panel5: TPanel;
+    Shape2: TShape;
+    PD_GET_JOBNO: TADOStoredProc;
+    Panel9: TPanel;
+    Panel7: TPanel;
+    Panel12: TPanel;
+    btnOrder: TButton;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Panel4: TPanel;
     Panel6: TPanel;
-    Pnl_ITM2: TPanel;
     Panel8: TPanel;
-    Pnl_Cell1: TPanel;
     Panel10: TPanel;
+    Panel11: TPanel;
+    Panel13: TPanel;
+    Pnl_ITM1: TPanel;
+    edtCode: TEdit;
+    Panel14: TPanel;
+    Pnl_ITM2: TPanel;
+    Panel15: TPanel;
+    Pnl_Cell1: TPanel;
+    Panel16: TPanel;
     Pnl_Cell2: TPanel;
     Pnl_InputCell: TPanel;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
-    Panel13: TPanel;
-    Panel14: TPanel;
-    edtMemo: TEdit;
-    btnOrder: TButton;
-    edtCode: TEdit;
     cbLevel: TComboBox;
     cbBay: TComboBox;
     cbBank: TComboBox;
-    Panel3: TPanel;
-    dtDateFr: TDateTimePicker;
-    Panel4: TPanel;
-    dtTimeFr: TDateTimePicker;
-    Shape2: TShape;
-    PD_GET_JOBNO: TADOStoredProc;
-    Panel7: TPanel;
     cbOut: TComboBox;
     lbloutstation: TLabel;
+    Panel17: TPanel;
+    dtDateFr: TDateTimePicker;
+    Panel18: TPanel;
+    dtTimeFr: TDateTimePicker;
+    edtLineName1: TEdit;
+    edtPalletNo1: TEdit;
+    edtModelNo1: TEdit;
+    edtITM_QTY: TEdit;
+    edtLineName2: TEdit;
+    edtPalletNo2: TEdit;
+    edtModelNo2: TEdit;
+    edtArea: TEdit;
+    Button1: TButton;
+    tmrRFID: TTimer;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -57,6 +73,11 @@ type
     procedure Pnl_CellClick(Sender: TObject);
     procedure btnOrderClick(Sender: TObject);
     procedure cbOutChange(Sender: TObject);
+    procedure edtCodeChange;
+    procedure getRFIDData;
+    procedure setRFIDOption;
+    procedure Button1Click(Sender: TObject);
+    procedure tmrRFIDTimer(Sender: TObject);
   private
     { Private declarations }
   public
@@ -145,6 +166,7 @@ begin
   if      pnl_ITM1.BevelInner=bvLowered then edtCode.Text := 'EPLT'
   else if pnl_ITM2.BevelInner=bvLowered then edtCode.Text := ''
   else                                       edtCode.Text := '';
+  if not tmrRFID.Enabled then tmrRFID.Enabled := True ;
 end;
 
 //==============================================================================
@@ -154,12 +176,6 @@ procedure TfrmU220.FormDeactivate(Sender: TObject);
 var
   i : integer ;
 begin
-  for i := 0 to Self.ComponentCount-1 do
-  begin
-    if (Self.Components[i] is TTimer) then
-       (Self.Components[i] as TTimer).Enabled := False ;
-  end;
-
   for i := 0 to Self.ComponentCount-1 Do
   begin
     if (Self.Components[i] is TADOQuery) then
@@ -174,12 +190,6 @@ procedure TfrmU220.FormClose(Sender: TObject; var Action: TCloseAction);
 var
   i : integer ;
 begin
-  for i := 0 to Self.ComponentCount-1 do
-  begin
-    if (Self.Components[i] is TTimer) then
-       (Self.Components[i] as TTimer).Enabled := False ;
-  end;
-
   for i := 0 to Self.ComponentCount-1 Do
   begin
     if (Self.Components[i] is TADOQuery) then
@@ -300,10 +310,37 @@ begin
       edtCode.Text := '';
       frmPopup_Item_Search := TfrmPopup_Item_Search.Create(Application);
       frmPopup_Item_Search.ShowModal ;
+
+      edtLineName1.Enabled := True;
+      edtLineName2.Enabled := True;
+      edtPalletNo1.Enabled := True;
+      edtPalletNo2.Enabled := True;
+      edtModelNo1.Enabled  := True;
+      edtModelNo2.Enabled  := True;
+      edtITM_QTY.Enabled   := True;
+      edtArea.Enabled      := True;
     end else
     begin
-      edtCode.Text := 'EPLT' ;
+      edtCode.Text := 'EPLT';
+      edtLineName1.Text := '';
+      edtLineName2.Text := '';
+      edtPalletNo1.Text := '';
+      edtPalletNo2.Text := '';
+      edtModelNo1.Text  := '';
+      edtModelNo2.Text  := '';
+      edtITM_QTY.Text   := '0';
+      edtArea.Text      := '';
+
+      edtLineName1.Enabled := False;
+      edtLineName2.Enabled := False;
+      edtPalletNo1.Enabled := False;
+      edtPalletNo2.Enabled := False;
+      edtModelNo1.Enabled  := False;
+      edtModelNo2.Enabled  := False;
+      edtITM_QTY.Enabled   := False;
+      edtArea.Enabled      := False;
     end;
+    edtCodeChange;
   end else
   begin
     edtCode.Text := '';
@@ -366,6 +403,12 @@ begin
       Exit;
     end;
 
+    if StrToInt(Trim(edtITM_QTY.Text)) > 36 then
+    begin
+      MessageDlg('36개가 최대 추량입니다.', mtConfirmation, [mbYes], 0) ;
+      Exit;
+    end;
+
     if ( Pnl_Cell2.BevelInner=bvLowered ) then
     begin
       if ( (Trim(cbBank.Text)='') or (Trim(cbBay.Text)='') or (Trim(cbLevel.Text)='') ) then
@@ -396,6 +439,51 @@ begin
       Exit;
     end;
 
+    if (cbOut.Text = '1') and (SC_STATUS[1].D213[10] = '1') or
+       (cbOut.Text = '3') and (SC_STATUS[1].D213[12] = '1') or
+       (cbOut.Text = '5') and (SC_STATUS[1].D213[14] = '1') then
+    begin
+      MessageDlg('AGV가 도킹중 입니다.', mtConfirmation, [mbYes], 0) ;
+      Exit;
+    end;
+
+ {
+    if edtLineName1.Text = '' then
+    begin
+      MessageDlg('식별자이름1을 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+      Exit;
+    end else
+    if edtLineName2.Text = '' then
+    begin
+      MessageDlg('식별자이름2를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+      Exit;
+    end else
+    if edtPalletNo1.Text = '' then
+    begin
+      MessageDlg('식별번호1을 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+      Exit;
+    end else
+    if edtPalletNo2.Text = '' then
+    begin
+      MessageDlg('실별번호2를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+      Exit;
+    end else
+    if edtModelNo1.Text = '' then
+    begin
+      MessageDlg('차종#1을 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+      Exit;
+    end else
+    if edtModelNo2.Text = '' then
+    begin
+      MessageDlg('차종#2를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+      Exit;
+    end else
+    if edtArea.Text = '' then
+    begin
+      MessageDlg('생산지를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+      Exit;
+    end;
+   }
 
     OrderDataClear(OrderData) ;
 
@@ -404,6 +492,7 @@ begin
     OrderData.LUGG       := Format('%.4d', [GetJobNo]) ;  // 작업번호
 
     OrderData.JOBD       := '1';     // 입고지시
+    OrderData.IS_AUTO    := 'N';
     OrderData.LINE_NO    := cbOut.Text; //LINE_NO
 
     OrderData.SRCSITE    := '0001';  // 적재 호기
@@ -453,7 +542,7 @@ begin
 
 
 
-    OrderData.NOWMC      := '1';
+    OrderData.NOWMC      := '4';
     OrderData.JOBSTATUS  := '4';
     OrderData.NOWSTATUS  := '4';
     OrderData.BUFFSTATUS := fnGetCHData('1','R','CH05','9'); // 입고레디
@@ -465,10 +554,18 @@ begin
     OrderData.CVFR       := cbOut.Text;
     OrderData.CVTO       := cbOut.Text;
     OrderData.CVCURR     := cbOut.Text;
-    OrderData.ETC        := edtMemo.Text ;
+    OrderData.ETC        := '수동입고' ;
     OrderData.EMG        := '0';
     OrderData.ITM_CD     := edtCode.Text ;
     OrderData.UP_TIME    := '';
+    OrderData.RF_LINE_NAME1 := edtLineName1.Text;
+    OrderData.RF_LINE_NAME2 := edtLineName2.Text;
+    OrderData.RF_PALLET_NO1 := edtPalletNo1.Text;
+    OrderData.RF_PALLET_NO2 := edtPalletNo2.Text;
+    OrderData.RF_MODEL_NO1  := edtModelNo1.Text;
+    OrderData.RF_MODEL_NO2  := edtModelNo2.Text;
+    OrderData.RF_BMA_NO     := edtITM_QTY.Text;
+    OrderData.RF_AREA       := edtArea.Text;
 
 
     if SetJobOrder then
@@ -482,6 +579,19 @@ begin
                                + Copy(OrderData.ID_CODE,4,2)+'] ' + #13#10+
                  '===============================' + #13#10+
                  '', mtConfirmation, [mbYes], 0) ;
+
+      edtCode.Text  := '';
+      dtDateFr.Date := StrToDate(FormatDateTime('YYYY-MM-DD',Now));
+      dtTimeFr.Time := StrToTime(FormatDateTime('HH:NN:SS',Now));
+      cbOut.ItemIndex := 0;
+      edtLineName1.Text := '';
+      edtLineName2.Text := '';
+      edtPalletNo1.Text := '';
+      edtPalletNo2.Text := '';
+      edtModelNo1.Text  := '';
+      edtModelNo2.Text  := '';
+      edtITM_QTY.Text   := '';
+      edtArea.Text      := '';
     end;
 
     dtDateFr.Date := StrToDate(FormatDateTime('YYYY-MM-DD',Now));
@@ -503,6 +613,8 @@ begin
   OrderData.REG_TIME   := '';
   OrderData.LUGG       := '';
   OrderData.JOBD       := '';
+  OrderData.IS_AUTO    := '';
+  OrderData.LINE_NO    := '';
   OrderData.SRCSITE    := '';
   OrderData.SRCAISLE   := '';
   OrderData.SRCBAY     := '';
@@ -528,6 +640,14 @@ begin
   OrderData.ITM_CD     := '';
   OrderData.UP_TIME    := '';
   OrderData.ID_CODE    := '';
+  OrderData.RF_LINE_NAME1 := '';
+  OrderData.RF_LINE_NAME2 := '';
+  OrderData.RF_PALLET_NO1 := '';
+  OrderData.RF_PALLET_NO2 := '';
+  OrderData.RF_MODEL_NO1  := '';
+  OrderData.RF_MODEL_NO2  := '';
+  OrderData.RF_BMA_NO     := '';
+  OrderData.RF_AREA       := '';
 end;
 
 //==============================================================================
@@ -621,21 +741,27 @@ begin
       SQL.Clear;
       SQL.Text :=
       ' INSERT INTO TT_ORDER (                             ' + #13#10+
-      '    REG_TIME, LUGG, JOBD, LINE_NO,                  ' + #13#10 +
+      '    REG_TIME, LUGG, JOBD, IS_AUTO, LINE_NO,         ' + #13#10 +
       '    SRCSITE, SRCAISLE, SRCBAY, SRCLEVEL,            ' + #13#10 +
       '    DSTSITE, DSTAISLE, DSTBAY, DSTLEVEL,            ' + #13#10 +
       '    NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS,        ' + #13#10 +
       '    JOBREWORK, JOBERRORT, JOBERRORC, JOBERRORD,     ' + #13#10 +
       '    JOB_END, CVFR, CVTO, CVCURR,                    ' + #13#10 +
-      '    ETC, EMG, ITM_CD                                ' + #13#10 +
+      '    ETC, EMG, ITM_CD,                               ' + #13#10 +
+      '    RF_LINE_NAME1, RF_LINE_NAME2, RF_PALLET_NO1,    ' + #13#10 +
+      '    RF_PALLET_NO2, RF_MODEL_NO1, RF_MODEL_NO2,      ' + #13#10 +
+      '    RF_BMA_NO, RF_AREA                             ' + #13#10 +
       '  ) VALUES (                                        ' + #13#10 +
-      '    :REG_TIME, :LUGG, :JOBD, :LINE_NO,              ' + #13#10 +
+      '    :REG_TIME, :LUGG, :JOBD, :IS_AUTO, :LINE_NO,    ' + #13#10 +
       '    :SRCSITE, :SRCAISLE, :SRCBAY, :SRCLEVEL,        ' + #13#10 +
       '    :DSTSITE, :DSTAISLE, :DSTBAY, :DSTLEVEL,        ' + #13#10 +
       '    :NOWMC, :JOBSTATUS, :NOWSTATUS, :BUFFSTATUS,    ' + #13#10 +
       '    :JOBREWORK, :JOBERRORT, :JOBERRORC, :JOBERRORD, ' + #13#10 +
       '    :JOB_END, :CVFR, :CVTO, :CVCURR,                ' + #13#10 +
-      '    :ETC, :EMG, :ITM_CD                             ' + #13#10 +
+      '    :ETC, :EMG, :ITM_CD,                            ' + #13#10 +
+      '    :RF_LINE_NAME1, :RF_LINE_NAME2, :RF_PALLET_NO1, ' + #13#10 +
+      '    :RF_PALLET_NO2, :RF_MODEL_NO1, :RF_MODEL_NO2,   ' + #13#10 +
+      '    :RF_BMA_NO, :RF_AREA                            ' + #13#10 +
       ' )';
 
 
@@ -643,6 +769,7 @@ begin
       Parameters[i].Value := OrderData.REG_TIME;    Inc(i);
       Parameters[i].Value := OrderData.LUGG;        Inc(i);
       Parameters[i].Value := OrderData.JOBD;        Inc(i);
+      Parameters[i].Value := OrderData.IS_AUTO;     Inc(i);
       Parameters[i].Value := OrderData.LINE_NO;     Inc(i); //LINE_NO
       Parameters[i].Value := OrderData.SRCSITE;     Inc(i);
       Parameters[i].Value := OrderData.SRCAISLE;    Inc(i);
@@ -667,6 +794,15 @@ begin
       Parameters[i].Value := OrderData.ETC;         Inc(i);
       Parameters[i].Value := OrderData.EMG;         Inc(i);
       Parameters[i].Value := OrderData.ITM_CD;      Inc(i);
+
+      Parameters[i].Value := OrderData.RF_LINE_NAME1; Inc(i);
+      Parameters[i].Value := OrderData.RF_LINE_NAME2; Inc(i);
+      Parameters[i].Value := OrderData.RF_PALLET_NO1; Inc(i);
+      Parameters[i].Value := OrderData.RF_PALLET_NO2; Inc(i);
+      Parameters[i].Value := OrderData.RF_MODEL_NO1;  Inc(i);
+      Parameters[i].Value := OrderData.RF_MODEL_NO2;  Inc(i);
+      Parameters[i].Value := OrderData.RF_BMA_NO;     Inc(i);
+      Parameters[i].Value := OrderData.RF_AREA;       Inc(i);
       ExecSql;
 
       //+++++++++++++++++++++++++++++++++++++
@@ -747,11 +883,218 @@ var
 begin
   case (Sender as TComboBox).ItemIndex of
     0  : begin lbloutstation.Caption := '입고대를 선택해 주십시오.' end;
-    1  : begin lbloutstation.Caption := '01-02-01 입고대' end;
-    2  : begin lbloutstation.Caption := '01-05-01 입고대' end;
-    3  : begin lbloutstation.Caption := '01-08-01 입고대' end;
+    1  : begin lbloutstation.Caption := '02-08-01 입고대' end;
+    2  : begin lbloutstation.Caption := '02-05-01 입고대' end;
+    3  : begin lbloutstation.Caption := '02-02-01 입고대' end;
+  end;
+
+  edtLineName1.Text := '';
+  edtLineName2.Text := '';
+  edtPalletNo1.Text := '';
+  edtPalletNo2.Text := '';
+  edtModelNo1.Text  := '';
+  edtModelNo2.Text  := '';
+  edtArea.Text      := '';
+end;
+
+//==============================================================================
+// cbOutChange
+//==============================================================================
+procedure TfrmU220.edtCodeChange;
+begin
+    if edtCode.Text = 'FULL' then
+    begin
+      frmU220.edtITM_QTY.Text := '36';
+      frmU220.edtITM_QTY.Enabled := False;
+    end else
+    if edtCode.Text = 'EPLT' then
+    begin
+      edtLineName1.Text := '';
+      edtLineName2.Text := '';
+      edtPalletNo1.Text := '';
+      edtPalletNo2.Text := '';
+      edtModelNo1.Text  := '';
+      edtModelNo2.Text  := '';
+      edtITM_QTY.Text   := '0';
+      edtArea.Text      := '';
+
+      edtLineName1.Enabled := False;
+      edtLineName2.Enabled := False;
+      edtPalletNo1.Enabled := False;
+      edtPalletNo2.Enabled := False;
+      edtModelNo1.Enabled  := False;
+      edtModelNo2.Enabled  := False;
+      edtITM_QTY.Enabled   := False;
+      edtArea.Enabled      := False;
+    end else
+    begin
+      edtLineName1.Enabled := True;
+      edtLineName2.Enabled := True;
+      edtPalletNo1.Enabled := True;
+      edtPalletNo2.Enabled := True;
+      edtModelNo1.Enabled  := True;
+      edtModelNo2.Enabled  := True;
+      edtITM_QTY.Enabled   := True;
+      edtArea.Enabled      := True;
+    end;
+end;
+
+//==============================================================================
+// Button1Click
+//==============================================================================
+procedure TfrmU220.Button1Click(Sender: TObject);
+var
+  StrSQL, Station_No : String ;
+begin
+
+  if cbOut.ItemIndex = 0 then
+  begin
+    MessageDlg('입고대를 선택해 주십시오.', mtConfirmation, [mbYes], 0) ;
+    Exit;
+  end;
+
+  btnOrder.Enabled := False;
+
+  Station_No := cbOut.Text;
+
+  if ((Station_No = '1') and (SC_STATUS[1].D211[08] = '0')) or
+     ((Station_No = '3') and (SC_STATUS[1].D211[10] = '0')) or
+     ((Station_No = '5') and (SC_STATUS[1].D211[12] = '0')) then
+  begin
+    MessageDlg('선택한 입고대에 화물이 없습니다.', mtConfirmation, [mbYes], 0) ;
+    Exit;
+  end;
+
+  StrSQL := ' UPDATE TC_CURRENT ' +
+              '    SET OPTION' + Station_No + ' = ''1'''+
+              '  WHERE CURRENT_NAME = ''RF_READ'' ';
+
+  try
+    with qryTemp do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Text := StrSQL ;
+      ExecSQL ;
+    end;
+    tmrRFID.Enabled := True;
+  except
+    on E : Exception do
+    begin
+      qryTemp.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'Button1Click', '', 'Exception Error', 'SQL', StrSQL, '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure Button1Click Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
+    end;
   end;
 end;
+
+//==============================================================================
+// Button1Click
+//==============================================================================
+procedure TfrmU220.tmrRFIDTimer(Sender: TObject);
+begin
+  if cbOut.ItemIndex = 0 then Exit;
+
+  try
+    getRFIDData;
+  finally
+  //
+  end;
+end;
+
+//==============================================================================
+// getRFIDOption
+//==============================================================================
+procedure TfrmU220.getRFIDData;
+var
+  StrSQL, StrSQL2, Station_No : String ;
+begin
+  StrSQL  := ' SELECT * FROM TC_CURRENT WHERE CURRENT_NAME = ''RF_READ'' ';
+  StrSQL2 := ' SELECT * FROM TC_RFID WHERE PORT_NO = ' + ' '''+cbOut.Text+''' ';
+  try
+    with qryTemp do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Text := StrSQL ;
+      open ;
+      if Not (Bof and Eof) then
+      begin
+        if FieldByName('OPTION'+cbOut.Text).AsString = '2' then
+        begin
+          Close;
+          SQL.Clear;
+          SQL.Text := StrSQL2 ;
+          open ;
+          if Not (Bof and Eof) then
+          begin
+            edtLineName1.Text := FieldByName('H00').AsString ;
+            edtLineName2.Text := FieldByName('H01').AsString ;
+            edtPalletNo1.Text := FieldByName('H03').AsString ;
+            edtPalletNo2.Text := FieldByName('H04').AsString ;
+            edtModelNo1.Text  := FieldByName('H16').AsString ;
+            edtModelNo2.Text  := FieldByName('H17').AsString ;
+            edtITM_QTY.Text   := FieldByName('H18').AsString ;
+            edtArea.Text      := FieldByName('H19').AsString ;
+          end;
+          setRFIDOption
+        end;
+      end;
+    end;
+  except
+    on E : Exception do
+    begin
+      qryTemp.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'getRFIDOption', '', 'Exception Error', 'SQL', StrSQL, '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure getRFIDOption Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
+    end;
+  end;
+end;
+
+//==============================================================================
+// getRFIDOption
+//==============================================================================
+procedure TfrmU220.setRFIDOption;
+var
+  StrSQL, Station_No : String ;
+  ExecNo : Integer;
+begin
+
+  if cbOut.ItemIndex = 0 then
+  begin
+    MessageDlg('입고대를 선택해 주십시오.', mtConfirmation, [mbYes], 0) ;
+    Exit;
+  end;
+
+  Station_No := cbOut.Text;
+
+  StrSQL := ' UPDATE TC_CURRENT ' +
+              '    SET OPTION' + Station_No + ' = ''3'''+
+              '  WHERE CURRENT_NAME = ''RF_READ'' ';
+
+  try
+    with qryTemp do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Text := StrSQL ;
+      ExecNo := ExecSQL ;
+      if ExecNo > 0 then
+      begin
+        btnOrder.Enabled := True;
+        tmrRFID.Enabled := False;
+      end;
+    end;
+  except
+    on E : Exception do
+    begin
+      qryTemp.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'getRFIDOption', '', 'Exception Error', 'SQL', StrSQL, '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure getRFIDOption Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
+    end;
+  end;
+end;
+
 end.
 
 

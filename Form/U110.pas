@@ -220,7 +220,8 @@ var
 begin
   if not qryInfo.Active then Exit;
 
-  if MessageDlg('선택['+IntToStr(dgInfo.SelectedRows.Count)+']한 코드를 [삭제] 하시겠습니까?', mtConfirmation, [mbYes, mbNo], 0) <> mrYes then Exit ;
+  if MessageDlg('선택['+IntToStr(dgInfo.SelectedRows.Count)+']한 코드를 [삭제] 하시겠습니까?', mtConfirmation, [mbYes, mbNo], 0) <> mrYes
+  then Exit;
 
   for i := 0 to (dgInfo.SelectedRows.Count-1) do
   begin
@@ -400,6 +401,7 @@ begin
       SQL.Clear;
       SQL.Text := StrSQL;
       ExecSQL;
+      InsertPGMHist('['+FormNo+']', 'N', 'fnCommandDelete', '삭제','삭제 - ' + ITM_CD,'SQL', '', '', '');
     end;
   except
     if qryTemp.Active then qryTemp.Close;
