@@ -63,7 +63,7 @@ type
     edtPalletNo2: TEdit;
     edtModelNo2: TEdit;
     edtArea: TEdit;
-    Button1: TButton;
+    btnRFIDRead: TButton;
     tmrRFID: TTimer;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
@@ -76,7 +76,7 @@ type
     procedure edtCodeChange;
     procedure getRFIDData;
     procedure setRFIDOption;
-    procedure Button1Click(Sender: TObject);
+    procedure btnRFIDReadClick(Sender: TObject);
     procedure tmrRFIDTimer(Sender: TObject);
   private
     { Private declarations }
@@ -557,7 +557,7 @@ begin
     OrderData.ETC        := '수동입고' ;
     OrderData.EMG        := '0';
     OrderData.ITM_CD     := edtCode.Text ;
-    OrderData.UP_TIME    := '';
+    OrderData.UP_TIME    := 'GETDATE()';
     OrderData.RF_LINE_NAME1 := edtLineName1.Text;
     OrderData.RF_LINE_NAME2 := edtLineName2.Text;
     OrderData.RF_PALLET_NO1 := edtPalletNo1.Text;
@@ -747,10 +747,10 @@ begin
       '    NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS,        ' + #13#10 +
       '    JOBREWORK, JOBERRORT, JOBERRORC, JOBERRORD,     ' + #13#10 +
       '    JOB_END, CVFR, CVTO, CVCURR,                    ' + #13#10 +
-      '    ETC, EMG, ITM_CD,                               ' + #13#10 +
+      '    ETC, EMG, ITM_CD, UP_TIME,                      ' + #13#10 +
       '    RF_LINE_NAME1, RF_LINE_NAME2, RF_PALLET_NO1,    ' + #13#10 +
       '    RF_PALLET_NO2, RF_MODEL_NO1, RF_MODEL_NO2,      ' + #13#10 +
-      '    RF_BMA_NO, RF_AREA                             ' + #13#10 +
+      '    RF_BMA_NO, RF_AREA                              ' + #13#10 +
       '  ) VALUES (                                        ' + #13#10 +
       '    :REG_TIME, :LUGG, :JOBD, :IS_AUTO, :LINE_NO,    ' + #13#10 +
       '    :SRCSITE, :SRCAISLE, :SRCBAY, :SRCLEVEL,        ' + #13#10 +
@@ -758,7 +758,7 @@ begin
       '    :NOWMC, :JOBSTATUS, :NOWSTATUS, :BUFFSTATUS,    ' + #13#10 +
       '    :JOBREWORK, :JOBERRORT, :JOBERRORC, :JOBERRORD, ' + #13#10 +
       '    :JOB_END, :CVFR, :CVTO, :CVCURR,                ' + #13#10 +
-      '    :ETC, :EMG, :ITM_CD,                            ' + #13#10 +
+      '    :ETC, :EMG, :ITM_CD, GETDATE(),                 ' + #13#10 +
       '    :RF_LINE_NAME1, :RF_LINE_NAME2, :RF_PALLET_NO1, ' + #13#10 +
       '    :RF_PALLET_NO2, :RF_MODEL_NO1, :RF_MODEL_NO2,   ' + #13#10 +
       '    :RF_BMA_NO, :RF_AREA                            ' + #13#10 +
@@ -942,7 +942,7 @@ end;
 //==============================================================================
 // Button1Click
 //==============================================================================
-procedure TfrmU220.Button1Click(Sender: TObject);
+procedure TfrmU220.btnRFIDReadClick(Sender: TObject);
 var
   StrSQL, Station_No : String ;
 begin
@@ -954,7 +954,7 @@ begin
   end;
 
   btnOrder.Enabled := False;
-
+  btnRFIDRead.Enabled := False;
   Station_No := cbOut.Text;
 
   if ((Station_No = '1') and (SC_STATUS[1].D211[08] = '0')) or
@@ -1082,6 +1082,7 @@ begin
       if ExecNo > 0 then
       begin
         btnOrder.Enabled := True;
+        btnRFIDRead.Enabled := True;
         tmrRFID.Enabled := False;
       end;
     end;

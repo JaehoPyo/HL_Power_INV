@@ -106,7 +106,6 @@ type
     function fnCaptionMsg(Signal, Number: string): String;
     function fnCaptionErrorMsg(Signal: string): String;
     function fnJobErrorChk(Signal: string): String;
-    procedure fnRFIDDataUpdate;
 
     procedure SCTREAD(SC_NO: Integer);
     procedure SC_StatusDisplay(SC_NO: Integer);
@@ -721,6 +720,20 @@ begin
       begin
         InsertPGMHist('[000]', 'N', 'HistoryDelete', '', 'Automatically Delete Error History ['+IntToStr(ExecNo)+']', 'PGM', '', '', '');
       end;
+
+      ExecNo := 0;
+      Close;
+      SQL.Clear;
+      StrSQL := ' DELETE FROM TC_RFID_HIST ' +
+                '  WHERE CRT_DT < GETDATE() - 3 ' ;
+      SQL.Text := StrSQL;
+      ExecNo := ExecSQL;
+
+      if ExecNo > 0 then
+      begin
+        InsertPGMHist('[000]', 'N', 'HistoryDelete', '', 'Automatically Delete RFID History ['+IntToStr(ExecNo)+']', 'PGM', '', '', '');
+      end;
+
       Close;
     end;
   except
@@ -891,11 +904,6 @@ begin
   TLabel(Self.FindComponent('Lbl_error')).Visible := fnErrorMsg(SC_STATUS[SC_NO].D212[14]); // 화재경보기5
   TLabel(Self.FindComponent('Lbl_error')).Visible := fnErrorMsg(SC_STATUS[SC_NO].D212[15]); // 화재경보기6
 
-
-  if (jobError = '') then fnRFIDDataUpdate; //알람OFF
-
-
-
   if (SC_STATUS[SC_NO].D210[15] = '0') And
      (SC_STATUS[SC_NO].D212[10] = '0') And
      (SC_STATUS[SC_NO].D212[11] = '0') And
@@ -1037,7 +1045,8 @@ begin
       begin
         Result := '#요청불일치 - ' + FieldByName('LUGG').AsString;
         TLabel(Self.FindComponent('Lbl_error')).Caption := '#'+ FieldByName('JOBERRORD').AsString +
-                                                        ' - ' + FieldByName('LUGG').AsString;
+                                                        ' - ' + FieldByName('LUGG').AsString +
+                                                        ' - St.0' + FieldByName('LINE_NO').AsString;
         TLabel(Self.FindComponent('Lbl_error')).Visible := True;
         ErrorChk_Caption := True;
         ErrorChk_Visibel := True;
@@ -1050,34 +1059,6 @@ begin
       qryTemp.Close;
       InsertPGMHist('[000]', 'E', 'fnJobErrorChk', '', 'Exception Error', 'SQL', StrSQL, '', E.Message);
       TraceLogWrite('[000] function fnJobErrorChk Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
-    end;
-  end;
-end;
-
-//==============================================================================
-// fnCurtainMsg   clRed  clFuchsia
-//==============================================================================
-procedure TfrmMain.fnRFIDDataUpdate;
-var
-  StrSQL : String ;
-begin
-  StrSQL := ' UPDATE TC_CURRENT ' +
-            '    SET OPTION1 = ''0'''+
-            '  WHERE CURRENT_NAME = ''ALRAM_OFF'' ';
-  try
-    with qryTemp do
-    begin
-      Close;
-      SQL.Clear;
-      SQL.Text := StrSQL ;
-      ExecSQL;
-    end;
-  except
-    on E : Exception do
-    begin
-      qryTemp.Close;
-      InsertPGMHist('['+FormNo+']', 'E', 'fnRFIDDataUpdate', '', 'Exception Error', 'SQL', StrSQL, '', E.Message);
-      TraceLogWrite('['+FormNo+'] procedure fnRFIDDataUpdate Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
     end;
   end;
 end;

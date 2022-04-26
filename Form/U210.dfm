@@ -560,9 +560,9 @@ object frmU210: TfrmU210
             AutoFitColWidth = False
             DynProps = <>
             EditButtons = <>
-            FieldName = 'ID_CODE'
+            FieldName = 'OD_CODE'
             Footers = <>
-            Title.Caption = #54616#50669#50948#52824
+            Title.Caption = #51201#51116#50948#52824
             Width = 170
           end
           item
@@ -1570,9 +1570,9 @@ object frmU210: TfrmU210
             AutoFitColWidth = False
             DynProps = <>
             EditButtons = <>
-            FieldName = 'LINE_NO'
+            FieldName = 'OD_CODE'
             Footers = <>
-            Title.Caption = #49828#53580#51060#49496
+            Title.Caption = #51201#51116#50948#52824
             Width = 170
           end
           item

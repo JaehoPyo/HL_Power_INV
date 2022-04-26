@@ -285,8 +285,6 @@ object frmU410: TfrmU410
       Font.Style = []
       ParentFont = False
       TabOrder = 1
-      ExplicitLeft = 494
-      ExplicitHeight = 58
       object cbCode: TComboBox
         Left = 10
         Top = 29
@@ -419,9 +417,6 @@ object frmU410: TfrmU410
     BevelInner = bvRaised
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitTop = 60
-    ExplicitWidth = 1008
-    ExplicitHeight = 552
     object dgInfo: TDBGridEh
       Left = 1
       Top = 1
@@ -492,7 +487,7 @@ object frmU410: TfrmU410
           FieldName = 'JOBD_DESC'
           Footers = <>
           Title.Caption = #51089#50629#50976#54805
-          Width = 200
+          Width = 160
         end
         item
           Alignment = taCenter
@@ -502,7 +497,7 @@ object frmU410: TfrmU410
           FieldName = 'ITM_CD'
           Footers = <>
           Title.Caption = #44592#51333#53076#46300
-          Width = 200
+          Width = 160
         end
         item
           Alignment = taCenter
@@ -512,7 +507,16 @@ object frmU410: TfrmU410
           FieldName = 'LUGG'
           Footers = <>
           Title.Caption = #51089#50629#48264#54840
-          Width = 200
+          Width = 160
+        end
+        item
+          Alignment = taCenter
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'LINE_NO'
+          Footers = <>
+          Title.Caption = #46972#51064#45336#48260
+          Width = 160
         end
         item
           Alignment = taCenter
@@ -563,6 +567,78 @@ object frmU410: TfrmU410
           Footers = <>
           Title.Caption = #51089#50629#51068#51088
           Width = 405
+        end
+        item
+          Alignment = taCenter
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'RF_LINE_NAME1'
+          Footers = <>
+          Title.Caption = #49885#48324#51088#51060#47492'1'
+          Width = 200
+        end
+        item
+          Alignment = taCenter
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'RF_LINE_NAME2'
+          Footers = <>
+          Title.Caption = #49885#48324#51088#51060#47492'2'
+          Width = 200
+        end
+        item
+          Alignment = taCenter
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'RF_PALLET_NO1'
+          Footers = <>
+          Title.Caption = #49885#48324#48264#54840'1'
+          Width = 200
+        end
+        item
+          Alignment = taCenter
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'RF_PALLET_NO2'
+          Footers = <>
+          Title.Caption = #49885#48324#48264#54840'2'
+          Width = 200
+        end
+        item
+          Alignment = taCenter
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'RF_MODEL_NO1'
+          Footers = <>
+          Title.Caption = #47784#45944'1'
+          Width = 200
+        end
+        item
+          Alignment = taCenter
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'RF_MODEL_NO2'
+          Footers = <>
+          Title.Caption = #47784#45944'2'
+          Width = 200
+        end
+        item
+          Alignment = taCenter
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'RF_BMA_NO'
+          Footers = <>
+          Title.Caption = #49688#47049
+          Width = 200
+        end
+        item
+          Alignment = taCenter
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'RF_AREA '
+          Footers = <>
+          Title.Caption = #49373#49328#51648
+          Width = 200
         end>
       object RowDetailData: TRowDetailPanelControlEh
       end

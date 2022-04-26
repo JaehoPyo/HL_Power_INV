@@ -23,7 +23,6 @@ type
     cbDateUse: TCheckBox;
     gbCode: TGroupBox;
     cbCode: TComboBox;
-    dgInfo: TDBGridEh;
     gbCell: TGroupBox;
     Label1: TLabel;
     Label2: TLabel;
@@ -35,6 +34,7 @@ type
     qryInfo: TADOQuery;
     qryTemp: TADOQuery;
     EhPrint: TPrintDBGridEh;
+    dgInfo: TDBGridEh;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -270,13 +270,14 @@ begin
     begin
       Close;
       SQL.Clear;
-      StrSQL   := ' Select REG_TIME, LUGG, JOBD,                      ' +  #13#10+
+      StrSQL   := ' Select REG_TIME, LUGG, JOBD, LINE_NO,             ' +  #13#10+
                   '        SRCSITE, SRCAISLE, SRCBAY, SRCLEVEL        ' +  #13#10+
                   '        DSTSITE, DSTAISLE, DSTBAY, DSTLEVEL        ' +  #13#10+
                   '        NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS    ' +  #13#10+
                   '        JOBREWORK, JOBERRORT, JOBERRORC, JOBERRORD ' +  #13#10+
                   '        CVFR, CVTO, CVCURR, ETC, EMG, ITM_CD,      ' +  #13#10+
                   '       (Case when (JOBD=''1'') then ''입고'' ' +  #13#10+
+                  '             when (JOBD=''7'') then ''랙이동'' ' +  #13#10+
                   '             when (JOBD=''2'') and (EMG=''0'') then ''출고'' ' +  #13#10+
                   '             when (JOBD=''2'') and (EMG=''1'') then ''긴급출고'' end) as JOBD_DESC, ' +  #13#10+
                   '       (Case NOWMC when ''1'' then ''컨베어 작업'' ' +  #13#10+
@@ -296,11 +297,15 @@ begin
                   '       (Case BUFFSTATUS when ''0'' then ''대기'' ' +  #13#10+
                   '                        when ''1'' then ''입고가능'' end) as BUFFSTATUS_DESC, ' +  #13#10+
                   '       (SUBSTRING(SRCAISLE,4,1)+''-''+SUBSTRING(SRCBAY,3,2)+''-''+SUBSTRING(SRCLEVEL,3,2)) as ID_CODE, ' +  #13#10+
+                  '       (SUBSTRING(DSTAISLE,4,1)+''-''+SUBSTRING(DSTBAY,3,2)+''-''+FORMAT(CONVERT(INT,DSTLEVEL), ''D2'')) as OD_CODE,           ' +
                   '       (SUBSTRING(REG_TIME,1,4)+''-''+SUBSTRING(REG_TIME,5,2)+''-''+SUBSTRING(REG_TIME,7,2)+''  ''+ ' +  #13#10+
                   '        SUBSTRING(REG_TIME,9,2)+'':''+SUBSTRING(REG_TIME,11,2)+'':''+SUBSTRING(REG_TIME,13,2)) as REF_TIME_CONV, ' +  #13#10+
-                  '       CONVERT(VARCHAR, REG_TIME, 120) as REG_TIME_DESC ' +
+                  '       CONVERT(VARCHAR, REG_TIME, 120) as REG_TIME_DESC, ' +
+                  '        RF_LINE_NAME1, RF_LINE_NAME2, RF_PALLET_NO1, RF_PALLET_NO2, RF_MODEL_NO1, ' +
+                  '        RF_MODEL_NO2, RF_BMA_NO, RF_PALLET_BMA1, RF_PALLET_BMA2, RF_PALLET_BMA3,  ' +
+                  '        RF_AREA  ' +
                   '   From TT_HISTORY ' +  #13#10+
-                  '  Where JOBD    = ''2'' ' +  #13#10+
+                  '  Where JOBD    = ''7'' ' +  #13#10+
                   '    And JOB_END = ''1'' ' ;
 
                   if (Trim(cbCode.Text)<>'') and (Trim(cbCode.Text)<>'전체') then

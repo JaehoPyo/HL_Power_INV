@@ -400,6 +400,13 @@ type
     edt_Docking6: TEdit;
     edt_Docking4: TEdit;
     edt_Docking2: TEdit;
+    btnRFID_Read4: TButton;
+    btnRFID_Read5: TButton;
+    btnRFID_Read6: TButton;
+    btnRFID_Read3: TButton;
+    btnRFID_Read2: TButton;
+    btnRFID_Read1: TButton;
+    qryTemp2: TADOQuery;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -408,6 +415,7 @@ type
     procedure btnClick(Sender: TObject);
     procedure tmrRFIDTimer(Sender: TObject);
     procedure btnCurtainClick(Sender: TObject);
+    procedure ButtonClickRFIDRead(Sender: TObject);
   private
     { Private declarations }
   public
@@ -443,6 +451,7 @@ type
 
     function fnGetSCSetInfo(SC_NO: Integer; GetField: String): String;
     function fnSetSCSetInfo(SC_NO: Integer; SetField, SetValue: String): Boolean;
+    procedure setRFIDOption;
 
   end;
   procedure U510Create();
@@ -771,14 +780,8 @@ begin
       end;
     end;
 
-{
-  TEdit(Self.FindComponent('edt_InReady1'     )).Text := fnSignalMsg(SC_STATUS[SC_NO].D211[08]); // 입고레디1
-  TEdit(Self.FindComponent('edt_OutReady1'    )).Text := fnSignalMsg(SC_STATUS[SC_NO].D211[09]); // 출고레디1
-  TEdit(Self.FindComponent('edt_InReady2'     )).Text := fnSignalMsg(SC_STATUS[SC_NO].D211[10]); // 입고레디2
-  TEdit(Self.FindComponent('edt_OutReady2'    )).Text := fnSignalMsg(SC_STATUS[SC_NO].D211[11]); // 출고레디2
-  TEdit(Self.FindComponent('edt_InReady3'     )).Text := fnSignalMsg(SC_STATUS[SC_NO].D211[12]); // 입고레디3
-  TEdit(Self.FindComponent('edt_OutReady3'    )).Text := fnSignalMsg(SC_STATUS[SC_NO].D211[13]); // 출고레디3
-}
+
+    setRFIDOption;
     tmrRFID.Enabled := True ;
   except
     on E : Exception do
@@ -1757,6 +1760,93 @@ begin
     end;
   end;
 end;
+//==============================================================================
+// ButtonClickRFIDRead
+//==============================================================================
+procedure TfrmU510.ButtonClickRFIDRead(Sender: TObject);
+var
+  StrSQL, Station_No : String ;
+  ExecNo : Integer;
+begin
+
+  Station_No := IntToStr((Sender as TButton).Tag);
+
+  StrSQL := ' UPDATE TC_CURRENT ' +
+              '    SET OPTION' + Station_No + ' = ''1'''+
+              '  WHERE CURRENT_NAME = ''RF_READ'' ';
+
+  try
+    with qryTemp do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Text := StrSQL ;
+      ExecNo := ExecSQL ;
+      if ExecNo > 0 then
+      begin
+//        (Sender as TButton).Enabled := False; //버튼 비활성화
+      end;
+    end;
+    tmrRFID.Enabled := True;
+  except
+    on E : Exception do
+    begin
+      qryTemp.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'ButtonClickRFIDRead', '', 'Exception Error', 'SQL', StrSQL, '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure ButtonClickRFIDRead Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
+    end;
+  end;
+end;
+
+//==============================================================================
+// setRFIDOption
+//==============================================================================
+procedure TfrmU510.setRFIDOption;
+var
+  StrSQL, StrSQL2, Station_No : String ;
+  ExecNo, i : Integer;
+begin
+  StrSQL  := ' SELECT * FROM TC_CURRENT WHERE CURRENT_NAME = ''RF_READ'' ';
+  try
+    with qryTemp do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Text := StrSQL ;
+      Open;
+      if Not (Bof and Eof) then
+      begin
+        for i := 1 to 6 do
+        begin
+          StrSQL2 := ' UPDATE TC_CURRENT ' +
+                     '    SET OPTION' + IntToStr(i) + ' = ''3'''+
+                     '  WHERE CURRENT_NAME = ''RF_READ'' ';
+          if FieldByName('OPTION'+IntToStr(i)).AsString = '2' then
+          begin
+//            TButton(Self.FindComponent('btnRFID_Read'+IntToStr(i))).Enabled := True; //버튼 활성화
+            with qryTemp2 do
+            begin
+              Close;
+              SQL.Clear;
+              SQL.Text := StrSQL2 ;
+              ExecNo := ExecSQL ;
+            end;
+          end;
+        end;
+      end;
+      Close;
+    end;
+  except
+    on E : Exception do
+    begin
+      qryTemp.Close;
+      qryTemp2.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'setRFIDOption', '', 'Exception Error', 'SQL', StrSQL, '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure setRFIDOption Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
+    end;
+  end;
+end;
+
 end.
 
 

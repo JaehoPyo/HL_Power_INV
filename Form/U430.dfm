@@ -273,142 +273,230 @@ object frmU430: TfrmU430
     BevelInner = bvRaised
     BevelOuter = bvNone
     TabOrder = 1
-    object dgInfo: TDBGridEh
-      Left = 1
-      Top = 1
-      Width = 1886
-      Height = 787
-      Align = alClient
-      ColumnDefValues.Layout = tlCenter
-      ColumnDefValues.Title.Alignment = taCenter
-      DataGrouping.Font.Charset = GB2312_CHARSET
-      DataGrouping.Font.Color = clWindowText
-      DataGrouping.Font.Height = -11
-      DataGrouping.Font.Name = 'Tahoma'
-      DataGrouping.Font.Style = []
-      DataGrouping.ParentFont = False
-      DrawGraphicData = True
-      DynProps = <>
-      EditActions = [geaCopyEh]
-      Font.Charset = GB2312_CHARSET
-      Font.Color = clWindowText
-      Font.Height = 20
-      Font.Name = #46027#50880
-      Font.Style = []
-      FooterRowCount = 1
-      FooterParams.FillStyle = cfstSolidEh
-      FooterParams.Font.Charset = GB2312_CHARSET
-      FooterParams.Font.Color = clWindowText
-      FooterParams.Font.Height = -16
-      FooterParams.Font.Name = #46027#50880
-      FooterParams.Font.Style = []
-      FooterParams.ParentFont = False
-      ImeName = 'Microsoft Office IME 2007'
-      IndicatorOptions = [gioShowRowIndicatorEh, gioShowRecNoEh]
-      IndicatorParams.FillStyle = cfstSolidEh
-      IndicatorTitle.TitleButton = True
-      IndicatorTitle.UseGlobalMenu = False
-      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
-      OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghShowRecNo, dghColumnResize, dghColumnMove, dghExtendVertLines]
-      ParentFont = False
-      RowHeight = 10
-      RowLines = 1
-      TabOrder = 0
-      TitleParams.BorderInFillStyle = True
-      TitleParams.FillStyle = cfstSolidEh
-      TitleParams.Font.Charset = GB2312_CHARSET
-      TitleParams.Font.Color = clWindowText
-      TitleParams.Font.Height = 20
-      TitleParams.Font.Name = #46027#50880
-      TitleParams.Font.Style = []
-      TitleParams.HorzLineColor = 5592405
-      TitleParams.ParentFont = False
-      TitleParams.RowHeight = 30
-      TitleParams.VertLineColor = 5592405
-      Columns = <
-        item
-          Alignment = taCenter
-          AutoFitColWidth = False
-          Color = 16710378
-          DynProps = <>
-          EditButtons = <>
-          FieldName = 'JOBD_DESC'
-          Footers = <>
-          Title.Caption = #51089#50629#50976#54805
-          Width = 200
-        end
-        item
-          Alignment = taCenter
-          AutoFitColWidth = False
-          DynProps = <>
-          EditButtons = <>
-          FieldName = 'ITM_CD'
-          Footers = <>
-          Title.Caption = #44592#51333#53076#46300
-          Width = 200
-        end
-        item
-          Alignment = taCenter
-          AutoFitColWidth = False
-          DynProps = <>
-          EditButtons = <>
-          FieldName = 'LUGG'
-          Footers = <>
-          Title.Caption = #51089#50629#48264#54840
-          Width = 200
-        end
-        item
-          Alignment = taCenter
-          AutoFitColWidth = False
-          DynProps = <>
-          EditButtons = <>
-          FieldName = 'ID_CODE'
-          Footers = <>
-          Title.Caption = #51201#51116#50948#52824
-          Width = 220
-        end
-        item
-          Alignment = taCenter
-          AutoFitColWidth = False
-          DynProps = <>
-          EditButtons = <>
-          FieldName = 'NOWMC_DESC'
-          Footers = <>
-          Title.Caption = #51652#54665#49345#53468
-          Width = 220
-        end
-        item
-          Alignment = taCenter
-          AutoFitColWidth = False
-          DynProps = <>
-          EditButtons = <>
-          FieldName = 'JOBERRORC_DESC'
-          Footers = <>
-          Title.Caption = #50640#47084#49345#53468
-          Width = 200
-        end
-        item
-          Alignment = taCenter
-          AutoFitColWidth = False
-          DynProps = <>
-          EditButtons = <>
-          FieldName = 'JOBERRORD_DESC'
-          Footers = <>
-          Title.Caption = #50640#47084#53076#46300
-          Width = 200
-        end
-        item
-          Alignment = taCenter
-          AutoFitColWidth = False
-          DynProps = <>
-          EditButtons = <>
-          FieldName = 'REG_TIME_DESC'
-          Footers = <>
-          Title.Caption = #51089#50629#51068#51088
-          Width = 405
-        end>
-      object RowDetailData: TRowDetailPanelControlEh
+  end
+  object dgInfo: TDBGridEh
+    Left = 0
+    Top = 80
+    Width = 1888
+    Height = 789
+    Align = alClient
+    ColumnDefValues.Layout = tlCenter
+    ColumnDefValues.Title.Alignment = taCenter
+    DataGrouping.Font.Charset = GB2312_CHARSET
+    DataGrouping.Font.Color = clWindowText
+    DataGrouping.Font.Height = -11
+    DataGrouping.Font.Name = 'Tahoma'
+    DataGrouping.Font.Style = []
+    DataGrouping.ParentFont = False
+    DataSource = dsInfo
+    DrawGraphicData = True
+    DynProps = <>
+    EditActions = [geaCopyEh]
+    Font.Charset = GB2312_CHARSET
+    Font.Color = clWindowText
+    Font.Height = 20
+    Font.Name = #46027#50880
+    Font.Style = []
+    FooterRowCount = 1
+    FooterParams.FillStyle = cfstSolidEh
+    FooterParams.Font.Charset = GB2312_CHARSET
+    FooterParams.Font.Color = clWindowText
+    FooterParams.Font.Height = -16
+    FooterParams.Font.Name = #46027#50880
+    FooterParams.Font.Style = []
+    FooterParams.ParentFont = False
+    ImeName = 'Microsoft Office IME 2007'
+    IndicatorOptions = [gioShowRowIndicatorEh, gioShowRecNoEh]
+    IndicatorParams.FillStyle = cfstSolidEh
+    IndicatorTitle.TitleButton = True
+    IndicatorTitle.UseGlobalMenu = False
+    EmptyDataInfo.Font.Charset = GB2312_CHARSET
+    EmptyDataInfo.Font.Color = clGray
+    EmptyDataInfo.Font.Height = 20
+    EmptyDataInfo.Font.Name = #46027#50880
+    EmptyDataInfo.Font.Style = []
+    EmptyDataInfo.ParentFont = False
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
+    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghShowRecNo, dghColumnResize, dghColumnMove, dghExtendVertLines]
+    ParentFont = False
+    RowHeight = 10
+    RowLines = 1
+    TabOrder = 2
+    TitleParams.BorderInFillStyle = True
+    TitleParams.FillStyle = cfstSolidEh
+    TitleParams.Font.Charset = GB2312_CHARSET
+    TitleParams.Font.Color = clWindowText
+    TitleParams.Font.Height = 20
+    TitleParams.Font.Name = #46027#50880
+    TitleParams.Font.Style = []
+    TitleParams.HorzLineColor = 5592405
+    TitleParams.ParentFont = False
+    TitleParams.RowHeight = 30
+    TitleParams.VertLineColor = 5592405
+    Columns = <
+      item
+        Alignment = taCenter
+        AutoFitColWidth = False
+        Color = 16710378
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'JOBD_DESC'
+        Footers = <>
+        Title.Caption = #51089#50629#50976#54805
+        Width = 160
       end
+      item
+        Alignment = taCenter
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'ITM_CD'
+        Footers = <>
+        Title.Caption = #44592#51333#53076#46300
+        Width = 160
+      end
+      item
+        Alignment = taCenter
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'LUGG'
+        Footers = <>
+        Title.Caption = #51089#50629#48264#54840
+        Width = 160
+      end
+      item
+        Alignment = taCenter
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'OD_CODE'
+        Footers = <>
+        Title.Caption = #54616#50669#50948#52824
+        Width = 200
+      end
+      item
+        Alignment = taCenter
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'ID_CODE'
+        Footers = <>
+        Title.Caption = #51201#51116#50948#52824
+        Width = 200
+      end
+      item
+        Alignment = taCenter
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'NOWMC_DESC'
+        Footers = <>
+        Title.Caption = #51652#54665#49345#53468
+        Width = 220
+      end
+      item
+        Alignment = taCenter
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'JOBERRORC_DESC'
+        Footers = <>
+        Title.Caption = #50640#47084#49345#53468
+        Width = 200
+      end
+      item
+        Alignment = taCenter
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'JOBERRORD_DESC'
+        Footers = <>
+        Title.Caption = #50640#47084#53076#46300
+        Width = 200
+      end
+      item
+        Alignment = taCenter
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'REG_TIME_DESC'
+        Footers = <>
+        Title.Caption = #51089#50629#51068#51088
+        Width = 405
+      end
+      item
+        Alignment = taCenter
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'RF_LINE_NAME1'
+        Footers = <>
+        Title.Caption = #49885#48324#51088#51060#47492'1'
+        Width = 200
+      end
+      item
+        Alignment = taCenter
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'RF_LINE_NAME2'
+        Footers = <>
+        Title.Caption = #49885#48324#51088#51060#47492'2'
+        Width = 200
+      end
+      item
+        Alignment = taCenter
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'RF_PALLET_NO1'
+        Footers = <>
+        Title.Caption = #49885#48324#48264#54840'1'
+        Width = 200
+      end
+      item
+        Alignment = taCenter
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'RF_PALLET_NO2'
+        Footers = <>
+        Title.Caption = #49885#48324#48264#54840'2'
+        Width = 200
+      end
+      item
+        Alignment = taCenter
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'RF_MODEL_NO1'
+        Footers = <>
+        Title.Caption = #47784#45944'1'
+        Width = 200
+      end
+      item
+        Alignment = taCenter
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'RF_MODEL_NO2'
+        Footers = <>
+        Title.Caption = #47784#45944'2'
+        Width = 200
+      end
+      item
+        Alignment = taCenter
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'RF_BMA_NO'
+        Footers = <>
+        Title.Caption = #49688#47049
+        Width = 200
+      end
+      item
+        Alignment = taCenter
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'RF_AREA '
+        Footers = <>
+        Title.Caption = #49373#49328#51648
+        Width = 200
+      end>
+    object RowDetailData: TRowDetailPanelControlEh
     end
   end
   object dsInfo: TDataSource
