@@ -27,7 +27,6 @@ type
     cbDateUse: TCheckBox;
     gbCode: TGroupBox;
     cbCode: TComboBox;
-    dgInfo: TDBGridEh;
     gbCell: TGroupBox;
     Label1: TLabel;
     Label2: TLabel;
@@ -35,6 +34,7 @@ type
     ComboBoxBank: TComboBox;
     ComboBoxBay: TComboBox;
     ComboBoxLevel: TComboBox;
+    dgInfo: TDBGridEh;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -270,7 +270,7 @@ begin
     begin
       Close;
       SQL.Clear;
-      StrSQL   := ' Select REG_TIME, LUGG, JOBD,                      ' +  #13#10+
+      StrSQL   := ' Select REG_TIME, LUGG, JOBD, LINE_NO,             ' +  #13#10+
                   '        SRCSITE, SRCAISLE, SRCBAY, SRCLEVEL        ' +  #13#10+
                   '        DSTSITE, DSTAISLE, DSTBAY, DSTLEVEL        ' +  #13#10+
                   '        NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS    ' +  #13#10+
@@ -298,7 +298,10 @@ begin
                   '       (SUBSTRING(SRCAISLE,4,1)+''-''+SUBSTRING(SRCBAY,3,2)+''-''+SUBSTRING(SRCLEVEL,3,2)) as ID_CODE, ' +  #13#10+
                   '       (SUBSTRING(REG_TIME,1,4)+''-''+SUBSTRING(REG_TIME,5,2)+''-''+SUBSTRING(REG_TIME,7,2)+''  ''+ ' +  #13#10+
                   '        SUBSTRING(REG_TIME,9,2)+'':''+SUBSTRING(REG_TIME,11,2)+'':''+SUBSTRING(REG_TIME,13,2)) as REF_TIME_CONV, ' +  #13#10+
-                  '       CONVERT(VARCHAR, REG_TIME, 120) as REG_TIME_DESC ' +
+                  '       CONVERT(VARCHAR, REG_TIME, 120) as REG_TIME_DESC ,' +
+                  '        RF_LINE_NAME1, RF_LINE_NAME2, RF_PALLET_NO1, RF_PALLET_NO2, RF_MODEL_NO1, ' +
+                  '        RF_MODEL_NO2, RF_BMA_NO, RF_PALLET_BMA1, RF_PALLET_BMA2, RF_PALLET_BMA3,  ' +
+                  '        RF_AREA  ' +
                   '   From TT_HISTORY ' +  #13#10+
                   '  Where JOBD    = ''2'' ' +  #13#10+
                   '    And JOB_END = ''1'' ' ;

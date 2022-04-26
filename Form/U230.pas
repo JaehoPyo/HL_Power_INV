@@ -521,7 +521,7 @@ begin
     OrderData.ETC        := qryInfo.FieldByName('ID_MEMO').AsString ;
     OrderData.EMG        := IntToStr(rgEMG.ItemIndex);
     OrderData.ITM_CD     := qryInfo.FieldByName('ITM_CD').AsString ;
-    OrderData.UP_TIME    := '';
+    OrderData.UP_TIME    := 'GETDATE()';
 
 
 
@@ -566,7 +566,7 @@ begin
       '    NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS,        ' + #13#10 +
       '    JOBREWORK, JOBERRORT, JOBERRORC, JOBERRORD,     ' + #13#10 +
       '    JOB_END, CVFR, CVTO, CVCURR,                    ' + #13#10 +
-      '    ETC, EMG, ITM_CD                                ' + #13#10 +
+      '    ETC, EMG, ITM_CD, UP_TIME                       ' + #13#10 +
       '  ) VALUES (                                        ' + #13#10 +
       '    :REG_TIME, :LUGG, :JOBD, :IS_AUTO, :LINE_NO,    ' + #13#10 +
       '    :SRCSITE, :SRCAISLE, :SRCBAY, :SRCLEVEL,        ' + #13#10 +
@@ -574,7 +574,7 @@ begin
       '    :NOWMC, :JOBSTATUS, :NOWSTATUS, :BUFFSTATUS,    ' + #13#10 +
       '    :JOBREWORK, :JOBERRORT, :JOBERRORC, :JOBERRORD, ' + #13#10 +
       '    :JOB_END, :CVFR, :CVTO, :CVCURR,                ' + #13#10 +
-      '    :ETC, :EMG, :ITM_CD                             ' + #13#10 +
+      '    :ETC, :EMG, :ITM_CD, GETDATE()                  ' + #13#10 +
       ' )';
 
       i := 0;

@@ -927,7 +927,7 @@ object frmU220: TfrmU220
         ParentFont = False
         TabOrder = 29
       end
-      object Button1: TButton
+      object btnRFIDRead: TButton
         Left = 84
         Top = 790
         Width = 460
@@ -940,7 +940,7 @@ object frmU220: TfrmU220
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 30
-        OnClick = Button1Click
+        OnClick = btnRFIDReadClick
       end
     end
   end

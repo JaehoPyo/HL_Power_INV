@@ -5199,6 +5199,16 @@
             Font.Style = [fsBold]
             ParentFont = False
           end
+          object btnRFID_Read1: TButton
+            Tag = 1
+            Left = 165
+            Top = 1
+            Width = 97
+            Height = 30
+            Caption = 'RFID READ'
+            TabOrder = 0
+            OnClick = ButtonClickRFIDRead
+          end
         end
         object Panel65: TPanel
           Left = 1196
@@ -5508,6 +5518,16 @@
             Font.Name = #46027#50880
             Font.Style = [fsBold]
             ParentFont = False
+          end
+          object btnRFID_Read2: TButton
+            Tag = 2
+            Left = 165
+            Top = 1
+            Width = 97
+            Height = 30
+            Caption = 'RFID READ'
+            TabOrder = 0
+            OnClick = ButtonClickRFIDRead
           end
         end
         object Panel83: TPanel
@@ -5819,6 +5839,16 @@
             Font.Style = [fsBold]
             ParentFont = False
           end
+          object btnRFID_Read3: TButton
+            Tag = 3
+            Left = 165
+            Top = 1
+            Width = 97
+            Height = 30
+            Caption = 'RFID READ'
+            TabOrder = 0
+            OnClick = ButtonClickRFIDRead
+          end
         end
         object Panel61: TPanel
           Left = 8
@@ -6128,6 +6158,16 @@
             Font.Name = #46027#50880
             Font.Style = [fsBold]
             ParentFont = False
+          end
+          object btnRFID_Read4: TButton
+            Tag = 4
+            Left = 165
+            Top = 1
+            Width = 97
+            Height = 30
+            Caption = 'RFID READ'
+            TabOrder = 0
+            OnClick = ButtonClickRFIDRead
           end
         end
         object Panel82: TPanel
@@ -6439,6 +6479,16 @@
             Font.Style = [fsBold]
             ParentFont = False
           end
+          object btnRFID_Read5: TButton
+            Tag = 5
+            Left = 165
+            Top = 1
+            Width = 97
+            Height = 30
+            Caption = 'RFID READ'
+            TabOrder = 0
+            OnClick = ButtonClickRFIDRead
+          end
         end
         object Panel84: TPanel
           Left = 8
@@ -6748,6 +6798,16 @@
             Font.Name = #46027#50880
             Font.Style = [fsBold]
             ParentFont = False
+          end
+          object btnRFID_Read6: TButton
+            Tag = 6
+            Left = 165
+            Top = 1
+            Width = 97
+            Height = 30
+            Caption = 'RFID READ'
+            TabOrder = 0
+            OnClick = ButtonClickRFIDRead
           end
         end
         object btnCurtain6: TButton
@@ -7603,5 +7663,12 @@
     OnTimer = tmrRFIDTimer
     Left = 945
     Top = 6
+  end
+  object qryTemp2: TADOQuery
+    Connection = MainDm.MainDB
+    CursorType = ctStatic
+    Parameters = <>
+    Left = 880
+    Top = 54
   end
 end
