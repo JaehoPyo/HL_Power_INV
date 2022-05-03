@@ -17,7 +17,7 @@ object frmPopup_Item_Search: TfrmPopup_Item_Search
   OnClose = FormClose
   OnDeactivate = FormDeactivate
   PixelsPerInch = 96
-  TextHeight = 11
+  TextHeight = 13
   object Pnl_Main: TPanel
     Left = 0
     Top = 0
@@ -789,7 +789,7 @@ object frmPopup_Item_Search: TfrmPopup_Item_Search
         Left = 208
         Top = 32
         Width = 44
-        Height = 11
+        Height = 13
         Caption = #49440#53469#53076#46300
         Visible = False
       end

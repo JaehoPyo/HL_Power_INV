@@ -19,7 +19,7 @@ object frmU240: TfrmU240
   OnClose = FormClose
   OnDeactivate = FormDeactivate
   PixelsPerInch = 96
-  TextHeight = 11
+  TextHeight = 13
   object Pnl_Main: TPanel
     Left = 0
     Top = 0
@@ -247,6 +247,7 @@ object frmU240: TfrmU240
               Width = 150
             end
             item
+              Alignment = taCenter
               DynProps = <>
               EditButtons = <>
               FieldName = 'RF_BMA_NO'
@@ -288,6 +289,15 @@ object frmU240: TfrmU240
               FieldName = 'RF_AREA'
               Footers = <>
               Title.Caption = #49373#49328#51648
+              Width = 150
+            end
+            item
+              Alignment = taCenter
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'RF_NEW_BMA'
+              Footers = <>
+              Title.Caption = #49888#44508'/'#51116#44256
               Width = 150
             end>
           object RowDetailData: TRowDetailPanelControlEh

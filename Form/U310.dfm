@@ -154,7 +154,7 @@ object frmU310: TfrmU310
   OnClose = FormClose
   OnDeactivate = FormDeactivate
   PixelsPerInch = 96
-  TextHeight = 11
+  TextHeight = 13
   object Pnl_Main: TPanel
     Left = 0
     Top = 0
@@ -1030,9 +1030,9 @@ object frmU310: TfrmU310
           end
           object btnSave: TButton
             Left = 10
-            Top = 442
+            Top = 469
             Width = 325
-            Height = 63
+            Height = 35
             Caption = #51200' '#51109
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -1331,6 +1331,38 @@ object frmU310: TfrmU310
             ImeName = 'Microsoft Office IME 2007'
             ParentFont = False
             TabOrder = 38
+          end
+          object Panel29: TPanel
+            Left = 10
+            Top = 442
+            Width = 100
+            Height = 24
+            Alignment = taRightJustify
+            BevelOuter = bvNone
+            Caption = #49888#44508'/'#51116#44256
+            Color = 9365209
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -16
+            Font.Name = #46027#50880
+            Font.Style = [fsBold]
+            ParentBackground = False
+            ParentFont = False
+            TabOrder = 39
+          end
+          object edtNEW_BMA: TEdit
+            Left = 115
+            Top = 442
+            Width = 220
+            Height = 24
+            Font.Charset = GB2312_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = #46027#50880
+            Font.Style = []
+            ImeName = 'Microsoft Office IME 2007'
+            ParentFont = False
+            TabOrder = 40
           end
         end
       end

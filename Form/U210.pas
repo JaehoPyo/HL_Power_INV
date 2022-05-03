@@ -372,33 +372,37 @@ begin
       begin
         Close;
         SQL.Clear;
-        SQL.Text := ' Select REG_TIME, LUGG, JOBD, LINE_NO,                                                                       ' +
-                    '        SRCSITE, SRCAISLE, SRCBAY, SRCLEVEL                                                                  ' +
-                    '        DSTSITE, DSTAISLE, DSTBAY, DSTLEVEL                                                                  ' +
-                    '        NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS                                                              ' +
-                    '        JOBREWORK, JOBERRORT, JOBERRORC, JOBERRORD                                                           ' +
-                    '        CVFR, CVTO, CVCURR, ETC, EMG, ITM_CD,                                                                ' +
-                    '       (Case JOBD  when ''1'' then ''입고''                                                                      ' +
-                    '                   when ''2'' then ''출고'' end) as JOBD_DESC,                                                   ' +
-                    '       (Case NOWMC when ''1'' then ''컨베어 작업''                                                               ' +
-                    '                   when ''2'' then ''스태커 적재''                                                               ' +
-                    '                   when ''3'' then ''스태커 하역'' end) as NOWMC_DESC,                                           ' +
-                    '       (Case NOWSTATUS when ''1'' then ''등록''                                                                  ' +
-                    '                       when ''2'' then ''지시''                                                                  ' +
-                    '                       when ''3'' then ''진행''                                                                  ' +
-                    '                       when ''4'' then ''완료'' end) as NOWSTATUS_DESC,                                          ' +
-                    '       (Case JOBERRORC when ''0'' then ''정상''                                                                  ' +
-                    '                       when ''1'' then ''에러'' end) as JOBERRORC_DESC,                                          ' +
-                    '       (Case JOBERRORD when ''0000'' then ''정상''                                                               ' +
-                    '                       else JOBERRORD end) as JOBERRORD_DESC,                                                ' +
-                    '       (Case BUFFSTATUS when ''0'' then ''대기''                                                                 ' +
-                    '                        when ''1'' then ''입고가능'' end) as BUFFSTATUS_DESC,                                    ' +
-                    '       (SUBSTRING(DSTAISLE,4,1)+''-''+SUBSTRING(DSTBAY,3,2)+''-''+SUBSTRING(DSTLEVEL,3,2)) as ID_CODE,           ' +
-                    '       (SUBSTRING(SRCAISLE,4,1)+''-''+SUBSTRING(SRCBAY,3,2)+''-''+FORMAT(CONVERT(INT,SRCLEVEL), ''D2'')) as OD_CODE,           ' +
-                    '       (SUBSTRING(REG_TIME,1,4)+''-''+SUBSTRING(REG_TIME,5,2)+''-''+SUBSTRING(REG_TIME,7,2)+                     ' +
-                    '        SUBSTRING(REG_TIME,9,2)+'':''+SUBSTRING(REG_TIME,11,2)+'':''+SUBSTRING(REG_TIME,13,2)) as REF_TIME_CONV, ' +
+        SQL.Text := ' Select REG_TIME, LUGG, JOBD, LINE_NO, ' +
+                    '        SRCSITE, SRCAISLE, SRCBAY, SRCLEVEL, ' +
+                    '        DSTSITE, DSTAISLE, DSTBAY, DSTLEVEL, ' +
+                    '        NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS, ' +
+                    '        JOBREWORK, JOBERRORT, JOBERRORC, JOBERRORD, ' +
+                    '        IS_AUTO, CVFR, CVTO, CVCURR, ETC, EMG, ITM_CD, ' +
+                    '       (Case JOBD  when ''1'' then ''입고'' ' +
+                    '                   when ''2'' then ''출고'' end) as JOBD_DESC, ' +
+                    '       (Case NOWMC when ''1'' then ''컨베어 작업'' ' +
+                    '                   when ''2'' then ''스태커 적재'' ' +
+                    '                   when ''3'' then ''스태커 하역'' ' +
+                    '                   when ''4'' then ''AGV작업'' end) as NOWMC_DESC, ' +
+                    '       (Case NOWSTATUS when ''1'' then ''등록'' ' +
+                    '                       when ''2'' then ''지시'' ' +
+                    '                       when ''3'' then ''이동중'' ' +
+                    '                       when ''4'' then ''완료'' end) as NOWSTATUS_DESC, ' +
+                    '       (Case JOBERRORC when ''0'' then ''정상'' ' +
+                    '                       when ''1'' then ''에러'' end) as JOBERRORC_DESC, ' +
+                    '       (Case when (JOBERRORD = ''0000'') or  ' +
+	                  '                  (JOBERRORD = '''') or ' +
+				            '                  (IsNull(JOBERRORD, '''') = '''') then ''정상'' ' +
+                    '             when JOBERRORD not like ''%불일치%'' then (SELECT ERR_NAME FROM TM_ERROR WHERE ERR_CODE = A.JOBERRORD) ' +
+			              '             else JOBERRORD end ) as JOBERRORD_DESC, ' +
+                    '       (Case BUFFSTATUS when ''0'' then ''대기'' ' +
+                    '                        when ''1'' then ''입고가능'' end) as BUFFSTATUS_DESC, ' +
+                    '       (SUBSTRING(DSTAISLE,4,1)+''-''+SUBSTRING(DSTBAY,3,2)+''-''+SUBSTRING(DSTLEVEL,3,2)) as ID_CODE, ' +
+                    '       (SUBSTRING(SRCAISLE,4,1)+''-''+SUBSTRING(SRCBAY,3,2)+''-''+FORMAT(CONVERT(INT,SRCLEVEL), ''D2'')) as OD_CODE, ' +
+                    '       (SUBSTRING(REG_TIME,1,4)+''-''+SUBSTRING(REG_TIME,5,2)+''-''+SUBSTRING(REG_TIME,7,2)+ '' '' + ' +
+                    '        SUBSTRING(REG_TIME,9,2)+'':''+SUBSTRING(REG_TIME,11,2)+'':''+SUBSTRING(REG_TIME,13,2)) as REG_TIME_CONV, ' +
                     '       CONVERT(VARCHAR, REG_TIME, 120) as REG_TIME_DESC ' +
-                    '   From TT_ORDER          ' +
+                    '   From TT_ORDER as A     ' +
                     '  Where JOBD    = ''1''   ' +
                     '    And JOB_END = ''0''   ' +
                     '  Order By REG_TIME, LUGG ';
@@ -414,33 +418,37 @@ begin
         Close;
         SQL.Clear;
         SQL.Text := ' Select REG_TIME, LUGG, JOBD, LINE_NO,             ' +  #13#10+
-                    '        SRCSITE, SRCAISLE, SRCBAY, SRCLEVEL        ' +  #13#10+
-                    '        DSTSITE, DSTAISLE, DSTBAY, DSTLEVEL        ' +  #13#10+
-                    '        NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS    ' +  #13#10+
-                    '        JOBREWORK, JOBERRORT, JOBERRORC, JOBERRORD ' +  #13#10+
-                    '        CVFR, CVTO, CVCURR, ETC, EMG, ITM_CD,      ' +  #13#10+
+                    '        SRCSITE, SRCAISLE, SRCBAY, SRCLEVEL,        ' +  #13#10+
+                    '        DSTSITE, DSTAISLE, DSTBAY, DSTLEVEL,        ' +  #13#10+
+                    '        NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS,    ' +  #13#10+
+                    '        JOBREWORK, JOBERRORT, JOBERRORC, JOBERRORD, ' +  #13#10+
+                    '        IS_AUTO, CVFR, CVTO, CVCURR, ETC, EMG, ITM_CD,      ' +  #13#10+
                     '       (Case when (JOBD=''1'') then ''입고'' ' +  #13#10+
                     '             when (JOBD=''2'') and (EMG=''0'') then ''출고'' ' +  #13#10+
                     '             when (JOBD=''2'') and (EMG=''1'') then ''긴급출고'' end) as JOBD_DESC, ' +  #13#10+
                     '       (Case NOWMC when ''1'' then ''컨베어 작업'' ' +  #13#10+
                     '                   when ''2'' then ''스태커 적재'' ' +  #13#10+
-                    '                   when ''3'' then ''스태커 하역'' end) as NOWMC_DESC, ' +  #13#10+
+                    '                   when ''3'' then ''스태커 하역'' ' +  #13#10+
+                    '                   when ''4'' then ''AGV 작업'' end) as NOWMC_DESC, ' +  #13#10+
                     '       (Case NOWSTATUS when ''1'' then ''등록'' ' +  #13#10+
                     '                       when ''2'' then ''지시'' ' +  #13#10+
-                    '                       when ''3'' then ''진행'' ' +  #13#10+
+                    '                       when ''3'' then ''이동중'' ' +  #13#10+
                     '                       when ''4'' then ''완료'' end) as NOWSTATUS_DESC, ' +  #13#10+
                     '       (Case JOBERRORC when ''0'' then ''정상'' ' +  #13#10+
                     '                       when ''1'' then ''에러'' end) as JOBERRORC_DESC, ' +  #13#10+
-                    '       (Case JOBERRORD when ''0000'' then ''정상'' ' +  #13#10+
-                    '                       else JOBERRORD end) as JOBERRORD_DESC, ' +  #13#10+
+                    '       (Case when (JOBERRORD = ''0000'') or  ' + #13#10 +
+	                  '                  (JOBERRORD = '''') or ' + #13#10 +
+				            '                  (IsNull(JOBERRORD, '''') = '''') then ''정상'' ' +  #13#10 +
+                    '             when JOBERRORD not like ''%불일치%'' then (SELECT ERR_NAME FROM TM_ERROR WHERE ERR_CODE = A.JOBERRORD) ' + #13#10 +
+			              '             else JOBERRORD end ) as JOBERRORD_DESC, ' + #13#10 +
                     '       (Case BUFFSTATUS when ''0'' then ''대기'' ' +  #13#10+
                     '                        when ''1'' then ''입고가능'' end) as BUFFSTATUS_DESC, ' +  #13#10+
                     '       (SUBSTRING(DSTAISLE,4,1)+''-''+SUBSTRING(DSTBAY,3,2)+''-''+FORMAT(CONVERT(INT,DSTLEVEL), ''D2'')) as ID_CODE,           ' +
                     '       (SUBSTRING(SRCAISLE,4,1)+''-''+SUBSTRING(SRCBAY,3,2)+''-''+FORMAT(CONVERT(INT,SRCLEVEL), ''D2'')) as OD_CODE,           ' +
-                    '       (SUBSTRING(REG_TIME,1,4)+''-''+SUBSTRING(REG_TIME,5,2)+''-''+SUBSTRING(REG_TIME,7,2)+                     ' +
-                    '        SUBSTRING(REG_TIME,9,2)+'':''+SUBSTRING(REG_TIME,11,2)+'':''+SUBSTRING(REG_TIME,13,2)) as REF_TIME_CONV, ' +
+                    '       (SUBSTRING(REG_TIME,1,4)+''-''+SUBSTRING(REG_TIME,5,2)+''-''+SUBSTRING(REG_TIME,7,2)+ '' '' + ' +
+                    '        SUBSTRING(REG_TIME,9,2)+'':''+SUBSTRING(REG_TIME,11,2)+'':''+SUBSTRING(REG_TIME,13,2)) as REG_TIME_CONV, ' +
                     '       CONVERT(VARCHAR, REG_TIME, 120) as REG_TIME_DESC ' +
-                    '   From TT_ORDER ' +  #13#10+
+                    '   From TT_ORDER as A ' +  #13#10+
                     '  Where JOBD    = ''2'' ' +  #13#10+
                     '    And JOB_END = ''0'' ' +  #13#10+
                     '  Order By EMG DESC, REG_TIME, LUGG ASC ' ;
@@ -456,11 +464,11 @@ begin
         Close;
         SQL.Clear;
         SQL.Text := ' Select REG_TIME, LUGG, JOBD, LINE_NO,             ' +  #13#10+
-                    '        SRCSITE, SRCAISLE, SRCBAY, SRCLEVEL        ' +  #13#10+
-                    '        DSTSITE, DSTAISLE, DSTBAY, DSTLEVEL        ' +  #13#10+
-                    '        NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS    ' +  #13#10+
-                    '        JOBREWORK, JOBERRORT, JOBERRORC, JOBERRORD ' +  #13#10+
-                    '        CVFR, CVTO, CVCURR, ETC, EMG, ITM_CD,      ' +  #13#10+
+                    '        SRCSITE, SRCAISLE, SRCBAY, SRCLEVEL,        ' +  #13#10+
+                    '        DSTSITE, DSTAISLE, DSTBAY, DSTLEVEL,        ' +  #13#10+
+                    '        NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS,    ' +  #13#10+
+                    '        JOBREWORK, JOBERRORT, JOBERRORC, JOBERRORD, ' +  #13#10+
+                    '        IS_AUTO, CVFR, CVTO, CVCURR, ETC, EMG, ITM_CD,      ' +  #13#10+
                     '       (Case when (JOBD=''1'') then ''입고'' ' +  #13#10+
                     '             when (JOBD=''2'') and (EMG=''0'') then ''출고'' ' +  #13#10+
                     '             when (JOBD=''2'') and (EMG=''1'') then ''긴급출고'' ' +  #13#10+
@@ -470,20 +478,23 @@ begin
                     '                   when ''3'' then ''스태커 하역'' end) as NOWMC_DESC, ' +  #13#10+
                     '       (Case NOWSTATUS when ''1'' then ''등록'' ' +  #13#10+
                     '                       when ''2'' then ''지시'' ' +  #13#10+
-                    '                       when ''3'' then ''진행'' ' +  #13#10+
+                    '                       when ''3'' then ''이동중'' ' +  #13#10+
                     '                       when ''4'' then ''완료'' end) as NOWSTATUS_DESC, ' +  #13#10+
                     '       (Case JOBERRORC when ''0'' then ''정상'' ' +  #13#10+
                     '                       when ''1'' then ''에러'' end) as JOBERRORC_DESC, ' +  #13#10+
-                    '       (Case JOBERRORD when ''0000'' then ''정상'' ' +  #13#10+
-                    '                       else JOBERRORD end) as JOBERRORD_DESC, ' +  #13#10+
+                    '       (Case when (JOBERRORD = ''0000'') or  ' + #13#10 +
+	                  '                  (JOBERRORD = '''') or ' + #13#10 +
+				            '                  (IsNull(JOBERRORD, '''') = '''') then ''정상'' ' +  #13#10 +
+                    '             when JOBERRORD not like ''%불일치%'' then (SELECT ERR_NAME FROM TM_ERROR WHERE ERR_CODE = A.JOBERRORD) ' + #13#10 +
+			              '             else JOBERRORD end ) as JOBERRORD_DESC, ' + #13#10 +
                     '       (Case BUFFSTATUS when ''0'' then ''대기'' ' +  #13#10+
                     '                        when ''1'' then ''입고가능'' end) as BUFFSTATUS_DESC, ' +  #13#10+
                     '       (SUBSTRING(DSTAISLE,4,1)+''-''+SUBSTRING(DSTBAY,3,2)+''-''+FORMAT(CONVERT(INT,DSTLEVEL), ''D2'')) as ID_CODE,           ' +
                     '       (SUBSTRING(SRCAISLE,4,1)+''-''+SUBSTRING(SRCBAY,3,2)+''-''+FORMAT(CONVERT(INT,SRCLEVEL), ''D2'')) as OD_CODE,           ' +
-                    '       (SUBSTRING(REG_TIME,1,4)+''-''+SUBSTRING(REG_TIME,5,2)+''-''+SUBSTRING(REG_TIME,7,2)+                     ' +
-                    '        SUBSTRING(REG_TIME,9,2)+'':''+SUBSTRING(REG_TIME,11,2)+'':''+SUBSTRING(REG_TIME,13,2)) as REF_TIME_CONV, ' +
+                    '       (SUBSTRING(REG_TIME,1,4)+''-''+SUBSTRING(REG_TIME,5,2)+''-''+SUBSTRING(REG_TIME,7,2)+ '' '' + ' +
+                    '        SUBSTRING(REG_TIME,9,2)+'':''+SUBSTRING(REG_TIME,11,2)+'':''+SUBSTRING(REG_TIME,13,2)) as REG_TIME_CONV, ' +
                     '       CONVERT(VARCHAR, REG_TIME, 120) as REG_TIME_DESC ' +
-                    '   From TT_ORDER ' +  #13#10+
+                    '   From TT_ORDER as A' +  #13#10+
                     '  Where JOBD    = ''7'' ' +  #13#10+
                     '    And JOB_END = ''0'' ' +  #13#10+
                     '  Order By EMG DESC, REG_TIME, LUGG ASC ' ;
@@ -1093,6 +1104,7 @@ begin
                    '      , RF_PALLET_BMA1 = ' + QuotedStr(OrderData.RF_PALLET_BMA1) +
                    '      , RF_PALLET_BMA2 = ' + QuotedStr(OrderData.RF_PALLET_BMA2) +
                    '      , RF_PALLET_BMA3 = ' + QuotedStr(OrderData.RF_PALLET_BMA3) +
+                   '      , RF_NEW_BMA     = ' + QuotedStr(OrderData.RF_NEW_BMA) +
                    '  Where ID_HOGI   = ''' + Copy(OrderData.SRCSITE,  4, 1)  + ''' ' +
                    '    AND ID_BANK   = ''' + Copy(OrderData.SRCAISLE, 4, 1)  + ''' ' + // 적재 열
                    '    AND ID_BAY    = ''' + Copy(OrderData.SRCBAY,   3, 2)  + ''' ' + // 적재 연

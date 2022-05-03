@@ -310,7 +310,7 @@ begin
                 '       (SUBSTRING(ID_CODE,1,1)+''-''+SUBSTRING(ID_CODE,2,2)+''-''+SUBSTRING(ID_CODE,4,2)) as ID_CODE_DESC, ' +
                 '        RF_LINE_NAME1, RF_LINE_NAME2, RF_PALLET_NO1, RF_PALLET_NO2, RF_MODEL_NO1, ' +
                 '        RF_MODEL_NO2, RF_BMA_NO, RF_PALLET_BMA1, RF_PALLET_BMA2, RF_PALLET_BMA3,  ' +
-                '        RF_AREA  ' +
+                '        RF_AREA, RF_NEW_BMA  ' +
                 '   From TT_STOCK ' +
                 '  Where 1=1 ' ;
 
@@ -501,7 +501,7 @@ begin
     OrderData.NOWMC      := '2';
     OrderData.JOBSTATUS  := '1';
     OrderData.NOWSTATUS  := '1';
-    OrderData.BUFFSTATUS := fnGetCHData('1','R','CH05','10'); // 출고레디
+    OrderData.BUFFSTATUS := ''; //fnGetCHData('1','R','CH05','10'); // 출고레디
     OrderData.JOBREWORK  := '';
     OrderData.JOBERRORT  := '';
     OrderData.JOBERRORC  := '';
@@ -519,8 +519,18 @@ begin
 
     OrderData.ITM_CD     := qryInfo.FieldByName('ITM_CD').AsString ;
     OrderData.UP_TIME    := 'GETDATE()';
-
-
+    OrderData.RF_LINE_NAME1  := qryInfo.FieldByName('RF_LINE_NAME1').AsString;
+    OrderData.RF_LINE_NAME2  := qryInfo.FieldByName('RF_LINE_NAME2').AsString;
+    OrderData.RF_PALLET_NO1  := qryInfo.FieldByName('RF_PALLET_NO1').AsString;
+    OrderData.RF_PALLET_NO2  := qryInfo.FieldByName('RF_PALLET_NO2').AsString;
+    OrderData.RF_MODEL_NO1   := qryInfo.FieldByName('RF_MODEL_NO1').AsString;
+    OrderData.RF_MODEL_NO2   := qryInfo.FieldByName('RF_MODEL_NO2').AsString;
+    OrderData.RF_BMA_NO      := qryInfo.FieldByName('RF_BMA_NO').AsString;
+    OrderData.RF_PALLET_BMA1 := qryInfo.FieldByName('RF_PALLET_BMA1').AsString;
+    OrderData.RF_PALLET_BMA2 := qryInfo.FieldByName('RF_PALLET_BMA2').AsString;
+    OrderData.RF_PALLET_BMA3 := qryInfo.FieldByName('RF_PALLET_BMA3').AsString;
+    OrderData.RF_AREA        := qryInfo.FieldByName('RF_AREA').AsString;
+    OrderData.RF_NEW_BMA     := qryInfo.FieldByName('RF_NEW_BMA').AsString;
 
     if SetJobOrder then
     begin
@@ -563,7 +573,11 @@ begin
       '    NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS,        ' + #13#10 +
       '    JOBREWORK, JOBERRORT, JOBERRORC, JOBERRORD,     ' + #13#10 +
       '    JOB_END, CVFR, CVTO, CVCURR,                    ' + #13#10 +
-      '    ETC, EMG, ITM_CD, UP_TIME                       ' + #13#10 +
+      '    ETC, EMG, ITM_CD, UP_TIME,                      ' + #13#10 +
+      '    RF_LINE_NAME1, RF_LINE_NAME2, RF_PALLET_NO1,    ' + #13#10 +
+      '    RF_PALLET_NO2, RF_MODEL_NO1, RF_MODEL_NO2,      ' + #13#10 +
+      '    RF_BMA_NO, RF_PALLET_BMA1, RF_PALLET_BMA2,      ' + #13#10 +
+      '    RF_PALLET_BMA3, RF_AREA, RF_NEW_BMA             ' + #13#10 +
       '  ) VALUES (                                        ' + #13#10 +
       '    :REG_TIME, :LUGG, :JOBD, :IS_AUTO, :LINE_NO,    ' + #13#10 +
       '    :SRCSITE, :SRCAISLE, :SRCBAY, :SRCLEVEL,        ' + #13#10 +
@@ -571,7 +585,11 @@ begin
       '    :NOWMC, :JOBSTATUS, :NOWSTATUS, :BUFFSTATUS,    ' + #13#10 +
       '    :JOBREWORK, :JOBERRORT, :JOBERRORC, :JOBERRORD, ' + #13#10 +
       '    :JOB_END, :CVFR, :CVTO, :CVCURR,                ' + #13#10 +
-      '    :ETC, :EMG, :ITM_CD, GETDATE()                  ' + #13#10 +
+      '    :ETC, :EMG, :ITM_CD, GETDATE(),                 ' + #13#10 +
+      '    :RF_LINE_NAME1, :RF_LINE_NAME2, :RF_PALLET_NO1, ' + #13#10 +
+      '    :RF_PALLET_NO2, :RF_MODEL_NO1, :RF_MODEL_NO2,   ' + #13#10 +
+      '    :RF_BMA_NO, :RF_PALLET_BMA1, :RF_PALLET_BMA2,   ' + #13#10 +
+      '    :RF_PALLET_BMA3, :RF_AREA, :RF_NEW_BMA          ' + #13#10 +
       ' )';
 
       i := 0;
@@ -603,6 +621,18 @@ begin
       Parameters[i].Value := OrderData.ETC;         Inc(i);
       Parameters[i].Value := OrderData.EMG;         Inc(i);
       Parameters[i].Value := OrderData.ITM_CD;      Inc(i);
+      Parameters[i].Value := OrderData.RF_LINE_NAME1;  inc(i);
+      Parameters[i].Value := OrderData.RF_LINE_NAME2;  inc(i);
+      Parameters[i].Value := OrderData.RF_PALLET_NO1;  inc(i);
+      Parameters[i].Value := OrderData.RF_PALLET_NO2;  inc(i);
+      Parameters[i].Value := OrderData.RF_MODEL_NO1;   inc(i);
+      Parameters[i].Value := OrderData.RF_MODEL_NO2;   inc(i);
+      Parameters[i].Value := OrderData.RF_BMA_NO;      inc(i);
+      Parameters[i].Value := OrderData.RF_PALLET_BMA1; inc(i);
+      Parameters[i].Value := OrderData.RF_PALLET_BMA2; inc(i);
+      Parameters[i].Value := OrderData.RF_PALLET_BMA3; inc(i);
+      Parameters[i].Value := OrderData.RF_AREA;        inc(i);
+      Parameters[i].Value := OrderData.RF_NEW_BMA;     inc(i);
       ExecSql;
 
       //+++++++++++++++++++++++++++++++++++++
@@ -856,6 +886,19 @@ begin
   OrderData.ITM_CD     := '';
   OrderData.UP_TIME    := '';
   OrderData.ID_CODE    := '';
+
+  OrderData.RF_LINE_NAME1  := '';
+  OrderData.RF_LINE_NAME2  := '';
+  OrderData.RF_PALLET_NO1  := '';
+  OrderData.RF_PALLET_NO2  := '';
+  OrderData.RF_MODEL_NO1   := '';
+  OrderData.RF_MODEL_NO2   := '';
+  OrderData.RF_BMA_NO      := '';
+  OrderData.RF_PALLET_BMA1 := '';
+  OrderData.RF_PALLET_BMA2 := '';
+  OrderData.RF_PALLET_BMA3 := '';
+  OrderData.RF_AREA        := '';
+  OrderData.RF_NEW_BMA     := '';
 end;
 
 //==============================================================================

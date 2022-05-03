@@ -2,7 +2,7 @@ object frmU320: TfrmU320
   Left = 2026
   Top = 265
   Caption = #51116#44256' '#54788#54889' '#51312#54924
-  ClientHeight = 869
+  ClientHeight = 868
   ClientWidth = 1888
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -154,7 +154,7 @@ object frmU320: TfrmU320
   OnClose = FormClose
   OnDeactivate = FormDeactivate
   PixelsPerInch = 96
-  TextHeight = 11
+  TextHeight = 13
   object Pnl_Top1: TPanel
     Left = 0
     Top = 0
@@ -268,12 +268,61 @@ object frmU320: TfrmU320
         OnClick = cbDateUseClick
       end
     end
+    object rgType: TRadioGroup
+      Left = 900
+      Top = 1
+      Width = 600
+      Height = 78
+      Align = alLeft
+      Caption = '[ '#51333#47448' ]'
+      Columns = 4
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -20
+      Font.Name = #46027#50880
+      Font.Style = []
+      ItemIndex = 0
+      Items.Strings = (
+        #51204#52404
+        #49892#54036#47112#53944
+        #44277#54036#47112#53944
+        #44592#53440)
+      ParentFont = False
+      TabOrder = 1
+      OnClick = ComboBoxChange
+      ExplicitLeft = 902
+    end
+    object GroupBox3: TGroupBox
+      Left = 721
+      Top = 1
+      Width = 179
+      Height = 78
+      Align = alLeft
+      Caption = '[ '#52264#51333' ]'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -20
+      Font.Name = #46027#50880
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      ExplicitLeft = 701
+      ExplicitTop = -4
+      object edtModelNo: TEdit
+        Left = 30
+        Top = 29
+        Width = 121
+        Height = 28
+        TabOrder = 0
+        OnChange = ComboBoxChange
+      end
+    end
   end
   object Pnl_Main: TPanel
     Left = 0
     Top = 160
     Width = 1888
-    Height = 709
+    Height = 708
     Align = alClient
     BevelInner = bvRaised
     BevelOuter = bvNone
@@ -282,7 +331,7 @@ object frmU320: TfrmU320
       Left = 1
       Top = 1
       Width = 1886
-      Height = 707
+      Height = 706
       Align = alClient
       ColumnDefValues.Layout = tlCenter
       ColumnDefValues.Title.Alignment = taCenter
@@ -336,8 +385,9 @@ object frmU320: TfrmU320
           EditButtons = <>
           FieldName = 'ID_CODE_DESC'
           Footers = <>
+          TextEditing = False
           Title.Caption = #51201#51116#50948#52824
-          Width = 200
+          Width = 100
         end
         item
           Alignment = taCenter
@@ -346,8 +396,31 @@ object frmU320: TfrmU320
           EditButtons = <>
           FieldName = 'ID_STATUS_DESC'
           Footers = <>
+          TextEditing = False
           Title.Caption = #49472#49345#53468
-          Width = 200
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'IN_USED'
+          Footers = <>
+          TextEditing = False
+          Title.Caption = #51077#44256#44552#51648
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'OT_USED'
+          Footers = <>
+          TextEditing = False
+          Title.Caption = #52636#44256#44552#51648
+          Width = 100
         end
         item
           Alignment = taCenter
@@ -356,8 +429,9 @@ object frmU320: TfrmU320
           EditButtons = <>
           FieldName = 'ITM_CD'
           Footers = <>
+          TextEditing = False
           Title.Caption = #44592#51333#53076#46300
-          Width = 200
+          Width = 100
         end
         item
           Alignment = taCenter
@@ -366,8 +440,108 @@ object frmU320: TfrmU320
           EditButtons = <>
           FieldName = 'ITM_NAME'
           Footers = <>
+          TextEditing = False
           Title.Caption = #44592#51333#47749
-          Width = 200
+          Width = 100
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'RF_LINE_NAME1'
+          Footers = <>
+          TextEditing = False
+          Title.Caption = #46972#51064#47749'1'
+          Width = 120
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'RF_LINE_NAME2'
+          Footers = <>
+          TextEditing = False
+          Title.Caption = #46972#51064#47749'2'
+          Width = 120
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'RF_PALLET_NO1'
+          Footers = <>
+          TextEditing = False
+          Title.Caption = #54036#47112#53944#48264#54840'1'
+          Width = 120
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'RF_PALLET_NO2'
+          Footers = <>
+          TextEditing = False
+          Title.Caption = #54036#47112#53944#48264#54840'2'
+          Width = 120
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'RF_MODEL_NO1'
+          Footers = <>
+          TextEditing = False
+          Title.Caption = #52264#51333'#1'
+          Width = 120
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'RF_MODEL_NO2'
+          Footers = <>
+          TextEditing = False
+          Title.Caption = #52264#51333'#2'
+          Width = 120
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'RF_BMA_NO'
+          Footers = <>
+          TextEditing = False
+          Title.Caption = 'BMA'#49688#47049
+          Width = 120
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'RF_AREA'
+          Footers = <>
+          TextEditing = False
+          Title.Caption = #49373#49328#51648
+          Width = 120
+        end
+        item
+          Alignment = taCenter
+          AutoFitColWidth = False
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'RF_NEW_BMA'
+          Footers = <>
+          TextEditing = False
+          Title.Caption = #49888#44508'/'#51116#44256
+          Width = 120
         end
         item
           Alignment = taCenter
@@ -376,7 +550,9 @@ object frmU320: TfrmU320
           EditButtons = <>
           FieldName = 'ITM_SPEC'
           Footers = <>
+          TextEditing = False
           Title.Caption = #44592#51333#49324#50577
+          Visible = False
           Width = 200
         end
         item
@@ -386,8 +562,9 @@ object frmU320: TfrmU320
           EditButtons = <>
           FieldName = 'STOCK_IN_DT'
           Footers = <>
+          TextEditing = False
           Title.Caption = #51077#44256#51068#51088
-          Width = 320
+          Width = 250
         end
         item
           Alignment = taCenter
@@ -396,105 +573,41 @@ object frmU320: TfrmU320
           EditButtons = <>
           FieldName = 'ID_MEMO'
           Footers = <>
+          TextEditing = False
           Title.Caption = #52280#44256#49324#54637
-          Width = 200
-        end
-        item
-          Alignment = taCenter
-          AutoFitColWidth = False
-          DynProps = <>
-          EditButtons = <>
-          FieldName = 'RF_LINE_NAME1'
-          Footers = <>
-          Title.Caption = #49885#48324#51088#51060#47492'1'
           Width = 150
         end
         item
           Alignment = taCenter
           AutoFitColWidth = False
-          DynProps = <>
-          EditButtons = <>
-          FieldName = 'RF_LINE_NAME2'
-          Footers = <>
-          Title.Caption = #49885#48324#51088#51060#47492'2'
-          Width = 150
-        end
-        item
-          DynProps = <>
-          EditButtons = <>
-          FieldName = 'RF_PALLET_NO1'
-          Footers = <>
-          Title.Caption = #49885#48324#48264#54840'1'
-          Width = 150
-        end
-        item
-          DynProps = <>
-          EditButtons = <>
-          FieldName = 'RF_PALLET_NO2'
-          Footers = <>
-          Title.Caption = #49885#48324#48264#54840'2'
-          Width = 150
-        end
-        item
-          Alignment = taCenter
-          DynProps = <>
-          EditButtons = <>
-          FieldName = 'RF_MODEL_NO1'
-          Footers = <>
-          Title.Caption = #52264#51333'#1'
-          Width = 150
-        end
-        item
-          Alignment = taCenter
-          DynProps = <>
-          EditButtons = <>
-          FieldName = 'RF_MODEL_NO2'
-          Footers = <>
-          Title.Caption = #52264#51333'#2'
-          Width = 150
-        end
-        item
-          DynProps = <>
-          EditButtons = <>
-          FieldName = 'RF_BMA_NO'
-          Footers = <>
-          Title.Caption = 'BMA'#49688#47049
-          Width = 150
-        end
-        item
-          Alignment = taCenter
           DynProps = <>
           EditButtons = <>
           FieldName = 'RF_PALLET_BMA1'
           Footers = <>
+          TextEditing = False
           Visible = False
           Width = 150
         end
         item
           Alignment = taCenter
+          AutoFitColWidth = False
           DynProps = <>
           EditButtons = <>
           FieldName = 'RF_PALLET_BMA2'
           Footers = <>
+          TextEditing = False
           Visible = False
           Width = 150
         end
         item
           Alignment = taCenter
+          AutoFitColWidth = False
           DynProps = <>
           EditButtons = <>
           FieldName = 'RF_PALLET_BMA3'
           Footers = <>
+          TextEditing = False
           Visible = False
-          Width = 150
-        end
-        item
-          Alignment = taCenter
-          DynProps = <>
-          EditButtons = <>
-          FieldName = 'RF_AREA'
-          Footers = <>
-          Title.Caption = #49373#49328#51648
           Width = 150
         end>
       object RowDetailData: TRowDetailPanelControlEh
@@ -538,7 +651,7 @@ object frmU320: TfrmU320
         ParentFont = False
       end
       object Label2: TLabel
-        Left = 310
+        Left = 200
         Top = 33
         Width = 20
         Height = 20
@@ -641,6 +754,7 @@ object frmU320: TfrmU320
       Font.Style = []
       ParentFont = False
       TabOrder = 1
+      Visible = False
       object cbCode: TComboBox
         Left = 10
         Top = 30

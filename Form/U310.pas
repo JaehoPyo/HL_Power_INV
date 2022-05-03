@@ -88,6 +88,8 @@ type
     edtModelNo1: TEdit;
     edtModelNo2: TEdit;
     edtArea: TEdit;
+    Panel29: TPanel;
+    edtNEW_BMA: TEdit;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -133,7 +135,7 @@ var
   CellPanel  : array [1..vBank, 0..vBay, 0..vLevel] of TPanel;
 
   BeforeRACK_INFO, AfterRACK_INFO : TSTOCK;
-
+  OldClickedCellName : String;
 implementation
 
 uses Main ;
@@ -369,8 +371,10 @@ begin
                 '        ROUND(DOUBLECELL / Cast(CELL_CNT as Float) *100, 1) DOUBLERATE,' +
                 '        ROUND(ZEROCELL   / Cast(CELL_CNT as Float) *100, 1) ZERORATE   ' +
                 '   From ( ' +
-                '         Select ID_HOGI, COUNT(*) CELL_CNT, ' +
-                '                SUM(case when ID_STATUS <> ''0'' then 1 else 0 end) CELL_USE, ' +
+                '         Select ID_HOGI, ' + //COUNT(*) CELL_CNT, ' +
+                '                SUM(case when ID_STATUS not in (''8'', ''9'') then 1 else 0 end) CELL_CNT, ' +
+                '                SUM(case when ID_STATUS <> ''0'' and ' +
+                '                              ID_STATUS not in (''8'', ''9'') then 1 else 0 end) CELL_USE, ' +
                 '                SUM(case when ID_STATUS  = ''0'' then 1 else 0 end) CELL_EMP, ' +
                 '                SUM(case ID_STATUS when ''1'' then 1 else 0 end) TRAYCELL,    ' +
                 '                SUM(case ID_STATUS when ''2'' then 1 else 0 end) ITEMCELL,    ' +
@@ -623,9 +627,9 @@ begin
         (CB_ID_STATUS.ItemIndex <> 3) and       //금지셀
         (CB_ID_STATUS.ItemIndex <> 7) then      //공출고
     begin
-      if StrToInt(Trim(edtITM_QTY.Text)) > 36 then
+      if StrToIntDef(Trim(edtITM_QTY.Text), 0) > 36 then
       begin
-        MessageDlg('36개가 최대 추량입니다.', mtConfirmation, [mbYes], 0) ;
+        MessageDlg('36개가 최대 수량입니다.', mtConfirmation, [mbYes], 0) ;
         Exit;
       end;
 
@@ -634,16 +638,16 @@ begin
         MessageDlg('기종코드를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
         Exit;
       end else
-      if edtITM_NAME.Text = '' then
-      begin
-        MessageDlg('기종명을 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
-        Exit;
-      end else
-      if edtITM_SPEC.Text = '' then
-      begin
-        MessageDlg('기종사양을 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
-        Exit;
-      end;
+//      if edtITM_NAME.Text = '' then
+//      begin
+//        MessageDlg('기종명을 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+//        Exit;
+//      end else
+//      if edtITM_SPEC.Text = '' then
+//      begin
+//        MessageDlg('기종사양을 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+//        Exit;
+//      end;
 
       if CB_ID_STATUS.ItemIndex <> 1 then
       begin
@@ -719,8 +723,9 @@ begin
                 '      , RF_PALLET_NO2 = ''''  ' +
                 '      , RF_MODEL_NO1 = ''''  ' +
                 '      , RF_MODEL_NO2 = ''''  ' +
-                '      , RF_BMA_NO = ''''  ' +
-                '      , RF_AREA = ''''  ' +
+                '      , RF_BMA_NO    = ''''  ' +
+                '      , RF_AREA      = ''''  ' +
+                '      , RF_NEW_BMA   = '''' ' +
                 '      , STOCK_REG_DT = GETDATE()   ' +
                 '  Where ID_HOGI = ' + QuotedStr(ID_HOGI) +
                 '    And ID_CODE = ' + QuotedStr(ID_CODE) ;
@@ -748,6 +753,7 @@ begin
                 '      , RF_MODEL_NO2 = '  + QuotedStr(edtModelNo2.Text)  +
                 '      , RF_BMA_NO = '     + QuotedStr(edtITM_QTY.Text)   +
                 '      , RF_AREA = '       + QuotedStr(edtArea.Text)      +
+                '      , RF_NEW_BMA = '    + QuotedStr(edtNEW_BMA.Text)   +
                 '  Where ID_HOGI = ' + QuotedStr(ID_HOGI) +
                 '    And ID_CODE = ' + QuotedStr(ID_CODE) ;
     end;
@@ -771,6 +777,7 @@ begin
     AfterRACK_INFO.RF_MODEL_NO2  := edtModelNo2.Text;
     AfterRACK_INFO.RF_BMA_NO     := edtITM_QTY.Text;
     AfterRACK_INFO.RF_AREA       := edtArea.Text;
+    AfterRACK_INFO.RF_NEW_BMA    := edtNEW_BMA.Text;
 
     with qryTemp do
     begin
@@ -847,6 +854,18 @@ begin
   ComboBoxBay.Text   := ID_BAY;
   ComboBoxLevel.Text := ID_LEVEL;
 
+  (Sender as TPanel).BevelOuter := bvLowered;
+  (Sender as TPanel).BevelInner := bvLowered;
+  (Sender as TPanel).BevelWidth := 3;
+  if (OldClickedCellName <> '') then
+  begin
+    TPanel(Self.FindComponent(OldClickedCellName)).BevelOuter := bvRaised;
+    TPanel(Self.FindComponent(OldClickedCellName)).BevelInner := bvNone;
+    TPanel(Self.FindComponent(OldClickedCellName)).BevelWidth := 1;
+  end;
+
+  OldClickedCellName := 'Cell' + ID_HOGI + ID_BANK + ID_BAY + ID_LEVEL ;
+
   edtITM_CD.Text   := '';
   edtITM_NAME.Text := '';
   edtITM_SPEC.Text := '';
@@ -868,6 +887,7 @@ begin
   edtModelNo1.Text  := '';
   edtModelNo2.Text  := '';
   edtArea.Text      := '';
+  edtNEW_BMA.Text   := '';
 
   try
     with qryTemp do
@@ -904,7 +924,7 @@ begin
         edtModelNo1.Text  := FieldByName('RF_MODEL_NO1' ).AsString;;
         edtModelNo2.Text  := FieldByName('RF_MODEL_NO2' ).AsString;
         edtArea.Text      := FieldByName('RF_AREA'      ).AsString;
-
+        edtNEW_BMA.Text   := FieldByName('RF_NEW_BMA'   ).AsString;
 
         if FieldByName('IN_USED').AsString = '1' then cbInUSED.Checked := False
                                                  else cbInUSED.Checked := True;
@@ -954,6 +974,7 @@ begin
       BeforeRACK_INFO.RF_MODEL_NO2  := edtModelNo2.Text;
       BeforeRACK_INFO.RF_BMA_NO     := edtITM_QTY.Text;
       BeforeRACK_INFO.RF_AREA       := edtArea.Text;
+      BeforeRACK_INFO.RF_NEW_BMA    := edtNEW_BMA.Text;
 
     end;
   except
@@ -1043,6 +1064,7 @@ begin
     edtModelNo1.Text  := '';
     edtModelNo2.Text  := '';
     edtArea.Text      := '';
+    edtNEW_BMA.Text   := '';
   end else
   if (Sender as TComboBox).ItemIndex=1 then
   begin

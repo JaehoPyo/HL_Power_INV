@@ -38,6 +38,9 @@ type
     cbCode: TComboBox;
     GroupBox2: TGroupBox;
     cbStatus: TComboBox;
+    rgType: TRadioGroup;
+    GroupBox3: TGroupBox;
+    edtModelNo: TEdit;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -336,7 +339,11 @@ begin
       StrSQL := ' Select ID_CODE, ID_BANK, ID_BAY, ID_LEVEL, ' +
                 '        STOCK_REG_DT, STOCK_IN_DT, ' +
                 '        ITM_CD, ITM_NAME, ITM_SPEC, ITM_QTY, ' +
-                '        ID_ZONE, ID_STATUS, ID_MEMO, OT_USED, IN_USED, ' +
+                '        ID_ZONE, ID_STATUS, ID_MEMO, ' +
+                '       (Case IN_USED when ''0'' then ''Y'' ' +
+                '                     when ''1'' then ''N'' end ) as IN_USED, ' +
+                '       (Case OT_USED when ''0'' then ''Y'' ' +
+                '                     when ''1'' then ''N'' end ) as OT_USED, ' +
                 '       (Case ID_STATUS when ''0'' then ''°ø¼¿''     ' +
                 '                       when ''1'' then ''°øÆÄ·¹Æ®'' ' +
                 '                       when ''2'' then ''½Ç¼¿''     ' +
@@ -350,10 +357,20 @@ begin
                 '       (SUBSTRING(ID_CODE,1,1)+''-''+SUBSTRING(ID_CODE,2,2)+''-''+SUBSTRING(ID_CODE,4,2)) as ID_CODE_DESC, ' +
                 '        RF_LINE_NAME1, RF_LINE_NAME2, RF_PALLET_NO1, RF_PALLET_NO2, RF_MODEL_NO1, ' +
                 '        RF_MODEL_NO2, RF_BMA_NO, RF_PALLET_BMA1, RF_PALLET_BMA2, RF_PALLET_BMA3,  ' +
-                '        RF_AREA  ' +
+                '        RF_AREA, RF_NEW_BMA  ' +
                 '   From TT_STOCK ' +
                 '  Where 1=1 ' ;
 
+
+      if (Trim(UpperCase(edtModelNo.Text)) <> '') then
+        StrSQL := StrSQL + ' And UPPER(RF_MODEL_NO1) like ' + QuotedStr('%' + Trim(UpperCase(edtModelNo.Text)) + '%');
+
+      if (rgType.ItemIndex = 1) then
+        StrSQL := StrSQL + ' And ITM_CD = ''FULL'' '
+      else if (rgType.ItemIndex = 2) then
+        StrSQL := StrSQL + ' And ITM_CD = ''EPLT'' '
+      else if (rgType.ItemIndex = 3) then
+        StrSQL := StrSQL + ' And ITM_CD not in (''FULL'', ''EPLT'')' ;
 
       if (Trim(ComboBoxBank.Text)<>'') and (Trim(ComboBoxBank.Text)<>'ÀüÃ¼') then
         StrSQL := StrSQL + ' And ID_BANK= ' + QuotedStr(Trim(ComboBoxBank.Text)) ;

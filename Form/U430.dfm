@@ -342,6 +342,7 @@ object frmU430: TfrmU430
         EditButtons = <>
         FieldName = 'JOBD_DESC'
         Footers = <>
+        TextEditing = False
         Title.Caption = #51089#50629#50976#54805
         Width = 160
       end
@@ -352,6 +353,7 @@ object frmU430: TfrmU430
         EditButtons = <>
         FieldName = 'ITM_CD'
         Footers = <>
+        TextEditing = False
         Title.Caption = #44592#51333#53076#46300
         Width = 160
       end
@@ -362,6 +364,7 @@ object frmU430: TfrmU430
         EditButtons = <>
         FieldName = 'LUGG'
         Footers = <>
+        TextEditing = False
         Title.Caption = #51089#50629#48264#54840
         Width = 160
       end
@@ -371,6 +374,7 @@ object frmU430: TfrmU430
         EditButtons = <>
         FieldName = 'OD_CODE'
         Footers = <>
+        TextEditing = False
         Title.Caption = #54616#50669#50948#52824
         Width = 200
       end
@@ -381,6 +385,7 @@ object frmU430: TfrmU430
         EditButtons = <>
         FieldName = 'ID_CODE'
         Footers = <>
+        TextEditing = False
         Title.Caption = #51201#51116#50948#52824
         Width = 200
       end
@@ -391,6 +396,7 @@ object frmU430: TfrmU430
         EditButtons = <>
         FieldName = 'NOWMC_DESC'
         Footers = <>
+        TextEditing = False
         Title.Caption = #51652#54665#49345#53468
         Width = 220
       end
@@ -401,6 +407,7 @@ object frmU430: TfrmU430
         EditButtons = <>
         FieldName = 'JOBERRORC_DESC'
         Footers = <>
+        TextEditing = False
         Title.Caption = #50640#47084#49345#53468
         Width = 200
       end
@@ -411,6 +418,7 @@ object frmU430: TfrmU430
         EditButtons = <>
         FieldName = 'JOBERRORD_DESC'
         Footers = <>
+        TextEditing = False
         Title.Caption = #50640#47084#53076#46300
         Width = 200
       end
@@ -419,8 +427,9 @@ object frmU430: TfrmU430
         AutoFitColWidth = False
         DynProps = <>
         EditButtons = <>
-        FieldName = 'REG_TIME_DESC'
+        FieldName = 'REG_TIME_CONV'
         Footers = <>
+        TextEditing = False
         Title.Caption = #51089#50629#51068#51088
         Width = 405
       end
@@ -430,6 +439,7 @@ object frmU430: TfrmU430
         EditButtons = <>
         FieldName = 'RF_LINE_NAME1'
         Footers = <>
+        TextEditing = False
         Title.Caption = #49885#48324#51088#51060#47492'1'
         Width = 200
       end
@@ -439,6 +449,7 @@ object frmU430: TfrmU430
         EditButtons = <>
         FieldName = 'RF_LINE_NAME2'
         Footers = <>
+        TextEditing = False
         Title.Caption = #49885#48324#51088#51060#47492'2'
         Width = 200
       end
@@ -448,6 +459,7 @@ object frmU430: TfrmU430
         EditButtons = <>
         FieldName = 'RF_PALLET_NO1'
         Footers = <>
+        TextEditing = False
         Title.Caption = #49885#48324#48264#54840'1'
         Width = 200
       end
@@ -457,6 +469,7 @@ object frmU430: TfrmU430
         EditButtons = <>
         FieldName = 'RF_PALLET_NO2'
         Footers = <>
+        TextEditing = False
         Title.Caption = #49885#48324#48264#54840'2'
         Width = 200
       end
@@ -466,6 +479,7 @@ object frmU430: TfrmU430
         EditButtons = <>
         FieldName = 'RF_MODEL_NO1'
         Footers = <>
+        TextEditing = False
         Title.Caption = #47784#45944'1'
         Width = 200
       end
@@ -475,6 +489,7 @@ object frmU430: TfrmU430
         EditButtons = <>
         FieldName = 'RF_MODEL_NO2'
         Footers = <>
+        TextEditing = False
         Title.Caption = #47784#45944'2'
         Width = 200
       end
@@ -484,6 +499,7 @@ object frmU430: TfrmU430
         EditButtons = <>
         FieldName = 'RF_BMA_NO'
         Footers = <>
+        TextEditing = False
         Title.Caption = #49688#47049
         Width = 200
       end
@@ -491,8 +507,9 @@ object frmU430: TfrmU430
         Alignment = taCenter
         DynProps = <>
         EditButtons = <>
-        FieldName = 'RF_AREA '
+        FieldName = 'RF_AREA'
         Footers = <>
+        TextEditing = False
         Title.Caption = #49373#49328#51648
         Width = 200
       end>

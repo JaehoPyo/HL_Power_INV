@@ -707,7 +707,8 @@ type
     RF_MODEL_NO1,
     RF_MODEL_NO2,
     RF_BMA_NO,
-    RF_AREA : String;
+    RF_AREA,
+    RF_NEW_BMA : String;
   End;
 
 implementation

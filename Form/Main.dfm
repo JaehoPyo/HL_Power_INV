@@ -2,7 +2,7 @@ object frmMain: TfrmMain
   Left = 206
   Top = 0
   Caption = #51088#46041#52285#44256' '#44288#47532' '#49884#49828#53596
-  ClientHeight = 1021
+  ClientHeight = 981
   ClientWidth = 1904
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
@@ -149,6 +149,7 @@ object frmMain: TfrmMain
   Menu = mnuMain
   OldCreateOrder = False
   Position = poScreenCenter
+  WindowState = wsMaximized
   OnActivate = FormActivate
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
@@ -159,7 +160,7 @@ object frmMain: TfrmMain
     Left = 0
     Top = 90
     Width = 1904
-    Height = 908
+    Height = 868
     Align = alClient
     AutoSize = True
     Center = True
@@ -475,6 +476,7 @@ object frmMain: TfrmMain
       158DC1F48370CF2E0000000049454E44AE426082}
     Transparent = True
     ExplicitTop = 91
+    ExplicitHeight = 908
   end
   object Panel1: TPanel
     Left = 0
@@ -528,9 +530,8 @@ object frmMain: TfrmMain
           ShowHint = False
           Layout = tlCenter
           StyleElements = [seClient, seBorder]
-          ExplicitLeft = 79
-          ExplicitTop = 3
-          ExplicitWidth = 536
+          ExplicitWidth = 426
+          ExplicitHeight = 40
         end
         object Lbl_error: TLabel
           Left = 482
@@ -555,7 +556,6 @@ object frmMain: TfrmMain
           Layout = tlCenter
           Visible = False
           StyleElements = [seClient, seBorder]
-          ExplicitLeft = 514
           ExplicitHeight = 40
         end
         object Panel11: TPanel
@@ -1670,7 +1670,7 @@ object frmMain: TfrmMain
     object LblMFCInterfaceConn: TLabel
       Left = 0
       Top = 0
-      Width = 105
+      Width = 76
       Height = 20
       Hint = #49444#48708' '#53685#49888' '#49345#53468' - '#51221#49345'['#45433#49353'] '#51060#49345'['#51201#49353']'
       Align = alLeft
@@ -1688,7 +1688,6 @@ object frmMain: TfrmMain
       ShowHint = True
       Transparent = False
       Layout = tlCenter
-      ExplicitWidth = 76
       ExplicitHeight = 13
     end
     object ShpMFCInterfaceConn1: TShape
@@ -1770,7 +1769,7 @@ object frmMain: TfrmMain
   end
   object staLoginInfo: TStatusBar
     Left = 0
-    Top = 998
+    Top = 958
     Width = 1904
     Height = 23
     Panels = <

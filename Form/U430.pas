@@ -292,19 +292,22 @@ begin
                   '                       when NULL  then ''정상'' ' +  #13#10+
                   '                       when ''1'' then ''에러'' ' +  #13#10+
                   '                       else ''정상'' end) as JOBERRORC_DESC, ' +  #13#10+
-                  '       (Case JOBERRORD when ''0000'' then ''정상'' ' +  #13#10+
-                  '                       else JOBERRORD end) as JOBERRORD_DESC, ' +  #13#10+
+                  '       (Case when (JOBERRORD = ''0000'') or  ' +
+	                  '                  (JOBERRORD = '''') or ' +
+				            '                  (IsNull(JOBERRORD, '''') = '''') then ''정상'' ' +
+                    '             when JOBERRORD not like ''%불일치%'' then (SELECT ERR_NAME FROM TM_ERROR WHERE ERR_CODE = A.JOBERRORD) ' +
+			              '             else JOBERRORD end ) as JOBERRORD_DESC, ' +
                   '       (Case BUFFSTATUS when ''0'' then ''대기'' ' +  #13#10+
                   '                        when ''1'' then ''입고가능'' end) as BUFFSTATUS_DESC, ' +  #13#10+
                   '       (SUBSTRING(SRCAISLE,4,1)+''-''+SUBSTRING(SRCBAY,3,2)+''-''+SUBSTRING(SRCLEVEL,3,2)) as ID_CODE, ' +  #13#10+
                   '       (SUBSTRING(DSTAISLE,4,1)+''-''+SUBSTRING(DSTBAY,3,2)+''-''+FORMAT(CONVERT(INT,DSTLEVEL), ''D2'')) as OD_CODE,           ' +
                   '       (SUBSTRING(REG_TIME,1,4)+''-''+SUBSTRING(REG_TIME,5,2)+''-''+SUBSTRING(REG_TIME,7,2)+''  ''+ ' +  #13#10+
-                  '        SUBSTRING(REG_TIME,9,2)+'':''+SUBSTRING(REG_TIME,11,2)+'':''+SUBSTRING(REG_TIME,13,2)) as REF_TIME_CONV, ' +  #13#10+
+                  '        SUBSTRING(REG_TIME,9,2)+'':''+SUBSTRING(REG_TIME,11,2)+'':''+SUBSTRING(REG_TIME,13,2)) as REG_TIME_CONV, ' +  #13#10+
                   '       CONVERT(VARCHAR, REG_TIME, 120) as REG_TIME_DESC, ' +
                   '        RF_LINE_NAME1, RF_LINE_NAME2, RF_PALLET_NO1, RF_PALLET_NO2, RF_MODEL_NO1, ' +
                   '        RF_MODEL_NO2, RF_BMA_NO, RF_PALLET_BMA1, RF_PALLET_BMA2, RF_PALLET_BMA3,  ' +
                   '        RF_AREA  ' +
-                  '   From TT_HISTORY ' +  #13#10+
+                  '   From TT_HISTORY as A ' +  #13#10+
                   '  Where JOBD    = ''7'' ' +  #13#10+
                   '    And JOB_END = ''1'' ' ;
 

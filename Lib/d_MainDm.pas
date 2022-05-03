@@ -60,7 +60,8 @@ type
    RF_PALLET_BMA1,
    RF_PALLET_BMA2,
    RF_PALLET_BMA3,
-   RF_AREA : String;
+   RF_AREA,
+   RF_NEW_BMA : String;
   end;
 
 

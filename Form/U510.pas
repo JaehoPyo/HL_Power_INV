@@ -20,8 +20,6 @@ type
     Shape2: TShape;
     Panel4: TPanel;
     Panel1: TPanel;
-    Pnl_Top: TPanel;
-    gbCode: TGroupBox;
     Panel157: TPanel;
     RackBay02: TPanel;
     Bay02: TPanel;
@@ -58,12 +56,99 @@ type
     Panel17: TPanel;
     Panel24: TPanel;
     Panel25: TPanel;
+    tmrQry: TTimer;
+    SCLine1: TPanel;
+    Panel159: TPanel;
+    Panel161: TPanel;
+    Panel162: TPanel;
+    SC: TPanel;
+    SCStatus: TPanel;
+    SCRFork: TPanel;
+    imgRFork_Left: TImage;
+    Label17: TLabel;
+    Label18: TLabel;
+    Label28: TLabel;
+    Label29: TLabel;
+    Label30: TLabel;
+    Label31: TLabel;
+    Label64: TLabel;
+    Label66: TLabel;
+    Label65: TLabel;
+    imgRFork_Right: TImage;
+    btnReset: TButton;
+    btnRetry: TButton;
+    Panel18: TPanel;
+    Panel19: TPanel;
+    Image4: TImage;
+    Image3: TImage;
+    Image5: TImage;
+    Image6: TImage;
+    Image7: TImage;
+    Image8: TImage;
+    pnlCurtain1: TPanel;
+    pnlCurtain2: TPanel;
+    pnlCurtain3: TPanel;
+    pnlCurtain4: TPanel;
+    pnlCurtain5: TPanel;
+    pnlCurtain6: TPanel;
+    ImgCV_Cago1: TImage;
+    ImgCV_Cago2: TImage;
+    ImgCV_Cago3: TImage;
+    ImgCV_Cago4: TImage;
+    ImgCV_Cago5: TImage;
+    ImgCV_Cago6: TImage;
+    tmrRFID: TTimer;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label23: TLabel;
+    Label24: TLabel;
+    Label25: TLabel;
+    Label26: TLabel;
+    btnCurtain6: TButton;
+    btnCurtain5: TButton;
+    btnCurtain1: TButton;
+    btnCurtain2: TButton;
+    btnCurtain3: TButton;
+    btnCurtain4: TButton;
+    qryTemp2: TADOQuery;
+    Panel103: TPanel;
+    Panel105: TPanel;
+    Panel106: TPanel;
+    Panel107: TPanel;
+    Panel108: TPanel;
+    Panel109: TPanel;
+    Pnl_Top: TPanel;
+    gbCode: TGroupBox;
+    대기중: TLabel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Panel63: TPanel;
+    Panel64: TPanel;
+    Panel68: TPanel;
+    Panel69: TPanel;
+    Panel70: TPanel;
+    Panel71: TPanel;
+    Panel72: TPanel;
+    Panel73: TPanel;
+    Panel74: TPanel;
+    Panel75: TPanel;
+    Panel76: TPanel;
+    Panel77: TPanel;
+    Panel66: TPanel;
+    Panel67: TPanel;
+    Panel78: TPanel;
+    Image2: TImage;
+    Panel79: TPanel;
+    Panel80: TPanel;
+    Panel81: TPanel;
+    Image1: TImage;
     Panel201: TPanel;
     Panel231: TPanel;
     Panel26: TPanel;
     Panel232: TPanel;
-    Panel55: TPanel;
-    Panel56: TPanel;
     Bevel1: TBevel;
     Bevel2: TBevel;
     edt_SCCMode: TEdit;
@@ -114,79 +199,6 @@ type
     Panel49: TPanel;
     Panel50: TPanel;
     edt_ErrorDesc: TEdit;
-    Panel51: TPanel;
-    edt_MoveOn: TEdit;
-    Panel52: TPanel;
-    edt_DstBay: TEdit;
-    Panel53: TPanel;
-    edt_DataReset: TEdit;
-    Panel54: TPanel;
-    edt_SrcBay: TEdit;
-    edt_DstBank: TEdit;
-    Panel57: TPanel;
-    edt_SrcLevel: TEdit;
-    Panel58: TPanel;
-    edt_DstLevel: TEdit;
-    Panel59: TPanel;
-    edt_SrcBank: TEdit;
-    Panel60: TPanel;
-    edt_Lugg: TEdit;
-    Panel62: TPanel;
-    tmrQry: TTimer;
-    SCLine1: TPanel;
-    Panel159: TPanel;
-    Panel161: TPanel;
-    Panel162: TPanel;
-    SC: TPanel;
-    SCStatus: TPanel;
-    SCRFork: TPanel;
-    Panel63: TPanel;
-    Panel64: TPanel;
-    Panel68: TPanel;
-    Panel69: TPanel;
-    Panel70: TPanel;
-    Panel71: TPanel;
-    Panel72: TPanel;
-    Panel73: TPanel;
-    Panel74: TPanel;
-    Panel75: TPanel;
-    Panel76: TPanel;
-    Panel77: TPanel;
-    대기중: TLabel;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
-    imgRFork_Left: TImage;
-    Label17: TLabel;
-    Label18: TLabel;
-    Label28: TLabel;
-    Label29: TLabel;
-    Label30: TLabel;
-    Label31: TLabel;
-    Label64: TLabel;
-    Label66: TLabel;
-    Label65: TLabel;
-    Panel66: TPanel;
-    Panel67: TPanel;
-    Panel78: TPanel;
-    Panel79: TPanel;
-    Panel80: TPanel;
-    Panel81: TPanel;
-    Image1: TImage;
-    Image2: TImage;
-    imgRFork_Right: TImage;
-    Label4: TLabel;
-    Label5: TLabel;
-    btnReset: TButton;
-    btnRetry: TButton;
-    Panel18: TPanel;
-    Panel19: TPanel;
-    Image4: TImage;
-    Image3: TImage;
-    Image5: TImage;
-    Image6: TImage;
-    Image7: TImage;
-    Image8: TImage;
     Panel20: TPanel;
     edt_InReady2: TEdit;
     Panel21: TPanel;
@@ -195,162 +207,6 @@ type
     edt_InReady3: TEdit;
     Panel23: TPanel;
     edt_OutReady3: TEdit;
-    pnlCurtain1: TPanel;
-    pnlCurtain2: TPanel;
-    pnlCurtain3: TPanel;
-    pnlCurtain4: TPanel;
-    pnlCurtain5: TPanel;
-    pnlCurtain6: TPanel;
-    ImgCV_Cago1: TImage;
-    ImgCV_Cago2: TImage;
-    ImgCV_Cago3: TImage;
-    ImgCV_Cago4: TImage;
-    ImgCV_Cago5: TImage;
-    ImgCV_Cago6: TImage;
-    Panel104: TPanel;
-    Label8: TLabel;
-    Label9: TLabel;
-    lblLineName1_RF01: TLabel;
-    Label7: TLabel;
-    lblLineName2_RF01: TLabel;
-    Label12: TLabel;
-    Label13: TLabel;
-    Label14: TLabel;
-    Label15: TLabel;
-    Label16: TLabel;
-    Label19: TLabel;
-    Label20: TLabel;
-    Label21: TLabel;
-    Label22: TLabel;
-    lblPalletBma3_RF01: TLabel;
-    lblPalletNo1_RF01: TLabel;
-    lblPalletNo2_RF01: TLabel;
-    lblModelNo1_RF01: TLabel;
-    lblModelNo2_RF01: TLabel;
-    lblBmaNo_RF01: TLabel;
-    lblArea_RF01: TLabel;
-    lblPalletBma1_RF01: TLabel;
-    lblPalletBma2_RF01: TLabel;
-    Panel65: TPanel;
-    Label36: TLabel;
-    Label37: TLabel;
-    lblLineName1_RF02: TLabel;
-    Label39: TLabel;
-    lblLineName2_RF02: TLabel;
-    Label41: TLabel;
-    Label42: TLabel;
-    Label43: TLabel;
-    Label44: TLabel;
-    Label45: TLabel;
-    Label46: TLabel;
-    Label47: TLabel;
-    Label48: TLabel;
-    Label49: TLabel;
-    lblPalletBma3_RF02: TLabel;
-    lblPalletNo1_RF02: TLabel;
-    lblPalletNo2_RF02: TLabel;
-    lblModelNo1_RF02: TLabel;
-    lblModelNo2_RF02: TLabel;
-    lblBmaNo_RF02: TLabel;
-    lblArea_RF02: TLabel;
-    lblPalletBma1_RF02: TLabel;
-    lblPalletBma2_RF02: TLabel;
-    Panel83: TPanel;
-    Label59: TLabel;
-    Label60: TLabel;
-    lblLineName1_RF03: TLabel;
-    Label62: TLabel;
-    lblLineName2_RF03: TLabel;
-    Label67: TLabel;
-    Label68: TLabel;
-    Label69: TLabel;
-    Label70: TLabel;
-    Label71: TLabel;
-    Label72: TLabel;
-    Label73: TLabel;
-    Label74: TLabel;
-    Label75: TLabel;
-    lblPalletBma3_RF03: TLabel;
-    lblPalletNo1_RF03: TLabel;
-    lblPalletNo2_RF03: TLabel;
-    lblModelNo1_RF03: TLabel;
-    lblModelNo2_RF03: TLabel;
-    lblBmaNo_RF03: TLabel;
-    lblArea_RF03: TLabel;
-    lblPalletBma1_RF03: TLabel;
-    lblPalletBma2_RF03: TLabel;
-    Panel61: TPanel;
-    Label6: TLabel;
-    Label85: TLabel;
-    lblLineName1_RF04: TLabel;
-    Label87: TLabel;
-    lblLineName2_RF04: TLabel;
-    Label89: TLabel;
-    Label90: TLabel;
-    Label91: TLabel;
-    Label92: TLabel;
-    Label93: TLabel;
-    Label94: TLabel;
-    Label95: TLabel;
-    Label96: TLabel;
-    Label97: TLabel;
-    lblPalletBma3_RF04: TLabel;
-    lblPalletNo1_RF04: TLabel;
-    lblPalletNo2_RF04: TLabel;
-    lblModelNo1_RF04: TLabel;
-    lblModelNo2_RF04: TLabel;
-    lblBmaNo_RF04: TLabel;
-    lblArea_RF04: TLabel;
-    lblPalletBma1_RF04: TLabel;
-    lblPalletBma2_RF04: TLabel;
-    Panel82: TPanel;
-    Label107: TLabel;
-    Label108: TLabel;
-    lblLineName1_RF05: TLabel;
-    Label110: TLabel;
-    lblLineName2_RF05: TLabel;
-    Label112: TLabel;
-    Label113: TLabel;
-    Label114: TLabel;
-    Label115: TLabel;
-    Label116: TLabel;
-    Label117: TLabel;
-    Label118: TLabel;
-    Label119: TLabel;
-    Label120: TLabel;
-    lblPalletBma3_RF05: TLabel;
-    lblPalletNo1_RF05: TLabel;
-    lblPalletNo2_RF05: TLabel;
-    lblModelNo1_RF05: TLabel;
-    lblModelNo2_RF05: TLabel;
-    lblBmaNo_RF05: TLabel;
-    lblArea_RF05: TLabel;
-    lblPalletBma1_RF05: TLabel;
-    lblPalletBma2_RF05: TLabel;
-    Panel84: TPanel;
-    Label130: TLabel;
-    Label131: TLabel;
-    lblLineName1_RF06: TLabel;
-    Label133: TLabel;
-    lblLineName2_RF06: TLabel;
-    Label135: TLabel;
-    Label136: TLabel;
-    Label137: TLabel;
-    Label138: TLabel;
-    Label139: TLabel;
-    Label140: TLabel;
-    Label141: TLabel;
-    Label142: TLabel;
-    Label143: TLabel;
-    lblPalletBma3_RF06: TLabel;
-    lblPalletNo1_RF06: TLabel;
-    lblPalletNo2_RF06: TLabel;
-    lblModelNo1_RF06: TLabel;
-    lblModelNo2_RF06: TLabel;
-    lblBmaNo_RF06: TLabel;
-    lblArea_RF06: TLabel;
-    lblPalletBma1_RF06: TLabel;
-    lblPalletBma2_RF06: TLabel;
     Panel85: TPanel;
     Panel86: TPanel;
     Panel87: TPanel;
@@ -375,19 +231,6 @@ type
     edt_Fire2: TEdit;
     edt_Fire4: TEdit;
     edt_Fire6: TEdit;
-    tmrRFID: TTimer;
-    Label10: TLabel;
-    Label11: TLabel;
-    Label23: TLabel;
-    Label24: TLabel;
-    Label25: TLabel;
-    Label26: TLabel;
-    btnCurtain6: TButton;
-    btnCurtain5: TButton;
-    btnCurtain1: TButton;
-    btnCurtain2: TButton;
-    btnCurtain3: TButton;
-    btnCurtain4: TButton;
     Panel97: TPanel;
     Panel98: TPanel;
     Panel99: TPanel;
@@ -400,13 +243,182 @@ type
     edt_Docking6: TEdit;
     edt_Docking4: TEdit;
     edt_Docking2: TEdit;
+    Panel55: TPanel;
+    Panel56: TPanel;
+    Panel51: TPanel;
+    edt_MoveOn: TEdit;
+    Panel52: TPanel;
+    edt_DstBay: TEdit;
+    Panel53: TPanel;
+    edt_DataReset: TEdit;
+    Panel54: TPanel;
+    edt_SrcBay: TEdit;
+    edt_DstBank: TEdit;
+    Panel57: TPanel;
+    edt_SrcLevel: TEdit;
+    Panel58: TPanel;
+    edt_DstLevel: TEdit;
+    Panel59: TPanel;
+    edt_SrcBank: TEdit;
+    Panel60: TPanel;
+    edt_Lugg: TEdit;
+    Panel62: TPanel;
+    Panel110: TPanel;
+    Panel61: TPanel;
+    Label6: TLabel;
+    Label85: TLabel;
+    lblLineName1_RF04: TLabel;
+    Label87: TLabel;
+    lblLineName2_RF04: TLabel;
+    Label89: TLabel;
+    Label90: TLabel;
+    Label91: TLabel;
+    Label92: TLabel;
+    Label93: TLabel;
+    Label94: TLabel;
+    Label95: TLabel;
+    Label96: TLabel;
+    Label97: TLabel;
+    lblPalletBma3_RF04: TLabel;
+    lblPalletNo1_RF04: TLabel;
+    lblPalletNo2_RF04: TLabel;
+    lblModelNo1_RF04: TLabel;
+    lblModelNo2_RF04: TLabel;
+    lblBmaNo_RF04: TLabel;
+    lblArea_RF04: TLabel;
+    lblPalletBma1_RF04: TLabel;
+    lblPalletBma2_RF04: TLabel;
     btnRFID_Read4: TButton;
-    btnRFID_Read5: TButton;
-    btnRFID_Read6: TButton;
-    btnRFID_Read3: TButton;
-    btnRFID_Read2: TButton;
+    Panel111: TPanel;
+    Panel104: TPanel;
+    Label8: TLabel;
+    Label9: TLabel;
+    lblLineName1_RF01: TLabel;
+    Label7: TLabel;
+    lblLineName2_RF01: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    Label15: TLabel;
+    Label16: TLabel;
+    Label19: TLabel;
+    Label20: TLabel;
+    Label21: TLabel;
+    Label22: TLabel;
+    lblPalletBma3_RF01: TLabel;
+    lblPalletNo1_RF01: TLabel;
+    lblPalletNo2_RF01: TLabel;
+    lblModelNo1_RF01: TLabel;
+    lblModelNo2_RF01: TLabel;
+    lblBmaNo_RF01: TLabel;
+    lblArea_RF01: TLabel;
+    lblPalletBma1_RF01: TLabel;
+    lblPalletBma2_RF01: TLabel;
     btnRFID_Read1: TButton;
-    qryTemp2: TADOQuery;
+    Panel82: TPanel;
+    Label107: TLabel;
+    Label108: TLabel;
+    lblLineName1_RF05: TLabel;
+    Label110: TLabel;
+    lblLineName2_RF05: TLabel;
+    Label112: TLabel;
+    Label113: TLabel;
+    Label114: TLabel;
+    Label115: TLabel;
+    Label116: TLabel;
+    Label117: TLabel;
+    Label118: TLabel;
+    Label119: TLabel;
+    Label120: TLabel;
+    lblPalletBma3_RF05: TLabel;
+    lblPalletNo1_RF05: TLabel;
+    lblPalletNo2_RF05: TLabel;
+    lblModelNo1_RF05: TLabel;
+    lblModelNo2_RF05: TLabel;
+    lblBmaNo_RF05: TLabel;
+    lblArea_RF05: TLabel;
+    lblPalletBma1_RF05: TLabel;
+    lblPalletBma2_RF05: TLabel;
+    btnRFID_Read5: TButton;
+    Panel84: TPanel;
+    Label130: TLabel;
+    Label131: TLabel;
+    lblLineName1_RF06: TLabel;
+    Label133: TLabel;
+    lblLineName2_RF06: TLabel;
+    Label135: TLabel;
+    Label136: TLabel;
+    Label137: TLabel;
+    Label138: TLabel;
+    Label139: TLabel;
+    Label140: TLabel;
+    Label141: TLabel;
+    Label142: TLabel;
+    Label143: TLabel;
+    lblPalletBma3_RF06: TLabel;
+    lblPalletNo1_RF06: TLabel;
+    lblPalletNo2_RF06: TLabel;
+    lblModelNo1_RF06: TLabel;
+    lblModelNo2_RF06: TLabel;
+    lblBmaNo_RF06: TLabel;
+    lblArea_RF06: TLabel;
+    lblPalletBma1_RF06: TLabel;
+    lblPalletBma2_RF06: TLabel;
+    btnRFID_Read6: TButton;
+    Panel65: TPanel;
+    Label36: TLabel;
+    Label37: TLabel;
+    lblLineName1_RF02: TLabel;
+    Label39: TLabel;
+    lblLineName2_RF02: TLabel;
+    Label41: TLabel;
+    Label42: TLabel;
+    Label43: TLabel;
+    Label44: TLabel;
+    Label45: TLabel;
+    Label46: TLabel;
+    Label47: TLabel;
+    Label48: TLabel;
+    Label49: TLabel;
+    lblPalletBma3_RF02: TLabel;
+    lblPalletNo1_RF02: TLabel;
+    lblPalletNo2_RF02: TLabel;
+    lblModelNo1_RF02: TLabel;
+    lblModelNo2_RF02: TLabel;
+    lblBmaNo_RF02: TLabel;
+    lblArea_RF02: TLabel;
+    lblPalletBma1_RF02: TLabel;
+    lblPalletBma2_RF02: TLabel;
+    btnRFID_Read2: TButton;
+    Panel83: TPanel;
+    Label59: TLabel;
+    Label60: TLabel;
+    lblLineName1_RF03: TLabel;
+    Label62: TLabel;
+    lblLineName2_RF03: TLabel;
+    Label67: TLabel;
+    Label68: TLabel;
+    Label69: TLabel;
+    Label70: TLabel;
+    Label71: TLabel;
+    Label72: TLabel;
+    Label73: TLabel;
+    Label74: TLabel;
+    Label75: TLabel;
+    lblPalletBma3_RF03: TLabel;
+    lblPalletNo1_RF03: TLabel;
+    lblPalletNo2_RF03: TLabel;
+    lblModelNo1_RF03: TLabel;
+    lblModelNo2_RF03: TLabel;
+    lblBmaNo_RF03: TLabel;
+    lblArea_RF03: TLabel;
+    lblPalletBma1_RF03: TLabel;
+    lblPalletBma2_RF03: TLabel;
+    btnRFID_Read3: TButton;
+    Panel112: TPanel;
+    dgInfo_In: TDBGridEh;
+    edt_Step: TEdit;
+    Panel113: TPanel;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -416,6 +428,7 @@ type
     procedure tmrRFIDTimer(Sender: TObject);
     procedure btnCurtainClick(Sender: TObject);
     procedure ButtonClickRFIDRead(Sender: TObject);
+    procedure dgInfo_InDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
   private
     { Private declarations }
   public
@@ -435,6 +448,8 @@ type
     procedure SCTREAD(SC_NO: Integer);
     procedure SC_StatusDisplay(SC_NO: Integer);
     procedure fnRFIDUpdate(Number, Flag: string);
+    procedure fnJobList;
+
 
     function fnSignalMsg(Signal: string): String;
     function fnModeMsg(Signal: string): String;
@@ -637,6 +652,7 @@ begin
     begin
 //      SCTREAD(i);          // SC 상태 Get  메인에서 실행
       SC_StatusDisplay(i); // SC상태 Display
+      fnJobList;
     end;
   except
     on E : Exception do
@@ -696,92 +712,66 @@ procedure TfrmU510.tmrRFIDTimer(Sender: TObject);
 var
   i : Integer;
   Number : string;
+  IsExist, IsRead : Boolean;
 begin
   try
-    for i := START_SCNO to END_SCNO do
+    for i := 1 to 6 do
     begin
-
-      if SC_STATUS[i].D211[08] = '0' then  //화물감지
-      begin
-        fnRFIDUpdate('1', '0');
-      end else
-      if SC_STATUS[i].D213[00] = '1' then  ///RFID READ 신호
-      begin
-        fnRFIDUpdate('1', '1');
-      end else
-      if SC_STATUS[i].D213[00] = '0' then  ///RFID READ 신호
-      begin
-        fnRFIDUpdate('1', '2');
+      case i of
+        1 :
+        begin
+          IsExist := Boolean(SC_STATUS[1].D211[08] = '1');
+          IsRead := Boolean(SC_STATUS[1].D213[00] = '1');
+        end;
+        2 :
+        begin
+          IsExist := Boolean(SC_STATUS[1].D211[09] = '1');
+          IsRead := Boolean(SC_STATUS[1].D213[01] = '1');
+        end;
+        3 :
+        begin
+          IsExist := Boolean(SC_STATUS[1].D211[10] = '1');
+          IsRead := Boolean(SC_STATUS[1].D213[02] = '1');
+        end;
+        4 :
+        begin
+          IsExist := Boolean(SC_STATUS[1].D211[11] = '1');
+          IsRead := Boolean(SC_STATUS[1].D213[03] = '1');
+        end;
+        5 :
+        begin
+          IsExist := Boolean(SC_STATUS[1].D211[12] = '1');
+          IsRead := Boolean(SC_STATUS[1].D213[04] = '1');
+        end;
+        6 :
+        begin
+          IsExist := Boolean(SC_STATUS[1].D211[13] = '1');
+          IsRead := Boolean(SC_STATUS[1].D213[05] = '1');
+        end;
       end;
 
-      if SC_STATUS[i].D211[09] = '0' then
+      // 화물이 없는 경우
+      if (IsExist = False) then
       begin
-        fnRFIDUpdate('2', '0');
+        // 라벨 캡션 초기화
+        fnRFIDUpdate(IntToStr(i), '0');
       end else
-      if SC_STATUS[i].D213[01] = '1' then
+      // 화물 있고 RFID 읽기 신호 켜진 경우
+      if (IsExist = True) and
+         (IsRead = True) then
       begin
-        fnRFIDUpdate('2', '1');
+        fnRFIDUpdate(IntToStr(i), '1');
+        TButton(Self.FindComponent('btnRFID_Read' + IntToStr(i))).Enabled := True;
       end else
-      if SC_STATUS[i].D213[01] = '0' then
+      // 화물 있고 RFID 읽기 신호 꺼진 경우
+      if (IsExist = True) and
+         (IsRead = False) then
       begin
-        fnRFIDUpdate('2', '2');
-      end;
-
-      if SC_STATUS[i].D211[10] = '0' then
-      begin
-        fnRFIDUpdate('3', '0');
-      end else
-      if SC_STATUS[i].D213[02] = '1' then
-      begin
-        fnRFIDUpdate('3', '1');
-      end else
-      if SC_STATUS[i].D213[02] = '0' then
-      begin
-        fnRFIDUpdate('3', '2');
-      end;
-
-      if SC_STATUS[i].D211[11] = '0' then
-      begin
-        fnRFIDUpdate('4', '0');
-      end else
-      if SC_STATUS[i].D213[03] = '1' then
-      begin
-        fnRFIDUpdate('4', '1');
-      end else
-      if SC_STATUS[i].D213[03] = '0' then
-      begin
-        fnRFIDUpdate('4', '2');
-      end;
-
-      if SC_STATUS[i].D211[12] = '0' then
-      begin
-        fnRFIDUpdate('5', '0');
-      end else
-      if SC_STATUS[i].D213[04] = '1' then
-      begin
-        fnRFIDUpdate('5', '1');
-      end else
-      if SC_STATUS[i].D213[04] = '0' then
-      begin
-        fnRFIDUpdate('5', '2');
-      end;
-
-      if SC_STATUS[i].D211[13] = '0' then
-      begin
-        fnRFIDUpdate('6', '0');
-      end else
-      if SC_STATUS[i].D213[05] = '1' then
-      begin
-        fnRFIDUpdate('6', '1');
-      end else
-      if SC_STATUS[i].D213[05] = '0' then
-      begin
-        fnRFIDUpdate('6', '2');
+        fnRFIDUpdate(IntToStr(i), '2');
       end;
     end;
 
-
-    setRFIDOption;
+//    setRFIDOption;
     tmrRFID.Enabled := True ;
   except
     on E : Exception do
@@ -1106,9 +1096,9 @@ begin
   //++++++++++++++++++++++
   // 지시단계
   //++++++++++++++++++++++
-//  edt_Step.Text := fnGetSCSetInfo(SC_NO, 'SC_STATUS');
+  edt_Step.Text := fnGetSCSetInfo(SC_NO, 'SC_STATUS');
 
-{
+
   //++++++++++++++++++++++
   // 기동지시
   //++++++++++++++++++++++
@@ -1119,9 +1109,9 @@ begin
   begin
     TEdit(Self.FindComponent('edt_MoveOn')).Text := '';
   end;
-}
+
   // LHB
-  TEdit(Self.FindComponent('edt_MoveOn')).Text := '';
+//  TEdit(Self.FindComponent('edt_MoveOn')).Text := '';
 
   //++++++++++++++++++++++
   // 데이터초기화
@@ -1587,6 +1577,65 @@ begin
 end;
 
 //==============================================================================
+// fnJobList
+//==============================================================================
+procedure TfrmU510.fnJobList;
+var
+  StrSQL : String;
+begin
+  try
+    with qryInfo do
+    begin
+      Close;
+      SQL.Clear;
+      StrSQL := ' Select REG_TIME, LUGG, JOBD, LINE_NO, ' +
+                    '        SRCSITE, SRCAISLE, SRCBAY, SRCLEVEL, ' +
+                    '        DSTSITE, DSTAISLE, DSTBAY, DSTLEVEL, ' +
+                    '        NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS, ' +
+                    '        JOBREWORK, JOBERRORT, JOBERRORC, JOBERRORD, ' +
+                    '        IS_AUTO, CVFR, CVTO, CVCURR, ETC, EMG, ITM_CD, ' +
+                    '       (Case JOBD  when ''1'' then ''입고'' ' +
+                    '                   when ''2'' then ''출고'' end) as JOBD_DESC, ' +
+                    '       (Case NOWMC when ''1'' then ''컨베어 작업'' ' +
+                    '                   when ''2'' then ''스태커 적재'' ' +
+                    '                   when ''3'' then ''스태커 하역'' ' +
+                    '                   when ''4'' then ''AGV작업'' end) as NOWMC_DESC, ' +
+                    '       (Case NOWSTATUS when ''1'' then ''등록'' ' +
+                    '                       when ''2'' then ''지시'' ' +
+                    '                       when ''3'' then ''이동중'' ' +
+                    '                       when ''4'' then ''완료'' end) as NOWSTATUS_DESC, ' +
+                    '       (Case JOBERRORC when ''0'' then ''정상'' ' +
+                    '                       when ''1'' then ''에러'' end) as JOBERRORC_DESC, ' +
+                    '       (Case when (JOBERRORD = ''0000'') or  ' +
+	                  '                  (JOBERRORD = '''') or ' +
+				            '                  (IsNull(JOBERRORD, '''') = '''') then ''정상'' ' +
+                    '             when JOBERRORD not like ''%불일치%'' then (SELECT ERR_NAME FROM TM_ERROR WHERE ERR_CODE = A.JOBERRORD) ' +
+			              '             else JOBERRORD end ) as JOBERRORD_DESC, ' +
+                    '       (Case BUFFSTATUS when ''0'' then ''대기'' ' +
+                    '                        when ''1'' then ''입고가능'' end) as BUFFSTATUS_DESC, ' +
+                    '       (Case when JOBD = ''1'' then (SUBSTRING(DSTAISLE,4,1)+''-''+SUBSTRING(DSTBAY,3,2)+''-''+SUBSTRING(DSTLEVEL,3,2)) ' +
+	                  '             when JOBD = ''2'' then (SUBSTRING(SRCAISLE,4,1)+''-''+SUBSTRING(SRCBAY,3,2)+''-''+SUBSTRING(SRCLEVEL,3,2)) ' +
+			              '         end) as RackLoc, ' +
+                    '       (SUBSTRING(REG_TIME,1,4)+''-''+SUBSTRING(REG_TIME,5,2)+''-''+SUBSTRING(REG_TIME,7,2)+ '' '' + ' +
+                    '        SUBSTRING(REG_TIME,9,2)+'':''+SUBSTRING(REG_TIME,11,2)+'':''+SUBSTRING(REG_TIME,13,2)) as REG_TIME_CONV, ' +
+                    '       CONVERT(VARCHAR, REG_TIME, 120) as REG_TIME_DESC ' +
+                    '   From TT_ORDER as A     ' +
+                    '  Where JOB_END = ''0''   ' +
+                    '  Order By REG_TIME, LUGG ';
+    SQL.Text := StrSQL;
+    Open;
+    end;
+  except
+    on E : Exception do
+    begin
+      qryInfo.Close;
+      InsertPGMHist('['+FormNo+']', 'E', 'fnJobList', '', 'Exception Error', 'SQL', StrSQL, '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnJobList Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
+    end;
+  end;
+end;
+
+//==============================================================================
 // btnResetClick
 //==============================================================================
 procedure TfrmU510.btnClick(Sender: TObject);
@@ -1771,20 +1820,19 @@ begin
 
   Station_No := IntToStr((Sender as TButton).Tag);
 
-  StrSQL := ' UPDATE TC_CURRENT ' +
-              '    SET OPTION' + Station_No + ' = ''1'''+
-              '  WHERE CURRENT_NAME = ''RF_READ'' ';
-
   try
     with qryTemp do
     begin
       Close;
       SQL.Clear;
+      StrSQL := ' UPDATE TC_CURRENT ' +
+                '    SET OPTION' + Station_No + ' = ''1'''+
+                '  WHERE CURRENT_NAME = ''RF_READ'' ';
       SQL.Text := StrSQL ;
       ExecNo := ExecSQL ;
       if ExecNo > 0 then
       begin
-//        (Sender as TButton).Enabled := False; //버튼 비활성화
+        (Sender as TButton).Enabled := False; //버튼 비활성화
       end;
     end;
     tmrRFID.Enabled := True;
@@ -1799,6 +1847,63 @@ begin
 end;
 
 //==============================================================================
+// dgInfo_InDrawColumnCell
+//==============================================================================
+procedure TfrmU510.dgInfo_InDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer;
+                                           Column: TColumnEh; State: TGridDrawState);
+begin
+  with Sender as TDBGridEh do
+  begin
+    try
+      if DataSource.DataSet.Active and not DataSource.DataSet.IsEmpty then
+      begin
+        with DataSource.DataSet do
+        begin
+          if (FieldByName('LUGG').AsString = edt_Lugg.Text) then
+          begin
+            Canvas.Brush.Color := $00FFB76F;
+          end;
+
+          if (FieldByName('JOBERRORC').AsString = '1') then
+          begin
+            Canvas.Font.Color := clRed;
+            Canvas.Font.Style := [fsBold];
+            Canvas.Brush.Color := $00ACACFF;
+          end else
+          begin
+            Canvas.Font.Color := clBlack;
+            Canvas.Font.Style := [];
+
+            if DataCol=0 then
+            begin
+              if (FieldByName('JOBD').AsString = '1') then   // 입고
+              begin
+                Canvas.Font.Color := clNavy;
+                Canvas.Font.Style := [fsBold];
+              end else                                       // 출고
+              if (FieldByName('JOBD').AsString = '2') then
+              begin
+                Canvas.Font.Style := [fsBold];
+                if (FieldByName('EMG').AsString = '0') then
+                     Canvas.Font.Color := clMaroon      // 일반출고
+                else Canvas.Font.Color := clRed;        // 긴급출고
+              end else
+              begin
+                Canvas.Font.Color := clGreen;
+                Canvas.Font.Style := [fsBold];
+              end;
+            end;
+          end;
+        end;
+        DefaultDrawColumnCell( Rect, DataCol, Column , State );
+      end;
+    except
+      DataSource.DataSet.Close;
+    end;
+  end;
+end;
+
+//==============================================================================
 // setRFIDOption
 //==============================================================================
 procedure TfrmU510.setRFIDOption;
@@ -1806,12 +1911,13 @@ var
   StrSQL, StrSQL2, Station_No : String ;
   ExecNo, i : Integer;
 begin
-  StrSQL  := ' SELECT * FROM TC_CURRENT WHERE CURRENT_NAME = ''RF_READ'' ';
+
   try
     with qryTemp do
     begin
       Close;
       SQL.Clear;
+      StrSQL  := ' SELECT * FROM TC_CURRENT WHERE CURRENT_NAME = ''RF_READ'' ';
       SQL.Text := StrSQL ;
       Open;
       if Not (Bof and Eof) then
