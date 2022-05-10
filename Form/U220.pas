@@ -951,10 +951,6 @@ begin
     Exit;
   end;
 
-  btnOrder.Enabled := False;
-  btnRFIDRead.Enabled := False;
-  Station_No := cbOut.Text;
-
   if ((Station_No = '1') and (SC_STATUS[1].D211[08] = '0')) or
      ((Station_No = '3') and (SC_STATUS[1].D211[10] = '0')) or
      ((Station_No = '5') and (SC_STATUS[1].D211[12] = '0')) then
@@ -962,6 +958,10 @@ begin
     MessageDlg('선택한 입고대에 화물이 없습니다.', mtConfirmation, [mbYes], 0) ;
     Exit;
   end;
+
+  btnOrder.Enabled := False;
+  btnRFIDRead.Enabled := False;
+  Station_No := cbOut.Text;
 
   try
     with qryTemp do
@@ -977,7 +977,7 @@ begin
       if (FieldByName('CNT').AsInteger > 0) then
       begin
         MessageDlg('AGV 자동입고 작업이 있어 불가능 합니다.' + #13#10 +
-                   'RFID를 읽으시려면 ACS를 초기화하고 WMS작업을 삭제(작업취소)해주세요' , mtWarning, [mbYes], 0) ;
+                   'RFID를 읽으시려면 WMS작업을 삭제(작업취소)해주세요' , mtWarning, [mbYes], 0) ;
       end else
       begin
         StrSQL := ' UPDATE TC_CURRENT ' +

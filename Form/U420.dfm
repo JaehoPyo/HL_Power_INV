@@ -193,6 +193,7 @@ object frmU420: TfrmU420
         Date = 42691.722841990740000000
         Format = 'yyyy'#45380' MM'#50900
         Time = 42691.722841990740000000
+        DateMode = dmUpDown
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -20

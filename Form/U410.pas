@@ -13,11 +13,12 @@ uses
 type
   TfrmU410 = class(TForm)
     qryTemp: TADOQuery;
-    qryInfo2: TADOQuery;
-    dsInfo2: TDataSource;
+    qryInfo: TADOQuery;
+    dsInfo: TDataSource;
     EhPrint: TPrintDBGridEh;
     Pnl_Top: TPanel;
     Pnl_Main: TPanel;
+    dgInfo: TDBGridEh;
     GroupBox1: TGroupBox;
     Label31: TLabel;
     dtDateFr: TDateTimePicker;
@@ -34,19 +35,6 @@ type
     ComboBoxBank: TComboBox;
     ComboBoxBay: TComboBox;
     ComboBoxLevel: TComboBox;
-    DBGridEh1: TDBGridEh;
-    Shape2: TShape;
-    Panel1: TPanel;
-    dgInfo: TDBGridEh;
-    Shape1: TShape;
-    qryInfo1: TADOQuery;
-    dsInfo1: TDataSource;
-    qryInfo3: TADOQuery;
-    dsInfo3: TDataSource;
-    GroupBox2: TGroupBox;
-    rgType: TRadioGroup;
-    edtModelNo: TEdit;
-    DBGridEh2: TDBGridEh;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -71,10 +59,6 @@ type
     procedure fnWmMsgRecv (var MSG : TMessage) ; message WM_USER ;
 
     procedure  SetComboBox;
-
-    procedure fnInfo1;
-    procedure fnInfo2;
-    procedure fnInfo3;
   end;
   procedure U410Create();
 
@@ -250,7 +234,7 @@ end;
 procedure TfrmU410.fnCommandPrint;
 begin
   try
-    if not qryInfo1.Active then Exit;
+    if not qryInfo.Active then Exit;
     fnCommandQuery;
     EhPrint.DBGridEh := dgInfo;
     EhPrint.PageHeader.LeftText.Clear;
@@ -282,80 +266,74 @@ var
   StrSQL : String;
 begin
   try
+    with qryInfo do
+    begin
+      Close;
+      SQL.Clear;
+      StrSQL   := ' Select REG_TIME, LUGG, JOBD, LINE_NO,             ' +  #13#10+
+                  '        SRCSITE, SRCAISLE, SRCBAY, SRCLEVEL,        ' +  #13#10+
+                  '        DSTSITE, DSTAISLE, DSTBAY, DSTLEVEL,        ' +  #13#10+
+                  '        NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS,    ' +  #13#10+
+                  '        JOBREWORK, JOBERRORT, JOBERRORC, JOBERRORD, ' +  #13#10+
+                  '        CVFR, CVTO, CVCURR, ETC, EMG, ITM_CD,      ' +  #13#10+
+                  '       (Case JOBD  when ''1'' then ''입고'' ' +  #13#10+
+                  '                   when ''2'' then ''출고'' end) as JOBD_DESC, ' +  #13#10+
+                  '       (Case NOWMC when ''1'' then ''컨베어 작업'' ' +  #13#10+
+                  '                   when ''2'' then ''스태커 적재'' ' +  #13#10+
+                  '                   when ''3'' then ''스태커 하역'' ' + #13#10+
+                  '                   when ''4'' then ''AGV작업'' end) as NOWMC_DESC, ' +  #13#10+
+                  '       (Case NOWSTATUS when ''1'' then ''등록'' ' +  #13#10+
+                  '                       when ''2'' then ''지시'' ' +  #13#10+
+                  '                       when ''3'' then ''진행'' ' +  #13#10+
+                  '                       when ''4'' then ''완료'' end) as NOWSTATUS_DESC, ' +  #13#10+
+                  '       (Case JOBERRORC when ''''  then ''정상'' ' +  #13#10+
+                  '                       when ''0'' then ''정상'' ' +  #13#10+
+                  '                       when NULL  then ''정상'' ' +  #13#10+
+                  '                       when ''1'' then ''에러'' ' +  #13#10+
+                  '                       else ''정상'' end) as JOBERRORC_DESC, ' +  #13#10+
+                  '       (Case when (JOBERRORD = ''0000'') or  ' +
+	                  '                  (JOBERRORD = '''') or ' +
+				            '                  (IsNull(JOBERRORD, '''') = '''') then ''정상'' ' +
+                    '             when JOBERRORD not like ''%불일치%'' then (SELECT ERR_NAME FROM TM_ERROR WHERE ERR_CODE = A.JOBERRORD) ' +
+			              '             else JOBERRORD end ) as JOBERRORD_DESC, ' +
+                  '       (Case BUFFSTATUS when ''0'' then ''대기'' ' +  #13#10+
+                  '                        when ''1'' then ''입고가능'' end) as BUFFSTATUS_DESC, ' +  #13#10+
+                  '       (SUBSTRING(DSTAISLE,4,1)+''-''+SUBSTRING(DSTBAY,3,2)+''-''+SUBSTRING(DSTLEVEL,3,2)) as ID_CODE, ' +  #13#10+
+                  '       (SUBSTRING(REG_TIME,1,4)+''-''+SUBSTRING(REG_TIME,5,2)+''-''+SUBSTRING(REG_TIME,7,2)+''  ''+ ' +  #13#10+
+                  '        SUBSTRING(REG_TIME,9,2)+'':''+SUBSTRING(REG_TIME,11,2)+'':''+SUBSTRING(REG_TIME,13,2)) as REG_TIME_CONV, ' +  #13#10+
+                  '        CONVERT(VARCHAR, REG_TIME, 120) as REG_TIME_DESC, ' +
+                  '        RF_LINE_NAME1, RF_LINE_NAME2, RF_PALLET_NO1, RF_PALLET_NO2, RF_MODEL_NO1, ' +
+                  '        RF_MODEL_NO2, RF_BMA_NO, RF_PALLET_BMA1, RF_PALLET_BMA2, RF_PALLET_BMA3,  ' +
+                  '        RF_AREA  ' +
+                  '   From TT_HISTORY as A ' +  #13#10+
+                  '  Where JOBD    = ''1'' ' +  #13#10+
+                  '    And JOB_END = ''1'' ' ;
 
-      fnInfo1;
-      fnInfo2;
-      fnInfo3;
+                  if (Trim(cbCode.Text)<>'') and (Trim(cbCode.Text)<>'전체') then
+                    StrSQL := StrSQL + ' And ITM_CD= ' + QuotedStr(Trim(cbCode.Text)) ;
 
-//
-//    with qryInfo do
-//    begin
-//      Close;
-//      SQL.Clear;
-//      StrSQL   := ' Select REG_TIME, LUGG, JOBD, LINE_NO,             ' +  #13#10+
-//                  '        SRCSITE, SRCAISLE, SRCBAY, SRCLEVEL,        ' +  #13#10+
-//                  '        DSTSITE, DSTAISLE, DSTBAY, DSTLEVEL,        ' +  #13#10+
-//                  '        NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS,    ' +  #13#10+
-//                  '        JOBREWORK, JOBERRORT, JOBERRORC, JOBERRORD, ' +  #13#10+
-//                  '        CVFR, CVTO, CVCURR, ETC, EMG, ITM_CD,      ' +  #13#10+
-//                  '       (Case JOBD  when ''1'' then ''입고'' ' +  #13#10+
-//                  '                   when ''2'' then ''출고'' end) as JOBD_DESC, ' +  #13#10+
-//                  '       (Case NOWMC when ''1'' then ''컨베어 작업'' ' +  #13#10+
-//                  '                   when ''2'' then ''스태커 적재'' ' +  #13#10+
-//                  '                   when ''3'' then ''스태커 하역'' ' + #13#10+
-//                  '                   when ''4'' then ''AGV작업'' end) as NOWMC_DESC, ' +  #13#10+
-//                  '       (Case NOWSTATUS when ''1'' then ''등록'' ' +  #13#10+
-//                  '                       when ''2'' then ''지시'' ' +  #13#10+
-//                  '                       when ''3'' then ''진행'' ' +  #13#10+
-//                  '                       when ''4'' then ''완료'' end) as NOWSTATUS_DESC, ' +  #13#10+
-//                  '       (Case JOBERRORC when ''''  then ''정상'' ' +  #13#10+
-//                  '                       when ''0'' then ''정상'' ' +  #13#10+
-//                  '                       when NULL  then ''정상'' ' +  #13#10+
-//                  '                       when ''1'' then ''에러'' ' +  #13#10+
-//                  '                       else ''정상'' end) as JOBERRORC_DESC, ' +  #13#10+
-//                  '       (Case when (JOBERRORD = ''0000'') or  ' +
-//	                  '                  (JOBERRORD = '''') or ' +
-//				            '                  (IsNull(JOBERRORD, '''') = '''') then ''정상'' ' +
-//                    '             when JOBERRORD not like ''%불일치%'' then (SELECT ERR_NAME FROM TM_ERROR WHERE ERR_CODE = A.JOBERRORD) ' +
-//			              '             else JOBERRORD end ) as JOBERRORD_DESC, ' +
-//                  '       (Case BUFFSTATUS when ''0'' then ''대기'' ' +  #13#10+
-//                  '                        when ''1'' then ''입고가능'' end) as BUFFSTATUS_DESC, ' +  #13#10+
-//                  '       (SUBSTRING(DSTAISLE,4,1)+''-''+SUBSTRING(DSTBAY,3,2)+''-''+SUBSTRING(DSTLEVEL,3,2)) as ID_CODE, ' +  #13#10+
-//                  '       (SUBSTRING(REG_TIME,1,4)+''-''+SUBSTRING(REG_TIME,5,2)+''-''+SUBSTRING(REG_TIME,7,2)+''  ''+ ' +  #13#10+
-//                  '        SUBSTRING(REG_TIME,9,2)+'':''+SUBSTRING(REG_TIME,11,2)+'':''+SUBSTRING(REG_TIME,13,2)) as REG_TIME_CONV, ' +  #13#10+
-//                  '        CONVERT(VARCHAR, REG_TIME, 120) as REG_TIME_DESC, ' +
-//                  '        RF_LINE_NAME1, RF_LINE_NAME2, RF_PALLET_NO1, RF_PALLET_NO2, RF_MODEL_NO1, ' +
-//                  '        RF_MODEL_NO2, RF_BMA_NO, RF_PALLET_BMA1, RF_PALLET_BMA2, RF_PALLET_BMA3,  ' +
-//                  '        RF_AREA  ' +
-//                  '   From TT_HISTORY as A ' +  #13#10+
-//                  '  Where JOBD    = ''1'' ' +  #13#10+
-//                  '    And JOB_END = ''1'' ' ;
-//
-//                  if (Trim(cbCode.Text)<>'') and (Trim(cbCode.Text)<>'전체') then
-//                    StrSQL := StrSQL + ' And ITM_CD= ' + QuotedStr(Trim(cbCode.Text)) ;
-//
-//                  if (Trim(ComboBoxBank.Text)<>'') and (Trim(ComboBoxBank.Text)<>'전체') then
-//                    StrSQL := StrSQL + ' And DSTAISLE= ' + QuotedStr(FormatFloat('0000',StrToInt(Trim(ComboBoxBank.Text)))) ;
-//
-//                  if (Trim(ComboBoxBay.Text)<>'') and (Trim(ComboBoxBay.Text)<>'전체') then
-//                    StrSQL := StrSQL + ' And DSTBAY= ' + QuotedStr(FormatFloat('0000',StrToInt(Trim(ComboBoxBay.Text)))) ;
-//
-//                  if (Trim(ComboBoxLevel.Text)<>'') and (Trim(ComboBoxLevel.Text)<>'전체') then
-//                    StrSQL := StrSQL + ' And DSTLEVEL= ' + QuotedStr(FormatFloat('0000',StrToInt(Trim(ComboBoxLevel.Text)))) ;
-//
-//                  if cbDateUse.Checked then
-//                    StrSQL := StrSQL + ' And REG_TIME Between ' +
-//                                       '      '''+FormatDateTime('YYYYMMDD', dtDateFr.Date)+''+FormatDateTime('HHNNSS', dtTimeFr.Time)+''' '+
-//                                       '  And '''+FormatDateTime('YYYYMMDD', dtDateTo.Date)+''+FormatDateTime('HHNNSS', dtTimeTo.Time)+''' ';
-//
-//                  StrSQL := StrSQL + '  Order By REG_TIME, LUGG ' ;
-//      SQL.Text := StrSQL ;
-//      Open;
-//    end;
+                  if (Trim(ComboBoxBank.Text)<>'') and (Trim(ComboBoxBank.Text)<>'전체') then
+                    StrSQL := StrSQL + ' And DSTAISLE= ' + QuotedStr(FormatFloat('0000',StrToInt(Trim(ComboBoxBank.Text)))) ;
+
+                  if (Trim(ComboBoxBay.Text)<>'') and (Trim(ComboBoxBay.Text)<>'전체') then
+                    StrSQL := StrSQL + ' And DSTBAY= ' + QuotedStr(FormatFloat('0000',StrToInt(Trim(ComboBoxBay.Text)))) ;
+
+                  if (Trim(ComboBoxLevel.Text)<>'') and (Trim(ComboBoxLevel.Text)<>'전체') then
+                    StrSQL := StrSQL + ' And DSTLEVEL= ' + QuotedStr(FormatFloat('0000',StrToInt(Trim(ComboBoxLevel.Text)))) ;
+
+                  if cbDateUse.Checked then
+                    StrSQL := StrSQL + ' And REG_TIME Between ' +
+                                       '      '''+FormatDateTime('YYYYMMDD', dtDateFr.Date)+''+FormatDateTime('HHNNSS', dtTimeFr.Time)+''' '+
+                                       '  And '''+FormatDateTime('YYYYMMDD', dtDateTo.Date)+''+FormatDateTime('HHNNSS', dtTimeTo.Time)+''' ';
+
+                  StrSQL := StrSQL + '  Order By REG_TIME, LUGG ' ;
+      SQL.Text := StrSQL ;
+      Open;
+    end;
   except
     on E : Exception do
     begin
-      //qryInfo.Close;
+      qryInfo.Close;
       InsertPGMHist('['+FormNo+']', 'E', 'fnCommandQuery', '조회', 'Exception Error', 'SQL', StrSQL, '', E.Message);
       TraceLogWrite('['+FormNo+'] procedure fnCommandQuery Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
     end;
@@ -376,382 +354,6 @@ end;
 procedure TfrmU410.fnCommandLang;
 begin
 //
-end;
-
-//==============================================================================
-// fnInfo1  시간별 입출고 실적
-//==============================================================================
-procedure TfrmU410.fnInfo1;
-var
-  StrSQL : String;
-  WhereStr : String;
-begin
-  try
-    WhereStr := '';
-    if (rgType.ItemIndex = 1) then
-    begin
-      WhereStr := WhereStr + ' AND ITM_CD = ' + QuotedStr('FULL');
-    end else
-    if (rgType.ItemIndex = 2) then
-    begin
-      WhereStr := WhereStr + ' AND ITM_CD = ' + QuotedStr('EPLT');
-    end else
-    if (rgType.ItemIndex = 3) then
-    begin
-      WhereStr := WhereStr + ' AND ITM_CD not in (''FULL'', ''EPLT'') ';
-    end;
-
-    if (Trim(edtModelNo.Text) <> '') then
-    begin
-      WhereStr := WhereStr + ' AND UPPER(RF_MODEL_NO1) like ' + QuotedStr('%' + Trim(UpperCase(edtModelNo.Text)) + '%');
-    end;
-
-
-    with qryInfo1 do
-    begin
-      Close;
-      SQL.Clear;
-      StrSQL := ' SELECT JOB_HOUR, ISNULL(IN_CNT, 0) AS IN_CNT, ISNULL(OT_CNT, 0) AS OT_CNT ' +
-                  ' FROM (SELECT ''08H'' AS JOB_HOUR ' +
-                             ' , SUM(CASE WHEN JOBD = ''1'' THEN 1 ELSE 0 END) AS IN_CNT ' +
-                             ' , SUM(CASE WHEN JOBD = ''2'' THEN 1 ELSE 0 END) AS OT_CNT ' +
-                          ' FROM TT_HISTORY ' +
-                         ' WHERE HIS_TIME BETWEEN ' + QuotedStr(FormatDateTime('YYYY-MM-DD', dtDateFr.Date) + ' 08:00:00') +
-                                            ' AND ' + QuotedStr(FormatdateTime('YYYY-MM-DD', dtDateFr.Date) + ' 08:59:59') +
-                           ' AND JOB_END = ''1'' ' +
-                           WhereStr +
-                         ' UNION ALL ' +
-                         'SELECT ''09H'' AS JOB_HOUR ' +
-                             ' , SUM(CASE WHEN JOBD = ''1'' THEN 1 ELSE 0 END) AS IN_CNT ' +
-                             ' , SUM(CASE WHEN JOBD = ''2'' THEN 1 ELSE 0 END) AS OT_CNT ' +
-                          ' FROM TT_HISTORY ' +
-                         ' WHERE HIS_TIME BETWEEN ' + QuotedStr(FormatDateTime('YYYY-MM-DD', dtDateFr.Date) + ' 09:00:00') +
-                                            ' AND ' + QuotedStr(FormatdateTime('YYYY-MM-DD', dtDateFr.Date) + ' 09:59:59') +
-                           ' AND JOB_END = ''1'' ' +
-                           WhereStr +
-                         ' UNION ALL ' +
-                         'SELECT ''10H'' AS JOB_HOUR ' +
-                             ' , SUM(CASE WHEN JOBD = ''1'' THEN 1 ELSE 0 END) AS IN_CNT ' +
-                             ' , SUM(CASE WHEN JOBD = ''2'' THEN 1 ELSE 0 END) AS OT_CNT ' +
-                          ' FROM TT_HISTORY ' +
-                         ' WHERE HIS_TIME BETWEEN ' + QuotedStr(FormatDateTime('YYYY-MM-DD', dtDateFr.Date) + ' 10:00:00') +
-                                            ' AND ' + QuotedStr(FormatdateTime('YYYY-MM-DD', dtDateFr.Date) + ' 10:59:59') +
-                           ' AND JOB_END = ''1'' ' +
-                           WhereStr +
-                         ' UNION ALL ' +
-                         'SELECT ''11H'' AS JOB_HOUR ' +
-                             ' , SUM(CASE WHEN JOBD = ''1'' THEN 1 ELSE 0 END) AS IN_CNT ' +
-                             ' , SUM(CASE WHEN JOBD = ''2'' THEN 1 ELSE 0 END) AS OT_CNT ' +
-                          ' FROM TT_HISTORY ' +
-                         ' WHERE HIS_TIME BETWEEN ' + QuotedStr(FormatDateTime('YYYY-MM-DD', dtDateFr.Date) + ' 11:00:00') +
-                                            ' AND ' + QuotedStr(FormatdateTime('YYYY-MM-DD', dtDateFr.Date) + ' 11:59:59') +
-                           ' AND JOB_END = ''1'' ' +
-                           WhereStr +
-                         ' UNION ALL ' +
-                         'SELECT ''12H'' AS JOB_HOUR ' +
-                             ' , SUM(CASE WHEN JOBD = ''1'' THEN 1 ELSE 0 END) AS IN_CNT ' +
-                             ' , SUM(CASE WHEN JOBD = ''2'' THEN 1 ELSE 0 END) AS OT_CNT ' +
-                          ' FROM TT_HISTORY ' +
-                         ' WHERE HIS_TIME BETWEEN ' + QuotedStr(FormatDateTime('YYYY-MM-DD', dtDateFr.Date) + ' 12:00:00') +
-                                            ' AND ' + QuotedStr(FormatdateTime('YYYY-MM-DD', dtDateFr.Date) + ' 12:59:59') +
-                           ' AND JOB_END = ''1'' ' +
-                           WhereStr +
-                         ' UNION ALL ' +
-                         'SELECT ''13H'' AS JOB_HOUR ' +
-                             ' , SUM(CASE WHEN JOBD = ''1'' THEN 1 ELSE 0 END) AS IN_CNT ' +
-                             ' , SUM(CASE WHEN JOBD = ''2'' THEN 1 ELSE 0 END) AS OT_CNT ' +
-                          ' FROM TT_HISTORY ' +
-                         ' WHERE HIS_TIME BETWEEN ' + QuotedStr(FormatDateTime('YYYY-MM-DD', dtDateFr.Date) + ' 13:00:00') +
-                                            ' AND ' + QuotedStr(FormatdateTime('YYYY-MM-DD', dtDateFr.Date) + ' 13:59:59') +
-                           ' AND JOB_END = ''1'' ' +
-                           WhereStr +
-                         ' UNION ALL ' +
-                         'SELECT ''14H'' AS JOB_HOUR ' +
-                             ' , SUM(CASE WHEN JOBD = ''1'' THEN 1 ELSE 0 END) AS IN_CNT ' +
-                             ' , SUM(CASE WHEN JOBD = ''2'' THEN 1 ELSE 0 END) AS OT_CNT ' +
-                          ' FROM TT_HISTORY ' +
-                         ' WHERE HIS_TIME BETWEEN ' + QuotedStr(FormatDateTime('YYYY-MM-DD', dtDateFr.Date) + ' 14:00:00') +
-                                            ' AND ' + QuotedStr(FormatdateTime('YYYY-MM-DD', dtDateFr.Date) + ' 14:59:59') +
-                           ' AND JOB_END = ''1'' ' +
-                           WhereStr +
-                         ' UNION ALL ' +
-                         'SELECT ''15H'' AS JOB_HOUR ' +
-                             ' , SUM(CASE WHEN JOBD = ''1'' THEN 1 ELSE 0 END) AS IN_CNT ' +
-                             ' , SUM(CASE WHEN JOBD = ''2'' THEN 1 ELSE 0 END) AS OT_CNT ' +
-                          ' FROM TT_HISTORY ' +
-                         ' WHERE HIS_TIME BETWEEN ' + QuotedStr(FormatDateTime('YYYY-MM-DD', dtDateFr.Date) + ' 15:00:00') +
-                                            ' AND ' + QuotedStr(FormatdateTime('YYYY-MM-DD', dtDateFr.Date) + ' 15:59:59') +
-                           ' AND JOB_END = ''1'' ' +
-                           WhereStr +
-                         ' UNION ALL ' +
-                         'SELECT ''16H'' AS JOB_HOUR ' +
-                             ' , SUM(CASE WHEN JOBD = ''1'' THEN 1 ELSE 0 END) AS IN_CNT ' +
-                             ' , SUM(CASE WHEN JOBD = ''2'' THEN 1 ELSE 0 END) AS OT_CNT ' +
-                          ' FROM TT_HISTORY ' +
-                         ' WHERE HIS_TIME BETWEEN ' + QuotedStr(FormatDateTime('YYYY-MM-DD', dtDateFr.Date) + ' 16:00:00') +
-                                            ' AND ' + QuotedStr(FormatdateTime('YYYY-MM-DD', dtDateFr.Date) + ' 16:59:59') +
-                           ' AND JOB_END = ''1'' ' +
-                           WhereStr +
-                         ' UNION ALL ' +
-                         'SELECT ''17H'' AS JOB_HOUR ' +
-                             ' , SUM(CASE WHEN JOBD = ''1'' THEN 1 ELSE 0 END) AS IN_CNT ' +
-                             ' , SUM(CASE WHEN JOBD = ''2'' THEN 1 ELSE 0 END) AS OT_CNT ' +
-                          ' FROM TT_HISTORY ' +
-                         ' WHERE HIS_TIME BETWEEN ' + QuotedStr(FormatDateTime('YYYY-MM-DD', dtDateFr.Date) + ' 17:00:00') +
-                                            ' AND ' + QuotedStr(FormatdateTime('YYYY-MM-DD', dtDateFr.Date) + ' 17:59:59') +
-                           ' AND JOB_END = ''1'' ' +
-                           WhereStr +
-                         ' UNION ALL ' +
-                         'SELECT ''18H'' AS JOB_HOUR ' +
-                             ' , SUM(CASE WHEN JOBD = ''1'' THEN 1 ELSE 0 END) AS IN_CNT ' +
-                             ' , SUM(CASE WHEN JOBD = ''2'' THEN 1 ELSE 0 END) AS OT_CNT ' +
-                          ' FROM TT_HISTORY ' +
-                         ' WHERE HIS_TIME BETWEEN ' + QuotedStr(FormatDateTime('YYYY-MM-DD', dtDateFr.Date) + ' 18:00:00') +
-                                            ' AND ' + QuotedStr(FormatdateTime('YYYY-MM-DD', dtDateFr.Date) + ' 18:59:59') +
-                           ' AND JOB_END = ''1'' ' +
-                           WhereStr +
-                         ' UNION ALL ' +
-                         'SELECT ''19H'' AS JOB_HOUR ' +
-                             ' , SUM(CASE WHEN JOBD = ''1'' THEN 1 ELSE 0 END) AS IN_CNT ' +
-                             ' , SUM(CASE WHEN JOBD = ''2'' THEN 1 ELSE 0 END) AS OT_CNT ' +
-                          ' FROM TT_HISTORY ' +
-                         ' WHERE HIS_TIME BETWEEN ' + QuotedStr(FormatDateTime('YYYY-MM-DD', dtDateFr.Date) + ' 19:00:00') +
-                                            ' AND ' + QuotedStr(FormatdateTime('YYYY-MM-DD', dtDateFr.Date) + ' 19:59:59') +
-                           ' AND JOB_END = ''1'' ' +
-                           WhereStr +
-                         ' UNION ALL ' +
-                         'SELECT ''20H'' AS JOB_HOUR ' +
-                             ' , SUM(CASE WHEN JOBD = ''1'' THEN 1 ELSE 0 END) AS IN_CNT ' +
-                             ' , SUM(CASE WHEN JOBD = ''2'' THEN 1 ELSE 0 END) AS OT_CNT ' +
-                          ' FROM TT_HISTORY ' +
-                         ' WHERE HIS_TIME BETWEEN ' + QuotedStr(FormatDateTime('YYYY-MM-DD', dtDateFr.Date) + ' 20:00:00') +
-                                            ' AND ' + QuotedStr(FormatdateTime('YYYY-MM-DD', dtDateFr.Date) + ' 20:59:59') +
-                           ' AND JOB_END = ''1'' ' +
-                           WhereStr +
-                         ' UNION ALL ' +
-                         'SELECT ''21H'' AS JOB_HOUR ' +
-                             ' , SUM(CASE WHEN JOBD = ''1'' THEN 1 ELSE 0 END) AS IN_CNT ' +
-                             ' , SUM(CASE WHEN JOBD = ''2'' THEN 1 ELSE 0 END) AS OT_CNT ' +
-                          ' FROM TT_HISTORY ' +
-                         ' WHERE HIS_TIME BETWEEN ' + QuotedStr(FormatDateTime('YYYY-MM-DD', dtDateFr.Date) + ' 21:00:00') +
-                                            ' AND ' + QuotedStr(FormatdateTime('YYYY-MM-DD', dtDateFr.Date) + ' 21:59:59') +
-                           ' AND JOB_END = ''1'' ' +
-                           WhereStr +
-                         ' UNION ALL ' +
-                         'SELECT ''22H'' AS JOB_HOUR ' +
-                             ' , SUM(CASE WHEN JOBD = ''1'' THEN 1 ELSE 0 END) AS IN_CNT ' +
-                             ' , SUM(CASE WHEN JOBD = ''2'' THEN 1 ELSE 0 END) AS OT_CNT ' +
-                          ' FROM TT_HISTORY ' +
-                         ' WHERE HIS_TIME BETWEEN ' + QuotedStr(FormatDateTime('YYYY-MM-DD', dtDateFr.Date) + ' 22:00:00') +
-                                            ' AND ' + QuotedStr(FormatdateTime('YYYY-MM-DD', dtDateFr.Date) + ' 22:59:59') +
-                           ' AND JOB_END = ''1'' ' +
-                           WhereStr +
-                         ' UNION ALL ' +
-                         'SELECT ''23H'' AS JOB_HOUR ' +
-                             ' , SUM(CASE WHEN JOBD = ''1'' THEN 1 ELSE 0 END) AS IN_CNT ' +
-                             ' , SUM(CASE WHEN JOBD = ''2'' THEN 1 ELSE 0 END) AS OT_CNT ' +
-                          ' FROM TT_HISTORY ' +
-                         ' WHERE HIS_TIME BETWEEN ' + QuotedStr(FormatDateTime('YYYY-MM-DD', dtDateFr.Date) + ' 23:00:00') +
-                                            ' AND ' + QuotedStr(FormatdateTime('YYYY-MM-DD', dtDateFr.Date) + ' 23:59:59') +
-                           ' AND JOB_END = ''1'' ' +
-                           WhereStr +
-                         ' UNION ALL ' +
-                         'SELECT ''합계'' AS JOB_HOUR ' +
-                             ' , SUM(CASE WHEN JOBD = ''1'' THEN 1 ELSE 0 END) AS IN_CNT ' +
-                             ' , SUM(CASE WHEN JOBD = ''2'' THEN 1 ELSE 0 END) AS OT_CNT ' +
-                          ' FROM TT_HISTORY ' +
-                         ' WHERE HIS_TIME BETWEEN ' + QuotedStr(FormatDateTime('YYYY-MM-DD', dtDateFr.Date) + ' 08:00:00') +
-                                            ' AND ' + QuotedStr(FormatdateTime('YYYY-MM-DD', dtDateFr.Date) + ' 23:59:59') +
-                           ' AND JOB_END = ''1'' ' +
-                           WhereStr +
-                         ' ) as A ' ;
-      SQL.Text := StrSQL;
-      Open;
-    end;
-  except
-    on E : Exception do
-    begin
-      qryInfo1.Close;
-      InsertPGMHist('['+FormNo+']', 'E', 'fnInfo1', '조회', 'Exception Error', 'SQL', StrSQL, '', E.Message);
-      TraceLogWrite('['+FormNo+'] procedure fnInfo1 Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
-    end;
-  end;
-end;
-
-//==============================================================================
-// fnInfo2  일간 입고 실적
-//==============================================================================
-procedure TfrmU410.fnInfo2;
-var
-  StrSQL : String;
-  WhereStr : String;
-begin
-  try
-    WhereStr := '';
-    if (rgType.ItemIndex = 1) then
-    begin
-      WhereStr := WhereStr + ' AND ITM_CD = ' + QuotedStr('FULL');
-    end else
-    if (rgType.ItemIndex = 2) then
-    begin
-      WhereStr := WhereStr + ' AND ITM_CD = ' + QuotedStr('EPLT');
-    end else
-    if (rgType.ItemIndex = 3) then
-    begin
-      WhereStr := WhereStr + ' AND ITM_CD not in (''FULL'', ''EPLT'') ';
-    end;
-
-    if (Trim(edtModelNo.Text) <> '') then
-    begin
-      WhereStr := WhereStr + ' AND UPPER(RF_MODEL_NO1) like ' + QuotedStr('%' + Trim(UpperCase(edtModelNo.Text)) + '%');
-    end;
-
-
-    with qryInfo2 do
-    begin
-      Close;
-      SQL.Clear;
-      StrSQL   := ' Select REG_TIME, LUGG, JOBD, LINE_NO,             ' +  #13#10+
-                  '        SRCSITE, SRCAISLE, SRCBAY, SRCLEVEL,        ' +  #13#10+
-                  '        DSTSITE, DSTAISLE, DSTBAY, DSTLEVEL,        ' +  #13#10+
-                  '        NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS,    ' +  #13#10+
-                  '        JOBREWORK, JOBERRORT, JOBERRORC, JOBERRORD, ' +  #13#10+
-                  '        CVFR, CVTO, CVCURR, ETC, EMG, ITM_CD,      ' +  #13#10+
-                  '       (Case JOBD  when ''1'' then ''입고'' ' +  #13#10+
-                  '                   when ''2'' then ''출고'' end) as JOBD_DESC, ' +  #13#10+
-                  '       (Case NOWMC when ''1'' then ''컨베어 작업'' ' +  #13#10+
-                  '                   when ''2'' then ''스태커 적재'' ' +  #13#10+
-                  '                   when ''3'' then ''스태커 하역'' ' + #13#10+
-                  '                   when ''4'' then ''AGV작업'' end) as NOWMC_DESC, ' +  #13#10+
-                  '       (Case NOWSTATUS when ''1'' then ''등록'' ' +  #13#10+
-                  '                       when ''2'' then ''지시'' ' +  #13#10+
-                  '                       when ''3'' then ''진행'' ' +  #13#10+
-                  '                       when ''4'' then ''완료'' end) as NOWSTATUS_DESC, ' +  #13#10+
-                  '       (Case JOBERRORC when ''''  then ''정상'' ' +  #13#10+
-                  '                       when ''0'' then ''정상'' ' +  #13#10+
-                  '                       when NULL  then ''정상'' ' +  #13#10+
-                  '                       when ''1'' then ''에러'' ' +  #13#10+
-                  '                       else ''정상'' end) as JOBERRORC_DESC, ' +  #13#10+
-                  '       (Case when (JOBERRORD = ''0000'') or  ' +
-	                  '                  (JOBERRORD = '''') or ' +
-				            '                  (IsNull(JOBERRORD, '''') = '''') then ''정상'' ' +
-                    '             when JOBERRORD not like ''%불일치%'' then (SELECT ERR_NAME FROM TM_ERROR WHERE ERR_CODE = A.JOBERRORD) ' +
-			              '             else JOBERRORD end ) as JOBERRORD_DESC, ' +
-                  '       (Case BUFFSTATUS when ''0'' then ''대기'' ' +  #13#10+
-                  '                        when ''1'' then ''입고가능'' end) as BUFFSTATUS_DESC, ' +  #13#10+
-                  '       (SUBSTRING(DSTAISLE,4,1)+''-''+SUBSTRING(DSTBAY,3,2)+''-''+SUBSTRING(DSTLEVEL,3,2)) as ID_CODE, ' +  #13#10+
-                  '       (SUBSTRING(REG_TIME,1,4)+''-''+SUBSTRING(REG_TIME,5,2)+''-''+SUBSTRING(REG_TIME,7,2)+''  ''+ ' +  #13#10+
-                  '        SUBSTRING(REG_TIME,9,2)+'':''+SUBSTRING(REG_TIME,11,2)+'':''+SUBSTRING(REG_TIME,13,2)) as REG_TIME_CONV, ' +  #13#10+
-                  '        CONVERT(VARCHAR, REG_TIME, 120) as REG_TIME_DESC, ' +
-                  '        RF_LINE_NAME1, RF_LINE_NAME2, RF_PALLET_NO1, RF_PALLET_NO2, RF_MODEL_NO1, ' +
-                  '        RF_MODEL_NO2, RF_BMA_NO, RF_PALLET_BMA1, RF_PALLET_BMA2, RF_PALLET_BMA3,  ' +
-                  '        RF_AREA, RF_NEW_BMA  ' +
-                  '   From TT_HISTORY as A ' +  #13#10+
-                  '  Where JOBD    = ''1'' ' +  #13#10+
-                  '    And JOB_END = ''1'' ' +
-                  '    And HIS_TIME BETWEEN ' + QuotedStr(FormatDateTime('YYYY-MM-DD', dtDateFr.Date) + ' 00:00:00') +
-                                  ' AND ' + QuotedStr(FormatdateTime('YYYY-MM-DD', dtDateFr.Date) + ' 23:59:59') +
-                  WhereStr ;
-                  StrSQL := StrSQL + '  Order By REG_TIME, LUGG ' ;
-      SQL.Text := StrSQL ;
-      Open;
-    end;
-  except
-    on E : Exception do
-    begin
-      qryInfo2.Close;
-      InsertPGMHist('['+FormNo+']', 'E', 'fnInfo2', '조회', 'Exception Error', 'SQL', StrSQL, '', E.Message);
-      TraceLogWrite('['+FormNo+'] procedure fnInfo2 Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
-    end;
-  end;
-end;
-
-//==============================================================================
-// fnInfo3  일간 출고 실적
-//==============================================================================
-procedure TfrmU410.fnInfo3;
-var
-  StrSQL : String;
-  WhereStr : String;
-begin
-  try
-    WhereStr := '';
-    if (rgType.ItemIndex = 1) then
-    begin
-      WhereStr := WhereStr + ' AND ITM_CD = ' + QuotedStr('FULL');
-    end else
-    if (rgType.ItemIndex = 2) then
-    begin
-      WhereStr := WhereStr + ' AND ITM_CD = ' + QuotedStr('EPLT');
-    end else
-    if (rgType.ItemIndex = 3) then
-    begin
-      WhereStr := WhereStr + ' AND ITM_CD not in (''FULL'', ''EPLT'') ';
-    end;
-
-    if (Trim(edtModelNo.Text) <> '') then
-    begin
-      WhereStr := WhereStr + ' AND UPPER(RF_MODEL_NO1) like ' + QuotedStr('%' + Trim(UpperCase(edtModelNo.Text)) + '%');
-    end;
-
-
-    with qryInfo3 do
-    begin
-      Close;
-      SQL.Clear;
-      StrSQL   := ' Select REG_TIME, LUGG, JOBD, LINE_NO,             ' +  #13#10+
-                  '        SRCSITE, SRCAISLE, SRCBAY, SRCLEVEL,        ' +  #13#10+
-                  '        DSTSITE, DSTAISLE, DSTBAY, DSTLEVEL,        ' +  #13#10+
-                  '        NOWMC, JOBSTATUS, NOWSTATUS, BUFFSTATUS,    ' +  #13#10+
-                  '        JOBREWORK, JOBERRORT, JOBERRORC, JOBERRORD, ' +  #13#10+
-                  '        CVFR, CVTO, CVCURR, ETC, EMG, ITM_CD,      ' +  #13#10+
-                  '       (Case JOBD  when ''1'' then ''입고'' ' +  #13#10+
-                  '                   when ''2'' then ''출고'' end) as JOBD_DESC, ' +  #13#10+
-                  '       (Case NOWMC when ''1'' then ''컨베어 작업'' ' +  #13#10+
-                  '                   when ''2'' then ''스태커 적재'' ' +  #13#10+
-                  '                   when ''3'' then ''스태커 하역'' ' + #13#10+
-                  '                   when ''4'' then ''AGV작업'' end) as NOWMC_DESC, ' +  #13#10+
-                  '       (Case NOWSTATUS when ''1'' then ''등록'' ' +  #13#10+
-                  '                       when ''2'' then ''지시'' ' +  #13#10+
-                  '                       when ''3'' then ''진행'' ' +  #13#10+
-                  '                       when ''4'' then ''완료'' end) as NOWSTATUS_DESC, ' +  #13#10+
-                  '       (Case JOBERRORC when ''''  then ''정상'' ' +  #13#10+
-                  '                       when ''0'' then ''정상'' ' +  #13#10+
-                  '                       when NULL  then ''정상'' ' +  #13#10+
-                  '                       when ''1'' then ''에러'' ' +  #13#10+
-                  '                       else ''정상'' end) as JOBERRORC_DESC, ' +  #13#10+
-                  '       (Case when (JOBERRORD = ''0000'') or  ' +
-	                  '                  (JOBERRORD = '''') or ' +
-				            '                  (IsNull(JOBERRORD, '''') = '''') then ''정상'' ' +
-                    '             when JOBERRORD not like ''%불일치%'' then (SELECT ERR_NAME FROM TM_ERROR WHERE ERR_CODE = A.JOBERRORD) ' +
-			              '             else JOBERRORD end ) as JOBERRORD_DESC, ' +
-                  '       (Case BUFFSTATUS when ''0'' then ''대기'' ' +  #13#10+
-                  '                        when ''1'' then ''입고가능'' end) as BUFFSTATUS_DESC, ' +  #13#10+
-                  '       (SUBSTRING(DSTAISLE,4,1)+''-''+SUBSTRING(DSTBAY,3,2)+''-''+SUBSTRING(DSTLEVEL,3,2)) as ID_CODE, ' +  #13#10+
-                  '       (SUBSTRING(REG_TIME,1,4)+''-''+SUBSTRING(REG_TIME,5,2)+''-''+SUBSTRING(REG_TIME,7,2)+''  ''+ ' +  #13#10+
-                  '        SUBSTRING(REG_TIME,9,2)+'':''+SUBSTRING(REG_TIME,11,2)+'':''+SUBSTRING(REG_TIME,13,2)) as REG_TIME_CONV, ' +  #13#10+
-                  '        CONVERT(VARCHAR, REG_TIME, 120) as REG_TIME_DESC, ' +
-                  '        RF_LINE_NAME1, RF_LINE_NAME2, RF_PALLET_NO1, RF_PALLET_NO2, RF_MODEL_NO1, ' +
-                  '        RF_MODEL_NO2, RF_BMA_NO, RF_PALLET_BMA1, RF_PALLET_BMA2, RF_PALLET_BMA3,  ' +
-                  '        RF_AREA, RF_NEW_BMA  ' +
-                  '   From TT_HISTORY as A ' +  #13#10+
-                  '  Where JOBD    = ''2'' ' +  #13#10+
-                  '    And JOB_END = ''1'' ' +
-                  '    And HIS_TIME BETWEEN ' + QuotedStr(FormatDateTime('YYYY-MM-DD', dtDateFr.Date) + ' 00:00:00') +
-                                  ' AND ' + QuotedStr(FormatdateTime('YYYY-MM-DD', dtDateFr.Date) + ' 23:59:59') +
-                  WhereStr ;
-                  StrSQL := StrSQL + '  Order By REG_TIME, LUGG ' ;
-      SQL.Text := StrSQL ;
-      Open;
-    end;
-  except
-    on E : Exception do
-    begin
-      qryInfo3.Close;
-      InsertPGMHist('['+FormNo+']', 'E', 'fnInfo3', '조회', 'Exception Error', 'SQL', StrSQL, '', E.Message);
-      TraceLogWrite('['+FormNo+'] procedure fnInfo3 Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
-    end;
-  end;
 end;
 
 //==============================================================================
@@ -787,7 +389,7 @@ begin
   except
     on E : Exception do
     begin
-      qryInfo1.Close;
+      qryInfo.Close;
       InsertPGMHist('['+FormNo+']', 'E', 'SetComboBox', '', 'Exception Error', 'PGM', '', '', E.Message);
       TraceLogWrite('['+FormNo+'] procedure SetComboBox Fail || ERR['+E.Message+']');
     end;
