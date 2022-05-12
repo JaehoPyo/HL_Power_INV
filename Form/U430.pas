@@ -21,8 +21,6 @@ type
     dtDateTo: TDateTimePicker;
     dtTimeTo: TDateTimePicker;
     cbDateUse: TCheckBox;
-    gbCode: TGroupBox;
-    cbCode: TComboBox;
     gbCell: TGroupBox;
     Label1: TLabel;
     Label2: TLabel;
@@ -35,6 +33,9 @@ type
     qryTemp: TADOQuery;
     EhPrint: TPrintDBGridEh;
     dgInfo: TDBGridEh;
+    GroupBox3: TGroupBox;
+    edtModelNo: TEdit;
+    rgType: TRadioGroup;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -58,7 +59,6 @@ type
     procedure fnCommandLang;
     procedure fnWmMsgRecv (var MSG : TMessage) ; message WM_USER ;
 
-    procedure SetComboBox;
   end;
   procedure U430Create();
 
@@ -124,7 +124,6 @@ begin
   dtDateTo.Date := StrToDate(FormatDateTime('YYYY-MM-DD',Now));
   dtTimeTo.Time := StrToTime(FormatDateTime('HH:NN:SS',Now));
 
-  SetComboBox ;
   fnCommandQuery ;
 end;
 
@@ -311,24 +310,32 @@ begin
                   '  Where JOBD    = ''7'' ' +  #13#10+
                   '    And JOB_END = ''1'' ' ;
 
-                  if (Trim(cbCode.Text)<>'') and (Trim(cbCode.Text)<>'전체') then
-                    StrSQL := StrSQL + ' And ITM_CD= ' + QuotedStr(Trim(cbCode.Text)) ;
+      if (Trim(ComboBoxBank.Text)<>'') and (Trim(ComboBoxBank.Text)<>'전체') then
+        StrSQL := StrSQL + ' And SRCAISLE= ' + QuotedStr(FormatFloat('0000',StrToInt(Trim(ComboBoxBank.Text)))) ;
 
-                  if (Trim(ComboBoxBank.Text)<>'') and (Trim(ComboBoxBank.Text)<>'전체') then
-                    StrSQL := StrSQL + ' And SRCAISLE= ' + QuotedStr(FormatFloat('0000',StrToInt(Trim(ComboBoxBank.Text)))) ;
+      if (Trim(ComboBoxBay.Text)<>'') and (Trim(ComboBoxBay.Text)<>'전체') then
+        StrSQL := StrSQL + ' And SRCBAY= ' + QuotedStr(FormatFloat('0000',StrToInt(Trim(ComboBoxBay.Text)))) ;
 
-                  if (Trim(ComboBoxBay.Text)<>'') and (Trim(ComboBoxBay.Text)<>'전체') then
-                    StrSQL := StrSQL + ' And SRCBAY= ' + QuotedStr(FormatFloat('0000',StrToInt(Trim(ComboBoxBay.Text)))) ;
+      if (Trim(ComboBoxLevel.Text)<>'') and (Trim(ComboBoxLevel.Text)<>'전체') then
+        StrSQL := StrSQL + ' And SRCLEVEL= ' + QuotedStr(FormatFloat('0000',StrToInt(Trim(ComboBoxLevel.Text)))) ;
 
-                  if (Trim(ComboBoxLevel.Text)<>'') and (Trim(ComboBoxLevel.Text)<>'전체') then
-                    StrSQL := StrSQL + ' And SRCLEVEL= ' + QuotedStr(FormatFloat('0000',StrToInt(Trim(ComboBoxLevel.Text)))) ;
+      if cbDateUse.Checked then
+        StrSQL := StrSQL + ' And REG_TIME BetWeen ' +
+                           '      '''+FormatDateTime('YYYYMMDD', dtDateFr.Date)+''+FormatDateTime('HHNNSS', dtTimeFr.Time)+''' '+
+                           '  And '''+FormatDateTime('YYYYMMDD', dtDateTo.Date)+''+FormatDateTime('HHNNSS', dtTimeTo.Time)+''' ';
 
-                  if cbDateUse.Checked then
-                    StrSQL := StrSQL + ' And REG_TIME BetWeen ' +
-                                       '      '''+FormatDateTime('YYYYMMDD', dtDateFr.Date)+''+FormatDateTime('HHNNSS', dtTimeFr.Time)+''' '+
-                                       '  And '''+FormatDateTime('YYYYMMDD', dtDateTo.Date)+''+FormatDateTime('HHNNSS', dtTimeTo.Time)+''' ';
+      if (Trim(UpperCase(edtModelNo.Text)) <> '') then
+        StrSQL := StrSQL + ' And UPPER(RF_MODEL_NO1) like ' + QuotedStr('%' + Trim(UpperCase(edtModelNo.Text)) + '%');
 
-                  StrSQL := StrSQL + '  Order By REG_TIME, LUGG ' ;
+      if (rgType.ItemIndex = 1) then
+        StrSQL := StrSQL + ' And ITM_CD = ''FULL'' '
+      else if (rgType.ItemIndex = 2) then
+        StrSQL := StrSQL + ' And ITM_CD = ''EPLT'' '
+      else if (rgType.ItemIndex = 3) then
+        StrSQL := StrSQL + ' And ITM_CD not in (''FULL'', ''EPLT'')' ;
+
+
+      StrSQL := StrSQL + '  Order By REG_TIME, LUGG ' ;
       SQL.Text := StrSQL;
       Open;
     end;
@@ -356,46 +363,6 @@ end;
 procedure TfrmU430.fnCommandLang;
 begin
 //
-end;
-
-//==============================================================================
-// SetComboBox [콤보박스 데이터 추가]
-//==============================================================================
-procedure TfrmU430.SetComboBox;
-var
-  StrSQL : String;
-begin
-  try
-    cbCode.Clear ;
-    cbCode.Items.Add('전체');
-    cbCode.ItemIndex := 0;
-
-    StrSQL := ' Select ITM_CD From TM_ITEM ' +
-              '  Order By ITM_CD ' ;
-
-    with qryTemp do
-    begin
-      Close;
-      SQL.Clear;
-      SQL.Text := StrSQL ;
-      Open ;
-      First;
-
-      while not(Eof) do
-      begin
-        cbCode.Items.Add(fieldByName('ITM_CD').AsString);
-        Next ;
-      end;
-
-    end;
-  except
-    on E : Exception do
-    begin
-      qryTemp.Close;
-      InsertPGMHist('['+FormNo+']', 'E', 'SetComboBox', '', 'Exception Error', 'PGM', '', '', E.Message);
-      TraceLogWrite('['+FormNo+'] procedure SetComboBox Fail || ERR['+E.Message+']');
-    end;
-  end;
 end;
 
 //==============================================================================

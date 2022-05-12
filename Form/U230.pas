@@ -16,15 +16,13 @@ type
     dsInfo: TDataSource;
     EhPrint: TPrintDBGridEh;
     Pnl_Main: TPanel;
-    Pnl_Sub: TPanel;
-    Shape2: TShape;
+    PD_GET_JOBNO: TADOStoredProc;
     btnOrder: TButton;
     Panel4: TPanel;
     Panel1: TPanel;
     Pnl_Top: TPanel;
+    sbtReset: TSpeedButton;
     rgITM_YN: TRadioGroup;
-    gbCode: TGroupBox;
-    cbCode: TComboBox;
     gbCell: TGroupBox;
     Label1: TLabel;
     Label2: TLabel;
@@ -32,7 +30,10 @@ type
     ComboBoxBank: TComboBox;
     ComboBoxBay: TComboBox;
     ComboBoxLevel: TComboBox;
-    sbtReset: TSpeedButton;
+    rgEMG: TRadioGroup;
+    GroupBox2: TGroupBox;
+    lbloutstation: TLabel;
+    cbOut: TComboBox;
     GroupBox1: TGroupBox;
     Panel2: TPanel;
     Panel3: TPanel;
@@ -40,12 +41,9 @@ type
     edtOutCode: TEdit;
     edtOutCell: TEdit;
     edtOutInDate: TEdit;
-    rgEMG: TRadioGroup;
-    PD_GET_JOBNO: TADOStoredProc;
-    GroupBox2: TGroupBox;
-    lbloutstation: TLabel;
-    cbOut: TComboBox;
     dgInfo: TDBGridEh;
+    GroupBox3: TGroupBox;
+    edtModelNo: TEdit;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -76,7 +74,6 @@ type
     procedure fnCommandLang;
     procedure fnWmMsgRecv (var MSG : TMessage) ; message WM_USER ;
 
-    procedure SetComboBox;
     function  SetJobOrder : Boolean;
     function  SetOutputOrder(sIdStatus: String) : Boolean;
     function  fnGetCHData(SCC_NO,SCC_SR,CH_NO,POS_NO:String) : String ;
@@ -144,7 +141,6 @@ begin
   frmU230.Caption := MainDm.M_Info.ActiveFormName;
   fnWmMsgSend( 22221,11111 );
 
-  SetComboBox ;
   fnCommandQuery ;
 end;
 
@@ -293,7 +289,11 @@ begin
       StrSQL := ' Select ID_CODE, ID_BANK, ID_BAY, ID_LEVEL, ' +
                 '        STOCK_REG_DT, STOCK_IN_DT, ' +
                 '        ITM_CD, ITM_NAME, ITM_SPEC, ITM_QTY, ' +
-                '        ID_ZONE, ID_STATUS, ID_MEMO, OT_USED, IN_USED, ' +
+                '        ID_ZONE, ID_STATUS, ID_MEMO, ' +
+                '       (Case IN_USED when ''0'' then ''Y'' ' +
+                '                     when ''1'' then ''N'' end ) as IN_USED, ' +
+                '       (Case OT_USED when ''0'' then ''Y'' ' +
+                '                     when ''1'' then ''N'' end ) as OT_USED, ' +
                 '       (Case ID_STATUS when ''0'' then ''공셀''     ' +
                 '                       when ''1'' then ''공파레트'' ' +
                 '                       when ''2'' then ''실셀''     ' +
@@ -307,7 +307,9 @@ begin
                 '        RF_MODEL_NO2, RF_BMA_NO, RF_PALLET_BMA1, RF_PALLET_BMA2, RF_PALLET_BMA3,  ' +
                 '        RF_AREA, RF_NEW_BMA  ' +
                 '   From TT_STOCK ' +
-                '  Where 1=1 ' ;
+                '  Where 1=1 ' +
+                '    And ID_STATUS not in (''0'', ''8'', ''9'') ' +
+                '    And OT_USED = ''1'' ' ;
 
 
       if (Trim(ComboBoxBank.Text)<>'') and (Trim(ComboBoxBank.Text)<>'전체') then
@@ -319,16 +321,15 @@ begin
       if (Trim(ComboBoxLevel.Text)<>'') and (Trim(ComboBoxLevel.Text)<>'전체') then
         StrSQL := StrSQL + ' And ID_LEVEL= ' + QuotedStr(Trim(ComboBoxLevel.Text)) ;
 
-      if (Trim(cbCode.Text) <> '') and (Trim(cbCode.Text) <> '전체') then
-        StrSQL := StrSQL + ' And ITM_CD Like ''%' + UpperCase(Trim(cbCode.Text)) + '%'' ' ;
+      if (Trim(edtModelNo.Text) <> '') then
+        StrSQL := StrSQL + ' And UPPER(RF_MODEL_NO1) Like ''%' + UpperCase(Trim(edtModelNo.Text)) + '%'' ' ;
 
-      if (rgITM_YN.ItemIndex in [1,2]) then // 기종 or 공파레트
-      begin
-        if (rgITM_YN.ItemIndex = 1 ) then StrSQL := StrSQL + ' And ID_STATUS= ''2'' '  // 기종
-        else                              StrSQL := StrSQL + ' And ID_STATUS= ''1'' ' ;// 공파레트
-      end else StrSQL := StrSQL + ' And ID_STATUS in (''1'',''2'') ' ;
-
-      StrSQL := StrSQL + ' And OT_USED= ''1'' ' ;
+      if (rgITM_YN.ItemIndex = 1) then
+        StrSQL := StrSQL + ' And ITM_CD = ''FULL'' '
+      else if (rgITM_YN.ItemIndex = 2) then
+        StrSQL := StrSQL + ' And ITM_CD = ''EPLT'' '
+      else if (rgITM_YN.ItemIndex = 3) then
+        StrSQL := StrSQL + ' And ITM_CD not in (''FULL'', ''EPLT'')' ;
 
       StrSQL := StrSQL + ' Order By STOCK_IN_DT, ID_CODE, ITM_CD ' ;
 
@@ -534,6 +535,7 @@ begin
     OrderData.RF_PALLET_BMA2 := qryInfo.FieldByName('RF_PALLET_BMA2').AsString;
     OrderData.RF_PALLET_BMA3 := qryInfo.FieldByName('RF_PALLET_BMA3').AsString;
     OrderData.RF_AREA        := qryInfo.FieldByName('RF_AREA').AsString;
+    OrderData.RF_NEW_BMA     := qryInfo.FieldByName('RF_NEW_BMA').AsString;
 
     if SetJobOrder then
     begin
@@ -580,7 +582,7 @@ begin
       '    RF_LINE_NAME1, RF_LINE_NAME2, RF_PALLET_NO1,    ' + #13#10 +
       '    RF_PALLET_NO2, RF_MODEL_NO1, RF_MODEL_NO2,      ' + #13#10 +
       '    RF_BMA_NO, RF_PALLET_BMA1, RF_PALLET_BMA2,      ' + #13#10 +
-      '    RF_PALLET_BMA3, RF_AREA                         ' + #13#10 +
+      '    RF_PALLET_BMA3, RF_AREA, RF_NEW_BMA             ' + #13#10 +
       '  ) VALUES (                                        ' + #13#10 +
       '    :REG_TIME, :LUGG, :JOBD, :IS_AUTO, :LINE_NO,    ' + #13#10 +
       '    :SRCSITE, :SRCAISLE, :SRCBAY, :SRCLEVEL,        ' + #13#10 +
@@ -592,7 +594,7 @@ begin
       '    :RF_LINE_NAME1, :RF_LINE_NAME2, :RF_PALLET_NO1, ' + #13#10 +
       '    :RF_PALLET_NO2, :RF_MODEL_NO1, :RF_MODEL_NO2,   ' + #13#10 +
       '    :RF_BMA_NO, :RF_PALLET_BMA1, :RF_PALLET_BMA2,   ' + #13#10 +
-      '    :RF_PALLET_BMA3, :RF_AREA                       ' + #13#10 +
+      '    :RF_PALLET_BMA3, :RF_AREA, :RF_NEW_BMA          ' + #13#10 +
       ' )';
 
       i := 0;
@@ -635,6 +637,7 @@ begin
       Parameters[i].Value := OrderData.RF_PALLET_BMA2; inc(i);
       Parameters[i].Value := OrderData.RF_PALLET_BMA3; inc(i);
       Parameters[i].Value := OrderData.RF_AREA;        inc(i);
+      Parameters[i].Value := OrderData.RF_NEW_BMA;     inc(i);
       ExecSql;
 
       //+++++++++++++++++++++++++++++++++++++
@@ -674,48 +677,7 @@ end;
 //==============================================================================
 procedure TfrmU230.Pnl_MainResize(Sender: TObject);
 begin
-  Pnl_Sub.Top  := (Pnl_Main.Height - Pnl_Sub.Height) div 2 ;
-  Pnl_Sub.Left := (Pnl_Main.Width  - Pnl_Sub.Width ) div 2 ;
-end;
-
-//==============================================================================
-// SetComboBox [콤보박스 데이터 추가]
-//==============================================================================
-procedure TfrmU230.SetComboBox;
-var
-  StrSQL : String;
-begin
-  try
-    cbCode.Clear ;
-    cbCode.Items.Add('전체');
-    cbCode.ItemIndex := 0;
-
-    StrSQL := ' Select ITM_CD From TM_ITEM ' +
-              '  Order By ITM_CD ' ;
-
-    with qryTemp do
-    begin
-      Close;
-      SQL.Clear;
-      SQL.Text := StrSQL ;
-      Open ;
-      First;
-
-      while not(Eof) do
-      begin
-        cbCode.Items.Add(fieldByName('ITM_CD').AsString);
-        Next ;
-      end;
-
-    end;
-  except
-    on E : Exception do
-    begin
-      qryTemp.Close;
-      InsertPGMHist('['+FormNo+']', 'E', 'SetComboBox', '', 'Exception Error', 'PGM', '', '', E.Message);
-      TraceLogWrite('['+FormNo+'] procedure SetComboBox Fail || ERR['+E.Message+']');
-    end;
-  end;
+//
 end;
 
 //==============================================================================
@@ -781,7 +743,8 @@ end;
 procedure TfrmU230.sbtResetClick(Sender: TObject);
 begin
   rgITM_YN.ItemIndex      := 0 ;
-  cbCode.ItemIndex        := 0 ;
+  edtModelNo.Text         := '';
+  rgITM_YN.ItemIndex      := 0 ;
   ComboBoxBank.ItemIndex  := 0 ;
   ComboBoxBay.ItemIndex   := 0 ;
   ComboBoxLevel.ItemIndex := 0 ;

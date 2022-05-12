@@ -130,35 +130,8 @@ object frmU430: TfrmU430
         TabOrder = 4
       end
     end
-    object gbCode: TGroupBox
-      Left = 721
-      Top = 1
-      Width = 190
-      Height = 78
-      Align = alLeft
-      Caption = '[ '#51060#46041#44592#51333' ]'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = 20
-      Font.Name = #46027#50880
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 1
-      object cbCode: TComboBox
-        Left = 10
-        Top = 29
-        Width = 170
-        Height = 28
-        ImeName = 'Microsoft Office IME 2007'
-        ItemIndex = 0
-        TabOrder = 0
-        Text = #51204#52404
-        Items.Strings = (
-          #51204#52404)
-      end
-    end
     object gbCell: TGroupBox
-      Left = 911
+      Left = 1500
       Top = 1
       Width = 340
       Height = 78
@@ -170,7 +143,8 @@ object frmU430: TfrmU430
       Font.Name = #46027#50880
       Font.Style = []
       ParentFont = False
-      TabOrder = 2
+      TabOrder = 1
+      ExplicitLeft = 911
       object Label1: TLabel
         Left = 90
         Top = 29
@@ -263,6 +237,50 @@ object frmU430: TfrmU430
           '03')
       end
     end
+    object GroupBox3: TGroupBox
+      Left = 721
+      Top = 1
+      Width = 179
+      Height = 78
+      Align = alLeft
+      Caption = '[ '#52264#51333' ]'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -20
+      Font.Name = #46027#50880
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      object edtModelNo: TEdit
+        Left = 30
+        Top = 29
+        Width = 121
+        Height = 28
+        TabOrder = 0
+      end
+    end
+    object rgType: TRadioGroup
+      Left = 900
+      Top = 1
+      Width = 600
+      Height = 78
+      Align = alLeft
+      Caption = '[ '#51333#47448' ]'
+      Columns = 4
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -20
+      Font.Name = #46027#50880
+      Font.Style = []
+      ItemIndex = 0
+      Items.Strings = (
+        #51204#52404
+        #49892#54036#47112#53944
+        #44277#54036#47112#53944
+        #44592#53440)
+      ParentFont = False
+      TabOrder = 3
+    end
   end
   object Pnl_Main: TPanel
     Left = 0
@@ -344,7 +362,7 @@ object frmU430: TfrmU430
         Footers = <>
         TextEditing = False
         Title.Caption = #51089#50629#50976#54805
-        Width = 160
+        Width = 100
       end
       item
         Alignment = taCenter
@@ -355,7 +373,7 @@ object frmU430: TfrmU430
         Footers = <>
         TextEditing = False
         Title.Caption = #44592#51333#53076#46300
-        Width = 160
+        Width = 100
       end
       item
         Alignment = taCenter
@@ -366,7 +384,7 @@ object frmU430: TfrmU430
         Footers = <>
         TextEditing = False
         Title.Caption = #51089#50629#48264#54840
-        Width = 160
+        Width = 100
       end
       item
         Alignment = taCenter
@@ -376,7 +394,7 @@ object frmU430: TfrmU430
         Footers = <>
         TextEditing = False
         Title.Caption = #54616#50669#50948#52824
-        Width = 200
+        Width = 100
       end
       item
         Alignment = taCenter
@@ -387,7 +405,7 @@ object frmU430: TfrmU430
         Footers = <>
         TextEditing = False
         Title.Caption = #51201#51116#50948#52824
-        Width = 200
+        Width = 100
       end
       item
         Alignment = taCenter
@@ -424,24 +442,13 @@ object frmU430: TfrmU430
       end
       item
         Alignment = taCenter
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'REG_TIME_CONV'
-        Footers = <>
-        TextEditing = False
-        Title.Caption = #51089#50629#51068#51088
-        Width = 405
-      end
-      item
-        Alignment = taCenter
         DynProps = <>
         EditButtons = <>
         FieldName = 'RF_LINE_NAME1'
         Footers = <>
         TextEditing = False
-        Title.Caption = #49885#48324#51088#51060#47492'1'
-        Width = 200
+        Title.Caption = #46972#51064#47749'1'
+        Width = 120
       end
       item
         Alignment = taCenter
@@ -450,8 +457,8 @@ object frmU430: TfrmU430
         FieldName = 'RF_LINE_NAME2'
         Footers = <>
         TextEditing = False
-        Title.Caption = #49885#48324#51088#51060#47492'2'
-        Width = 200
+        Title.Caption = #46972#51064#47749'2'
+        Width = 120
       end
       item
         Alignment = taCenter
@@ -460,8 +467,8 @@ object frmU430: TfrmU430
         FieldName = 'RF_PALLET_NO1'
         Footers = <>
         TextEditing = False
-        Title.Caption = #49885#48324#48264#54840'1'
-        Width = 200
+        Title.Caption = #54036#47112#53944#48264#54840'1'
+        Width = 120
       end
       item
         Alignment = taCenter
@@ -470,8 +477,8 @@ object frmU430: TfrmU430
         FieldName = 'RF_PALLET_NO2'
         Footers = <>
         TextEditing = False
-        Title.Caption = #49885#48324#48264#54840'2'
-        Width = 200
+        Title.Caption = #54036#47112#53944#48264#54840'2'
+        Width = 120
       end
       item
         Alignment = taCenter
@@ -480,8 +487,8 @@ object frmU430: TfrmU430
         FieldName = 'RF_MODEL_NO1'
         Footers = <>
         TextEditing = False
-        Title.Caption = #47784#45944'1'
-        Width = 200
+        Title.Caption = #52264#51333'#1'
+        Width = 120
       end
       item
         Alignment = taCenter
@@ -490,8 +497,8 @@ object frmU430: TfrmU430
         FieldName = 'RF_MODEL_NO2'
         Footers = <>
         TextEditing = False
-        Title.Caption = #47784#45944'2'
-        Width = 200
+        Title.Caption = #52264#51333'#2'
+        Width = 120
       end
       item
         Alignment = taCenter
@@ -501,7 +508,7 @@ object frmU430: TfrmU430
         Footers = <>
         TextEditing = False
         Title.Caption = #49688#47049
-        Width = 200
+        Width = 120
       end
       item
         Alignment = taCenter
@@ -511,7 +518,26 @@ object frmU430: TfrmU430
         Footers = <>
         TextEditing = False
         Title.Caption = #49373#49328#51648
-        Width = 200
+        Width = 120
+      end
+      item
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'RF_NEW_BMA'
+        Footers = <>
+        Title.Caption = #49888#44508'/'#51116#44256
+        Width = 120
+      end
+      item
+        Alignment = taCenter
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'REG_TIME_CONV'
+        Footers = <>
+        TextEditing = False
+        Title.Caption = #51089#50629#51068#51088
+        Width = 405
       end>
     object RowDetailData: TRowDetailPanelControlEh
     end

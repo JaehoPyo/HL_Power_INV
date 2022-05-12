@@ -2,7 +2,7 @@ object frmPopup_Update: TfrmPopup_Update
   Left = 0
   Top = 0
   BorderStyle = bsNone
-  ClientHeight = 523
+  ClientHeight = 552
   ClientWidth = 375
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -21,17 +21,18 @@ object frmPopup_Update: TfrmPopup_Update
     Left = 0
     Top = 0
     Width = 375
-    Height = 523
+    Height = 552
     Align = alClient
     BevelInner = bvRaised
     Color = clBlue
     ParentBackground = False
     TabOrder = 0
+    ExplicitHeight = 523
     object Pnl_Sub: TPanel
       Left = 4
       Top = 67
       Width = 367
-      Height = 452
+      Height = 481
       ParentCustomHint = False
       Align = alClient
       BevelInner = bvRaised
@@ -52,6 +53,7 @@ object frmPopup_Update: TfrmPopup_Update
       ParentShowHint = False
       ShowHint = False
       TabOrder = 0
+      ExplicitHeight = 452
       object Label1: TLabel
         Left = 841
         Top = 77
@@ -98,12 +100,13 @@ object frmPopup_Update: TfrmPopup_Update
         Left = 2
         Top = 2
         Width = 363
-        Height = 448
+        Height = 477
         Align = alClient
         BevelInner = bvLowered
         BevelOuter = bvNone
         ParentBackground = False
         TabOrder = 0
+        ExplicitHeight = 448
         object Panel19: TPanel
           Left = 10
           Top = 10
@@ -532,7 +535,7 @@ object frmPopup_Update: TfrmPopup_Update
           Height = 24
           Alignment = taRightJustify
           BevelOuter = bvNone
-          Caption = #49885#48324#51088#51060#47492'2'
+          Caption = #46972#51064#47749'2'
           Color = 9365209
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
@@ -550,7 +553,7 @@ object frmPopup_Update: TfrmPopup_Update
           Height = 24
           Alignment = taRightJustify
           BevelOuter = bvNone
-          Caption = #49885#48324#48264#54840'1'
+          Caption = #54036#47112#53944#48264#54840'1'
           Color = 9365209
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
@@ -568,7 +571,7 @@ object frmPopup_Update: TfrmPopup_Update
           Height = 24
           Alignment = taRightJustify
           BevelOuter = bvNone
-          Caption = #49885#48324#48264#54840'2'
+          Caption = #54036#47112#53944#48264#54840'2'
           Color = 9365209
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
@@ -586,7 +589,7 @@ object frmPopup_Update: TfrmPopup_Update
           Height = 24
           Alignment = taRightJustify
           BevelOuter = bvNone
-          Caption = #49885#48324#51088#51060#47492'1'
+          Caption = #46972#51064#47749'1'
           Color = 9365209
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
@@ -748,6 +751,38 @@ object frmPopup_Update: TfrmPopup_Update
           ImeName = 'Microsoft Office IME 2007'
           ParentFont = False
           TabOrder = 37
+        end
+        object Panel3: TPanel
+          Left = 10
+          Top = 442
+          Width = 100
+          Height = 24
+          Alignment = taRightJustify
+          BevelOuter = bvNone
+          Caption = #49888#44508'/'#51116#44256
+          Color = 9365209
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = #46027#50880
+          Font.Style = [fsBold]
+          ParentBackground = False
+          ParentFont = False
+          TabOrder = 38
+        end
+        object edtNewBMA: TEdit
+          Left = 115
+          Top = 442
+          Width = 220
+          Height = 24
+          Font.Charset = GB2312_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = #46027#50880
+          Font.Style = []
+          ImeName = 'Microsoft Office IME 2007'
+          ParentFont = False
+          TabOrder = 39
         end
       end
     end
@@ -1309,27 +1344,29 @@ object frmPopup_Update: TfrmPopup_Update
       Left = 371
       Top = 67
       Width = 2
-      Height = 452
+      Height = 481
       Align = alRight
       BevelOuter = bvNone
       Color = 14211288
       ParentBackground = False
       TabOrder = 2
+      ExplicitHeight = 452
     end
     object Panel13: TPanel
       Left = 2
       Top = 67
       Width = 2
-      Height = 452
+      Height = 481
       Align = alLeft
       BevelOuter = bvNone
       Color = 14211288
       ParentBackground = False
       TabOrder = 3
+      ExplicitHeight = 452
     end
     object Panel14: TPanel
       Left = 2
-      Top = 519
+      Top = 548
       Width = 371
       Height = 2
       Align = alBottom
@@ -1337,6 +1374,7 @@ object frmPopup_Update: TfrmPopup_Update
       Color = 14211288
       ParentBackground = False
       TabOrder = 4
+      ExplicitTop = 519
     end
   end
   object qryUpdate: TADOQuery

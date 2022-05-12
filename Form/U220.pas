@@ -17,11 +17,11 @@ type
     dsInfo: TDataSource;
     EhPrint: TPrintDBGridEh;
     Pnl_Main: TPanel;
-    Pnl_Sub: TPanel;
+    PD_GET_JOBNO: TADOStoredProc;
+    tmrRFID: TTimer;
+    lbloutstation: TLabel;
     Panel1: TPanel;
     Panel5: TPanel;
-    Shape2: TShape;
-    PD_GET_JOBNO: TADOStoredProc;
     Panel9: TPanel;
     Panel7: TPanel;
     Panel12: TPanel;
@@ -50,7 +50,6 @@ type
     cbBay: TComboBox;
     cbBank: TComboBox;
     cbOut: TComboBox;
-    lbloutstation: TLabel;
     Panel17: TPanel;
     dtDateFr: TDateTimePicker;
     Panel18: TPanel;
@@ -64,7 +63,6 @@ type
     edtModelNo2: TEdit;
     edtArea: TEdit;
     btnRFIDRead: TButton;
-    tmrRFID: TTimer;
     Panel19: TPanel;
     edtPalletLine1: TEdit;
     edtPalletLine3: TEdit;
@@ -414,8 +412,7 @@ end;
 //==============================================================================
 procedure TfrmU220.Pnl_MainResize(Sender: TObject);
 begin
-  Pnl_Sub.Top  := (Pnl_Main.Height - Pnl_Sub.Height) div 2 ;
-  Pnl_Sub.Left := (Pnl_Main.Width  - Pnl_Sub.Width ) div 2 ;
+//
 end;
 
 //==============================================================================

@@ -1,9 +1,9 @@
 object frmMain: TfrmMain
-  Left = 206
+  Left = 0
   Top = 0
   Caption = #51088#46041#52285#44256' '#44288#47532' '#49884#49828#53596
-  ClientHeight = 981
-  ClientWidth = 1904
+  ClientHeight = 988
+  ClientWidth = 1918
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -148,8 +148,7 @@ object frmMain: TfrmMain
     00000000000000000000000000000000000000000000FFFFFFFFFFFFFFFF}
   Menu = mnuMain
   OldCreateOrder = False
-  Position = poScreenCenter
-  WindowState = wsMaximized
+  Position = poDesktopCenter
   OnActivate = FormActivate
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
@@ -159,8 +158,8 @@ object frmMain: TfrmMain
   object Img_Main: TImage
     Left = 0
     Top = 90
-    Width = 1904
-    Height = 868
+    Width = 1918
+    Height = 875
     Align = alClient
     AutoSize = True
     Center = True
@@ -476,42 +475,46 @@ object frmMain: TfrmMain
       158DC1F48370CF2E0000000049454E44AE426082}
     Transparent = True
     ExplicitTop = 91
+    ExplicitWidth = 1904
     ExplicitHeight = 908
   end
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1904
+    Width = 1918
     Height = 90
     Align = alTop
     BevelOuter = bvNone
     BorderWidth = 4
     ParentBackground = False
     TabOrder = 0
+    ExplicitWidth = 1904
     object Panel10: TPanel
       Left = 4
       Top = 4
-      Width = 1892
+      Width = 1906
       Height = 82
       Align = alClient
       BevelOuter = bvLowered
       Color = 14803425
       ParentBackground = False
       TabOrder = 0
+      ExplicitWidth = 1892
       object Panel22: TPanel
         Left = 1
         Top = 1
-        Width = 1890
+        Width = 1904
         Height = 80
         Align = alClient
         BevelWidth = 2
         Color = 14803425
         ParentBackground = False
         TabOrder = 0
+        ExplicitWidth = 1890
         object LblMenu000: TLabel
           Left = 17
           Top = 2
-          Width = 465
+          Width = 479
           Height = 76
           ParentCustomHint = False
           Align = alClient
@@ -534,7 +537,7 @@ object frmMain: TfrmMain
           ExplicitHeight = 40
         end
         object Lbl_error: TLabel
-          Left = 482
+          Left = 496
           Top = 2
           Width = 662
           Height = 76
@@ -556,6 +559,7 @@ object frmMain: TfrmMain
           Layout = tlCenter
           Visible = False
           StyleElements = [seClient, seBorder]
+          ExplicitLeft = 482
           ExplicitHeight = 40
         end
         object Panel11: TPanel
@@ -568,7 +572,7 @@ object frmMain: TfrmMain
           TabOrder = 0
         end
         object Pnl_BTN: TPanel
-          Left = 1144
+          Left = 1158
           Top = 2
           Width = 744
           Height = 76
@@ -576,6 +580,7 @@ object frmMain: TfrmMain
           BevelOuter = bvLowered
           ParentBackground = False
           TabOrder = 1
+          ExplicitLeft = 1144
           object Pnl_Btn5: TPanel
             Left = 297
             Top = 1
@@ -1593,13 +1598,14 @@ object frmMain: TfrmMain
       end
     end
     object Panel28: TPanel
-      Left = 1896
+      Left = 1910
       Top = 4
       Width = 4
       Height = 82
       Align = alRight
       BevelOuter = bvNone
       TabOrder = 1
+      ExplicitLeft = 1896
     end
   end
   object PnlDatabaseConn: TPanel
@@ -1769,8 +1775,8 @@ object frmMain: TfrmMain
   end
   object staLoginInfo: TStatusBar
     Left = 0
-    Top = 958
-    Width = 1904
+    Top = 965
+    Width = 1918
     Height = 23
     Panels = <
       item
@@ -1810,6 +1816,8 @@ object frmMain: TfrmMain
     ParentShowHint = False
     ShowHint = False
     OnDrawPanel = staLoginInfoDrawPanel
+    ExplicitTop = 958
+    ExplicitWidth = 1904
   end
   object tmrSystem: TTimer
     OnTimer = tmrSystemTimer

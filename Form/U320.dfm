@@ -290,7 +290,6 @@ object frmU320: TfrmU320
       ParentFont = False
       TabOrder = 1
       OnClick = ComboBoxChange
-      ExplicitLeft = 902
     end
     object GroupBox3: TGroupBox
       Left = 721
@@ -306,8 +305,6 @@ object frmU320: TfrmU320
       Font.Style = []
       ParentFont = False
       TabOrder = 2
-      ExplicitLeft = 701
-      ExplicitTop = -4
       object edtModelNo: TEdit
         Left = 30
         Top = 29
@@ -811,20 +808,20 @@ object frmU320: TfrmU320
     Connection = MainDm.MainDB
     CursorType = ctStatic
     Parameters = <>
-    Left = 880
-    Top = 6
+    Left = 928
+    Top = 110
   end
   object qryInfo: TADOQuery
     Connection = MainDm.MainDB
     CursorType = ctStatic
     Parameters = <>
-    Left = 848
-    Top = 6
+    Left = 896
+    Top = 110
   end
   object dsInfo: TDataSource
     DataSet = qryInfo
-    Left = 816
-    Top = 6
+    Left = 864
+    Top = 110
   end
   object EhPrint: TPrintDBGridEh
     Options = []
@@ -839,7 +836,7 @@ object frmU320: TfrmU320
     PageHeader.Font.Name = 'Tahoma'
     PageHeader.Font.Style = []
     Units = MM
-    Left = 913
-    Top = 6
+    Left = 961
+    Top = 110
   end
 end

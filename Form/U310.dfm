@@ -1115,7 +1115,7 @@ object frmU310: TfrmU310
             Height = 24
             Alignment = taRightJustify
             BevelOuter = bvNone
-            Caption = #49885#48324#51088#51060#47492'2'
+            Caption = #46972#51064#47749'2'
             Color = 9365209
             Font.Charset = ANSI_CHARSET
             Font.Color = clBlack
@@ -1133,7 +1133,7 @@ object frmU310: TfrmU310
             Height = 24
             Alignment = taRightJustify
             BevelOuter = bvNone
-            Caption = #49885#48324#48264#54840'1'
+            Caption = #54036#47112#53944#48264#54840'1'
             Color = 9365209
             Font.Charset = ANSI_CHARSET
             Font.Color = clBlack
@@ -1151,7 +1151,7 @@ object frmU310: TfrmU310
             Height = 24
             Alignment = taRightJustify
             BevelOuter = bvNone
-            Caption = #49885#48324#48264#54840'2'
+            Caption = #54036#47112#53944#48264#54840'2'
             Color = 9365209
             Font.Charset = ANSI_CHARSET
             Font.Color = clBlack
@@ -1169,7 +1169,7 @@ object frmU310: TfrmU310
             Height = 24
             Alignment = taRightJustify
             BevelOuter = bvNone
-            Caption = #49885#48324#51088#51060#47492'1'
+            Caption = #46972#51064#47749'1'
             Color = 9365209
             Font.Charset = ANSI_CHARSET
             Font.Color = clBlack

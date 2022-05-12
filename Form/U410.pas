@@ -18,7 +18,6 @@ type
     EhPrint: TPrintDBGridEh;
     Pnl_Top: TPanel;
     Pnl_Main: TPanel;
-    dgInfo: TDBGridEh;
     GroupBox1: TGroupBox;
     Label31: TLabel;
     dtDateFr: TDateTimePicker;
@@ -26,8 +25,6 @@ type
     dtDateTo: TDateTimePicker;
     dtTimeTo: TDateTimePicker;
     cbDateUse: TCheckBox;
-    gbCode: TGroupBox;
-    cbCode: TComboBox;
     gbCell: TGroupBox;
     Label1: TLabel;
     Label2: TLabel;
@@ -35,6 +32,10 @@ type
     ComboBoxBank: TComboBox;
     ComboBoxBay: TComboBox;
     ComboBoxLevel: TComboBox;
+    dgInfo: TDBGridEh;
+    GroupBox3: TGroupBox;
+    edtModelNo: TEdit;
+    rgType: TRadioGroup;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -58,7 +59,6 @@ type
     procedure fnCommandLang;
     procedure fnWmMsgRecv (var MSG : TMessage) ; message WM_USER ;
 
-    procedure  SetComboBox;
   end;
   procedure U410Create();
 
@@ -124,7 +124,6 @@ begin
   dtDateTo.Date := StrToDate(FormatDateTime('YYYY-MM-DD',Now));
   dtTimeTo.Time := StrToTime(FormatDateTime('HH:NN:SS',Now));
 
-  SetComboBox ;
   fnCommandQuery ;
 end;
 
@@ -292,10 +291,10 @@ begin
                   '                       when ''1'' then ''에러'' ' +  #13#10+
                   '                       else ''정상'' end) as JOBERRORC_DESC, ' +  #13#10+
                   '       (Case when (JOBERRORD = ''0000'') or  ' +
-	                  '                  (JOBERRORD = '''') or ' +
-				            '                  (IsNull(JOBERRORD, '''') = '''') then ''정상'' ' +
-                    '             when JOBERRORD not like ''%불일치%'' then (SELECT ERR_NAME FROM TM_ERROR WHERE ERR_CODE = A.JOBERRORD) ' +
-			              '             else JOBERRORD end ) as JOBERRORD_DESC, ' +
+                  '                  (JOBERRORD = '''') or ' +
+                  '                  (IsNull(JOBERRORD, '''') = '''') then ''정상'' ' +
+                  '             when JOBERRORD not like ''%불일치%'' then (SELECT ERR_NAME FROM TM_ERROR WHERE ERR_CODE = A.JOBERRORD) ' +
+                  '             else JOBERRORD end ) as JOBERRORD_DESC, ' +
                   '       (Case BUFFSTATUS when ''0'' then ''대기'' ' +  #13#10+
                   '                        when ''1'' then ''입고가능'' end) as BUFFSTATUS_DESC, ' +  #13#10+
                   '       (SUBSTRING(DSTAISLE,4,1)+''-''+SUBSTRING(DSTBAY,3,2)+''-''+SUBSTRING(DSTLEVEL,3,2)) as ID_CODE, ' +  #13#10+
@@ -304,29 +303,37 @@ begin
                   '        CONVERT(VARCHAR, REG_TIME, 120) as REG_TIME_DESC, ' +
                   '        RF_LINE_NAME1, RF_LINE_NAME2, RF_PALLET_NO1, RF_PALLET_NO2, RF_MODEL_NO1, ' +
                   '        RF_MODEL_NO2, RF_BMA_NO, RF_PALLET_BMA1, RF_PALLET_BMA2, RF_PALLET_BMA3,  ' +
-                  '        RF_AREA  ' +
+                  '        RF_AREA, RF_NEW_BMA  ' +
                   '   From TT_HISTORY as A ' +  #13#10+
                   '  Where JOBD    = ''1'' ' +  #13#10+
                   '    And JOB_END = ''1'' ' ;
 
-                  if (Trim(cbCode.Text)<>'') and (Trim(cbCode.Text)<>'전체') then
-                    StrSQL := StrSQL + ' And ITM_CD= ' + QuotedStr(Trim(cbCode.Text)) ;
+      if (Trim(ComboBoxBank.Text)<>'') and (Trim(ComboBoxBank.Text)<>'전체') then
+        StrSQL := StrSQL + ' And DSTAISLE= ' + QuotedStr(FormatFloat('0000',StrToInt(Trim(ComboBoxBank.Text)))) ;
 
-                  if (Trim(ComboBoxBank.Text)<>'') and (Trim(ComboBoxBank.Text)<>'전체') then
-                    StrSQL := StrSQL + ' And DSTAISLE= ' + QuotedStr(FormatFloat('0000',StrToInt(Trim(ComboBoxBank.Text)))) ;
+      if (Trim(ComboBoxBay.Text)<>'') and (Trim(ComboBoxBay.Text)<>'전체') then
+        StrSQL := StrSQL + ' And DSTBAY= ' + QuotedStr(FormatFloat('0000',StrToInt(Trim(ComboBoxBay.Text)))) ;
 
-                  if (Trim(ComboBoxBay.Text)<>'') and (Trim(ComboBoxBay.Text)<>'전체') then
-                    StrSQL := StrSQL + ' And DSTBAY= ' + QuotedStr(FormatFloat('0000',StrToInt(Trim(ComboBoxBay.Text)))) ;
+      if (Trim(ComboBoxLevel.Text)<>'') and (Trim(ComboBoxLevel.Text)<>'전체') then
+        StrSQL := StrSQL + ' And DSTLEVEL= ' + QuotedStr(FormatFloat('0000',StrToInt(Trim(ComboBoxLevel.Text)))) ;
 
-                  if (Trim(ComboBoxLevel.Text)<>'') and (Trim(ComboBoxLevel.Text)<>'전체') then
-                    StrSQL := StrSQL + ' And DSTLEVEL= ' + QuotedStr(FormatFloat('0000',StrToInt(Trim(ComboBoxLevel.Text)))) ;
+      if cbDateUse.Checked then
+        StrSQL := StrSQL + ' And REG_TIME Between ' +
+                           '      '''+FormatDateTime('YYYYMMDD', dtDateFr.Date)+''+FormatDateTime('HHNNSS', dtTimeFr.Time)+''' '+
+                           '  And '''+FormatDateTime('YYYYMMDD', dtDateTo.Date)+''+FormatDateTime('HHNNSS', dtTimeTo.Time)+''' ';
 
-                  if cbDateUse.Checked then
-                    StrSQL := StrSQL + ' And REG_TIME Between ' +
-                                       '      '''+FormatDateTime('YYYYMMDD', dtDateFr.Date)+''+FormatDateTime('HHNNSS', dtTimeFr.Time)+''' '+
-                                       '  And '''+FormatDateTime('YYYYMMDD', dtDateTo.Date)+''+FormatDateTime('HHNNSS', dtTimeTo.Time)+''' ';
+      if (Trim(UpperCase(edtModelNo.Text)) <> '') then
+        StrSQL := StrSQL + ' And UPPER(RF_MODEL_NO1) like ' + QuotedStr('%' + Trim(UpperCase(edtModelNo.Text)) + '%');
 
-                  StrSQL := StrSQL + '  Order By REG_TIME, LUGG ' ;
+      if (rgType.ItemIndex = 1) then
+        StrSQL := StrSQL + ' And ITM_CD = ''FULL'' '
+      else if (rgType.ItemIndex = 2) then
+        StrSQL := StrSQL + ' And ITM_CD = ''EPLT'' '
+      else if (rgType.ItemIndex = 3) then
+        StrSQL := StrSQL + ' And ITM_CD not in (''FULL'', ''EPLT'')' ;
+
+
+      StrSQL := StrSQL + '  Order By REG_TIME, LUGG ' ;
       SQL.Text := StrSQL ;
       Open;
     end;
@@ -354,46 +361,6 @@ end;
 procedure TfrmU410.fnCommandLang;
 begin
 //
-end;
-
-//==============================================================================
-// SetComboBox [콤보박스 데이터 추가]
-//==============================================================================
-procedure TfrmU410.SetComboBox;
-var
-  StrSQL : String;
-begin
-  try
-    cbCode.Clear ;
-    cbCode.Items.Add('전체');
-    cbCode.ItemIndex := 0;
-
-    StrSQL := ' Select ITM_CD From TM_ITEM ' +
-              '  Order By ITM_CD ' ;
-
-    with qryTemp do
-    begin
-      Close;
-      SQL.Clear;
-      SQL.Text := StrSQL ;
-      Open ;
-      First;
-
-      while not(Eof) do
-      begin
-        cbCode.Items.Add(fieldByName('ITM_CD').AsString);
-        Next ;
-      end;
-
-    end;
-  except
-    on E : Exception do
-    begin
-      qryInfo.Close;
-      InsertPGMHist('['+FormNo+']', 'E', 'SetComboBox', '', 'Exception Error', 'PGM', '', '', E.Message);
-      TraceLogWrite('['+FormNo+'] procedure SetComboBox Fail || ERR['+E.Message+']');
-    end;
-  end;
 end;
 
 //==============================================================================

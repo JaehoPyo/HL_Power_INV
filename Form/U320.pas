@@ -283,6 +283,7 @@ begin
     frmPopup_Update.edtModelNo1.Text  := qryInfo.FieldByName('RF_MODEL_NO1' ).AsString;;
     frmPopup_Update.edtModelNo2.Text  := qryInfo.FieldByName('RF_MODEL_NO2' ).AsString;
     frmPopup_Update.edtArea.Text      := qryInfo.FieldByName('RF_AREA'      ).AsString;
+    frmPopup_Update.edtNewBMA.Text    := qryInfo.FieldByName('RF_NEW_BMA'   ).AsString;
     frmPopup_Update.ShowModal ;
     fnCommandQuery;
   except
@@ -359,7 +360,8 @@ begin
                 '        RF_MODEL_NO2, RF_BMA_NO, RF_PALLET_BMA1, RF_PALLET_BMA2, RF_PALLET_BMA3,  ' +
                 '        RF_AREA, RF_NEW_BMA  ' +
                 '   From TT_STOCK ' +
-                '  Where 1=1 ' ;
+                '  Where 1=1 ' +
+                '    And ID_STATUS not in (''8'', ''9'') ' ;
 
 
       if (Trim(UpperCase(edtModelNo.Text)) <> '') then

@@ -419,6 +419,18 @@ type
     dgInfo_In: TDBGridEh;
     edt_Step: TEdit;
     Panel113: TPanel;
+    Label27: TLabel;
+    lblNewBMA_RF01: TLabel;
+    Label32: TLabel;
+    lblNewBMA_RF02: TLabel;
+    Label33: TLabel;
+    lblNewBMA_RF03: TLabel;
+    Label34: TLabel;
+    lblNewBMA_RF04: TLabel;
+    Label35: TLabel;
+    lblNewBMA_RF05: TLabel;
+    Label40: TLabel;
+    lblNewBMA_RF06: TLabel;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -755,7 +767,12 @@ begin
       begin
         // 라벨 캡션 초기화
         fnRFIDUpdate(IntToStr(i), '0');
+        TButton(Self.FindComponent('btnRFID_Read' + IntToStr(i))).Enabled := False;
       end else
+      begin
+        TButton(Self.FindComponent('btnRFID_Read' + IntToStr(i))).Enabled := True;
+      end;
+
       // 화물 있고 RFID 읽기 신호 켜진 경우
       if (IsExist = True) and
          (IsRead = True) then
@@ -1712,6 +1729,7 @@ begin
       TLabel(Self.FindComponent('lblPalletBma1_RF0' + Number)).Caption := '-';
       TLabel(Self.FindComponent('lblPalletBma2_RF0' + Number)).Caption := '-';
       TLabel(Self.FindComponent('lblPalletBma3_RF0' + Number)).Caption := '-';
+      TLabel(Self.FindComponent('lblNewBMA_RF0'     + Number)).Caption := '-';
       Exit;
     end;
 
@@ -1735,7 +1753,8 @@ begin
       TLabel(Self.FindComponent('lblArea_RF0'       + Number)).Caption := FieldByName('H19').AsString ;
       TLabel(Self.FindComponent('lblPalletBma1_RF0' + Number)).Caption := FieldByName('H20').AsString ;
       TLabel(Self.FindComponent('lblPalletBma2_RF0' + Number)).Caption := FieldByName('H21').AsString ;
-      TLabel(Self.FindComponent('lblPalletBma3_RF0' + Number)).Caption := FieldByName('H22' ).AsString ;
+      TLabel(Self.FindComponent('lblPalletBma3_RF0' + Number)).Caption := FieldByName('H22').AsString ;
+      TLabel(Self.FindComponent('lblNewBMA_RF0'     + Number)).Caption := IfThen(FieldByName('H23').AsString = '1', '신규', '재고') ;
 
       Close;
     end;

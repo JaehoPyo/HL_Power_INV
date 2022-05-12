@@ -17,16 +17,13 @@ type
     EhPrint: TPrintDBGridEh;
     PD_GET_JOBNO: TADOStoredProc;
     Pnl_Main: TPanel;
-    Pnl_Sub: TPanel;
-    Shape2: TShape;
+    qryRackCheck: TADOQuery;
     btnOrder: TButton;
     Panel4: TPanel;
+    dgInfo: TDBGridEh;
     Panel1: TPanel;
     Pnl_Top: TPanel;
     sbtReset: TSpeedButton;
-    rgITM_YN: TRadioGroup;
-    gbCode: TGroupBox;
-    cbCode: TComboBox;
     gbCell: TGroupBox;
     Label1: TLabel;
     Label2: TLabel;
@@ -42,7 +39,9 @@ type
     edtOutCode: TEdit;
     edtOutCell: TEdit;
     edtOutInDate: TEdit;
-    Panel6: TPanel;
+    rgITM_YN: TRadioGroup;
+    GroupBox2: TGroupBox;
+    edtModelNo: TEdit;
     GroupBox3: TGroupBox;
     Label4: TLabel;
     Label5: TLabel;
@@ -50,8 +49,6 @@ type
     cbMoveBank: TComboBox;
     cbMoveBay: TComboBox;
     cbMoveLevel: TComboBox;
-    qryRackCheck: TADOQuery;
-    dgInfo: TDBGridEh;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -80,7 +77,6 @@ type
     procedure fnCommandLang;
     procedure fnWmMsgRecv (var MSG : TMessage) ; message WM_USER ;
 
-    procedure SetComboBox;
     function  SetJobOrder : Boolean;
     function  SetOutputOrder(sIdStatus: String) : Boolean;
     function  fnGetCHData(SCC_NO,SCC_SR,CH_NO,POS_NO:String) : String ;
@@ -149,7 +145,6 @@ begin
   frmU240.Caption := MainDm.M_Info.ActiveFormName;
   fnWmMsgSend( 22221,11111 );
 
-  SetComboBox ;
   fnCommandQuery ;
 end;
 
@@ -312,7 +307,9 @@ begin
                 '        RF_MODEL_NO2, RF_BMA_NO, RF_PALLET_BMA1, RF_PALLET_BMA2, RF_PALLET_BMA3,  ' +
                 '        RF_AREA, RF_NEW_BMA  ' +
                 '   From TT_STOCK ' +
-                '  Where 1=1 ' ;
+                '  Where 1=1 ' +
+                '    And ID_STATUS not in (''0'', ''8'', ''9'') ' +
+                '    And OT_USED = ''1'' ' ;
 
 
       if (Trim(ComboBoxBank.Text)<>'') and (Trim(ComboBoxBank.Text)<>'전체') then
@@ -324,16 +321,15 @@ begin
       if (Trim(ComboBoxLevel.Text)<>'') and (Trim(ComboBoxLevel.Text)<>'전체') then
         StrSQL := StrSQL + ' And ID_LEVEL= ' + QuotedStr(Trim(ComboBoxLevel.Text)) ;
 
-      if (Trim(cbCode.Text) <> '') and (Trim(cbCode.Text) <> '전체') then
-        StrSQL := StrSQL + ' And ITM_CD Like ''%' + UpperCase(Trim(cbCode.Text)) + '%'' ' ;
+      if (Trim(edtModelNo.Text) <> '') then
+        StrSQL := StrSQL + ' And UPPER(RF_MODEL_NO1) Like ''%' + UpperCase(Trim(edtModelNo.Text)) + '%'' ' ;
 
-      if (rgITM_YN.ItemIndex in [1,2]) then // 기종 or 공파레트
-      begin
-        if (rgITM_YN.ItemIndex = 1 ) then StrSQL := StrSQL + ' And ID_STATUS= ''2'' '  // 기종
-        else                              StrSQL := StrSQL + ' And ID_STATUS= ''1'' ' ;// 공파레트
-      end else StrSQL := StrSQL + ' And ID_STATUS in (''1'',''2'') ' ;
-
-      StrSQL := StrSQL + ' And OT_USED= ''1'' ' ;
+      if (rgITM_YN.ItemIndex = 1) then
+        StrSQL := StrSQL + ' And ITM_CD = ''FULL'' '
+      else if (rgITM_YN.ItemIndex = 2) then
+        StrSQL := StrSQL + ' And ITM_CD = ''EPLT'' '
+      else if (rgITM_YN.ItemIndex = 3) then
+        StrSQL := StrSQL + ' And ITM_CD not in (''FULL'', ''EPLT'')' ;
 
       StrSQL := StrSQL + ' Order By ID_CODE, ITM_CD, STOCK_IN_DT ' ;
 
@@ -514,8 +510,11 @@ begin
     if (cbMoveBank.Text + cbMoveBay.Text + cbMoveLevel.Text = '20301') or
        (cbMoveBank.Text + cbMoveBay.Text + cbMoveLevel.Text = '20601') then
     begin
-      OrderData.EMG        := '2'
-    end else OrderData.EMG        := IntToStr(rgEMG.ItemIndex);
+      OrderData.EMG := '2'
+    end else
+    begin
+      OrderData.EMG := IntToStr(rgEMG.ItemIndex);
+    end;
 
     OrderData.ITM_CD     := qryInfo.FieldByName('ITM_CD').AsString ;
     OrderData.UP_TIME    := 'GETDATE()';
@@ -536,7 +535,6 @@ begin
     begin
       Inc(OrderCount) ;
     end;
-
 
   except
     on E : Exception do
@@ -695,48 +693,7 @@ end;
 //==============================================================================
 procedure TfrmU240.Pnl_MainResize(Sender: TObject);
 begin
-  Pnl_Sub.Top  := (Pnl_Main.Height - Pnl_Sub.Height) div 2 ;
-  Pnl_Sub.Left := (Pnl_Main.Width  - Pnl_Sub.Width ) div 2 ;
-end;
-
-//==============================================================================
-// SetComboBox [콤보박스 데이터 추가]
-//==============================================================================
-procedure TfrmU240.SetComboBox;
-var
-  StrSQL : String;
-begin
-  try
-    cbCode.Clear ;
-    cbCode.Items.Add('전체');
-    cbCode.ItemIndex := 0;
-
-    StrSQL := ' Select ITM_CD From TM_ITEM ' +
-              '  Order By ITM_CD ' ;
-
-    with qryTemp do
-    begin
-      Close;
-      SQL.Clear;
-      SQL.Text := StrSQL ;
-      Open ;
-      First;
-
-      while not(Eof) do
-      begin
-        cbCode.Items.Add(fieldByName('ITM_CD').AsString);
-        Next ;
-      end;
-
-    end;
-  except
-    on E : Exception do
-    begin
-      qryTemp.Close;
-      InsertPGMHist('['+FormNo+']', 'E', 'SetComboBox', '', 'Exception Error', 'PGM', '', '', E.Message);
-      TraceLogWrite('['+FormNo+'] procedure SetComboBox Fail || ERR['+E.Message+']');
-    end;
-  end;
+//
 end;
 
 //==============================================================================
@@ -802,7 +759,7 @@ end;
 procedure TfrmU240.sbtResetClick(Sender: TObject);
 begin
   rgITM_YN.ItemIndex      := 0 ;
-  cbCode.ItemIndex        := 0 ;
+  edtModelNo.Text         := '';
   ComboBoxBank.ItemIndex  := 0 ;
   ComboBoxBay.ItemIndex   := 0 ;
   ComboBoxLevel.ItemIndex := 0 ;

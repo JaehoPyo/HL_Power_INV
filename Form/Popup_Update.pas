@@ -67,6 +67,8 @@ type
     Panel13: TPanel;
     Panel14: TPanel;
     qryUpdate: TADOQuery;
+    Panel3: TPanel;
+    edtNewBMA: TEdit;
     procedure btnCloseClick(Sender: TObject);
     procedure btnSaveClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
@@ -110,7 +112,7 @@ begin
     begin
       if StrToInt(Trim(edtITM_QTY.Text)) > 36 then
       begin
-        MessageDlg('36개가 최대 추량입니다.', mtConfirmation, [mbYes], 0) ;
+        MessageDlg('36개가 최대 수량입니다.', mtConfirmation, [mbYes], 0) ;
         Exit;
       end;
 
@@ -118,57 +120,58 @@ begin
       begin
         MessageDlg('기종코드를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
         Exit;
-      end else
-      if edtITM_NAME.Text = '' then
-      begin
-        MessageDlg('기종명을 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
-        Exit;
-      end else
-      if edtITM_SPEC.Text = '' then
-      begin
-        MessageDlg('기종사양을 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
-        Exit;
-      end else
-      if edtITM_QTY.Text = '0' then
-      begin
-        MessageDlg('수량을 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
-        Exit;
-      end else
-      if edtLineName1.Text = '' then
-      begin
-        MessageDlg('식별자이름1을 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
-        Exit;
-      end else
-      if edtLineName2.Text = '' then
-      begin
-        MessageDlg('식별자이름2를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
-        Exit;
-      end else
-      if edtPalletNo1.Text = '' then
-      begin
-        MessageDlg('식별번호1을 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
-        Exit;
-      end else
-      if edtPalletNo2.Text = '' then
-      begin
-        MessageDlg('실별번호2를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
-        Exit;
-      end else
-      if edtModelNo1.Text = '' then
-      begin
-        MessageDlg('차종#1을 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
-        Exit;
-      end else
-      if edtModelNo2.Text = '' then
-      begin
-        MessageDlg('차종#2를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
-        Exit;
-      end else
-      if edtArea.Text = '' then
-      begin
-        MessageDlg('생산지를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
-        Exit;
       end;
+//       else
+//      if edtITM_NAME.Text = '' then
+//      begin
+//        MessageDlg('기종명을 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+//        Exit;
+//      end else
+//      if edtITM_SPEC.Text = '' then
+//      begin
+//        MessageDlg('기종사양을 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+//        Exit;
+//      end else
+//      if edtITM_QTY.Text = '0' then
+//      begin
+//        MessageDlg('수량을 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+//        Exit;
+//      end else
+//      if edtLineName1.Text = '' then
+//      begin
+//        MessageDlg('식별자이름1을 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+//        Exit;
+//      end else
+//      if edtLineName2.Text = '' then
+//      begin
+//        MessageDlg('식별자이름2를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+//        Exit;
+//      end else
+//      if edtPalletNo1.Text = '' then
+//      begin
+//        MessageDlg('식별번호1을 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+//        Exit;
+//      end else
+//      if edtPalletNo2.Text = '' then
+//      begin
+//        MessageDlg('실별번호2를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+//        Exit;
+//      end else
+//      if edtModelNo1.Text = '' then
+//      begin
+//        MessageDlg('차종#1을 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+//        Exit;
+//      end else
+//      if edtModelNo2.Text = '' then
+//      begin
+//        MessageDlg('차종#2를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+//        Exit;
+//      end else
+//      if edtArea.Text = '' then
+//      begin
+//        MessageDlg('생산지를 확인해 주십시오.', mtConfirmation, [mbYes], 0) ;
+//        Exit;
+//      end;
     end;
 
     INdt := '';
@@ -199,6 +202,7 @@ begin
                 '      , RF_MODEL_NO2 = ''''  ' +
                 '      , RF_BMA_NO = ''''  ' +
                 '      , RF_AREA = ''''  ' +
+                '      , RF_NEW_BMA = '''' ' +
                 '      , STOCK_REG_DT = GETDATE()   ' +
                 '  Where ID_HOGI = ' + QuotedStr(ID_HOGI) +
                 '    And ID_CODE = ' + QuotedStr(ID_CODE) ;
@@ -226,6 +230,7 @@ begin
                 '      , RF_MODEL_NO2 = '  + QuotedStr(edtModelNo2.Text)  +
                 '      , RF_BMA_NO = '     + QuotedStr(edtITM_QTY.Text)   +
                 '      , RF_AREA = '       + QuotedStr(edtArea.Text)      +
+                '      , RF_NEW_BMA = '    + QuotedStr(edtNewBMA.Text)    +
                 '  Where ID_HOGI = ' + QuotedStr(ID_HOGI) +
                 '    And ID_CODE = ' + QuotedStr(ID_CODE) ;
     end;
@@ -249,6 +254,7 @@ begin
     AfterRACK_INFO.RF_MODEL_NO2  := edtModelNo2.Text;
     AfterRACK_INFO.RF_BMA_NO     := edtITM_QTY.Text;
     AfterRACK_INFO.RF_AREA       := edtArea.Text;
+    AfterRACK_INFO.RF_NEW_BMA    := edtNewBMA.Text;
 
     with qryUpdate do
     begin
@@ -290,7 +296,8 @@ begin
                      '식별번호2['   + AfterRACK_INFO.RF_PALLET_NO2 + '] ' +
                      '차종#1['      + AfterRACK_INFO.RF_MODEL_NO1  + '] ' +
                      '차종#2['      + AfterRACK_INFO.RF_MODEL_NO2  + '] ' +
-                     '생산지['      + AfterRACK_INFO.RF_AREA       + '] ' ;
+                     '생산지['      + AfterRACK_INFO.RF_AREA       + '] ' +
+                     '신규/재고['   + AfterRACK_INFO.RF_NEW_BMA    + '] ' ;
 
         InsertPGMHist('[Popup_Update]', 'N', 'btnSaveClick', '수정','수정 - ' + tmpLogStr,'SQL', StrSQL, '', '');
       end;
@@ -330,6 +337,7 @@ begin
   BeforeRACK_INFO.RF_MODEL_NO2  := edtModelNo2.Text;
   BeforeRACK_INFO.RF_BMA_NO     := edtITM_QTY.Text;
   BeforeRACK_INFO.RF_AREA       := edtArea.Text;
+  BeforeRACK_INFO.RF_NEW_BMA    := edtNewBMA.Text;
 end;
 
 //==============================================================================
@@ -395,6 +403,7 @@ begin
     edtModelNo1.Text  := '';
     edtModelNo2.Text  := '';
     edtArea.Text      := '';
+    edtNewBMA.Text    := '';
   end else
   if (Sender as TComboBox).ItemIndex=1 then
   begin

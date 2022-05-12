@@ -309,10 +309,15 @@ var
   ITM_YN, StrSQL : String;
 begin
   try
-    if      rgITM_YN.ItemIndex=1 then ITM_YN := 'Y'
-    else if rgITM_YN.ItemIndex=2 then ITM_YN := 'N'
-    else                              ITM_YN := '';
-
+//    if      rgITM_YN.ItemIndex=1 then ITM_YN := 'Y'
+//    else if rgITM_YN.ItemIndex=2 then ITM_YN := 'N'
+//    else                              ITM_YN := '';
+    if (rgITM_YN.ItemIndex = 1) then
+      StrSQL := StrSQL + ' And ITM_CD = ''FULL'' '
+    else if (rgITM_YN.ItemIndex = 2) then
+      StrSQL := StrSQL + ' And ITM_CD = ''EPLT'' '
+    else if (rgITM_YN.ItemIndex = 3) then
+      StrSQL := StrSQL + ' And ITM_CD not in (''FULL'', ''EPLT'')' ;
 
     StrSQL := ' Select ITM_CD, ITM_NAME, ITM_SPEC, ITM_QTY, ' +
               '        ITM_YN, MEMO, UP_DATE, CR_DATE       ' +

@@ -2,8 +2,8 @@
   Left = 2026
   Top = 265
   Caption = #49444#48708' '#47784#45768#53552#47553
-  ClientHeight = 869
-  ClientWidth = 1924
+  ClientHeight = 875
+  ClientWidth = 1918
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -158,8 +158,8 @@
   object Pnl_Main: TPanel
     Left = 0
     Top = 0
-    Width = 1924
-    Height = 869
+    Width = 1918
+    Height = 875
     Align = alClient
     BevelInner = bvRaised
     BevelOuter = bvNone
@@ -168,24 +168,24 @@
     Padding.Bottom = 10
     TabOrder = 0
     OnResize = Pnl_MainResize
-    ExplicitWidth = 1888
+    ExplicitWidth = 1924
+    ExplicitHeight = 869
     object Pnl_Sub: TPanel
       Left = 11
       Top = 1
-      Width = 1497
-      Height = 857
+      Width = 1491
+      Height = 863
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 0
       TabStop = True
-      ExplicitLeft = 1
-      ExplicitWidth = 1240
-      ExplicitHeight = 908
+      ExplicitWidth = 1497
+      ExplicitHeight = 857
       object Shape2: TShape
         Left = 0
         Top = 72
-        Width = 1497
-        Height = 785
+        Width = 1491
+        Height = 791
         Align = alClient
         Pen.Mode = pmMask
         Pen.Style = psDot
@@ -196,15 +196,14 @@
       object Panel4: TPanel
         Left = 0
         Top = 72
-        Width = 1497
-        Height = 785
+        Width = 1491
+        Height = 791
         Align = alClient
         BevelInner = bvLowered
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitTop = 74
-        ExplicitWidth = 1902
-        ExplicitHeight = 850
+        ExplicitWidth = 1497
+        ExplicitHeight = 785
         object Label17: TLabel
           Left = 390
           Top = 210
@@ -1773,11 +1772,11 @@
         end
         object btnReset: TButton
           Tag = 1
-          Left = 385
-          Top = 508
+          Left = 939
+          Top = 506
           Width = 325
           Height = 65
-          Caption = #45936#51060#53552#52488#44592#54868
+          Caption = 'SC '#45936#51060#53552' '#52488#44592#54868
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -24
@@ -1789,8 +1788,8 @@
         end
         object btnRetry: TButton
           Tag = 2
-          Left = 783
-          Top = 508
+          Left = 227
+          Top = 504
           Width = 325
           Height = 65
           Caption = #51116#44592#46041'('#51060#51473#51077#44256','#44277#52636#44256')'
@@ -1802,6 +1801,7 @@
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 5
+          Visible = False
           OnClick = btnClick
         end
         object pnlCurtain1: TPanel
@@ -1990,9 +1990,6 @@
             ParentBackground = False
             ParentFont = False
             TabOrder = 0
-            ExplicitLeft = 141
-            ExplicitTop = 8
-            ExplicitHeight = 41
           end
           object Panel106: TPanel
             Left = 189
@@ -2025,9 +2022,6 @@
             ParentBackground = False
             ParentFont = False
             TabOrder = 2
-            ExplicitLeft = 141
-            ExplicitTop = 8
-            ExplicitHeight = 41
           end
           object Panel108: TPanel
             Left = 574
@@ -2060,33 +2054,29 @@
             ParentBackground = False
             ParentFont = False
             TabOrder = 4
-            ExplicitLeft = 789
-            ExplicitTop = 0
           end
         end
         object Panel110: TPanel
-          Left = 1276
+          Left = 1270
           Top = 1
           Width = 220
-          Height = 783
+          Height = 789
           Align = alRight
           BevelOuter = bvNone
           TabOrder = 19
-          ExplicitHeight = 848
+          ExplicitLeft = 1276
+          ExplicitHeight = 783
           object Panel61: TPanel
             Left = 0
             Top = 0
             Width = 220
-            Height = 250
+            Height = 260
             Align = alTop
             BevelInner = bvLowered
             BevelOuter = bvNone
             Color = clCream
             ParentBackground = False
             TabOrder = 0
-            ExplicitLeft = -55
-            ExplicitTop = 56
-            ExplicitWidth = 240
             object Label6: TLabel
               Left = 8
               Top = 6
@@ -2103,9 +2093,11 @@
             object Label85: TLabel
               Left = 8
               Top = 29
-              Width = 85
+              Width = 86
               Height = 14
-              Caption = #49885#48324#51088#51060#47492'1'
+              Alignment = taRightJustify
+              AutoSize = False
+              Caption = #46972#51064#47749'1'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
               Font.Height = 14
@@ -2115,7 +2107,7 @@
             end
             object lblLineName1_RF04: TLabel
               Left = 100
-              Top = 30
+              Top = 29
               Width = 7
               Height = 13
               Caption = '-'
@@ -2128,9 +2120,11 @@
             end
             object Label87: TLabel
               Left = 8
-              Top = 49
-              Width = 85
+              Top = 48
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #49885#48324#51088#51060#47492'2'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -2141,7 +2135,7 @@
             end
             object lblLineName2_RF04: TLabel
               Left = 100
-              Top = 50
+              Top = 48
               Width = 7
               Height = 13
               Caption = '-'
@@ -2153,10 +2147,12 @@
               ParentFont = False
             end
             object Label89: TLabel
-              Left = 23
-              Top = 69
-              Width = 70
+              Left = 8
+              Top = 67
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #49885#48324#48264#54840'1'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -2166,10 +2162,12 @@
               ParentFont = False
             end
             object Label90: TLabel
-              Left = 23
-              Top = 89
-              Width = 70
+              Left = 8
+              Top = 86
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #49885#48324#48264#54840'2'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -2179,10 +2177,12 @@
               ParentFont = False
             end
             object Label91: TLabel
-              Left = 44
-              Top = 109
-              Width = 49
+              Left = 8
+              Top = 105
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #52264#51333'#1'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -2192,10 +2192,12 @@
               ParentFont = False
             end
             object Label92: TLabel
-              Left = 44
-              Top = 129
-              Width = 49
+              Left = 8
+              Top = 124
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #52264#51333'#2'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -2205,10 +2207,12 @@
               ParentFont = False
             end
             object Label93: TLabel
-              Left = 24
-              Top = 149
-              Width = 69
+              Left = 8
+              Top = 143
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = 'BMA '#44060#49688
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -2218,10 +2222,12 @@
               ParentFont = False
             end
             object Label94: TLabel
-              Left = 48
-              Top = 169
-              Width = 45
+              Left = 8
+              Top = 162
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #49373#49328#51648
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -2231,10 +2237,12 @@
               ParentFont = False
             end
             object Label95: TLabel
-              Left = 29
-              Top = 189
-              Width = 64
+              Left = 8
+              Top = 181
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = 'BMA 1'#50676
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -2244,10 +2252,12 @@
               ParentFont = False
             end
             object Label96: TLabel
-              Left = 29
-              Top = 209
-              Width = 64
+              Left = 8
+              Top = 200
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = 'BMA 2'#50676
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -2257,10 +2267,12 @@
               ParentFont = False
             end
             object Label97: TLabel
-              Left = 29
-              Top = 229
-              Width = 64
+              Left = 8
+              Top = 219
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = 'BMA 3'#50676
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -2271,7 +2283,7 @@
             end
             object lblPalletBma3_RF04: TLabel
               Left = 99
-              Top = 229
+              Top = 219
               Width = 7
               Height = 13
               Caption = '-'
@@ -2284,7 +2296,7 @@
             end
             object lblPalletNo1_RF04: TLabel
               Left = 100
-              Top = 70
+              Top = 67
               Width = 7
               Height = 13
               Caption = '-'
@@ -2297,7 +2309,7 @@
             end
             object lblPalletNo2_RF04: TLabel
               Left = 100
-              Top = 90
+              Top = 86
               Width = 7
               Height = 13
               Caption = '-'
@@ -2310,7 +2322,7 @@
             end
             object lblModelNo1_RF04: TLabel
               Left = 100
-              Top = 110
+              Top = 105
               Width = 7
               Height = 13
               Caption = '-'
@@ -2323,7 +2335,7 @@
             end
             object lblModelNo2_RF04: TLabel
               Left = 100
-              Top = 130
+              Top = 124
               Width = 7
               Height = 13
               Caption = '-'
@@ -2336,7 +2348,7 @@
             end
             object lblBmaNo_RF04: TLabel
               Left = 100
-              Top = 151
+              Top = 143
               Width = 7
               Height = 13
               Caption = '-'
@@ -2349,7 +2361,7 @@
             end
             object lblArea_RF04: TLabel
               Left = 100
-              Top = 170
+              Top = 162
               Width = 7
               Height = 13
               Caption = '-'
@@ -2362,7 +2374,7 @@
             end
             object lblPalletBma1_RF04: TLabel
               Left = 100
-              Top = 190
+              Top = 181
               Width = 7
               Height = 13
               Caption = '-'
@@ -2375,13 +2387,41 @@
             end
             object lblPalletBma2_RF04: TLabel
               Left = 100
-              Top = 210
+              Top = 200
               Width = 7
               Height = 13
               Caption = '-'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clOlive
               Font.Height = 13
+              Font.Name = #46027#50880
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label34: TLabel
+              Left = 8
+              Top = 238
+              Width = 86
+              Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
+              Caption = #49888#44508'/'#51116#44256
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clGreen
+              Font.Height = 14
+              Font.Name = #46027#50880
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object lblNewBMA_RF04: TLabel
+              Left = 100
+              Top = 238
+              Width = 7
+              Height = 13
+              Caption = '-'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clOlive
+              Font.Height = -13
               Font.Name = #46027#50880
               Font.Style = [fsBold]
               ParentFont = False
@@ -2399,18 +2439,16 @@
           end
           object Panel82: TPanel
             Left = 0
-            Top = 250
+            Top = 260
             Width = 220
-            Height = 250
+            Height = 260
             Align = alTop
             BevelInner = bvLowered
             BevelOuter = bvNone
             Color = clCream
             ParentBackground = False
             TabOrder = 1
-            ExplicitLeft = -55
-            ExplicitTop = 306
-            ExplicitWidth = 240
+            ExplicitTop = 250
             object Label107: TLabel
               Left = 8
               Top = 6
@@ -2427,9 +2465,11 @@
             object Label108: TLabel
               Left = 8
               Top = 29
-              Width = 85
+              Width = 86
               Height = 14
-              Caption = #49885#48324#51088#51060#47492'1'
+              Alignment = taRightJustify
+              AutoSize = False
+              Caption = #46972#51064#47749'1'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
               Font.Height = 14
@@ -2439,7 +2479,7 @@
             end
             object lblLineName1_RF05: TLabel
               Left = 100
-              Top = 30
+              Top = 29
               Width = 7
               Height = 13
               Caption = '-'
@@ -2452,9 +2492,11 @@
             end
             object Label110: TLabel
               Left = 8
-              Top = 49
-              Width = 85
+              Top = 48
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #49885#48324#51088#51060#47492'2'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -2465,7 +2507,7 @@
             end
             object lblLineName2_RF05: TLabel
               Left = 100
-              Top = 50
+              Top = 48
               Width = 7
               Height = 13
               Caption = '-'
@@ -2477,10 +2519,12 @@
               ParentFont = False
             end
             object Label112: TLabel
-              Left = 23
-              Top = 69
-              Width = 70
+              Left = 8
+              Top = 67
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #49885#48324#48264#54840'1'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -2490,10 +2534,12 @@
               ParentFont = False
             end
             object Label113: TLabel
-              Left = 23
-              Top = 89
-              Width = 70
+              Left = 8
+              Top = 86
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #49885#48324#48264#54840'2'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -2503,10 +2549,12 @@
               ParentFont = False
             end
             object Label114: TLabel
-              Left = 44
-              Top = 109
-              Width = 49
+              Left = 8
+              Top = 105
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #52264#51333'#1'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -2516,10 +2564,12 @@
               ParentFont = False
             end
             object Label115: TLabel
-              Left = 44
-              Top = 129
-              Width = 49
+              Left = 8
+              Top = 124
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #52264#51333'#2'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -2529,10 +2579,12 @@
               ParentFont = False
             end
             object Label116: TLabel
-              Left = 24
-              Top = 149
-              Width = 69
+              Left = 8
+              Top = 143
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = 'BMA '#44060#49688
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -2542,10 +2594,12 @@
               ParentFont = False
             end
             object Label117: TLabel
-              Left = 48
-              Top = 169
-              Width = 45
+              Left = 8
+              Top = 162
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #49373#49328#51648
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -2555,10 +2609,12 @@
               ParentFont = False
             end
             object Label118: TLabel
-              Left = 29
-              Top = 189
-              Width = 64
+              Left = 8
+              Top = 181
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = 'BMA 1'#50676
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -2568,10 +2624,12 @@
               ParentFont = False
             end
             object Label119: TLabel
-              Left = 29
-              Top = 209
-              Width = 64
+              Left = 8
+              Top = 200
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = 'BMA 2'#50676
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -2581,10 +2639,12 @@
               ParentFont = False
             end
             object Label120: TLabel
-              Left = 29
-              Top = 229
-              Width = 64
+              Left = 8
+              Top = 219
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = 'BMA 3'#50676
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -2595,7 +2655,7 @@
             end
             object lblPalletBma3_RF05: TLabel
               Left = 99
-              Top = 229
+              Top = 219
               Width = 7
               Height = 13
               Caption = '-'
@@ -2608,7 +2668,7 @@
             end
             object lblPalletNo1_RF05: TLabel
               Left = 100
-              Top = 70
+              Top = 67
               Width = 7
               Height = 13
               Caption = '-'
@@ -2621,7 +2681,7 @@
             end
             object lblPalletNo2_RF05: TLabel
               Left = 100
-              Top = 90
+              Top = 86
               Width = 7
               Height = 13
               Caption = '-'
@@ -2634,7 +2694,7 @@
             end
             object lblModelNo1_RF05: TLabel
               Left = 100
-              Top = 110
+              Top = 105
               Width = 7
               Height = 13
               Caption = '-'
@@ -2647,7 +2707,7 @@
             end
             object lblModelNo2_RF05: TLabel
               Left = 100
-              Top = 130
+              Top = 124
               Width = 7
               Height = 13
               Caption = '-'
@@ -2660,7 +2720,7 @@
             end
             object lblBmaNo_RF05: TLabel
               Left = 100
-              Top = 151
+              Top = 143
               Width = 7
               Height = 13
               Caption = '-'
@@ -2673,7 +2733,7 @@
             end
             object lblArea_RF05: TLabel
               Left = 100
-              Top = 170
+              Top = 162
               Width = 7
               Height = 13
               Caption = '-'
@@ -2686,7 +2746,7 @@
             end
             object lblPalletBma1_RF05: TLabel
               Left = 100
-              Top = 190
+              Top = 181
               Width = 7
               Height = 13
               Caption = '-'
@@ -2699,13 +2759,41 @@
             end
             object lblPalletBma2_RF05: TLabel
               Left = 100
-              Top = 210
+              Top = 200
               Width = 7
               Height = 13
               Caption = '-'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clOlive
               Font.Height = 13
+              Font.Name = #46027#50880
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label35: TLabel
+              Left = 8
+              Top = 238
+              Width = 86
+              Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
+              Caption = #49888#44508'/'#51116#44256
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clGreen
+              Font.Height = 14
+              Font.Name = #46027#50880
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object lblNewBMA_RF05: TLabel
+              Left = 100
+              Top = 238
+              Width = 7
+              Height = 13
+              Caption = '-'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clOlive
+              Font.Height = -13
               Font.Name = #46027#50880
               Font.Style = [fsBold]
               ParentFont = False
@@ -2723,18 +2811,16 @@
           end
           object Panel84: TPanel
             Left = 0
-            Top = 500
+            Top = 520
             Width = 220
-            Height = 250
+            Height = 260
             Align = alTop
             BevelInner = bvLowered
             BevelOuter = bvNone
             Color = clCream
             ParentBackground = False
             TabOrder = 2
-            ExplicitLeft = -55
-            ExplicitTop = 556
-            ExplicitWidth = 240
+            ExplicitTop = 500
             object Label130: TLabel
               Left = 8
               Top = 6
@@ -2751,9 +2837,11 @@
             object Label131: TLabel
               Left = 8
               Top = 29
-              Width = 85
+              Width = 86
               Height = 14
-              Caption = #49885#48324#51088#51060#47492'1'
+              Alignment = taRightJustify
+              AutoSize = False
+              Caption = #46972#51064#47749'1'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
               Font.Height = 14
@@ -2763,7 +2851,7 @@
             end
             object lblLineName1_RF06: TLabel
               Left = 100
-              Top = 30
+              Top = 29
               Width = 7
               Height = 13
               Caption = '-'
@@ -2776,9 +2864,11 @@
             end
             object Label133: TLabel
               Left = 8
-              Top = 49
-              Width = 85
+              Top = 48
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #49885#48324#51088#51060#47492'2'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -2789,7 +2879,7 @@
             end
             object lblLineName2_RF06: TLabel
               Left = 100
-              Top = 50
+              Top = 48
               Width = 7
               Height = 13
               Caption = '-'
@@ -2801,10 +2891,12 @@
               ParentFont = False
             end
             object Label135: TLabel
-              Left = 23
-              Top = 69
-              Width = 70
+              Left = 8
+              Top = 67
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #49885#48324#48264#54840'1'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -2814,10 +2906,12 @@
               ParentFont = False
             end
             object Label136: TLabel
-              Left = 23
-              Top = 89
-              Width = 70
+              Left = 8
+              Top = 86
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #49885#48324#48264#54840'2'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -2827,10 +2921,12 @@
               ParentFont = False
             end
             object Label137: TLabel
-              Left = 44
-              Top = 109
-              Width = 49
+              Left = 8
+              Top = 105
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #52264#51333'#1'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -2840,10 +2936,12 @@
               ParentFont = False
             end
             object Label138: TLabel
-              Left = 44
-              Top = 129
-              Width = 49
+              Left = 8
+              Top = 124
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #52264#51333'#2'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -2853,10 +2951,12 @@
               ParentFont = False
             end
             object Label139: TLabel
-              Left = 24
-              Top = 149
-              Width = 69
+              Left = 8
+              Top = 143
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = 'BMA '#44060#49688
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -2866,10 +2966,12 @@
               ParentFont = False
             end
             object Label140: TLabel
-              Left = 48
-              Top = 169
-              Width = 45
+              Left = 8
+              Top = 162
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #49373#49328#51648
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -2879,10 +2981,12 @@
               ParentFont = False
             end
             object Label141: TLabel
-              Left = 29
-              Top = 189
-              Width = 64
+              Left = 8
+              Top = 181
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = 'BMA 1'#50676
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -2892,10 +2996,12 @@
               ParentFont = False
             end
             object Label142: TLabel
-              Left = 29
-              Top = 209
-              Width = 64
+              Left = 8
+              Top = 200
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = 'BMA 2'#50676
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -2905,10 +3011,12 @@
               ParentFont = False
             end
             object Label143: TLabel
-              Left = 29
-              Top = 229
-              Width = 64
+              Left = 8
+              Top = 219
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = 'BMA 3'#50676
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -2919,7 +3027,7 @@
             end
             object lblPalletBma3_RF06: TLabel
               Left = 99
-              Top = 229
+              Top = 219
               Width = 7
               Height = 13
               Caption = '-'
@@ -2932,7 +3040,7 @@
             end
             object lblPalletNo1_RF06: TLabel
               Left = 100
-              Top = 70
+              Top = 67
               Width = 7
               Height = 13
               Caption = '-'
@@ -2945,7 +3053,7 @@
             end
             object lblPalletNo2_RF06: TLabel
               Left = 100
-              Top = 90
+              Top = 86
               Width = 7
               Height = 13
               Caption = '-'
@@ -2958,7 +3066,7 @@
             end
             object lblModelNo1_RF06: TLabel
               Left = 100
-              Top = 110
+              Top = 105
               Width = 7
               Height = 13
               Caption = '-'
@@ -2971,7 +3079,7 @@
             end
             object lblModelNo2_RF06: TLabel
               Left = 100
-              Top = 130
+              Top = 124
               Width = 7
               Height = 13
               Caption = '-'
@@ -2984,7 +3092,7 @@
             end
             object lblBmaNo_RF06: TLabel
               Left = 100
-              Top = 151
+              Top = 143
               Width = 7
               Height = 13
               Caption = '-'
@@ -2997,7 +3105,7 @@
             end
             object lblArea_RF06: TLabel
               Left = 100
-              Top = 170
+              Top = 162
               Width = 7
               Height = 13
               Caption = '-'
@@ -3010,7 +3118,7 @@
             end
             object lblPalletBma1_RF06: TLabel
               Left = 100
-              Top = 190
+              Top = 181
               Width = 7
               Height = 13
               Caption = '-'
@@ -3023,13 +3131,41 @@
             end
             object lblPalletBma2_RF06: TLabel
               Left = 100
-              Top = 210
+              Top = 200
               Width = 7
               Height = 13
               Caption = '-'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clOlive
               Font.Height = 13
+              Font.Name = #46027#50880
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label40: TLabel
+              Left = 8
+              Top = 238
+              Width = 86
+              Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
+              Caption = #49888#44508'/'#51116#44256
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clGreen
+              Font.Height = 14
+              Font.Name = #46027#50880
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object lblNewBMA_RF06: TLabel
+              Left = 100
+              Top = 238
+              Width = 7
+              Height = 13
+              Caption = '-'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clOlive
+              Font.Height = -13
               Font.Name = #46027#50880
               Font.Style = [fsBold]
               ParentFont = False
@@ -3050,25 +3186,24 @@
           Left = 1
           Top = 1
           Width = 220
-          Height = 783
+          Height = 789
           Align = alLeft
           BevelOuter = bvNone
           TabOrder = 20
-          ExplicitHeight = 848
+          ExplicitHeight = 783
           object Panel104: TPanel
             Left = 0
             Top = 0
             Width = 220
-            Height = 250
+            Height = 260
             Align = alTop
             BevelInner = bvLowered
             BevelOuter = bvNone
             Color = clCream
             ParentBackground = False
             TabOrder = 0
-            ExplicitLeft = -54
-            ExplicitTop = 56
-            ExplicitWidth = 239
+            ExplicitLeft = -24
+            ExplicitTop = 5
             object Label8: TLabel
               Left = 8
               Top = 6
@@ -3085,9 +3220,11 @@
             object Label9: TLabel
               Left = 8
               Top = 29
-              Width = 85
+              Width = 86
               Height = 14
-              Caption = #49885#48324#51088#51060#47492'1'
+              Alignment = taRightJustify
+              AutoSize = False
+              Caption = #46972#51064#47749'1'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
               Font.Height = 14
@@ -3097,7 +3234,7 @@
             end
             object lblLineName1_RF01: TLabel
               Left = 100
-              Top = 30
+              Top = 29
               Width = 7
               Height = 13
               Caption = '-'
@@ -3110,9 +3247,11 @@
             end
             object Label7: TLabel
               Left = 8
-              Top = 49
-              Width = 85
+              Top = 48
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #49885#48324#51088#51060#47492'2'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -3123,7 +3262,7 @@
             end
             object lblLineName2_RF01: TLabel
               Left = 100
-              Top = 50
+              Top = 48
               Width = 7
               Height = 13
               Caption = '-'
@@ -3135,10 +3274,12 @@
               ParentFont = False
             end
             object Label12: TLabel
-              Left = 23
-              Top = 69
-              Width = 70
+              Left = 8
+              Top = 67
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #49885#48324#48264#54840'1'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -3148,10 +3289,12 @@
               ParentFont = False
             end
             object Label13: TLabel
-              Left = 23
-              Top = 89
-              Width = 70
+              Left = 8
+              Top = 86
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #49885#48324#48264#54840'2'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -3161,10 +3304,12 @@
               ParentFont = False
             end
             object Label14: TLabel
-              Left = 44
-              Top = 109
-              Width = 49
+              Left = 8
+              Top = 105
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #52264#51333'#1'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -3174,10 +3319,12 @@
               ParentFont = False
             end
             object Label15: TLabel
-              Left = 44
-              Top = 129
-              Width = 49
+              Left = 8
+              Top = 124
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #52264#51333'#2'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -3187,10 +3334,12 @@
               ParentFont = False
             end
             object Label16: TLabel
-              Left = 24
-              Top = 149
-              Width = 69
+              Left = 8
+              Top = 143
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = 'BMA '#44060#49688
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -3200,10 +3349,12 @@
               ParentFont = False
             end
             object Label19: TLabel
-              Left = 48
-              Top = 169
-              Width = 45
+              Left = 8
+              Top = 162
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #49373#49328#51648
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -3213,10 +3364,12 @@
               ParentFont = False
             end
             object Label20: TLabel
-              Left = 29
-              Top = 189
-              Width = 64
+              Left = 8
+              Top = 181
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = 'BMA 1'#50676
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -3226,10 +3379,12 @@
               ParentFont = False
             end
             object Label21: TLabel
-              Left = 29
-              Top = 209
-              Width = 64
+              Left = 8
+              Top = 200
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = 'BMA 2'#50676
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -3239,10 +3394,12 @@
               ParentFont = False
             end
             object Label22: TLabel
-              Left = 29
-              Top = 229
-              Width = 64
+              Left = 8
+              Top = 219
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = 'BMA 3'#50676
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -3252,8 +3409,8 @@
               ParentFont = False
             end
             object lblPalletBma3_RF01: TLabel
-              Left = 99
-              Top = 229
+              Left = 100
+              Top = 219
               Width = 7
               Height = 13
               Caption = '-'
@@ -3266,7 +3423,7 @@
             end
             object lblPalletNo1_RF01: TLabel
               Left = 100
-              Top = 70
+              Top = 67
               Width = 7
               Height = 13
               Caption = '-'
@@ -3279,7 +3436,7 @@
             end
             object lblPalletNo2_RF01: TLabel
               Left = 100
-              Top = 90
+              Top = 86
               Width = 7
               Height = 13
               Caption = '-'
@@ -3292,7 +3449,7 @@
             end
             object lblModelNo1_RF01: TLabel
               Left = 100
-              Top = 110
+              Top = 105
               Width = 7
               Height = 13
               Caption = '-'
@@ -3305,7 +3462,7 @@
             end
             object lblModelNo2_RF01: TLabel
               Left = 100
-              Top = 130
+              Top = 124
               Width = 7
               Height = 13
               Caption = '-'
@@ -3318,7 +3475,7 @@
             end
             object lblBmaNo_RF01: TLabel
               Left = 100
-              Top = 151
+              Top = 143
               Width = 7
               Height = 13
               Caption = '-'
@@ -3331,7 +3488,7 @@
             end
             object lblArea_RF01: TLabel
               Left = 100
-              Top = 170
+              Top = 162
               Width = 7
               Height = 13
               Caption = '-'
@@ -3344,7 +3501,7 @@
             end
             object lblPalletBma1_RF01: TLabel
               Left = 100
-              Top = 190
+              Top = 181
               Width = 7
               Height = 13
               Caption = '-'
@@ -3357,13 +3514,41 @@
             end
             object lblPalletBma2_RF01: TLabel
               Left = 100
-              Top = 210
+              Top = 200
               Width = 7
               Height = 13
               Caption = '-'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clOlive
               Font.Height = 13
+              Font.Name = #46027#50880
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label27: TLabel
+              Left = 8
+              Top = 238
+              Width = 86
+              Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
+              Caption = #49888#44508'/'#51116#44256
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clGreen
+              Font.Height = 14
+              Font.Name = #46027#50880
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object lblNewBMA_RF01: TLabel
+              Left = 100
+              Top = 238
+              Width = 7
+              Height = 13
+              Caption = '-'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clOlive
+              Font.Height = -13
               Font.Name = #46027#50880
               Font.Style = [fsBold]
               ParentFont = False
@@ -3381,18 +3566,15 @@
           end
           object Panel65: TPanel
             Left = 0
-            Top = 250
+            Top = 260
             Width = 220
-            Height = 250
+            Height = 260
             Align = alTop
             BevelInner = bvLowered
             BevelOuter = bvNone
             Color = clCream
             ParentBackground = False
             TabOrder = 1
-            ExplicitLeft = -55
-            ExplicitTop = 306
-            ExplicitWidth = 240
             object Label36: TLabel
               Left = 8
               Top = 6
@@ -3409,9 +3591,11 @@
             object Label37: TLabel
               Left = 8
               Top = 29
-              Width = 85
+              Width = 86
               Height = 14
-              Caption = #49885#48324#51088#51060#47492'1'
+              Alignment = taRightJustify
+              AutoSize = False
+              Caption = #46972#51064#47749'1'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
               Font.Height = 14
@@ -3421,7 +3605,7 @@
             end
             object lblLineName1_RF02: TLabel
               Left = 100
-              Top = 30
+              Top = 29
               Width = 7
               Height = 13
               Caption = '-'
@@ -3434,9 +3618,11 @@
             end
             object Label39: TLabel
               Left = 8
-              Top = 49
-              Width = 85
+              Top = 48
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #49885#48324#51088#51060#47492'2'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -3447,7 +3633,7 @@
             end
             object lblLineName2_RF02: TLabel
               Left = 100
-              Top = 50
+              Top = 48
               Width = 7
               Height = 13
               Caption = '-'
@@ -3459,10 +3645,12 @@
               ParentFont = False
             end
             object Label41: TLabel
-              Left = 23
-              Top = 69
-              Width = 70
+              Left = 8
+              Top = 67
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #49885#48324#48264#54840'1'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -3472,10 +3660,12 @@
               ParentFont = False
             end
             object Label42: TLabel
-              Left = 23
-              Top = 89
-              Width = 70
+              Left = 8
+              Top = 86
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #49885#48324#48264#54840'2'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -3485,10 +3675,12 @@
               ParentFont = False
             end
             object Label43: TLabel
-              Left = 44
-              Top = 109
-              Width = 49
+              Left = 8
+              Top = 105
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #52264#51333'#1'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -3498,10 +3690,12 @@
               ParentFont = False
             end
             object Label44: TLabel
-              Left = 44
-              Top = 129
-              Width = 49
+              Left = 8
+              Top = 124
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #52264#51333'#2'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -3511,10 +3705,12 @@
               ParentFont = False
             end
             object Label45: TLabel
-              Left = 24
-              Top = 149
-              Width = 69
+              Left = 8
+              Top = 143
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = 'BMA '#44060#49688
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -3524,10 +3720,12 @@
               ParentFont = False
             end
             object Label46: TLabel
-              Left = 48
-              Top = 169
-              Width = 45
+              Left = 8
+              Top = 162
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #49373#49328#51648
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -3537,10 +3735,12 @@
               ParentFont = False
             end
             object Label47: TLabel
-              Left = 29
-              Top = 189
-              Width = 64
+              Left = 8
+              Top = 181
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = 'BMA 1'#50676
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -3550,10 +3750,12 @@
               ParentFont = False
             end
             object Label48: TLabel
-              Left = 29
-              Top = 209
-              Width = 64
+              Left = 8
+              Top = 200
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = 'BMA 2'#50676
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -3563,10 +3765,12 @@
               ParentFont = False
             end
             object Label49: TLabel
-              Left = 29
-              Top = 229
-              Width = 64
+              Left = 8
+              Top = 219
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = 'BMA 3'#50676
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -3576,8 +3780,8 @@
               ParentFont = False
             end
             object lblPalletBma3_RF02: TLabel
-              Left = 99
-              Top = 229
+              Left = 100
+              Top = 219
               Width = 7
               Height = 13
               Caption = '-'
@@ -3590,7 +3794,7 @@
             end
             object lblPalletNo1_RF02: TLabel
               Left = 100
-              Top = 70
+              Top = 67
               Width = 7
               Height = 13
               Caption = '-'
@@ -3603,7 +3807,7 @@
             end
             object lblPalletNo2_RF02: TLabel
               Left = 100
-              Top = 90
+              Top = 86
               Width = 7
               Height = 13
               Caption = '-'
@@ -3616,7 +3820,7 @@
             end
             object lblModelNo1_RF02: TLabel
               Left = 100
-              Top = 110
+              Top = 105
               Width = 7
               Height = 13
               Caption = '-'
@@ -3629,7 +3833,7 @@
             end
             object lblModelNo2_RF02: TLabel
               Left = 100
-              Top = 130
+              Top = 124
               Width = 7
               Height = 13
               Caption = '-'
@@ -3642,7 +3846,7 @@
             end
             object lblBmaNo_RF02: TLabel
               Left = 100
-              Top = 151
+              Top = 143
               Width = 7
               Height = 13
               Caption = '-'
@@ -3655,7 +3859,7 @@
             end
             object lblArea_RF02: TLabel
               Left = 100
-              Top = 170
+              Top = 162
               Width = 7
               Height = 13
               Caption = '-'
@@ -3668,7 +3872,7 @@
             end
             object lblPalletBma1_RF02: TLabel
               Left = 100
-              Top = 190
+              Top = 181
               Width = 7
               Height = 13
               Caption = '-'
@@ -3681,13 +3885,41 @@
             end
             object lblPalletBma2_RF02: TLabel
               Left = 100
-              Top = 210
+              Top = 200
               Width = 7
               Height = 13
               Caption = '-'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clOlive
               Font.Height = 13
+              Font.Name = #46027#50880
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label32: TLabel
+              Left = 8
+              Top = 238
+              Width = 86
+              Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
+              Caption = #49888#44508'/'#51116#44256
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clGreen
+              Font.Height = 14
+              Font.Name = #46027#50880
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object lblNewBMA_RF02: TLabel
+              Left = 100
+              Top = 238
+              Width = 7
+              Height = 13
+              Caption = '-'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clOlive
+              Font.Height = -13
               Font.Name = #46027#50880
               Font.Style = [fsBold]
               ParentFont = False
@@ -3705,18 +3937,17 @@
           end
           object Panel83: TPanel
             Left = 0
-            Top = 500
+            Top = 520
             Width = 220
-            Height = 250
+            Height = 260
             Align = alTop
             BevelInner = bvLowered
             BevelOuter = bvNone
             Color = clCream
             ParentBackground = False
             TabOrder = 2
-            ExplicitLeft = -55
-            ExplicitTop = 556
-            ExplicitWidth = 240
+            ExplicitLeft = 2
+            ExplicitTop = 518
             object Label59: TLabel
               Left = 8
               Top = 6
@@ -3733,9 +3964,11 @@
             object Label60: TLabel
               Left = 8
               Top = 29
-              Width = 85
+              Width = 86
               Height = 14
-              Caption = #49885#48324#51088#51060#47492'1'
+              Alignment = taRightJustify
+              AutoSize = False
+              Caption = #46972#51064#47749'1'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
               Font.Height = 14
@@ -3745,7 +3978,7 @@
             end
             object lblLineName1_RF03: TLabel
               Left = 100
-              Top = 30
+              Top = 29
               Width = 7
               Height = 13
               Caption = '-'
@@ -3758,9 +3991,11 @@
             end
             object Label62: TLabel
               Left = 8
-              Top = 49
-              Width = 85
+              Top = 48
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #49885#48324#51088#51060#47492'2'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -3771,7 +4006,7 @@
             end
             object lblLineName2_RF03: TLabel
               Left = 100
-              Top = 50
+              Top = 48
               Width = 7
               Height = 13
               Caption = '-'
@@ -3783,10 +4018,12 @@
               ParentFont = False
             end
             object Label67: TLabel
-              Left = 23
-              Top = 69
-              Width = 70
+              Left = 8
+              Top = 67
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #49885#48324#48264#54840'1'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -3796,10 +4033,12 @@
               ParentFont = False
             end
             object Label68: TLabel
-              Left = 23
-              Top = 89
-              Width = 70
+              Left = 8
+              Top = 86
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #49885#48324#48264#54840'2'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -3809,10 +4048,12 @@
               ParentFont = False
             end
             object Label69: TLabel
-              Left = 44
-              Top = 109
-              Width = 49
+              Left = 8
+              Top = 105
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #52264#51333'#1'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -3822,10 +4063,12 @@
               ParentFont = False
             end
             object Label70: TLabel
-              Left = 44
-              Top = 129
-              Width = 49
+              Left = 8
+              Top = 124
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #52264#51333'#2'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -3835,10 +4078,12 @@
               ParentFont = False
             end
             object Label71: TLabel
-              Left = 24
-              Top = 149
-              Width = 69
+              Left = 8
+              Top = 143
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = 'BMA '#44060#49688
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -3848,10 +4093,12 @@
               ParentFont = False
             end
             object Label72: TLabel
-              Left = 48
-              Top = 169
-              Width = 45
+              Left = 8
+              Top = 162
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = #49373#49328#51648
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -3861,10 +4108,12 @@
               ParentFont = False
             end
             object Label73: TLabel
-              Left = 29
-              Top = 189
-              Width = 64
+              Left = 8
+              Top = 181
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = 'BMA 1'#50676
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -3874,10 +4123,12 @@
               ParentFont = False
             end
             object Label74: TLabel
-              Left = 29
-              Top = 209
-              Width = 64
+              Left = 8
+              Top = 200
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = 'BMA 2'#50676
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -3887,10 +4138,12 @@
               ParentFont = False
             end
             object Label75: TLabel
-              Left = 29
-              Top = 229
-              Width = 64
+              Left = 8
+              Top = 219
+              Width = 86
               Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
               Caption = 'BMA 3'#50676
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -3900,8 +4153,8 @@
               ParentFont = False
             end
             object lblPalletBma3_RF03: TLabel
-              Left = 99
-              Top = 229
+              Left = 100
+              Top = 219
               Width = 7
               Height = 13
               Caption = '-'
@@ -3914,7 +4167,7 @@
             end
             object lblPalletNo1_RF03: TLabel
               Left = 100
-              Top = 70
+              Top = 67
               Width = 7
               Height = 13
               Caption = '-'
@@ -3927,7 +4180,7 @@
             end
             object lblPalletNo2_RF03: TLabel
               Left = 100
-              Top = 90
+              Top = 86
               Width = 7
               Height = 13
               Caption = '-'
@@ -3940,7 +4193,7 @@
             end
             object lblModelNo1_RF03: TLabel
               Left = 100
-              Top = 110
+              Top = 105
               Width = 7
               Height = 13
               Caption = '-'
@@ -3953,7 +4206,7 @@
             end
             object lblModelNo2_RF03: TLabel
               Left = 100
-              Top = 130
+              Top = 124
               Width = 7
               Height = 13
               Caption = '-'
@@ -3966,7 +4219,7 @@
             end
             object lblBmaNo_RF03: TLabel
               Left = 100
-              Top = 151
+              Top = 143
               Width = 7
               Height = 13
               Caption = '-'
@@ -3979,7 +4232,7 @@
             end
             object lblArea_RF03: TLabel
               Left = 100
-              Top = 170
+              Top = 162
               Width = 7
               Height = 13
               Caption = '-'
@@ -3992,7 +4245,7 @@
             end
             object lblPalletBma1_RF03: TLabel
               Left = 100
-              Top = 190
+              Top = 181
               Width = 7
               Height = 13
               Caption = '-'
@@ -4005,13 +4258,41 @@
             end
             object lblPalletBma2_RF03: TLabel
               Left = 100
-              Top = 210
+              Top = 200
               Width = 7
               Height = 13
               Caption = '-'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clOlive
               Font.Height = 13
+              Font.Name = #46027#50880
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object Label33: TLabel
+              Left = 8
+              Top = 238
+              Width = 86
+              Height = 14
+              Alignment = taRightJustify
+              AutoSize = False
+              Caption = #49888#44508'/'#51116#44256
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clGreen
+              Font.Height = 14
+              Font.Name = #46027#50880
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object lblNewBMA_RF03: TLabel
+              Left = 100
+              Top = 238
+              Width = 7
+              Height = 13
+              Caption = '-'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clOlive
+              Font.Height = -13
               Font.Name = #46027#50880
               Font.Style = [fsBold]
               ParentFont = False
@@ -4210,25 +4491,26 @@
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 1497
+        Width = 1491
         Height = 72
         Align = alTop
         BevelOuter = bvNone
         ParentBackground = False
         TabOrder = 1
+        ExplicitWidth = 1497
         object Pnl_Top: TPanel
           Left = 0
           Top = 0
-          Width = 1497
+          Width = 1491
           Height = 72
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
-          ExplicitHeight = 64
+          ExplicitWidth = 1497
           object gbCode: TGroupBox
             Left = 0
             Top = 0
-            Width = 1497
+            Width = 1491
             Height = 72
             Align = alClient
             Caption = '[ '#49345#53468' '#48276#47168' ]'
@@ -4241,7 +4523,7 @@
             ParentColor = False
             ParentFont = False
             TabOrder = 0
-            ExplicitHeight = 63
+            ExplicitWidth = 1497
             object 대기중: TLabel
               Left = 64
               Top = 31
@@ -4972,18 +5254,17 @@
       end
     end
     object Panel201: TPanel
-      Left = 1508
+      Left = 1502
       Top = 1
       Width = 405
-      Height = 857
+      Height = 863
       Align = alRight
       BevelInner = bvRaised
       BevelOuter = bvLowered
       Color = 14803425
       TabOrder = 1
-      ExplicitLeft = 1497
-      ExplicitTop = -1
-      ExplicitHeight = 848
+      ExplicitLeft = 1508
+      ExplicitHeight = 857
       object Panel231: TPanel
         Left = 2
         Top = 2
@@ -5006,11 +5287,11 @@
         Left = 2
         Top = 26
         Width = 401
-        Height = 829
+        Height = 835
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 1
-        ExplicitHeight = 819
+        ExplicitHeight = 829
         object Panel232: TPanel
           Left = 0
           Top = 0
@@ -7488,14 +7769,14 @@
           Left = 0
           Top = 676
           Width = 401
-          Height = 153
+          Height = 159
           Align = alClient
           BevelInner = bvLowered
           BevelOuter = bvNone
           Color = 16185078
           ParentBackground = False
           TabOrder = 2
-          ExplicitHeight = 143
+          ExplicitHeight = 153
           object Panel51: TPanel
             Left = 7
             Top = 103

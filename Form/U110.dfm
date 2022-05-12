@@ -154,7 +154,7 @@ object frmU110: TfrmU110
   OnClose = FormClose
   OnDeactivate = FormDeactivate
   PixelsPerInch = 96
-  TextHeight = 11
+  TextHeight = 13
   object Pnl_Top: TPanel
     Left = 0
     Top = 0
@@ -167,12 +167,12 @@ object frmU110: TfrmU110
     object rgITM_YN: TRadioGroup
       Left = 217
       Top = 1
-      Width = 328
+      Width = 496
       Height = 78
       Align = alLeft
-      Caption = '[ '#44592#51333#50668#48512' ]'
+      Caption = '[ '#51333#47448' ]'
       Color = clBtnFace
-      Columns = 3
+      Columns = 4
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -20
@@ -181,8 +181,9 @@ object frmU110: TfrmU110
       ItemIndex = 0
       Items.Strings = (
         #51204#52404
-        #44592#51333
-        #44277#54028#47112#53944)
+        #49892#54036#47112#53944
+        #44277#54028#47112#53944
+        #44592#53440)
       ParentColor = False
       ParentFont = False
       TabOrder = 0
