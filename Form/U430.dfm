@@ -16,6 +16,8 @@ object frmU430: TfrmU430
   Visible = True
   WindowState = wsMaximized
   OnActivate = FormActivate
+  OnDeactivate = FormDeactivate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Pnl_Top: TPanel
@@ -144,7 +146,6 @@ object frmU430: TfrmU430
       Font.Style = []
       ParentFont = False
       TabOrder = 1
-      ExplicitLeft = 911
       object Label1: TLabel
         Left = 90
         Top = 29

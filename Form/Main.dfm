@@ -149,6 +149,7 @@ object frmMain: TfrmMain
   Menu = mnuMain
   OldCreateOrder = False
   Position = poDesktopCenter
+  WindowState = wsMaximized
   OnActivate = FormActivate
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
@@ -488,7 +489,6 @@ object frmMain: TfrmMain
     BorderWidth = 4
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 1904
     object Panel10: TPanel
       Left = 4
       Top = 4
@@ -499,7 +499,6 @@ object frmMain: TfrmMain
       Color = 14803425
       ParentBackground = False
       TabOrder = 0
-      ExplicitWidth = 1892
       object Panel22: TPanel
         Left = 1
         Top = 1
@@ -510,7 +509,6 @@ object frmMain: TfrmMain
         Color = 14803425
         ParentBackground = False
         TabOrder = 0
-        ExplicitWidth = 1890
         object LblMenu000: TLabel
           Left = 17
           Top = 2
@@ -559,7 +557,6 @@ object frmMain: TfrmMain
           Layout = tlCenter
           Visible = False
           StyleElements = [seClient, seBorder]
-          ExplicitLeft = 482
           ExplicitHeight = 40
         end
         object Panel11: TPanel
@@ -580,7 +577,6 @@ object frmMain: TfrmMain
           BevelOuter = bvLowered
           ParentBackground = False
           TabOrder = 1
-          ExplicitLeft = 1144
           object Pnl_Btn5: TPanel
             Left = 297
             Top = 1
@@ -1605,7 +1601,6 @@ object frmMain: TfrmMain
       Align = alRight
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitLeft = 1896
     end
   end
   object PnlDatabaseConn: TPanel
@@ -1816,8 +1811,6 @@ object frmMain: TfrmMain
     ParentShowHint = False
     ShowHint = False
     OnDrawPanel = staLoginInfoDrawPanel
-    ExplicitTop = 958
-    ExplicitWidth = 1904
   end
   object tmrSystem: TTimer
     OnTimer = tmrSystemTimer

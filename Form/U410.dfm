@@ -153,6 +153,7 @@ object frmU410: TfrmU410
   OnActivate = FormActivate
   OnClose = FormClose
   OnDeactivate = FormDeactivate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Pnl_Top: TPanel
@@ -285,7 +286,6 @@ object frmU410: TfrmU410
       Font.Style = []
       ParentFont = False
       TabOrder = 1
-      ExplicitLeft = 911
       object Label1: TLabel
         Left = 90
         Top = 33

@@ -235,6 +235,7 @@ object frmU230: TfrmU230
         TitleParams.ParentFont = False
         TitleParams.RowHeight = 26
         TitleParams.VertLineColor = 5592405
+        OnCellClick = dgInfoCellClick
         OnTitleClick = dgInfoTitleClick
         Columns = <
           item
