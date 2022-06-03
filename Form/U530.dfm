@@ -19,7 +19,7 @@ object frmU530: TfrmU530
   OnClose = FormClose
   OnDeactivate = FormDeactivate
   PixelsPerInch = 96
-  TextHeight = 11
+  TextHeight = 13
   object Pnl_Top: TPanel
     Left = 0
     Top = 0
@@ -146,7 +146,8 @@ object frmU530: TfrmU530
       Font.Style = []
       ParentFont = False
       TabOrder = 1
-      ExplicitLeft = 721
+      ExplicitLeft = 1369
+      ExplicitTop = 17
       object edtDesc: TEdit
         Left = 20
         Top = 29
@@ -176,7 +177,6 @@ object frmU530: TfrmU530
       Font.Style = []
       ParentFont = False
       TabOrder = 2
-      ExplicitLeft = 721
       object edtName: TEdit
         Left = 20
         Top = 29
@@ -206,7 +206,6 @@ object frmU530: TfrmU530
       Font.Style = []
       ParentFont = False
       TabOrder = 3
-      ExplicitLeft = 721
       object cbType: TComboBox
         Left = 20
         Top = 29
@@ -258,6 +257,49 @@ object frmU530: TfrmU530
         OnKeyPress = KeyPress
       end
     end
+    object GroupBox6: TGroupBox
+      Left = 1649
+      Top = 1
+      Width = 160
+      Height = 78
+      Align = alLeft
+      Caption = '[ '#54665' '#45458#51060#51312#51208' ]'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = 20
+      Font.Name = #46027#50880
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 5
+      object edtRowHeight: TEdit
+        Left = 27
+        Top = 29
+        Width = 93
+        Height = 28
+        Alignment = taCenter
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = 20
+        Font.Name = #46027#50880
+        Font.Style = [fsBold]
+        NumbersOnly = True
+        ParentFont = False
+        TabOrder = 0
+        Text = '1'
+        OnChange = edtRowHeightChange
+        OnKeyPress = KeyPress
+      end
+      object UpDown1: TUpDown
+        Left = 120
+        Top = 29
+        Width = 16
+        Height = 28
+        Associate = edtRowHeight
+        Min = 1
+        Position = 1
+        TabOrder = 1
+      end
+    end
   end
   object Pnl_Main: TPanel
     Left = 0
@@ -291,7 +333,6 @@ object frmU530: TfrmU530
       Font.Height = -16
       Font.Name = #46027#50880
       Font.Style = []
-      FooterRowCount = 1
       FooterParams.FillStyle = cfstSolidEh
       FooterParams.Font.Charset = GB2312_CHARSET
       FooterParams.Font.Color = clWindowText
@@ -515,22 +556,22 @@ object frmU530: TfrmU530
   end
   object dsInfo: TDataSource
     DataSet = qryInfo
-    Left = 1744
-    Top = 14
+    Left = 1696
+    Top = 270
   end
   object qryInfo: TADOQuery
     Connection = MainDm.MainDB
     CursorType = ctStatic
     Parameters = <>
-    Left = 1776
-    Top = 14
+    Left = 1728
+    Top = 270
   end
   object qryTemp: TADOQuery
     Connection = MainDm.MainDB
     CursorType = ctStatic
     Parameters = <>
-    Left = 1808
-    Top = 14
+    Left = 1760
+    Top = 270
   end
   object EhPrint: TPrintDBGridEh
     Options = []
@@ -545,7 +586,7 @@ object frmU530: TfrmU530
     PageHeader.Font.Name = 'Tahoma'
     PageHeader.Font.Style = []
     Units = MM
-    Left = 1841
-    Top = 14
+    Left = 1793
+    Top = 270
   end
 end

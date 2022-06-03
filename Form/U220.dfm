@@ -1109,6 +1109,7 @@ object frmU220: TfrmU220
   end
   object tmrRFID: TTimer
     Enabled = False
+    Interval = 500
     OnTimer = tmrRFIDTimer
     Left = 815
     Top = 58

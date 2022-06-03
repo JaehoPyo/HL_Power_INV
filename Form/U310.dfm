@@ -1012,7 +1012,7 @@ object frmU310: TfrmU310
             Font.Name = #46027#50880
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 18
+            TabOrder = 21
           end
           object cbOtUSED: TCheckBox
             Left = 276
@@ -1026,7 +1026,7 @@ object frmU310: TfrmU310
             Font.Name = #46027#50880
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 19
+            TabOrder = 22
           end
           object btnSave: TButton
             Left = 10
@@ -1040,7 +1040,7 @@ object frmU310: TfrmU310
             Font.Name = #46027#50880
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 20
+            TabOrder = 31
             OnClick = btnSaveClick
           end
           object Panel8: TPanel
@@ -1059,7 +1059,7 @@ object frmU310: TfrmU310
             Font.Style = [fsBold]
             ParentBackground = False
             ParentFont = False
-            TabOrder = 21
+            TabOrder = 32
           end
           object edtID_MEMO: TEdit
             Left = 115
@@ -1073,7 +1073,7 @@ object frmU310: TfrmU310
             Font.Style = []
             ImeName = 'Microsoft Office IME 2007'
             ParentFont = False
-            TabOrder = 22
+            TabOrder = 20
           end
           object dtDate: TDateTimePicker
             Left = 115
@@ -1089,7 +1089,7 @@ object frmU310: TfrmU310
             Font.Style = []
             ImeName = 'Microsoft Office IME 2007'
             ParentFont = False
-            TabOrder = 23
+            TabOrder = 18
           end
           object dtTime: TDateTimePicker
             Left = 238
@@ -1106,7 +1106,7 @@ object frmU310: TfrmU310
             ImeName = 'Microsoft Office IME 2007'
             Kind = dtkTime
             ParentFont = False
-            TabOrder = 24
+            TabOrder = 19
           end
           object Panel2: TPanel
             Left = 10
@@ -1124,7 +1124,7 @@ object frmU310: TfrmU310
             Font.Style = [fsBold]
             ParentBackground = False
             ParentFont = False
-            TabOrder = 25
+            TabOrder = 33
           end
           object Panel11: TPanel
             Left = 10
@@ -1142,7 +1142,7 @@ object frmU310: TfrmU310
             Font.Style = [fsBold]
             ParentBackground = False
             ParentFont = False
-            TabOrder = 26
+            TabOrder = 34
           end
           object Panel20: TPanel
             Left = 10
@@ -1160,7 +1160,7 @@ object frmU310: TfrmU310
             Font.Style = [fsBold]
             ParentBackground = False
             ParentFont = False
-            TabOrder = 27
+            TabOrder = 35
           end
           object Panel21: TPanel
             Left = 10
@@ -1178,7 +1178,7 @@ object frmU310: TfrmU310
             Font.Style = [fsBold]
             ParentBackground = False
             ParentFont = False
-            TabOrder = 28
+            TabOrder = 36
           end
           object Panel22: TPanel
             Left = 10
@@ -1196,7 +1196,7 @@ object frmU310: TfrmU310
             Font.Style = [fsBold]
             ParentBackground = False
             ParentFont = False
-            TabOrder = 29
+            TabOrder = 37
           end
           object Panel25: TPanel
             Left = 10
@@ -1214,7 +1214,7 @@ object frmU310: TfrmU310
             Font.Style = [fsBold]
             ParentBackground = False
             ParentFont = False
-            TabOrder = 30
+            TabOrder = 38
           end
           object Panel28: TPanel
             Left = 10
@@ -1232,7 +1232,7 @@ object frmU310: TfrmU310
             Font.Style = [fsBold]
             ParentBackground = False
             ParentFont = False
-            TabOrder = 31
+            TabOrder = 39
           end
           object edtLineName1: TEdit
             Left = 115
@@ -1246,7 +1246,7 @@ object frmU310: TfrmU310
             Font.Style = []
             ImeName = 'Microsoft Office IME 2007'
             ParentFont = False
-            TabOrder = 32
+            TabOrder = 23
           end
           object edtLineName2: TEdit
             Left = 115
@@ -1260,7 +1260,7 @@ object frmU310: TfrmU310
             Font.Style = []
             ImeName = 'Microsoft Office IME 2007'
             ParentFont = False
-            TabOrder = 33
+            TabOrder = 24
           end
           object edtPalletNo1: TEdit
             Left = 115
@@ -1274,7 +1274,7 @@ object frmU310: TfrmU310
             Font.Style = []
             ImeName = 'Microsoft Office IME 2007'
             ParentFont = False
-            TabOrder = 34
+            TabOrder = 25
           end
           object edtPalletNo2: TEdit
             Left = 115
@@ -1288,7 +1288,7 @@ object frmU310: TfrmU310
             Font.Style = []
             ImeName = 'Microsoft Office IME 2007'
             ParentFont = False
-            TabOrder = 35
+            TabOrder = 26
           end
           object edtModelNo1: TEdit
             Left = 115
@@ -1302,7 +1302,7 @@ object frmU310: TfrmU310
             Font.Style = []
             ImeName = 'Microsoft Office IME 2007'
             ParentFont = False
-            TabOrder = 36
+            TabOrder = 27
           end
           object edtModelNo2: TEdit
             Left = 115
@@ -1316,7 +1316,7 @@ object frmU310: TfrmU310
             Font.Style = []
             ImeName = 'Microsoft Office IME 2007'
             ParentFont = False
-            TabOrder = 37
+            TabOrder = 28
           end
           object edtArea: TEdit
             Left = 115
@@ -1330,7 +1330,7 @@ object frmU310: TfrmU310
             Font.Style = []
             ImeName = 'Microsoft Office IME 2007'
             ParentFont = False
-            TabOrder = 38
+            TabOrder = 29
           end
           object Panel29: TPanel
             Left = 10
@@ -1348,7 +1348,7 @@ object frmU310: TfrmU310
             Font.Style = [fsBold]
             ParentBackground = False
             ParentFont = False
-            TabOrder = 39
+            TabOrder = 40
           end
           object edtNEW_BMA: TEdit
             Left = 115
@@ -1362,7 +1362,7 @@ object frmU310: TfrmU310
             Font.Style = []
             ImeName = 'Microsoft Office IME 2007'
             ParentFont = False
-            TabOrder = 40
+            TabOrder = 30
           end
         end
       end

@@ -401,6 +401,7 @@ end;
 procedure TfrmU230.btnOrderClick(Sender: TObject);
 var
   i : integer ;
+  LogStr : String;
 begin
   try
     OrderCount := 0;
@@ -422,13 +423,20 @@ begin
 
     if (dgInfo.SelectedRows.Count = 1) then
     begin
+      LogStr := '▷기종코드 ['+ edtOutCode.Text +'] ' + #13#10+
+                '▷차종 [' + qryInfo.FieldByName('RF_MODEL_NO1').AsString +'] ' + #13#10+
+                '▷적재위치 ['+ edtOutCell.Text +'] ' + #13#10+
+                '▷입고일자 ['+ edtOutIndate.Text +'] ' + #13#10;
+
+
       if MessageDlg(' 선택 한 기종을 출고 하시겠습니까?' + #13#10  + #13#10+
                     '===============================' + #13#10+
-                    '▷기종코드 ['+ edtOutCode.Text +'] ' + #13#10+
-                    '▷적재위치 ['+ edtOutCell.Text +'] ' + #13#10+
-                    '▷입고일자 ['+ edtOutIndate.Text +'] ' + #13#10+
+                    LogStr +
                     '===============================' + #13#10+
-                    '', mtConfirmation, [mbYes, mbNo], 0) <> mrYes then Exit ;
+                    '',
+                    mtConfirmation, [mbYes, mbNo], 0) <> mrYes then Exit ;
+
+      InsertPGMHist('['+FormNo+']', 'N', 'btnOrderClick', '', LogStr, 'PGM', '', '', '');
     end else
     if (dgInfo.SelectedRows.Count > 1) then
     begin

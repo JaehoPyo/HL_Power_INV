@@ -836,8 +836,8 @@ end;
 //==============================================================================
 procedure TfrmU210.sbtClick(Sender: TObject);
 var
-  IO,JobNo : String;
-
+  IO, JobNo, ItmCd, IsAuto, Station, Loc, NowMc, NowStatus, ErrorStatus : String;
+  LogStr : String;
 begin
   if (((Sender as TSpeedButton).Tag = 1) or ((Sender as TSpeedButton).Tag = 2)) and
      ((Trim(edtJOB_NO_SEL1.Text) = '') or
@@ -859,7 +859,7 @@ begin
   begin
       MessageDlg('  출고 작업을 선택하지 않았습니다.' + #13#10 + #13#10 +
                  '  수동처리 할 출고 작업을 선택 후 진행해 주십시오.', mtConfirmation, [mbYes], 0);
-      dgInfo_In.SetFocus;
+      dgInfo_Ot.SetFocus;
       Exit;  
   end;
   
@@ -871,14 +871,50 @@ begin
   begin
       MessageDlg('  이동 작업을 선택하지 않았습니다.' + #13#10 + #13#10 +
                  '  수동처리 할 이동 작업을 선택 후 진행해 주십시오.', mtConfirmation, [mbYes], 0);
-      dgInfo_In.SetFocus;
+      dgInfo_Rack.SetFocus;
       Exit;  
   end;
   
   Case (Sender as TSpeedButton).Tag of
-    1,2 : begin JobNo := edtJOB_NO_SEL1.Text; IO := '입고'; end;
-    3,4 : begin JobNo := edtJOB_NO_SEL2.Text; IO := '출고'; end;
-    5,6 : begin JobNo := edtJOB_NO_SEL3.Text; IO := '랙이동'; end;
+    1,2 :
+    begin
+      JobNo := edtJOB_NO_SEL1.Text;
+      IO := '입고';
+      ItmCd       := qryInfo_In.FieldByName('ITM_CD').AsString;
+      IsAuto      := qryInfo_In.FieldByName('IS_AUTO').AsString;
+      Station     := qryInfo_In.FieldByName('LINE_NO').AsString;
+      Loc         := qryInfo_In.FieldByName('ID_CODE').AsString;
+      NowMc       := qryInfo_In.FieldByName('NOWMC_DESC').AsString;
+      NowStatus   := qryInfo_In.FieldByName('NOWSTATUS_DESC').AsString;
+      ErrorStatus := qryInfo_In.FieldByName('JOBERRORC_DESC').AsString + '-' +
+                     qryInfo_In.FieldByName('JOBERRORD_DESC').AsString;
+    end;
+    3,4 :
+    begin
+      JobNo := edtJOB_NO_SEL2.Text;
+      IO := '출고';
+      ItmCd       := qryInfo_Ot.FieldByName('ITM_CD').AsString;
+      IsAuto      := qryInfo_Ot.FieldByName('IS_AUTO').AsString;
+      Station     := qryInfo_Ot.FieldByName('LINE_NO').AsString;
+      Loc         := qryInfo_Ot.FieldByName('OD_CODE').AsString;
+      NowMc       := qryInfo_Ot.FieldByName('NOWMC_DESC').AsString;
+      NowStatus   := qryInfo_Ot.FieldByName('NOWSTATUS_DESC').AsString;
+      ErrorStatus := qryInfo_Ot.FieldByName('JOBERRORC_DESC').AsString + '-' +
+                     qryInfo_Ot.FieldByName('JOBERRORD_DESC').AsString;
+    end;
+    5,6 :
+    begin
+      JobNo := edtJOB_NO_SEL3.Text;
+      IO := '랙이동';
+      ItmCd       := qryInfo_Rack.FieldByName('ITM_CD').AsString;
+      IsAuto      := qryInfo_Rack.FieldByName('IS_AUTO').AsString;
+      Station     := qryInfo_Rack.FieldByName('LINE_NO').AsString;
+      Loc         := qryInfo_Rack.FieldByName('OD_CODE').AsString + '->' + qryInfo_Ot.FieldByName('ID_CODE').AsString;
+      NowMc       := qryInfo_Rack.FieldByName('NOWMC_DESC').AsString;
+      NowStatus   := qryInfo_Rack.FieldByName('NOWSTATUS_DESC').AsString;
+      ErrorStatus := qryInfo_Rack.FieldByName('JOBERRORC_DESC').AsString + '-' +
+                     qryInfo_Rack.FieldByName('JOBERRORD_DESC').AsString;
+    end;
   End;
 
   if MessageDlg('  [ '+JobNo+' ] 번 작업 처리 하시겠습니까?', mtConfirmation, [mbYes, mbNo], 0) <> mrYes then Exit ;
@@ -887,23 +923,38 @@ begin
 
   if (OrderData.JOBERRORC = '1') and (OrderData.JOBERRORD = 'RFID 불일치') then fnRFIDDataUpdate; // 알람 OFF
 
+  LogStr := '기종코드[' + ItmCd + '], ' + #13#10 +
+            '자동작업[' + IsAuto + '], ' + #13#10 +
+            '스테이션[' + Station + '], ' + #13#10 +
+            '랙위치[' + Loc + '], ' + #13#10 +
+            '작업정보[' + NowMc + '], ' + #13#10 +
+            '진행상태[' + NowStatus + '], ' + #13#10 +
+            '에러상태[' + ErrorStatus + ']';
   if fnJobCheck(JobNo) then //작업중
-  begin 
+  begin
     if (Sender as tSpeedButton).Tag mod 2 = 1 then
     begin
-      fnUpdateSCSetInfo('JOB_CANCLE');//취소  
+      fnUpdateSCSetInfo('JOB_CANCLE');//취소
+      LogStr := 'SC 진행작업 취소' + #13#10 + LogStr ;
+      InsertPGMHist('['+FormNo+']', 'N', 'sbtClick', '', LogStr, 'PGM', '', '', '');
     end else
     begin
-      fnUpdateSCSetInfo('JOB_COMPLETE');//완료   
+      fnUpdateSCSetInfo('JOB_COMPLETE');//완료
+      LogStr := 'SC 진행작업 강제완료'+ #13#10 + LogStr ;
+      InsertPGMHist('['+FormNo+']', 'N', 'sbtClick', '', LogStr, 'PGM', '', '', '');
     end;
   end else //대기중
   begin
     if (Sender as tSpeedButton).Tag mod 2 = 1 then //취소
     begin
       fnOrderCancelAndComplet(IO,JobNo,'취소');
+      LogStr := '작업취소' + #13#10 + LogStr ;
+      InsertPGMHist('['+FormNo+']', 'N', 'sbtClick', '', LogStr, 'PGM', '', '', '');
     end else                                       //완료
     begin
       fnOrderCancelAndComplet(IO,JobNo,'완료');
+      LogStr := '강제완료' + #13#10 + LogStr ;
+      InsertPGMHist('['+FormNo+']', 'N', 'sbtClick', '', LogStr, 'PGM', '', '', '');
     end;
   end;
   fnAutoQuery(IO);

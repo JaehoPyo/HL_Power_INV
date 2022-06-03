@@ -8,7 +8,7 @@ uses
   Grids, StrUtils, DBGrids, comobj, frxClass, frxDBSet, DBGridEhGrouping, EhLibADO,
   ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh,DBGridEhImpExp,
   DBGridEh, Vcl.Mask, Vcl.DBCtrls, DBCtrlsEh, PrnDbgeh, Vcl.Buttons,
-  Vcl.Imaging.pngimage ;
+  Vcl.Imaging.pngimage, Vcl.ComCtrls ;
 
 type
   TfrmU510 = class(TForm)
@@ -431,6 +431,17 @@ type
     lblNewBMA_RF05: TLabel;
     Label40: TLabel;
     lblNewBMA_RF06: TLabel;
+    pnlOutOrder: TPanel;
+    Panel114: TPanel;
+    Label38: TLabel;
+    Panel115: TPanel;
+    edtEPLT_CNT: TEdit;
+    UpDown1: TUpDown;
+    Panel116: TPanel;
+    Label50: TLabel;
+    Panel117: TPanel;
+    edtFULL_CNT: TEdit;
+    UpDown2: TUpDown;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -441,6 +452,10 @@ type
     procedure btnCurtainClick(Sender: TObject);
     procedure ButtonClickRFIDRead(Sender: TObject);
     procedure dgInfo_InDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure pnlOutOrderClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure UpDownMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
   private
     { Private declarations }
   public
@@ -468,6 +483,8 @@ type
     function fnCagoMsg(Signal: string): Boolean;
     function fnCurMsg(FName : string): Boolean;
     function fnCurtainMsg(Signal: string): String;
+    function fnGet_Current(Cur_Name, FName: String): Integer;
+    procedure fnSet_Current(Cur_Name, FName, FValue: String);
     function fnSignalEditColor(Signal,Flag: string): TColor;
     function fnSignalFontColor(Signal,Flag: string): TColor;
     function fnGetErrMsg(SC_NO: integer; GetField,ErrCode: String): String;
@@ -573,6 +590,25 @@ begin
 end;
 
 //==============================================================================
+// FormShow
+//==============================================================================
+procedure TfrmU510.FormShow(Sender: TObject);
+begin
+  if (fnGet_Current('OUT_QTY_ORDER', 'OPTION1') = 0) then
+  begin
+    pnlOutOrder.Color := $00CFB790;
+    pnlOutOrder.Caption := '잔량 우선 출고중';
+  end else
+  begin
+    pnlOutOrder.Color := $0093CAB2;
+    pnlOutOrder.Caption := '만셀 우선 출고중';
+  end;
+
+  edtEPLT_CNT.Text := IntToStr(fnGet_Current('EPLT_ALRAM_CNT', 'OPTION1'));
+  edtFULL_CNT.Text := IntToStr(fnGet_Current('FULL_ALRAM_CNT', 'OPTION1'));
+end;
+
+//==============================================================================
 // FormClose
 //==============================================================================
 procedure TfrmU510.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -594,6 +630,14 @@ begin
   Action := Cafree;
   try frmU510 := Nil ;
   except end;
+end;
+
+//==============================================================================
+// FormCreate
+//==============================================================================
+procedure TfrmU510.FormCreate(Sender: TObject);
+begin
+//
 end;
 
 //==============================================================================
@@ -796,6 +840,22 @@ begin
       tmrQry.Enabled := False ;
       ErrorLogWrite('Procedure tmrQryTimer, ' + 'Error[' + E.Message + ']');
     end;
+  end;
+end;
+
+//==============================================================================
+// UpDownMouseDown
+//==============================================================================
+procedure TfrmU510.UpDownMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+var
+  Tag : Integer;
+  val : String;
+begin
+  Tag := (Sender as TUpDown).Associate.Tag;
+  val := TEdit((Sender as TUpDown).Associate).Text;
+  case Tag of
+    1 : fnSet_Current('EPLT_ALRAM_CNT', 'OPTION1', val);
+    2 : fnSet_Current('FULL_ALRAM_CNT', 'OPTION1', val);
   end;
 end;
 
@@ -1556,6 +1616,24 @@ begin
   Result := RtnStr;
 end;
 
+//==============================================================================
+// pnlOutOrderClick : 출고 우선순위 변경
+//==============================================================================
+procedure TfrmU510.pnlOutOrderClick(Sender: TObject);
+begin
+  if (fnGet_Current('OUT_QTY_ORDER', 'OPTION1') = 0) then
+  begin
+    fnSet_Current('OUT_QTY_ORDER', 'OPTION1', '1');
+    pnlOutOrder.Color := $0093CAB2;
+    pnlOutOrder.Caption := '만셀 우선 출고중';
+  end else
+  begin
+    fnSet_Current('OUT_QTY_ORDER', 'OPTION1', '0');
+    pnlOutOrder.Color := $00CFB790;
+    pnlOutOrder.Caption := '잔량 우선 출고중';
+  end;
+
+end;
 
 //==============================================================================
 // fnGetSCSetInfo : 설비 명령 관련 데이터 반환
@@ -1681,6 +1759,7 @@ function TfrmU510.fnSetSCSetInfo(SC_NO: Integer; SetField, SetValue: String): Bo
 var
   StrSQL : String ;
   ExecNo : Integer;
+  LogStr : String;
 begin
   try
     Result := False;
@@ -1695,6 +1774,10 @@ begin
       SQL.Text := StrSQL ;
       ExecNo := ExecSQL ;
       if ExecNo > 0 then Result := True ;
+
+      LogStr := 'SC데이터 초기화 요청';
+      InsertPGMHist('['+FormNo+']', 'N', 'fnSetSCSetInfo', '', LogStr, 'PGM', '', '', '');
+
       Close ;
     end;
   except
@@ -1775,6 +1858,7 @@ procedure TfrmU510.btnCurtainClick(Sender: TObject);
 var
   StrSQL, StrSQL2, CurtainNo : String ;
   ExecNo : Integer;
+  LogStr : String;
 begin
   CurtainNo := IntToStr((Sender as TButton).Tag);
 
@@ -1794,6 +1878,8 @@ begin
     StrSQL2 := ' UPDATE TC_CURRENT ' +
                '    SET OPTION'+CurtainNo+' = ''1''' +
                '  WHERE CURRENT_NAME = ''CUR_PARAM'' ';
+
+    LogStr := '라이트커튼[' + CurtainNo + '] ON'
   end else
   begin
     StrSQL := ' UPDATE TC_CURRENT ' +
@@ -1802,6 +1888,8 @@ begin
     StrSQL2 := ' UPDATE TC_CURRENT ' +
                '    SET OPTION'+CurtainNo+' = ''0''' +
                '  WHERE CURRENT_NAME = ''CUR_PARAM'' ';
+
+    LogStr := '라이트커튼[' + CurtainNo + '] OFF'
   end;
 
   try
@@ -1817,6 +1905,8 @@ begin
         SQL.Clear;
         SQL.Text := StrSQL2;
         ExecSQL;
+
+        InsertPGMHist('['+FormNo+']', 'N', 'btnCurtainClick', '', LogStr, 'PGM', '', '', '');
       end;
     end;
   except
@@ -1835,6 +1925,7 @@ procedure TfrmU510.ButtonClickRFIDRead(Sender: TObject);
 var
   StrSQL, Station_No : String ;
   ExecNo : Integer;
+  LogStr : String;
 begin
 
   Station_No := IntToStr((Sender as TButton).Tag);
@@ -1851,6 +1942,8 @@ begin
       ExecNo := ExecSQL ;
       if ExecNo > 0 then
       begin
+        LogStr := '스테이션[' + Station_NO + '] RFID Read 요청 클릭';
+        InsertPGMHist('['+FormNo+']', 'N', 'ButtonClickRFIDRead', '', LogStr, 'PGM', '', '', '');
         (Sender as TButton).Enabled := False; //버튼 비활성화
       end;
     end;
@@ -1970,6 +2063,70 @@ begin
       TraceLogWrite('['+FormNo+'] procedure setRFIDOption Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
     end;
   end;
+end;
+
+
+//==============================================================================
+// fnGet_Current : 파라메터 가져옴.
+//==============================================================================
+function TfrmU510.fnGet_Current(Cur_Name, FName: String): Integer;
+var
+  StrSQL : string;
+begin
+  Result := 0;
+  StrSQL := '';
+  try
+    with qryTemp do
+    begin
+      Close;
+      SQL.Clear;
+      StrSQL := ' SELECT ' + FName +
+                 '  FROM TC_CURRENT ' +
+                 ' WHERE CURRENT_NAME = ' + QuotedStr(Cur_Name);
+      SQL.Text := StrSQL ;
+      Open ;
+      Result := FieldByName(FName).AsInteger;
+      Close ;
+    end;
+  except
+    on E: Exception do
+    begin
+      qryTemp.Close ;
+      InsertPGMHist('['+FormNo+']', 'E', 'fnGet_Current', '', 'Exception Error', 'SQL', StrSQL, '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnGet_Current Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
+    end;
+  end;
+end;
+
+//==============================================================================
+// fnSet_Current : 파라메터 설정.
+//==============================================================================
+procedure TfrmU510.fnSet_Current(Cur_Name, FName, FValue: String);
+var
+  StrSQL : string;
+begin
+  StrSQL := '';
+  try
+    with qryTemp do
+    begin
+      Close;
+      SQL.Clear;
+      StrSQL := ' UPDATE TC_CURRENT' +
+                   ' SET ' + FName + ' = ' + QuotedStr(FValue) +
+                 ' WHERE CURRENT_NAME = ' + QuotedStr(Cur_Name);
+      SQL.Text := StrSQL ;
+      ExecSql ;
+      Close ;
+    end;
+  except
+    on E: Exception do
+    begin
+      qryTemp.Close ;
+      InsertPGMHist('['+FormNo+']', 'E', 'fnSet_Current', '', 'Exception Error', 'SQL', StrSQL, '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure fnSet_Current Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
+    end;
+  end;
+
 end;
 
 end.

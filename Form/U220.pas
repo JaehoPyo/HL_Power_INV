@@ -80,8 +80,6 @@ type
     procedure btnOrderClick(Sender: TObject);
     procedure cbOutChange(Sender: TObject);
     procedure edtCodeChange;
-    procedure getRFIDData;
-    procedure setRFIDOption;
     procedure btnRFIDReadClick(Sender: TObject);
     procedure tmrRFIDTimer(Sender: TObject);
   private
@@ -419,6 +417,8 @@ end;
 // btnOrderClick [입고지시]
 //==============================================================================
 procedure TfrmU220.btnOrderClick(Sender: TObject);
+var
+  LogStr : String;
 begin
   try
     if Trim(edtCode.Text)='' then
@@ -558,16 +558,22 @@ begin
 
     if SetJobOrder then
     begin
+      LogStr := '  입고대(스테이션) : ' + cbOut.Text + #13#10 +
+                '▷작업번호 ['+ OrderData.LUGG   +'] ' + #13#10+
+                '▷기종코드 ['+ OrderData.ITM_CD +'] ' + #13#10+
+                '▷차종 ['    + OrderData.RF_MODEL_NO1 +'] ' + #13#10+
+                '▷적재위치 ['+ Copy(OrderData.ID_CODE,1,1)+'-'
+                              + Copy(OrderData.ID_CODE,2,2)+'-'
+                              + Copy(OrderData.ID_CODE,4,2)+'] ' + #13#10;
+
       MessageDlg('입고지시가 완료되었습니다.' + #13#10  + #13#10+
                  '===============================' + #13#10+
-                 '  입고대(스테이션) : ' + cbOut.Text + #13#10 +
-                 '▷작업번호 ['+ OrderData.LUGG   +'] ' + #13#10+
-                 '▷기종코드 ['+ OrderData.ITM_CD +'] ' + #13#10+
-                 '▷적재위치 ['+ Copy(OrderData.ID_CODE,1,1)+'-'
-                               + Copy(OrderData.ID_CODE,2,2)+'-'
-                               + Copy(OrderData.ID_CODE,4,2)+'] ' + #13#10+
-                 '===============================' + #13#10+
-                 '', mtConfirmation, [mbYes], 0) ;
+                 LogStr +
+                 '===============================' + #13#10 +
+                 '',
+                 mtConfirmation, [mbYes], 0) ;
+
+      InsertPGMHist('['+FormNo+']', 'N', 'btnOrderClick', '', LogStr, 'PGM', '', '', '');
 
       edtCode.Text  := '';
       dtDateFr.Date := StrToDate(FormatDateTime('YYYY-MM-DD',Now));
@@ -897,45 +903,45 @@ end;
 //==============================================================================
 procedure TfrmU220.edtCodeChange;
 begin
-    if edtCode.Text = 'FULL' then
-    begin
-      frmU220.edtITM_QTY.Text := '36';
-      frmU220.edtITM_QTY.Enabled := False;
-    end else
-    if edtCode.Text = 'EPLT' then
-    begin
-      edtLineName1.Text := '';
-      edtLineName2.Text := '';
-      edtPalletNo1.Text := '';
-      edtPalletNo2.Text := '';
-      edtModelNo1.Text  := '';
-      edtModelNo2.Text  := '';
-      edtITM_QTY.Text   := '0';
-      edtArea.Text      := '';
+  if edtCode.Text = 'FULL' then
+  begin
+    frmU220.edtITM_QTY.Text := '36';
+    frmU220.edtITM_QTY.Enabled := False;
+  end else
+  if edtCode.Text = 'EPLT' then
+  begin
+    edtLineName1.Text := '';
+    edtLineName2.Text := '';
+    edtPalletNo1.Text := '';
+    edtPalletNo2.Text := '';
+    edtModelNo1.Text  := '';
+    edtModelNo2.Text  := '';
+    edtITM_QTY.Text   := '0';
+    edtArea.Text      := '';
 
-      edtLineName1.Enabled := False;
-      edtLineName2.Enabled := False;
-      edtPalletNo1.Enabled := False;
-      edtPalletNo2.Enabled := False;
-      edtModelNo1.Enabled  := False;
-      edtModelNo2.Enabled  := False;
-      edtITM_QTY.Enabled   := False;
-      edtArea.Enabled      := False;
-    end else
-    begin
-      edtLineName1.Enabled := True;
-      edtLineName2.Enabled := True;
-      edtPalletNo1.Enabled := True;
-      edtPalletNo2.Enabled := True;
-      edtModelNo1.Enabled  := True;
-      edtModelNo2.Enabled  := True;
-      edtITM_QTY.Enabled   := True;
-      edtArea.Enabled      := True;
-    end;
+    edtLineName1.Enabled := False;
+    edtLineName2.Enabled := False;
+    edtPalletNo1.Enabled := False;
+    edtPalletNo2.Enabled := False;
+    edtModelNo1.Enabled  := False;
+    edtModelNo2.Enabled  := False;
+    edtITM_QTY.Enabled   := False;
+    edtArea.Enabled      := False;
+  end else
+  begin
+    edtLineName1.Enabled := True;
+    edtLineName2.Enabled := True;
+    edtPalletNo1.Enabled := True;
+    edtPalletNo2.Enabled := True;
+    edtModelNo1.Enabled  := True;
+    edtModelNo2.Enabled  := True;
+    edtITM_QTY.Enabled   := True;
+    edtArea.Enabled      := True;
+  end;
 end;
 
 //==============================================================================
-// Button1Click
+// btnRFIDReadClick
 //==============================================================================
 procedure TfrmU220.btnRFIDReadClick(Sender: TObject);
 var
@@ -989,8 +995,8 @@ begin
     on E : Exception do
     begin
       qryTemp.Close;
-      InsertPGMHist('['+FormNo+']', 'E', 'Button1Click', '', 'Exception Error', 'SQL', StrSQL, '', E.Message);
-      TraceLogWrite('['+FormNo+'] procedure Button1Click Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
+      InsertPGMHist('['+FormNo+']', 'E', 'btnRFIDReadClick', '', 'Exception Error', 'SQL', StrSQL, '', E.Message);
+      TraceLogWrite('['+FormNo+'] procedure btnRFIDReadClick Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
     end;
   end;
 end;
@@ -999,119 +1005,64 @@ end;
 // Button1Click
 //==============================================================================
 procedure TfrmU220.tmrRFIDTimer(Sender: TObject);
+var
+  StrSQL : String;
+  IsRead : Boolean;
 begin
   if cbOut.ItemIndex = 0 then Exit;
 
   try
-    getRFIDData;
-  finally
-  //
-  end;
-end;
+    try
+      if (cbOut.Text = '1') then
+        IsRead := Boolean(SC_STATUS[1].D213[00] = '1')
+      else if (cbOut.Text = '3') then
+        IsRead := Boolean(SC_STATUS[1].D213[02] = '1')
+      else if (cbOut.Text = '5') then
+        IsRead := Boolean(SC_STATUS[1].D213[04] = '1')
+      else Exit;
 
-//==============================================================================
-// getRFIDOption
-//==============================================================================
-procedure TfrmU220.getRFIDData;
-var
-  StrSQL, StrSQL2, Station_No : String ;
-  IsRead : Boolean;
-begin
-
-  try
-    if (cbOut.Text = '1') then
-      IsRead := Boolean(SC_STATUS[1].D213[00] = '1')
-    else if (cbOut.Text = '3') then
-      IsRead := Boolean(SC_STATUS[1].D213[02] = '1')
-    else if (cbOut.Text = '5') then
-      IsRead := Boolean(SC_STATUS[1].D213[04] = '1')
-    else Exit;
-
-    if (IsRead) then
-    begin
-      with qryTemp do
+      if (IsRead) then
       begin
-        Close;
-        SQL.Clear;
-        StrSQL := ' SELECT * ' +
-                    ' FROM TC_RFID ' +
-                   ' WHERE PORT_NO = ' + ' '''+cbOut.Text+''' ';
-        SQL.Text := StrSQL;
-        Open;
-        if (RecordCount > 0) then
+        with qryTemp do
         begin
-          edtLineName1.Text := FieldByName('H00').AsString ;
-          edtLineName2.Text := FieldByName('H01').AsString ;
-          edtPalletNo1.Text := FieldByName('H02').AsString ;
-          edtPalletNo2.Text := FieldByName('H03').AsString ;
-          edtModelNo1.Text  := FieldByName('H16').AsString ;
-          edtModelNo2.Text  := FieldByName('H17').AsString ;
-          edtITM_QTY.Text   := FieldByName('H18').AsString ;
-          edtArea.Text      := FieldByName('H19').AsString ;
-          edtPalletLine1.Text := FieldByName('H20').AsString;
-          edtPalletLine2.Text := FieldByName('H21').AsString;
-          edtPalletLine3.Text := FieldByName('H22').AsString;
-          edtNEW_BMA.Text := IfThen(FieldByName('H23').AsString = '1', '신규', '재고');
+          Close;
+          SQL.Clear;
+          StrSQL := ' SELECT * ' +
+                      ' FROM TC_RFID ' +
+                     ' WHERE PORT_NO = ' + ' '''+cbOut.Text+''' ';
+          SQL.Text := StrSQL;
+          Open;
+          if (RecordCount > 0) then
+          begin
+            edtLineName1.Text   := FieldByName('H00').AsString;
+            edtLineName2.Text   := FieldByName('H01').AsString;
+            edtPalletNo1.Text   := FieldByName('H02').AsString;
+            edtPalletNo2.Text   := FieldByName('H03').AsString;
+            edtModelNo1.Text    := FieldByName('H16').AsString;
+            edtModelNo2.Text    := FieldByName('H17').AsString;
+            edtITM_QTY.Text     := FieldByName('H18').AsString;
+            edtArea.Text        := FieldByName('H19').AsString;
+            edtPalletLine1.Text := FieldByName('H20').AsString;
+            edtPalletLine2.Text := FieldByName('H21').AsString;
+            edtPalletLine3.Text := FieldByName('H22').AsString;
+            edtNEW_BMA.Text     := IfThen(FieldByName('H23').AsString = '1', '신규', '재고');
 
-          btnOrder.Enabled := True;
-          btnRFIDRead.Enabled := True;
-          tmrRFID.Enabled := False;
+            btnOrder.Enabled := True;
+            btnRFIDRead.Enabled := True;
+            tmrRFID.Enabled := False;
+          end;
         end;
       end;
-    end;
-
-  except
-    on E : Exception do
-    begin
-      qryTemp.Close;
-      InsertPGMHist('['+FormNo+']', 'E', 'getRFIDOption', '', 'Exception Error', 'SQL', StrSQL, '', E.Message);
-      TraceLogWrite('['+FormNo+'] procedure getRFIDOption Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
-    end;
-  end;
-end;
-
-//==============================================================================
-// getRFIDOption
-//==============================================================================
-procedure TfrmU220.setRFIDOption;
-var
-  StrSQL, Station_No : String ;
-  ExecNo : Integer;
-begin
-
-  if cbOut.ItemIndex = 0 then
-  begin
-    MessageDlg('입고대를 선택해 주십시오.', mtConfirmation, [mbYes], 0) ;
-    Exit;
-  end;
-
-  Station_No := cbOut.Text;
-
-  StrSQL := ' UPDATE TC_CURRENT ' +
-              '    SET OPTION' + Station_No + ' = ''3'''+
-              '  WHERE CURRENT_NAME = ''RF_READ'' ';
-
-  try
-    with qryTemp do
-    begin
-      Close;
-      SQL.Clear;
-      SQL.Text := StrSQL ;
-      ExecNo := ExecSQL ;
-      if ExecNo > 0 then
+    except
+      on E : Exception do
       begin
-        btnOrder.Enabled := True;
-        btnRFIDRead.Enabled := True;
-        tmrRFID.Enabled := False;
+        qryTemp.Close;
+        InsertPGMHist('['+FormNo+']', 'E', 'getRFIDOption', '', 'Exception Error', 'SQL', StrSQL, '', E.Message);
+        TraceLogWrite('['+FormNo+'] procedure getRFIDOption Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
       end;
     end;
-  except
-    on E : Exception do
-    begin
-      qryTemp.Close;
-      InsertPGMHist('['+FormNo+']', 'E', 'getRFIDOption', '', 'Exception Error', 'SQL', StrSQL, '', E.Message);
-      TraceLogWrite('['+FormNo+'] procedure getRFIDOption Fail || ERR['+E.Message+'], SQL['+StrSQL+']');
-    end;
+  finally
+  //
   end;
 end;
 

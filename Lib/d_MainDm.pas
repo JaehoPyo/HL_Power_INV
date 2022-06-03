@@ -944,6 +944,8 @@ end;
 // InsertPGMHist ( W_PROGRAM_HIST 테이블에 이력을 넣음)                       //
 //==============================================================================
 procedure InsertPGMHist(MENU_ID, HIST_TYPE, FUNC_NAME, EVENT_NAME, EVENT_DESC, COMMAND_TYPE, COMMAND_TEXT, PARAM, ERROR_MSG: String);
+var
+  ErrCd, ErrMsg : String;
 begin
   try
     with MainDm.PD_INS_PGM_HIST do
@@ -960,7 +962,13 @@ begin
       Parameters.ParamByName('i_PARAM'       ).Value := PARAM;
       Parameters.ParamByName('i_ERROR_MSG'   ).Value := ERROR_MSG;
       Parameters.ParamByName('i_USER_ID'     ).Value := MainDm.M_Info.UserCode + ' ['+MainDm.M_Info.ActivePCAddr+']';
+      Parameters.ParamByName('o_ERR_CD'      ).Direction := pdOutput;
+      Parameters.ParamByName('o_ERR_MSG'     ).Direction := pdOutput;
       ExecProc;
+
+      ErrCd := Parameters.ParamByName('o_ERR_CD').Value;
+      ErrMsg := Parameters.ParamByName('o_ERR_MSG').Value;
+
       Close;
     end;
   except

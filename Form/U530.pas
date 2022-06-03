@@ -34,6 +34,9 @@ type
     qryInfo: TADOQuery;
     qryTemp: TADOQuery;
     EhPrint: TPrintDBGridEh;
+    GroupBox6: TGroupBox;
+    edtRowHeight: TEdit;
+    UpDown1: TUpDown;
     procedure FormActivate(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -41,6 +44,7 @@ type
     procedure KeyPress(Sender: TObject; var Key: Char);
     procedure cbTypeClick(Sender: TObject);
     procedure DatePickerKeyPress(Sender: TObject; var Key: Char);
+    procedure edtRowHeightChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -353,6 +357,14 @@ begin
       end;
     end;
   end;
+end;
+
+//==============================================================================
+// edtRowHeightChange
+//==============================================================================
+procedure TfrmU530.edtRowHeightChange(Sender: TObject);
+begin
+  dgInfo.RowLines := StrToIntDef((Sender as TEdit).Text,0);
 end;
 
 //==============================================================================
