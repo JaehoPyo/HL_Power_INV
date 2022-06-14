@@ -4528,7 +4528,6 @@
             Align = alClient
             BevelOuter = bvNone
             TabOrder = 0
-            ExplicitHeight = 24
             object edtEPLT_CNT: TEdit
               Tag = 1
               Left = 0
@@ -4547,8 +4546,6 @@
               ReadOnly = True
               TabOrder = 0
               Text = '1'
-              ExplicitLeft = 1
-              ExplicitTop = 3
             end
             object UpDown1: TUpDown
               Tag = 1

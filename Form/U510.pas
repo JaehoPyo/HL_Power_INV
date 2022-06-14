@@ -1868,7 +1868,7 @@ begin
        ((CurtainNo = '4') and (SC_STATUS[1].D211[11] = '0')) or
        ((CurtainNo = '6') and (SC_STATUS[1].D211[13] = '0')) then
     begin
-      MessageDlg('출고스테이션에 경우 화물이 있어야 커튼 OFF 가능합니다.', mtConfirmation, [mbYes], 0) ;
+      MessageDlg('출고스테이션의 경우 화물이 있어야 커튼 OFF 가능합니다.', mtConfirmation, [mbYes], 0) ;
       Exit;
     end;
 

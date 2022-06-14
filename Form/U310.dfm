@@ -431,8 +431,8 @@ object frmU310: TfrmU310
             TabOrder = 7
           end
           object Panel3: TPanel
-            Left = 75
-            Top = 17
+            Left = 76
+            Top = 20
             Width = 100
             Height = 20
             BevelOuter = bvNone
@@ -817,7 +817,7 @@ object frmU310: TfrmU310
           end
           object Panel32: TPanel
             Left = 170
-            Top = 229
+            Top = 226
             Width = 100
             Height = 24
             Alignment = taRightJustify

@@ -45,6 +45,7 @@ type
     procedure cbTypeClick(Sender: TObject);
     procedure DatePickerKeyPress(Sender: TObject; var Key: Char);
     procedure edtRowHeightChange(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -119,12 +120,6 @@ begin
   frmU530.Caption := MainDm.M_Info.ActiveFormName;
   fnWmMsgSend( 22221,11111 );
 
-  dtDateFr.Date := StrToDate(FormatDateTime('YYYY-MM-DD',Now));
-  dtTimeFr.Time := StrToTime('00:00:00');
-
-  dtDateTo.Date := StrToDate(FormatDateTime('YYYY-MM-DD',Now));
-  dtTimeTo.Time := StrToTime(FormatDateTime('HH:NN:SS',Now));
-
   fnCommandQuery ;
 end;
 
@@ -140,6 +135,18 @@ begin
     if (Self.Components[i] is TTimer) then
        (Self.Components[i] as TTimer).Enabled := False ;
   end;
+end;
+
+//==============================================================================
+// FormShow
+//==============================================================================
+procedure TfrmU530.FormShow(Sender: TObject);
+begin
+  dtDateFr.Date := StrToDate(FormatDateTime('YYYY-MM-DD',Now));
+  dtTimeFr.Time := StrToTime('00:00:00');
+
+  dtDateTo.Date := StrToDate(FormatDateTime('YYYY-MM-DD',Now));
+  dtTimeTo.Time := StrToTime(FormatDateTime('HH:NN:SS',Now));
 end;
 
 //==============================================================================

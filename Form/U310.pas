@@ -530,15 +530,8 @@ function TfrmU310.fnCellCreate(Wdt,Hgt : Integer) : Boolean ;
       with BankPanel[Hogi][i] do
       begin
         Parent      := TPanel(Self.FindComponent('CanvasPanel'+IntToStr(Hogi))) ;
-
-        if Hogi = 1 then
-        begin
-          Align       := AlTop;
-        end else
-        begin
-          Align       := AlBottom;
-        end;
-
+        Top := 100;
+        Align       := AlTop;
         AutoSize    := False ;
         BevelInner  := bvRaised;
         BevelOuter  := bvNone;
@@ -629,7 +622,7 @@ begin
     begin
       if StrToIntDef(Trim(edtITM_QTY.Text), 0) > 36 then
       begin
-        MessageDlg('36개가 최대 수량입니다.', mtConfirmation, [mbYes], 0) ;
+        MessageDlg('수량은 최대 36개입니다.', mtConfirmation, [mbYes], 0) ;
         Exit;
       end;
 
@@ -788,37 +781,86 @@ begin
       begin
         ShowMessage('적재 정보 수정');
 
-        tmpLogStr := '적재위치['    + ID_CODE + '], ' +
-                     '셀상태['      + BeforeRACK_INFO.ID_STATUS + '], ' +
-                     '기종코드['    + BeforeRACK_INFO.ITM_CD    + '], ' +
-                     '기종명['      + BeforeRACK_INFO.ITM_NAME  + '], ' +
-                     '기종사양['    + BeforeRACK_INFO.ITM_SPEC  + '], ' +
-                     '수량['        + BeforeRACK_INFO.ITM_QTY   + '], ' +
-                     '입고금지['    + BeforeRACK_INFO.IN_USED   + '], ' +
-                     '출고금지['    + BeforeRACK_INFO.OT_USED   + '], ' +
-                     '라인명1['     + BeforeRACK_INFO.RF_LINE_NAME1 + '] ' +
-                     '라인명2['     + BeforeRACK_INFO.RF_LINE_NAME2 + '] ' +
-                     '팔레트번호1[' + BeforeRACK_INFO.RF_PALLET_NO1 + '] ' +
-                     '팔레트번호2[' + BeforeRACK_INFO.RF_PALLET_NO2 + '] ' +
-                     '차종#1['      + BeforeRACK_INFO.RF_MODEL_NO1  + '] ' +
-                     '차종#2['      + BeforeRACK_INFO.RF_MODEL_NO2  + '] ' +
-                     '생산지['      + BeforeRACK_INFO.RF_AREA       + '] => ' +
+        tmpLogStr := '[품목정보]' + #13#10 +
+                     '적재위치[' + ID_CODE + ']' + #13#10 +
+                     '기종코드['    + BeforeRACK_INFO.ITM_CD        + ']' + #13#10 +
+                     '수량['        + BeforeRACK_INFO.ITM_QTY       + ']' + #13#10 +
+                     '팔레트번호1[' + BeforeRACK_INFO.RF_PALLET_NO1 + ']' + #13#10 +
+                     '팔레트번호2[' + BeforeRACK_INFO.RF_PALLET_NO2 + ']' + #13#10 +
+                     '차종#1['      + BeforeRACK_INFO.RF_MODEL_NO1  + ']' + #13#10 +
+                     '차종#2['      + BeforeRACK_INFO.RF_MODEL_NO2  + ']' + #13#10 +
+                     '생산지['      + BeforeRACK_INFO.RF_AREA       + ']' + #13#10 +
+                     '신규/재고['   + BeforeRACK_INFO.RF_NEW_BMA    + ']' + #13#10;
 
-                     '적재위치['    + ID_CODE + '], ' +
-                     '셀상태['      + AfterRACK_INFO.ID_STATUS + '], ' +
-                     '기종코드['    + AfterRACK_INFO.ITM_CD    + '], ' +
-                     '기종명['      + AfterRACK_INFO.ITM_NAME  + '], ' +
-                     '기종사양['    + AfterRACK_INFO.ITM_SPEC  + '], ' +
-                     '수량['        + AfterRACK_INFO.ITM_QTY   + '], ' +
-                     '입고금지['    + AfterRACK_INFO.IN_USED   + '], ' +
-                     '출고금지['    + AfterRACK_INFO.OT_USED   + '], ' +
-                     '라인명1['     + AfterRACK_INFO.RF_LINE_NAME1 + '] ' +
-                     '라인명2['     + AfterRACK_INFO.RF_LINE_NAME2 + '] ' +
-                     '팔레트명1['   + AfterRACK_INFO.RF_PALLET_NO1 + '] ' +
-                     '팔레트명2['   + AfterRACK_INFO.RF_PALLET_NO2 + '] ' +
-                     '차종#1['      + AfterRACK_INFO.RF_MODEL_NO1  + '] ' +
-                     '차종#2['      + AfterRACK_INFO.RF_MODEL_NO2  + '] ' +
-                     '생산지['      + AfterRACK_INFO.RF_AREA       + '] ' ;
+        tmpLogStr := tmpLogStr + '[수정정보]' + #13#10;
+        if (BeforeRACK_INFO.ID_STATUS <> AfterRACK_INFO.ID_STATUS) then
+          tmpLogStr := tmpLogStr + '셀상태[' + BeforeRACK_INFO.ID_STATUS + ' -> ' + AfterRACK_INFO.ID_STATUS + ']' + #13#10;
+        if (BeforeRACK_INFO.ITM_CD <> AfterRACK_INFO.ITM_CD) then
+          tmpLogStr := tmpLogStr + '기종코드[' +BeforeRACK_INFO.ITM_CD + ' -> ' + AfterRACK_INFO.ITM_CD + ']' + #13#10;
+        if (BeforeRACK_INFO.ITM_NAME <> AfterRACK_INFO.ITM_NAME) then
+          tmpLogStr := tmpLogStr + '기종명[' + BeforeRACK_INFO.ITM_NAME + ' -> ' + AfterRACK_INFO.ITM_NAME + ']' + #13#10;
+        if (BeforeRACK_INFO.ITM_SPEC <> AfterRACK_INFO.ITM_SPEC) then
+          tmpLogStr := tmpLogStr + '기종사양[' + BeforeRACK_INFO.ITM_SPEC + ' -> ' + AfterRACK_INFO.ITM_SPEC + ']' + #13#10;
+        if (BeforeRACK_INFO.ITM_QTY <> AfterRACK_INFO.ITM_QTY) then
+          tmpLogStr := tmpLogStr + '수량[' + BeforeRACK_INFO.ITM_QTY + ' -> ' + AfterRACK_INFO.ITM_QTY + ']' + #13#10;
+        if (BeforeRACK_INFO.OT_USED <> AfterRACK_INFO.OT_USED) then
+          tmpLogStr := tmpLogStr + '출고금지[' + BeforeRACK_INFO.OT_USED + ' -> ' + AfterRACK_INFO.OT_USED + ']' + #13#10;
+        if (BeforeRACK_INFO.IN_USED <> AfterRACK_INFO.IN_USED) then
+          tmpLogStr := tmpLogStr + '입고금지[' + BeforeRACK_INFO.IN_USED + ' -> ' + AfterRACK_INFO.IN_USED + ']' + #13#10;
+        if (BeforeRACK_INFO.RF_LINE_NAME1 <> AfterRACK_INFO.RF_LINE_NAME1) then
+          tmpLogStr := tmpLogStr + '라인명1[' + BeforeRACK_INFO.RF_LINE_NAME1 + ' -> ' + AfterRACK_INFO.RF_LINE_NAME1 + ']' + #13#10;
+        if (BeforeRACK_INFO.RF_LINE_NAME2 <> AfterRACK_INFO.RF_LINE_NAME2) then
+          tmpLogStr := tmpLogStr + '라인명2[' + BeforeRACK_INFO.RF_LINE_NAME2 + ' -> ' + AfterRACK_INFO.RF_LINE_NAME2 + ']' + #13#10;
+        if (BeforeRACK_INFO.RF_PALLET_NO1 <> AfterRACK_INFO.RF_PALLET_NO1) then
+          tmpLogStr := tmpLogStr + '팔레트번호1' + BeforeRACK_INFO.RF_PALLET_NO1 + ' -> ' + AfterRACK_INFO.RF_PALLET_NO1 + ']' + #13#10;
+        if (BeforeRACK_INFO.RF_PALLET_NO2 <> AfterRACK_INFO.RF_PALLET_NO2) then
+          tmpLogStr := tmpLogStr + '팔레트번호2' + BeforeRACK_INFO.RF_PALLET_NO2 + ' -> ' + AfterRACK_INFO.RF_PALLET_NO2 + ']' + #13#10;
+        if (BeforeRACK_INFO.RF_MODEL_NO1 <> AfterRACK_INFO.RF_MODEL_NO1) then
+          tmpLogStr := tmpLogStr + '차종#1[' + BeforeRACK_INFO.RF_MODEL_NO1 + ' -> ' + AfterRACK_INFO.RF_MODEL_NO1 + ']' + #13#10;
+        if (BeforeRACK_INFO.RF_MODEL_NO2 <> AfterRACK_INFO.RF_MODEL_NO2) then
+          tmpLogStr := tmpLogStr + '차종#2[' + BeforeRACK_INFO.RF_MODEL_NO2 + ' -> ' + AfterRACK_INFO.RF_MODEL_NO2 + ']' + #13#10;
+        if (BeforeRACK_INFO.RF_AREA <> AfterRACK_INFO.RF_AREA) then
+          tmpLogStr := tmpLogStr + '생산지[' + BeforeRACK_INFO.RF_AREA + ' -> ' + AfterRACK_INFO.RF_AREA + ']' + #13#10;
+        if (BeforeRACK_INFO.RF_NEW_BMA <> AfterRACK_INFO.RF_NEW_BMA) then
+          tmpLogStr := tmpLogStr + '신규/재고[' + BeforeRACK_INFO.RF_NEW_BMA + ' -> ' + AfterRACK_INFO.RF_NEW_BMA + ']' + #13#10;
+
+
+
+
+
+
+//
+//        tmpLogStr := '적재위치['    + ID_CODE + '], ' +
+//                     '셀상태['      + BeforeRACK_INFO.ID_STATUS + '], ' +
+//                     '기종코드['    + BeforeRACK_INFO.ITM_CD    + '], ' +
+//                     '기종명['      + BeforeRACK_INFO.ITM_NAME  + '], ' +
+//                     '기종사양['    + BeforeRACK_INFO.ITM_SPEC  + '], ' +
+//                     '수량['        + BeforeRACK_INFO.ITM_QTY   + '], ' +
+//                     '입고금지['    + BeforeRACK_INFO.IN_USED   + '], ' +
+//                     '출고금지['    + BeforeRACK_INFO.OT_USED   + '], ' +
+//                     '라인명1['     + BeforeRACK_INFO.RF_LINE_NAME1 + '] ' +
+//                     '라인명2['     + BeforeRACK_INFO.RF_LINE_NAME2 + '] ' +
+//                     '팔레트번호1[' + BeforeRACK_INFO.RF_PALLET_NO1 + '] ' +
+//                     '팔레트번호2[' + BeforeRACK_INFO.RF_PALLET_NO2 + '] ' +
+//                     '차종#1['      + BeforeRACK_INFO.RF_MODEL_NO1  + '] ' +
+//                     '차종#2['      + BeforeRACK_INFO.RF_MODEL_NO2  + '] ' +
+//                     '생산지['      + BeforeRACK_INFO.RF_AREA       + '] => ' +
+//
+//                     '적재위치['    + ID_CODE + '], ' +
+//                     '셀상태['      + AfterRACK_INFO.ID_STATUS + '], ' +
+//                     '기종코드['    + AfterRACK_INFO.ITM_CD    + '], ' +
+//                     '기종명['      + AfterRACK_INFO.ITM_NAME  + '], ' +
+//                     '기종사양['    + AfterRACK_INFO.ITM_SPEC  + '], ' +
+//                     '수량['        + AfterRACK_INFO.ITM_QTY   + '], ' +
+//                     '입고금지['    + AfterRACK_INFO.IN_USED   + '], ' +
+//                     '출고금지['    + AfterRACK_INFO.OT_USED   + '], ' +
+//                     '라인명1['     + AfterRACK_INFO.RF_LINE_NAME1 + '] ' +
+//                     '라인명2['     + AfterRACK_INFO.RF_LINE_NAME2 + '] ' +
+//                     '팔레트명1['   + AfterRACK_INFO.RF_PALLET_NO1 + '] ' +
+//                     '팔레트명2['   + AfterRACK_INFO.RF_PALLET_NO2 + '] ' +
+//                     '차종#1['      + AfterRACK_INFO.RF_MODEL_NO1  + '] ' +
+//                     '차종#2['      + AfterRACK_INFO.RF_MODEL_NO2  + '] ' +
+//                     '생산지['      + AfterRACK_INFO.RF_AREA       + '] ' ;
 
         InsertPGMHist('['+FormNo+']', 'N', 'btnSaveClick', '수정','수정 - ' + tmpLogStr,'SQL', StrSQL, '', '');
 
@@ -960,10 +1002,10 @@ begin
       BeforeRACK_INFO.ITM_SPEC  := edtITM_SPEC.Text;
       BeforeRACK_INFO.ITM_QTY   := edtITM_QTY.Text;
 
-      if cbInUSED.Checked = True then BeforeRACK_INFO.IN_USED   := '0'
-      else BeforeRACK_INFO.IN_USED   := '1';
-      if cbOtUSED.Checked = True then BeforeRACK_INFO.OT_USED   := '0'
-      else BeforeRACK_INFO.OT_USED   := '1';
+      if cbInUSED.Checked = True then BeforeRACK_INFO.IN_USED   := 'Y'
+      else BeforeRACK_INFO.IN_USED   := 'N';
+      if cbOtUSED.Checked = True then BeforeRACK_INFO.OT_USED   := 'Y'
+      else BeforeRACK_INFO.OT_USED   := 'N';
 
       BeforeRACK_INFO.RF_LINE_NAME1 := edtLineName1.Text;
       BeforeRACK_INFO.RF_LINE_NAME2 := edtLineName2.Text;
